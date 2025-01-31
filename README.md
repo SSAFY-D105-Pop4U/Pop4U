@@ -1,4 +1,4 @@
-## 기능 명세서서
+## 기능 명세서
 ![alt text](/readme_file/기능명세서_1.png)
 ![alt text](/readme_file/기능명세서_2.png)
 
