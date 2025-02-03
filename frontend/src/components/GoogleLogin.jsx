@@ -1,5 +1,8 @@
 // import { useEffect } from "react";
 // import { getToken } from "../apis/getToken"
+import google from "../assets/images/google.png"
+import "../styles/components/GoogleLogin.css"
+import "../styles/components/GoogleLogin.css"
 
 const GoogleLogin = () => {
     // 첫 acess_token 받아오기기 (clientId, redirectUri는 env 파일에 넣어서 사용해야함 )
@@ -21,7 +24,11 @@ const GoogleLogin = () => {
         window.location.href = googleAuthUrl;
     };
 
-
+    
+    return (
+        <button onClick={googleLogin} className="google-button">
+    </button>
+    );
     // useEffect(() => {
     //     const getAccessTokenFromUrl = () => {
     //         const hashParams = new URLSearchParams(window.location.hash.substring(1));
@@ -42,7 +49,6 @@ const GoogleLogin = () => {
     //     }
     // }, []);
 
-    return <button onClick={googleLogin}>구글로그인</button>;
 };
-
+ 
 export default GoogleLogin;
