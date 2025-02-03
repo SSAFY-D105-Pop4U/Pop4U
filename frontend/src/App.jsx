@@ -1,10 +1,5 @@
-import './App.css'
-import SocialLogin from "./pages/SocialLogin"
+import "./App.css";
 function App() {
-  return (
-    <>
-      <SocialLogin />
-    </>
-  )
+  return <></>;
 }
-export default App
+export default App;
