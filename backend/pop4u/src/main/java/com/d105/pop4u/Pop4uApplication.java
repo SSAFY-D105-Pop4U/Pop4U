@@ -1,4 +1,4 @@
-package com.ssafy.pop4u;
+package com.d105.pop4u;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.ssafy.pop4u;
+package com.d105.pop4u;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
