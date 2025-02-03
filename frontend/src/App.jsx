@@ -1,8 +1,9 @@
 import './App.css'
+import SocialLogin from "./pages/SocialLogin"
 function App() {
   return (
     <>
-      HI
+      <SocialLogin />
     </>
   )
 }
