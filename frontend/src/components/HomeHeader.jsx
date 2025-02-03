@@ -1,4 +1,4 @@
-import logo from "../assets/icons/logo.png";
+import logo from "../assets/icons/smallLogo.png";
 import search from "../assets/icons/search.png";
 import notice from "../assets/icons/notice.png";
 import menu from "../assets/icons/menu.png";

@@ -1,3 +1,4 @@
+import HomeArea from "../components/HomeArea";
 import HomeHeader from "../components/HomeHeader";
 import "../styles/Home.css";
 
@@ -11,6 +12,7 @@ const Home = () => {
           <br />
           어디로 가볼까요?
         </h2>
+        <HomeArea />
       </div>
     </div>
   );
