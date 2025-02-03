@@ -1,11 +1,11 @@
-import HomeHeaderBar from "../components/HomeHeaderBar";
+import HomeHeader from "../components/HomeHeader";
 import "../styles/Home.css";
 
 const Home = () => {
   return (
     <div>
       <div className="header">
-        <HomeHeaderBar />
+        <HomeHeader />
         <h2>
           팝업 스토어
           <br />

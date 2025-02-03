@@ -3,7 +3,7 @@ import search from "../assets/icons/search.png";
 import notice from "../assets/icons/notice.png";
 import menu from "../assets/icons/menu.png";
 
-const HomeHeaderBar = () => {
+const HomeHeader = () => {
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
@@ -26,4 +26,4 @@ const HomeHeaderBar = () => {
   );
 };
 
-export default HomeHeaderBar;
+export default HomeHeader;
