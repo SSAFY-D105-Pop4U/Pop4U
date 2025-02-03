@@ -2,17 +2,27 @@ import { useState } from "react";
 import "../styles/Sidebar.css";
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onClose();
+    }, 300);
+  };
+
   if (!isOpen) return null;
 
   return (
     <>
-      <div className="sidebar-overlay" onClick={onClose}></div>
-      <div className="sidebar">
+      <div className="sidebar-overlay" onClick={handleClose}></div>
+      <div className={`sidebar ${isClosing ? "closing" : ""}`}>
         <div className="menu-header">
-          <h2>메뉴</h2>
-          <button className="close-btn" onClick={onClose}>
+          <button className="close-btn" onClick={handleClose}>
             ✕
           </button>
+          <h2>메뉴</h2>
         </div>
 
         <div className="profile-section">
@@ -40,7 +50,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             </li>
             <li>
               <img src="/icon-info.png" alt="" />
-              회사 정보
+              회사정보
             </li>
           </ul>
         </div>
