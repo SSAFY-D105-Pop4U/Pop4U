@@ -1,6 +1,8 @@
 # Java 23 버전 사용
 FROM eclipse-temurin:23-jdk-jammy
 
+ENV JAVA_HOME /opt/java/openjdk
+ENV PATH $PATH:$JAVA_HOME/bin
 # 작업 디렉토리 설정
 WORKDIR /app
 

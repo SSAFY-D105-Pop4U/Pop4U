@@ -16,7 +16,8 @@ pipeline {
 
        stage('Backend Build') {
            when {
-               expression { env.BRANCH_NAME == 'back_develop' }
+               expression { env.BRANCH_NAME == 'back_develop' || 
+                            env.GIT_BRANCH.contains('feat/BE/Infra')
            }
            steps {
                dir('backend/pop4u') {
