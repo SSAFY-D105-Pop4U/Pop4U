@@ -1,9 +1,9 @@
 pipeline {
    agent any
 
-   environment {
-       EC2_HOST = "${env.EC2_HOST}"
-   }
+    environment {
+        BRANCH_NAME = "${env.GIT_BRANCH.split('/')[-1]}"
+    }
 
    stages {
        stage('Check Branch') {
