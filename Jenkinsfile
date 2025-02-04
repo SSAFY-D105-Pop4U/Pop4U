@@ -15,8 +15,13 @@ pipeline {
           }
           steps {
               dir('backend/pop4u') {
-                  sh 'chmod +x gradlew'
-                  sh './gradlew clean build'
+                  sh """
+                   docker run --rm \
+                   -v "\$(pwd)":/app \
+                   -w /app \
+                   eclipse-temurin:23-jdk-jammy \
+                   ./gradlew clean build
+                   """
               }
           }
       }
