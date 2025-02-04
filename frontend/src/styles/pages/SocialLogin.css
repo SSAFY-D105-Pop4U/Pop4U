@@ -72,6 +72,7 @@
     color: #75757A;
     line-height: 20.76px;
     margin-bottom: 100px;
+    
 }
 
 .google-icon img {
@@ -99,7 +100,7 @@
 }
 
 .admin-login {
-    font-size: 15px;
+    font-size: 13px;
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     color: #75757A;
