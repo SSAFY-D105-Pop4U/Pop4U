@@ -2,8 +2,8 @@ pipeline {
   agent any
 
    environment {
-       BRANCH_NAME = "${env.GIT_BRANCH.split('/')[-1]}"
-   }
+        BRANCH_NAME = "${env.GIT_BRANCH}"
+    }
 
   stages {
       stage('Backend Build') {
@@ -39,32 +39,25 @@ pipeline {
       }
 
       stage('Deploy') {
-          steps {
-              script {
-                  if (env.BRANCH_NAME == 'back_develop') {
-                      sshagent(['ec2-ssh-key']) {
-                          sh """
-                              ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
-                                  cd /home/ubuntu/S12P11D105
-                                  git pull origin back_develop
-                                  docker-compose up -d --build backend
-                              '
-                          """
-                      }
-                  } else if (env.BRANCH_NAME == 'front_develop') {
-                      sshagent(['ec2-ssh-key']) {
-                          sh """
-                              ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
-                                  cd /home/ubuntu/S12P11D105
-                                  git pull origin front_develop
-                                  docker-compose up -d --build frontend
-                              '
-                          """
-                      }
-                  }
-              }
-          }
-      }
+        steps {
+            script {
+                def deployBranch = env.BRANCH_NAME == 'back_develop' ? 'backend' : 
+                                env.BRANCH_NAME == 'front_develop' ? 'frontend' : null
+                
+                if (deployBranch) {
+                    sshagent(['ec2-ssh-key']) {
+                        sh """
+                            ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
+                                cd /home/ubuntu/S12P11D105
+                                git pull origin ${env.BRANCH_NAME}
+                                docker-compose up -d --build ${deployBranch}
+                            '
+                        """
+                    }
+                }
+            }
+        }
+    }
   }
 
   post {
