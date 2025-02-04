@@ -1,14 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
+import Home from "../pages/Home"
+import SocialLogin from "../pages/SocialLogin";
 const AppRoutes = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/home" element={<Home />} />
-        <Route path="/" element={<SocialLogin />} />
-      </Routes>
-    </Router>
-  );
+    return (
+
+        <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<SocialLogin />} />
+        </Routes>
+
+    );
 };
 
 export default AppRoutes;

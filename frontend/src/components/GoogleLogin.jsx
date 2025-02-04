@@ -1,6 +1,6 @@
 // import { useEffect } from "react";
 // import { getToken } from "../apis/getToken"
-import google from "../assets/images/google.png"
+// import google from "../assets/images/google.png"
 import "../styles/components/GoogleLogin.css"
 import "../styles/components/GoogleLogin.css"
 
@@ -24,10 +24,10 @@ const GoogleLogin = () => {
         window.location.href = googleAuthUrl;
     };
 
-    
+
     return (
         <button onClick={googleLogin} className="google-button">
-    </button>
+        </button>
     );
     // useEffect(() => {
     //     const getAccessTokenFromUrl = () => {
@@ -50,5 +50,5 @@ const GoogleLogin = () => {
     // }, []);
 
 };
- 
+
 export default GoogleLogin;
