@@ -65,15 +65,19 @@ public class PopupStore {
     @Column(name = "popup_url")
     private String popupUrl;
 
+    @Builder.Default
     @Column(name = "popup_maximum_capacity", nullable = false)
     private Integer popupMaximumCapacity = 1;
 
+    @Builder.Default
     @Column(name = "popup_maximum_people", nullable = false)
     private Integer popupMaximumPeople = 1;
 
+    @Builder.Default
     @Column(name = "popup_created_at", nullable = false, updatable = false)
     private LocalDateTime popupCreatedAt = LocalDateTime.now();
 
+    @Builder.Default
     @Column(name = "popup_updated_at", nullable = false)
     private LocalDateTime popupUpdatedAt = LocalDateTime.now();
 
