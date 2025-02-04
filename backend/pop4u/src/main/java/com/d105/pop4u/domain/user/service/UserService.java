@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Long save(AddUserRequest dto) {
+    public Long brandJoin(AddUserRequest dto) {
         LocalDateTime now = LocalDateTime.now();
 
         return userRepository.save(User.builder()
