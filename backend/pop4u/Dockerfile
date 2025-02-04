@@ -5,14 +5,14 @@ FROM eclipse-temurin:23-jdk-jammy
 WORKDIR /app
 
 # Gradle 빌드 파일 복사
-COPY ./backend/hello-spring/build.gradle .
-COPY ./backend/hello-spring/settings.gradle .
+COPY ./backend/pop4u/build.gradle .
+COPY ./backend/pop4u/settings.gradle .
 
 # 소스 코드 복사
-COPY ./backend/hello-spring/src ./src
+COPY ./backend/pop4u/src ./src
 
 # Gradle 빌드
 RUN ./gradlew build -x test
 
 # JAR 파일을 실행
-ENTRYPOINT ["java", "-jar", "/app/build/libs/hello-spring-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/app/build/libs/pop4u-0.0.1-SNAPSHOT.jar"]
