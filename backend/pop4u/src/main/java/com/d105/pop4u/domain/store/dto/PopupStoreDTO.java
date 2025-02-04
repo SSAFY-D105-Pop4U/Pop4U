@@ -76,6 +76,9 @@ public class PopupStoreDTO {
 }
 
 
+
+// 유저 연결 시 아래 코드
+
 // @Getter
 // @Setter
 // @NoArgsConstructor

@@ -68,6 +68,8 @@ public class PopupStoreService {
         return PopupStoreDTO.fromEntity(popupStore);
     }
 
+
+    // 브랜드 유저 연결 시 수정
     
     // // 특정 브랜드 유저가 등록한 팝업스토어 조회
     // public List<PopupStoreDTO> getPopupStoresByUser(Long userId) {

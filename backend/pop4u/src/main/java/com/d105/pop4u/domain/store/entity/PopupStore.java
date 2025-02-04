@@ -21,9 +21,11 @@ public class PopupStore {
     @Column(name = "popup_id", nullable = false)
     private Long popupId;
 
-     // 유저 ID를 직접 저장하는 방식으로 변경 (User 엔티티 연결 X)
-     @Column(name = "user_id", nullable = false)
-     private Long userId;
+    // 유저 ID를 직접 저장하는 방식으로 변경 (User 엔티티 연결 X)
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
+    // 유저 연결 시 아래 코드
 
     // @ManyToOne(fetch = FetchType.LAZY)
     // @JoinColumn(name = "user_id", nullable = false) // 브랜드 유저와 연결
@@ -35,7 +37,7 @@ public class PopupStore {
     @Column(name = "popup_region", length = 50, nullable = false)
     private String popupRegion;
 
-    @Column(name = "popup_address", length = 255, nullable = false)
+    @Column(name = "popup_address", nullable = false)
     private String popupAddress;
 
     @Column(name = "popup_start_date", nullable = false)
@@ -60,7 +62,7 @@ public class PopupStore {
     @Column(name = "popup_view_count", nullable = false)
     private Long popupViewCount = 0L; // 기본값 0
 
-    @Column(name = "popup_url", length = 255)
+    @Column(name = "popup_url")
     private String popupUrl;
 
     @Column(name = "popup_maximum_capacity", nullable = false)
@@ -75,14 +77,4 @@ public class PopupStore {
     @Column(name = "popup_updated_at", nullable = false)
     private LocalDateTime popupUpdatedAt = LocalDateTime.now();
 
-    @PrePersist
-    protected void onCreate() {
-        this.popupCreatedAt = LocalDateTime.now();
-        this.popupUpdatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.popupUpdatedAt = LocalDateTime.now();
-    }
 }

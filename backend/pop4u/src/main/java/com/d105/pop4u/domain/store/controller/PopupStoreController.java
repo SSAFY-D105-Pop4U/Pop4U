@@ -48,6 +48,8 @@ public class PopupStoreController {
         return ResponseEntity.ok(popupStoreService.createPopupStore(popupStoreDTO));
     }
 
+    // 유저 연결되면 위를 지우고 주석 풀기
+
     // // 특정 브랜드 유저가 등록한 팝업스토어 조회
     // @GetMapping("/user/{user_id}")
     // public ResponseEntity<List<PopupStoreDTO>> getPopupStoresByUser(@PathVariable Long user_id) {
