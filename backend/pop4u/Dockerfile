@@ -1,5 +1,5 @@
 # Java 23 버전 사용
-FROM openjdk:23-jdk
+FROM eclipse-temurin:23-jdk-alpine
 
 ENV JAVA_HOME /opt/java/openjdk
 ENV PATH $PATH:$JAVA_HOME/bin
