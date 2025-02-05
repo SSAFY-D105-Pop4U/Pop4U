@@ -30,6 +30,7 @@ pipeline {
                                     docker-compose rm -f ${deployBranch} || true &&
                                     docker-compose build --no-cache ${deployBranch} &&
                                     docker-compose up -d --no-deps --build ${deployBranch}
+                                '
                             """
                         }
                     }
