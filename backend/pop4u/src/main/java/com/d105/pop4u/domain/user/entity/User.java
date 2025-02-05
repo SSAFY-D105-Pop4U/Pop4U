@@ -102,4 +102,9 @@ public class User implements UserDetails {
         this.userNickname = nickname;
         return this;
     }
+
+    public User updateUserRefreshToken(String refreshtoken) {
+        this.userRefreshToken = refreshtoken;
+        return this;
+    }
 }
