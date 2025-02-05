@@ -7,43 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Backend Build') {
-            when {
-                expression { 
-                    env.BRANCH_NAME == 'origin/back_develop' || 
-                    env.GIT_BRANCH.contains('origin/feat/BE/Infra')
-                }
-            }
-            steps {
-                dir('backend/pop4u') {
-                    sh """
-                        docker run --rm \
-                        -v "\$(pwd)":/app \
-                        -w /app \
-                        eclipse-temurin:23-jdk-jammy \
-                        ./gradlew clean build
-                    """
-                }
-            }
-        }
-
-        stage('Frontend Build') {
-            when {
-                expression { env.BRANCH_NAME == 'origin/front_develop' }
-            }
-            steps {
-                dir('frontend') {
-                    sh """
-                        docker run --rm \
-                        -v "\$(pwd)":/app \
-                        -w /app \
-                        node:20-alpine \
-                        sh -c 'npm install && npm run build'
-                    """
-                }
-            }
-        }
-
         stage('Deploy') {
             steps {
                 script {
