@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/Sidebar.css";
+import "../styles/components/Sidebar.css";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);

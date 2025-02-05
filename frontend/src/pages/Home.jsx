@@ -1,7 +1,7 @@
 import { useState } from "react";
 import HomeHeader from "../components/HomeHeader";
 import Sidebar from "../components/Sidebar";
-import "../styles/Home.css";
+import "../styles/pages/Home.css";
 
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -20,7 +20,6 @@ const Home = () => {
           어디로 가볼까요?
         </h2>
       </div>
-
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
     </div>
   );
