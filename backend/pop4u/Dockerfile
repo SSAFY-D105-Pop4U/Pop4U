@@ -6,6 +6,10 @@ ENV PATH $PATH:$JAVA_HOME/bin
 # 작업 디렉토리 설정
 WORKDIR /app
 
+# 환경 변수 설정
+ENV JAVA_HOME=/usr/java/openjdk-23
+ENV PATH $PATH:$JAVA_HOME/bin
+
 # Gradle 빌드 파일 복사
 COPY gradlew .
 COPY gradle gradle
