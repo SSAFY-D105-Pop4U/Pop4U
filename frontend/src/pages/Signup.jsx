@@ -1,109 +1,85 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/pages/Signup.css';
+import { useState, useRef } from "react";
+import "../styles/pages/Signup.css";
+import large_logo from "../assets/images/large_logo.png";
+
 
 const Signup = () => {
-    const navigate = useNavigate();
-
-    // State 관리
     const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-        phone: '',
-        name: ''
+        id: "",
+        password: "",
+        name: "",
+        phone: ""
     });
+    const passwordCheckRef = useRef(null);
 
-    // 입력 값 변경 핸들러
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
-    // 회원가입 제출 핸들러
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log('전송 데이터:', formData);
-
-        try {
-            const response = await fetch('https://your-backend-api.com/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                alert('회원가입 성공!');
-                navigate('/login'); // 로그인 페이지로 이동
-            } else {
-                alert('회원가입 실패!');
-            }
-        } catch (error) {
-            console.error('회원가입 에러:', error);
-            alert('서버 오류 발생');
-        }
+    //이거 백엔드로 호출하는 코드
+    const handleSignup = () => {
+        console.log("회원가입 요청:", formData);
+        // 여기에 API 호출 로직 추가 가능
     };
 
     return (
         <div className="signup-container">
-            <form onSubmit={handleSubmit}>
-                {/* 프로필 이미지 */}
-                <img className="profile-image" src="https://via.placeholder.com/206x208" alt="프로필" />
+            {/* 회원가입 박스 */}
+            <div className="signup-box">
+                <img src={large_logo} alt="Logo" className="login-logo" />
+                <input
+                    type="text"
+                    name="id"
+                    placeholder="아이디 입력해 주세요."
+                    className="input-field"
+                    value={formData.id}
+                    onChange={handleChange}
+                />
 
-                {/* 이름 입력 */}
-                <div className="input-box">
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="이름을 입력해 주세요."
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="비밀번호를 입력해 주세요."
+                    className="input-field"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
 
-                {/* 이메일 입력 */}
-                <div className="input-box">
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="이메일을 입력해 주세요."
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <input
+                    type="password"
+                    name="passwordCheck"
+                    placeholder="비밀번호를 재입력 해주세요."
+                    className="input-field"
+                    ref={passwordCheckRef}
+                />
 
-                {/* 전화번호 입력 */}
-                <div className="input-box">
-                    <input
-                        type="tel"
-                        name="phone"
-                        placeholder="전화번호를 입력해 주세요."
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="이름을 입력해 주세요."
+                    className="input-field"
+                    value={formData.name}
+                    onChange={handleChange}
+                />
 
-                {/* 비밀번호 입력 */}
-                <div className="input-box">
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="비밀번호를 입력해 주세요."
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="전화번호를 입력해 주세요."
+                    className="input-field"
+                    value={formData.phone}
+                    onChange={handleChange}
+                />
 
-                {/* 회원가입 버튼 */}
-                <button className="signup-button" type="submit">회원가입</button>
-            </form>
+
+                <button className="signup-button" onClick={handleSignup}>
+                    회원가입
+                </button>
+            </div>
         </div>
     );
 };

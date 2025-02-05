@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "../styles/pages/Login.css";
 import large_logo from "../assets/images/large_logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const nav = useNavigate()
     const [login, setlogin] = useState({
         userid: "",
         password: ""
@@ -16,6 +18,7 @@ const Login = () => {
         }));
     };
 
+    /// api 쏘는거 따로 빼야함
     const handleLogin = () => {
         // 나중에 API 호출 로직 추가
         console.log("로그인 요청:", login);
@@ -58,7 +61,8 @@ const Login = () => {
 
                 <div className="signup-section">
                     <span className="signup-text">아직 회원이 아니신가요? </span>
-                    <span className="signup-link">회원가입</span>
+                    <span className="signup-link" onClick={() => nav("/signup")}>회원가입</span>
+
                 </div>
             </div>
         </div>
