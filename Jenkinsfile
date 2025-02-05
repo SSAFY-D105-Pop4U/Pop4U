@@ -30,7 +30,6 @@ pipeline {
                                 scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
                             """
                             sh """
-                            scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@\${EC2_HOST}:~/docker-compose.yml
                             ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
                                     docker-compose stop ${deployBranch} || true &&
                                     docker-compose rm -f ${deployBranch} || true &&
