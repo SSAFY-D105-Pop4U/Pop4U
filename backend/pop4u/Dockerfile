@@ -1,5 +1,5 @@
 # Java 23 버전 사용
-FROM adoptopenjdk/openjdk23:latest
+FROM openjdk:23
 
 ENV JAVA_HOME /opt/java/openjdk
 ENV PATH $PATH:$JAVA_HOME/bin
