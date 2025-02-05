@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public Long save(AddUserRequest dto) {
+    public Long brandJoin(AddUserRequest dto) {
         LocalDateTime now = LocalDateTime.now();
 
         return userRepository.save(User.builder()
@@ -35,5 +35,10 @@ public class UserService {
                 .userUpdatedAt(now)
                 .build()
         ).getUserId();
+    }
+
+    public User findByUserId(Long userId) {
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 }
