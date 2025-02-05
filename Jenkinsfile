@@ -4,6 +4,7 @@ pipeline {
     environment {
         BRANCH_NAME = "${env.GIT_BRANCH}"
         EC2_HOST = "i12d105.p.ssafy.io"
+        WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
 
     stages {
@@ -25,6 +26,9 @@ pipeline {
                     
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
+                            sh """
+                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
+                            """
                             sh """
                             scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@\${EC2_HOST}:~/docker-compose.yml
                             ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
