@@ -1,5 +1,5 @@
 # Java 23 버전 사용
-FROM openjdk:23
+FROM openjdk:23-jdk
 
 ENV JAVA_HOME /opt/java/openjdk
 ENV PATH $PATH:$JAVA_HOME/bin
@@ -9,9 +9,6 @@ WORKDIR /app
 # 환경 변수 설정
 ENV JAVA_HOME=/usr/java/openjdk-23
 ENV PATH $PATH:$JAVA_HOME/bin
-
-# Install xargs
-RUN apt-get update && apt-get install -y findutils
 
 # Gradle 빌드 파일 복사
 COPY gradlew .
