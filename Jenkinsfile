@@ -21,6 +21,7 @@ pipeline {
                     // 디버깅
                     echo "Current branch: ${env.GIT_BRANCH}"
                     echo "Deploy branch: ${deployBranch}"
+                    echo "Current workspace: ${WORKSPACE}"
                     
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
