@@ -10,6 +10,9 @@ WORKDIR /app
 ENV JAVA_HOME=/usr/java/openjdk-23
 ENV PATH $PATH:$JAVA_HOME/bin
 
+# Install xargs
+RUN apt-get update && apt-get install -y findutils
+
 # Gradle 빌드 파일 복사
 COPY gradlew .
 COPY gradle gradle
