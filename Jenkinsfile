@@ -11,21 +11,25 @@ pipeline {
             steps {
                 script {
                     def deployBranch = ""
-                    if (env.BRANCH_NAME == 'origin/back_develop' || env.GIT_BRANCH.contains('origin/feat/BE/Infra')) {
+                    // GIT_BRANCH 변수만 일관되게 사용
+                    if (env.GIT_BRANCH == 'origin/back_develop' || env.GIT_BRANCH.contains('origin/feat/BE/')) {
                         deployBranch = 'backend'
-                    } else if (env.BRANCH_NAME == 'origin/front_develop') {
+                    } else if (env.GIT_BRANCH == 'origin/front_develop') {
                         deployBranch = 'frontend'
                     }
+
+                    // 디버깅
+                    echo "Current branch: ${env.GIT_BRANCH}"
+                    echo "Deploy branch: ${deployBranch}"
                     
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
                             sh """
-                            docker-compose -f docker-compose.yml stop backend || true
-                            docker-compose -f docker-compose.yml rm -f backend || true
-                                                        """
-                            sh """
-                            docker-compose -f docker-compose.yml build --no-cache backend
-                            docker-compose -f docker-compose.yml up -d --no-deps --build backend
+                            ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
+                                    docker-compose stop ${deployBranch} || true &&
+                                    docker-compose rm -f ${deployBranch} || true &&
+                                    docker-compose build --no-cache ${deployBranch} &&
+                                    docker-compose up -d --no-deps --build ${deployBranch}
                             """
                         }
                     }
