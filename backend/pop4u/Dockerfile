@@ -7,6 +7,8 @@ ENV PATH $PATH:$JAVA_HOME/bin
 WORKDIR /app
 
 # Gradle 빌드 파일 복사
+COPY gradlew .
+COPY gradle gradle
 COPY build.gradle .
 COPY settings.gradle .
 
@@ -14,6 +16,7 @@ COPY settings.gradle .
 COPY src ./src
 
 # Gradle 빌드
+RUN chmod +x gradlew
 RUN ./gradlew build -x test
 
 # JAR 파일을 실행
