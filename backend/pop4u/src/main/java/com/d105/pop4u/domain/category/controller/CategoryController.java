@@ -19,4 +19,17 @@ public class CategoryController {
     public ResponseEntity<List<Category>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
+
+    // ✅ 새 카테고리 추가
+    @PostMapping
+    public ResponseEntity<Category> addCategory(@RequestParam String categoryName) {
+        return ResponseEntity.ok(categoryService.addCategory(categoryName));
+    }
+
+    // ✅ 카테고리 삭제
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
+        categoryService.deleteCategory(categoryId);
+        return ResponseEntity.ok("카테고리가 삭제되었습니다.");
+    }
 }

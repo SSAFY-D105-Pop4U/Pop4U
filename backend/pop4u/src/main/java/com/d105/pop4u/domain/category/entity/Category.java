@@ -22,7 +22,7 @@ public class Category {
     @Column(name = "category_name", length = 50, nullable = false, unique = true)
     private String categoryName;
 
-//    // ✅ 팝업스토어와의 관계 (N:M) - `popup_category`를 통해 연결 예정
-//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-//    private List<PopupCategory> popupCategories;
+    // ✅ 팝업스토어와의 관계 (N:M) - `popup_category`를 통해 연결
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<PopupCategory> popupCategories;
 }
