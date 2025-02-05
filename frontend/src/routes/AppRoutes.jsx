@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home"
 import SocialLogin from "../pages/SocialLogin";
 import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
 const AppRoutes = () => {
     return (
@@ -9,7 +10,9 @@ const AppRoutes = () => {
         <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/SocialLogin" element={<SocialLogin />} />
+            <Route path="/socialLogin" element={<SocialLogin />} />
+            <Route path="/signup" element={<Signup />} />
+
         </Routes>
 
     );
