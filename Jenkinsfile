@@ -20,11 +20,12 @@ pipeline {
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
                             sh """
-                                ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
-                                    cd /home/ubuntu/S12P11D105
-                                    git pull origin ${env.BRANCH_NAME.replace('origin/', '')}
-                                    docker-compose up -d --build ${deployBranch}
-                                '
+                            docker-compose -f docker-compose.yml stop backend || true
+                            docker-compose -f docker-compose.yml rm -f backend || true
+                                                        """
+                            sh """
+                            docker-compose -f docker-compose.yml build --no-cache backend
+                            docker-compose -f docker-compose.yml up -d --no-deps --build backend
                             """
                         }
                     }
