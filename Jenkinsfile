@@ -15,8 +15,10 @@ pipeline {
                     
                     if (env.GIT_BRANCH == 'origin/back_develop' || env.GIT_BRANCH.contains('origin/feat/BE/')) {
                         deployBranch = 'backend'
+                        containerName = 'spring-backend'
                     } else if (env.GIT_BRANCH == 'origin/front_develop') {
                         deployBranch = 'frontend'
+                        containerName = 'react-frontend'
                     }
 
                     // 디버깅
@@ -31,11 +33,11 @@ pipeline {
                             """
                             sh """
                             ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
-                                cd ~ &&
-                                docker-compose stop ${deployBranch} || true &&
-                                docker-compose rm -f ${deployBranch} || true &&
-                                docker-compose build --no-cache ${deployBranch} &&
-                                docker-compose up -d --no-deps --build ${deployBranch}
+                                    cd ~
+                                    docker-compose down
+                                    docker rm -f ${containerName} || true
+                                    docker-compose build --no-cache ${deployBranch}
+                                    docker-compose up -d --no-deps --build ${deployBranch}
                                 '
                             """
                         }
