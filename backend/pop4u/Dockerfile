@@ -7,11 +7,11 @@ ENV PATH $PATH:$JAVA_HOME/bin
 WORKDIR /app
 
 # Gradle 빌드 파일 복사
-COPY ./backend/pop4u/build.gradle .
-COPY ./backend/pop4u/settings.gradle .
+COPY build.gradle .
+COPY settings.gradle .
 
 # 소스 코드 복사
-COPY ./backend/pop4u/src ./src
+COPY src ./src
 
 # Gradle 빌드
 RUN ./gradlew build -x test
