@@ -74,8 +74,6 @@ const Signup = () => {
                     value={formData.phone}
                     onChange={handleChange}
                 />
-
-
                 <button className="signup-button" onClick={handleSignup}>
                     회원가입
                 </button>
