@@ -7,7 +7,7 @@ const HomeHeader = ({ onMenuClick }) => {
   return (
     <div>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img src={logo} alt="로고 이미지" width="64" height="64" />
+        <img src={logo} alt="로고 이미지" width="64" height="64"/>
 
         <div
           style={{
