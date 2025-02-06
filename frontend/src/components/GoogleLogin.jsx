@@ -13,15 +13,15 @@ const GoogleLogin = () => {
         console.log("Client ID:", clientId);
         console.log("Redirect URI:", redirectUri);
 
-        const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
-            "client_id=" + encodeURIComponent(clientId) +
-            "&redirect_uri=" + encodeURIComponent(redirectUri) +
-            "&response_type=token" +
-            "&scope=email profile";
+        // const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
+        //     "client_id=" + encodeURIComponent(clientId) +
+        //     "&redirect_uri=" + encodeURIComponent(redirectUri) +
+        //     "&response_type=token" +
+        //     "&scope=email profile";
 
         console.log("Google OAuth URL:", googleAuthUrl);
 
-        window.location.href = googleAuthUrl;
+        window.location.href = "localhost:8080/login";
     };
 
 
