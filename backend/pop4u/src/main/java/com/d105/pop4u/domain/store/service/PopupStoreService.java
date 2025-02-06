@@ -1,162 +1,169 @@
 package com.d105.pop4u.domain.store.service;
 
+import com.d105.pop4u.domain.category.dto.CategoryDTO;
 import com.d105.pop4u.domain.category.entity.Category;
 import com.d105.pop4u.domain.category.repository.CategoryRepository;
 import com.d105.pop4u.domain.category.entity.PopupCategory;
 import com.d105.pop4u.domain.category.repository.PopupCategoryRepository;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.entity.PopupStore;
+import com.d105.pop4u.domain.store.entity.PopupStoreImg;
+import com.d105.pop4u.domain.store.repository.PopupStoreImgRepository;
 import com.d105.pop4u.domain.store.repository.PopupStoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.FileSystemUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class PopupStoreService {
     private final PopupStoreRepository popupStoreRepository;
     private final CategoryRepository categoryRepository;
     private final PopupCategoryRepository popupCategoryRepository;
+    private final PopupStoreImgRepository popupStoreImgRepository;
+    private final String UPLOAD_DIR = System.getProperty("user.home") + "/uploads/popup/";
 
-    // ✅ 모든 팝업스토어 조회 (카테고리 포함)
+    // ✅ 조회 메서드들
     public List<PopupStoreDTO> getAllPopupStores() {
-        return popupStoreRepository.findAll()
-                .stream()
-                .map(store -> {
-                    List<Long> categoryIds = getCategoryIdsByPopup(store.getPopupId());
-                    return PopupStoreDTO.fromEntity(store, categoryIds);
-                })
+        return popupStoreRepository.findAll().stream()
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // ✅ 특정 팝업스토어 조회 (카테고리 포함)
     public PopupStoreDTO getPopupStoreById(Long popupId) {
-        PopupStore popupStore = popupStoreRepository.findByPopupId(popupId)
-                .orElseThrow(() -> new IllegalArgumentException("팝업스토어를 찾을 수 없습니다."));
-        List<Long> categoryIds = getCategoryIdsByPopup(popupId);
-        return PopupStoreDTO.fromEntity(popupStore, categoryIds);
+        return convertToDTO(findPopupStore(popupId));
     }
 
-    // ✅ 지역별 팝업스토어 조회 (카테고리 포함)
     public List<PopupStoreDTO> getPopupStoresByRegion(String region) {
-        return popupStoreRepository.findByPopupRegion(region)
-                .stream()
-                .map(store -> {
-                    List<Long> categoryIds = getCategoryIdsByPopup(store.getPopupId());
-                    return PopupStoreDTO.fromEntity(store, categoryIds);
-                })
+        return popupStoreRepository.findByPopupRegion(region).stream()
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // ✅ 특정 유저가 등록한 팝업스토어 조회 (카테고리 포함)
     public List<PopupStoreDTO> getPopupStoresByUser(Long userId) {
-        return popupStoreRepository.findByUserId(userId)
-                .stream()
-                .map(store -> {
-                    List<Long> categoryIds = getCategoryIdsByPopup(store.getPopupId());
-                    return PopupStoreDTO.fromEntity(store, categoryIds);
-                })
+        return popupStoreRepository.findByUserId(userId).stream()
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // ✅ 팝업스토어 생성 (카테고리 포함)
+    // ✅ 생성/수정/삭제 메서드들
     @Transactional
-    public PopupStoreDTO createPopupStore(PopupStoreDTO dto) {
-        // 1️⃣ 팝업스토어 생성
-        PopupStore popupStore = PopupStore.builder()
-                .userId(dto.getUserId())
-                .popupName(dto.getPopupName())
-                .popupRegion(dto.getPopupRegion())
-                .popupAddress(dto.getPopupAddress())
-                .popupStartDate(dto.getPopupStartDate())
-                .popupEndDate(dto.getPopupEndDate())
-                .popupOpenTime(dto.getPopupOpenTime())
-                .popupClosedTime(dto.getPopupClosedTime())
-                .popupDescription(dto.getPopupDescription())
-                .popupUrl(dto.getPopupUrl())
-                .popupMaximumCapacity(dto.getPopupMaximumCapacity())
-                .popupMaximumPeople(dto.getPopupMaximumPeople())
-                .build();
-
-        popupStore = popupStoreRepository.save(popupStore);
-
-        // 2️⃣ 카테고리 연결
-        if (dto.getCategoryIds() != null && !dto.getCategoryIds().isEmpty()) {
-            updatePopupCategories(popupStore, dto.getCategoryIds());
-        }
-
-        return PopupStoreDTO.fromEntity(popupStore, dto.getCategoryIds());
+    public PopupStoreDTO createPopupStore(PopupStoreDTO dto, List<MultipartFile> images) throws IOException {
+        PopupStore popupStore = popupStoreRepository.save(dto.toEntity());
+        handleImages(popupStore, images, null);
+        handleCategories(popupStore, dto.getCategoryIds());
+        return getPopupStoreById(popupStore.getPopupId());
     }
 
-    // ✅ 팝업스토어 수정 (카테고리 포함)
     @Transactional
-    public PopupStoreDTO updatePopupStore(Long popupId, PopupStoreDTO dto) {
-        PopupStore popupStore = popupStoreRepository.findByPopupId(popupId)
-                .orElseThrow(() -> new IllegalArgumentException("팝업스토어를 찾을 수 없습니다."));
-
-        // 1️⃣ 기본 정보 업데이트
-        popupStore.setPopupName(dto.getPopupName());
-        popupStore.setPopupRegion(dto.getPopupRegion());
-        popupStore.setPopupAddress(dto.getPopupAddress());
-        popupStore.setPopupStartDate(dto.getPopupStartDate());
-        popupStore.setPopupEndDate(dto.getPopupEndDate());
-        popupStore.setPopupOpenTime(dto.getPopupOpenTime());
-        popupStore.setPopupClosedTime(dto.getPopupClosedTime());
-        popupStore.setPopupDescription(dto.getPopupDescription());
-        popupStore.setPopupUrl(dto.getPopupUrl());
-        popupStore.setPopupMaximumCapacity(dto.getPopupMaximumCapacity());
-        popupStore.setPopupMaximumPeople(dto.getPopupMaximumPeople());
-
-        popupStore = popupStoreRepository.save(popupStore);
-
-        // 2️⃣ 카테고리 업데이트
-        updatePopupCategories(popupStore, dto.getCategoryIds());
-
-        return PopupStoreDTO.fromEntity(popupStore, dto.getCategoryIds());
+    public PopupStoreDTO updatePopupStore(Long popupId, PopupStoreDTO dto, 
+            List<MultipartFile> newImages, List<String> deleteImages) throws IOException {
+        PopupStore popupStore = findPopupStore(popupId);
+        popupStore.updateInfo(dto);
+        handleImages(popupStore, newImages, deleteImages);
+        handleCategories(popupStore, dto.getCategoryIds());
+        return getPopupStoreById(popupId);
     }
 
-    // ✅ 팝업스토어 삭제 (연관 카테고리도 삭제)
     @Transactional
     public void deletePopupStore(Long popupId) {
-        PopupStore popupStore = popupStoreRepository.findByPopupId(popupId)
-                .orElseThrow(() -> new IllegalArgumentException("팝업스토어를 찾을 수 없습니다."));
-
-        // 1️⃣ 연관된 카테고리 삭제
-        popupCategoryRepository.deleteByPopupStore(popupStore);
-
-        // 2️⃣ 팝업스토어 삭제
+        PopupStore popupStore = findPopupStore(popupId);
+        deleteAllImages(popupStore);
         popupStoreRepository.delete(popupStore);
     }
 
-    // ✅ 특정 팝업의 카테고리 목록 조회
-    private List<Long> getCategoryIdsByPopup(Long popupId) {
-        return popupCategoryRepository.findByPopupStore_PopupId(popupId)
+    // ✅ 유틸리티 메서드들
+    private PopupStore findPopupStore(Long popupId) {
+        return popupStoreRepository.findById(popupId)
+                .orElseThrow(() -> new IllegalArgumentException("팝업스토어를 찾을 수 없습니다."));
+    }
+
+    private PopupStoreDTO convertToDTO(PopupStore store) {
+        List<Long> categoryIds = popupCategoryRepository.findByPopupStore_PopupId(store.getPopupId())
                 .stream()
                 .map(pc -> pc.getCategory().getCategoryId())
                 .collect(Collectors.toList());
+
+        List<String> images = popupStoreImgRepository.findByPopupStore_PopupId(store.getPopupId())
+                .stream()
+                .map(PopupStoreImg::getPopupImg)
+                .collect(Collectors.toList());
+
+        return PopupStoreDTO.fromEntity(store, categoryIds, images);
     }
 
-    // ✅ 팝업과 연결된 카테고리 업데이트
-    private void updatePopupCategories(PopupStore popupStore, List<Long> categoryIds) {
-        // 1️⃣ 기존 카테고리 삭제
-        popupCategoryRepository.deleteByPopupStore(popupStore);
-
-        // 2️⃣ 새로운 카테고리 매핑
+    private void handleCategories(PopupStore store, List<Long> categoryIds) {
+        popupCategoryRepository.deleteByPopupStore(store);
+        
         if (categoryIds != null && !categoryIds.isEmpty()) {
-            for (Long categoryId : categoryIds) {
-                Category category = categoryRepository.findById(categoryId)
-                        .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 카테고리 ID: " + categoryId));
+            List<PopupCategory> categories = categoryIds.stream()
+                    .map(id -> categoryRepository.findById(id)
+                            .map(category -> PopupCategory.builder()
+                                    .popupStore(store)
+                                    .category(category)
+                                    .build())
+                            .orElseThrow(() -> new IllegalArgumentException("카테고리를 찾을 수 없습니다: " + id)))
+                    .collect(Collectors.toList());
+            popupCategoryRepository.saveAll(categories);
+        }
+    }
 
-                PopupCategory popupCategory = PopupCategory.builder()
-                        .popupStore(popupStore)
-                        .category(category)
-                        .build();
+    private void handleImages(PopupStore store, List<MultipartFile> newImages, List<String> deleteImages) throws IOException {
+        if (deleteImages != null) {
+            for (String imageUrl : deleteImages) {
+                deleteImage(store.getPopupId(), imageUrl);
+            }
+        }
 
-                popupCategoryRepository.save(popupCategory);
+        if (newImages != null && !newImages.isEmpty()) {
+            String dirPath = UPLOAD_DIR + store.getPopupId() + "/";
+            File directory = new File(dirPath);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            for (int i = 0; i < newImages.size(); i++) {
+                MultipartFile file = newImages.get(i);
+                if (!file.isEmpty()) {
+                    String fileName = (i + 1) + ".jpg";
+                    File destinationFile = new File(dirPath + fileName);
+                    
+                    file.transferTo(destinationFile);
+                    
+                    popupStoreImgRepository.save(PopupStoreImg.builder()
+                            .popupStore(store)
+                            .popupImg("/uploads/popup/" + store.getPopupId() + "/" + fileName)
+                            .build());
+                }
             }
         }
     }
+
+    private void deleteImage(Long popupId, String imageUrl) {
+        popupStoreImgRepository.deleteByPopupImg(imageUrl);
+        String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+        File file = new File(UPLOAD_DIR + popupId + "/" + fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
+    private void deleteAllImages(PopupStore store) {
+        popupStoreImgRepository.deleteByPopupStore(store);
+        File directory = new File(UPLOAD_DIR + store.getPopupId());
+        if (directory.exists()) {
+            FileSystemUtils.deleteRecursively(directory);
+        }
+    }
 }
+

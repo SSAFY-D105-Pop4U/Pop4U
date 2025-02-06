@@ -28,6 +28,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
 
 	// 나용성
     implementation 'org.springframework.boot:spring-boot-starter'

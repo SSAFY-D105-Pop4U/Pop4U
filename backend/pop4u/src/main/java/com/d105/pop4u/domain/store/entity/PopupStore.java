@@ -1,6 +1,9 @@
 package com.d105.pop4u.domain.store.entity;
 
 import com.d105.pop4u.domain.category.entity.PopupCategory;
+import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,10 +49,12 @@ public class PopupStore {
 
     @Column(name = "popup_start_date", nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate popupStartDate;
 
     @Column(name = "popup_end_date", nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate popupEndDate;
 
     @Column(name = "popup_open_time", nullable = false)
@@ -93,4 +98,17 @@ public class PopupStore {
     @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PopupStoreImg> popupImages = new ArrayList<>(); // ✅ 팝업에 여러 개의 이미지 연결
 
+    public void updateInfo(PopupStoreDTO dto) {
+        this.popupName = dto.getPopupName();
+        this.popupRegion = dto.getPopupRegion();
+        this.popupAddress = dto.getPopupAddress();
+        this.popupStartDate = dto.getPopupStartDate();
+        this.popupEndDate = dto.getPopupEndDate();
+        this.popupOpenTime = dto.getPopupOpenTime();
+        this.popupClosedTime = dto.getPopupClosedTime();
+        this.popupDescription = dto.getPopupDescription();
+        this.popupUrl = dto.getPopupUrl();
+        this.popupMaximumCapacity = dto.getPopupMaximumCapacity();
+        this.popupMaximumPeople = dto.getPopupMaximumPeople();
+    }
 }
