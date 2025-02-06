@@ -7,6 +7,7 @@ import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,7 +85,12 @@ public class PopupStore {
     @Column(name = "popup_updated_at", nullable = false)
     private LocalDateTime popupUpdatedAt = LocalDateTime.now();
 
+    @Builder.Default
     @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL)
-    private List<PopupCategory> popupCategories; // ✅ 팝업스토어가 가진 카테고리 리스트
+    private List<PopupCategory> popupCategories = new ArrayList<>(); // ✅ 팝업스토어가 가진 카테고리 리스트
+
+    @Builder.Default
+    @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PopupStoreImg> popupImages = new ArrayList<>(); // ✅ 팝업에 여러 개의 이미지 연결
 
 }
