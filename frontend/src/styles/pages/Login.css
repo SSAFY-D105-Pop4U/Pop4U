@@ -32,7 +32,7 @@
     width: 303px;
     height: 456px;
     background: white;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     display: flex;
@@ -50,7 +50,8 @@
 /* 입력 필드 */
 .input-box {
     width: 100%;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    
 }
 
 .input-field {
@@ -63,6 +64,7 @@
     font-weight: 300;
     color: #D9D9D9;
     margin-left: 10;
+    padding: 0;
     /* text-align: center; */
 }
 
