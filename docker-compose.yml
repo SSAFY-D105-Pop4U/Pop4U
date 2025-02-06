@@ -12,6 +12,10 @@ services:
       - SPRING_PROFILES_ACTIVE=prod
     networks:
       - app-network
+    depends_on:
+      - mysql
+      - redis
+      - mongodb
 
   frontend:
     build:
@@ -25,6 +29,50 @@ services:
     networks:
       - app-network
 
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=newpassword
+      - MYSQL_DATABASE=pop4u
+      - MYSQL_USER=newuser
+      - MYSQL_PASSWORD=newpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=pop4u
+      - MONGO_INITDB_ROOT_PASSWORD=pop4u
+      - MONGO_INITDB_DATABASE=pop4u
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  mysql-data:
+  redis-data:
+  mongo-data:
