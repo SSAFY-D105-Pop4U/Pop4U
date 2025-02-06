@@ -7,11 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "notification")
-@Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Notification {
 
     @Id
@@ -24,10 +20,6 @@ public class Notification {
 
     @Column(name = "popup_id")  // nullable
     private Long popupId;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "notification_type", nullable = false)
-    private NotificationType notificationType;
 
     @Column(name = "notification_title", length = 50, nullable = false)
     private String notificationTitle;
