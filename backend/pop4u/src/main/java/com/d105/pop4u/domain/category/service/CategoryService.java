@@ -1,5 +1,6 @@
 package com.d105.pop4u.domain.category.service;
 
+import com.d105.pop4u.domain.category.dto.CategoryDTO;
 import com.d105.pop4u.domain.category.entity.Category;
 import com.d105.pop4u.domain.category.repository.CategoryRepository;
 import jakarta.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,9 +34,12 @@ public class CategoryService {
         }
     }
 
-    // ✅ 모든 카테고리 조회
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+    // ✅ 모든 카테고리 조회 (팝업 정보 없이 카테고리만 반환)
+    public List<CategoryDTO> getAllCategories() {
+        return categoryRepository.findAll()
+                .stream()
+                .map(CategoryDTO::fromEntity) // ✅ DTO 변환하여 팝업 정보 제외
+                .collect(Collectors.toList());
     }
 
     // ✅ 새 카테고리 추가
