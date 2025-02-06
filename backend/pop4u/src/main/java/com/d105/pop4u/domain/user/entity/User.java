@@ -107,4 +107,9 @@ public class User implements UserDetails {
         this.userRefreshToken = refreshtoken;
         return this;
     }
+
+    // 리프레시 토큰 설정 메서드 추가
+    public void setUserRefreshToken(String refreshToken) {
+        this.userRefreshToken = refreshToken;
+    }
 }
