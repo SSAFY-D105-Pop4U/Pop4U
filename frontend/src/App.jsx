@@ -1,10 +1,12 @@
-import './App.css'
-import SocialLogin from "./pages/SocialLogin"
+import AppRouter from "./routes/AppRoutes";
+import "./App.css";
+
 function App() {
   return (
-    <>
-      <SocialLogin />
-    </>
-  )
+    <div>
+      <AppRouter />
+    </div>
+  );
 }
-export default App
+
+export default App;

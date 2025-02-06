@@ -1,0 +1,42 @@
+/* 전체 그리드 컨테이너 스타일 */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열 레이아웃 */
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* 각 아이템 스타일 */
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none; /* 테두리 제거 */
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.grid-item:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-5px);
+}
+
+/* 아이콘 스타일 */
+.icon {
+  width: 39px;
+  height: 39px;
+  margin-bottom: 10px;
+}
+
+/* 라벨 텍스트 스타일 */
+.label {
+  font-size: 12px;
+  color: #333;
+}
+.icon img {
+  width: 39px; /* 가로 크기 */
+  height: 39px; /* 세로 크기 */
+  object-fit: cover; /* 이미지 비율 유지 및 크기 조정 */
+}
