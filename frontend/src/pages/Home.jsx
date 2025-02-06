@@ -2,6 +2,8 @@ import { useState } from "react";
 import HomeHeader from "../components/HomeHeader";
 import Sidebar from "../components/Sidebar";
 import "../styles/pages/Home.css";
+import HomeArea from "../components/HomeArea";
+import HomeHorizScroll from "../components/HomeHorizScroll";
 
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
