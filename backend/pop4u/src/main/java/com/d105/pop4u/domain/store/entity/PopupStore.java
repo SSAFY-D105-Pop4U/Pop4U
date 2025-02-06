@@ -1,11 +1,14 @@
 package com.d105.pop4u.domain.store.entity;
 
+import com.d105.pop4u.domain.category.entity.PopupCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "popup_store")
@@ -42,11 +45,11 @@ public class PopupStore {
 
     @Column(name = "popup_start_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date popupStartDate;
+    private LocalDate popupStartDate;
 
     @Column(name = "popup_end_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date popupEndDate;
+    private LocalDate popupEndDate;
 
     @Column(name = "popup_open_time", nullable = false)
     private LocalTime popupOpenTime;
@@ -80,5 +83,8 @@ public class PopupStore {
     @Builder.Default
     @Column(name = "popup_updated_at", nullable = false)
     private LocalDateTime popupUpdatedAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL)
+    private List<PopupCategory> popupCategories; // ✅ 팝업스토어가 가진 카테고리 리스트
 
 }
