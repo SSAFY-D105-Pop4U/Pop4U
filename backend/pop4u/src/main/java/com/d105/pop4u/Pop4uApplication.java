@@ -7,12 +7,12 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
-//@SpringBootApplication
+@SpringBootApplication
 // 테스트 시 유저 제외
-@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
-@ComponentScan(basePackages = "com.d105.pop4u", excludeFilters = {
-        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com\\.d105\\.pop4u\\.domain\\.user\\..*")
-})
+//@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+//@ComponentScan(basePackages = "com.d105.pop4u", excludeFilters = {
+//        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com\\.d105\\.pop4u\\.domain\\.user\\..*")
+//})
 public class Pop4uApplication {
 
     public static void main(String[] args) {

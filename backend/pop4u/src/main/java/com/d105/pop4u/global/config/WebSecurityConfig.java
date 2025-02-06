@@ -16,7 +16,6 @@
 //import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 //import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //
->>>>>>> backend/pop4u/src/main/java/com/d105/pop4u/global/config/WebSecurityConfig.java
 //@RequiredArgsConstructor
 //@Configuration
 //public class WebSecurityConfig {
