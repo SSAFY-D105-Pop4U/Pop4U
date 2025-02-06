@@ -1,5 +1,7 @@
 package com.d105.pop4u.domain.review.entity;
 
+import com.d105.pop4u.domain.store.entity.PopupStore;
+import com.d105.pop4u.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,11 +20,17 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId; // 리뷰 고유번호
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId; // 회원 고유 번호
+//    @Column(name = "user_id", nullable = false)
+//    private Long userId; // 회원 고유 번호
+    @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩 설정
+    @JoinColumn(name = "user_id", nullable = false) // 외래 키 설정
+    private User userId; // 회원 엔티티
 
-    @Column(name = "popup_id", nullable = false)
-    private Long popupId; // 팝업 고유번호
+//    @Column(name = "popup_id", nullable = false)
+//    private Long popupId; // 팝업 고유번호
+    @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩 설정
+    @JoinColumn(name = "popup_id", nullable = false) // 외래 키 설정
+    private PopupStore popupId; // 팝업 엔티티
 
     @Column(name = "review_content", nullable = false)
     private String reviewContent; // 리뷰 내용
@@ -39,5 +47,13 @@ public class Review {
     @PrePersist
     protected void onCreate() {
         reviewCreatedAt = LocalDateTime.now(); // 생성 시 현재 시간 설정
+    }
+
+    public User getUser() {
+        return userId; // User 엔티티 반환
+    }
+
+    public PopupStore getPopup() {
+        return popupId; // PopupStore 엔티티 반환
     }
 }
