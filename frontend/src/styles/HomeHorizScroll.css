@@ -39,10 +39,14 @@
   height: 172px;
   object-fit: cover; /* 이미지 비율 유지 */
   border-radius: 10px;
+  user-select: none; /* 이미지 선택 방지 */
+  pointer-events: none; /* 마우스 이벤트 방지 */
+  -webkit-user-drag: none; /* Safari에서 이미지 드래그 방지 */
 }
 
 .card-content {
   padding: 10px;
+  user-select: none;
 }
 
 .card-title {
