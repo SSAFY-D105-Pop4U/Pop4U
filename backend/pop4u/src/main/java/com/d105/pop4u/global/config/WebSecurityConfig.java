@@ -1,41 +1,22 @@
-package com.d105.pop4u.global.config;
-
-import com.d105.pop4u.domain.user.service.UserDetailService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
-
-@Configuration
-@EnableWebSecurity
-public class WebSecurityConfig {
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // 모든 요청 인증 없이 허용
-                );
-
-        return http.build();
-    }
-}
-
-
-
+//package com.d105.pop4u.global.config;
+//
+//import com.d105.pop4u.domain.user.service.UserDetailService;
+//import lombok.RequiredArgsConstructor;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.security.authentication.AuthenticationManager;
+//import org.springframework.security.authentication.ProviderManager;
+//import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+//import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+//import org.springframework.security.config.http.SessionCreationPolicy;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.web.SecurityFilterChain;
+//import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+//import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+//
+>>>>>>> backend/pop4u/src/main/java/com/d105/pop4u/global/config/WebSecurityConfig.java
 //@RequiredArgsConstructor
 //@Configuration
 //public class WebSecurityConfig {
@@ -49,17 +30,6 @@ public class WebSecurityConfig {
 //    }
 //
 //
-//
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf().disable()
-//                .authorizeHttpRequests(auth -> auth
-//                        .anyRequest().permitAll() // 모든 요청 인증 없이 허용
-//                );
-//
-//        return http.build();
-//    }
 //    @Bean // 이 메서드가 Spring Bean으로 관리되도록 설정
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http

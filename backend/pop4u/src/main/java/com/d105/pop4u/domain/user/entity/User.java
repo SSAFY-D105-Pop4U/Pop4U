@@ -96,4 +96,15 @@ public class User implements UserDetails {
     public String getUsername() {
         return userEmail;
     }
+
+    // 사용자 이름 변경
+    public User updateUserNickname(String nickname) {
+        this.userNickname = nickname;
+        return this;
+    }
+
+    public User updateUserRefreshToken(String refreshtoken) {
+        this.userRefreshToken = refreshtoken;
+        return this;
+    }
 }

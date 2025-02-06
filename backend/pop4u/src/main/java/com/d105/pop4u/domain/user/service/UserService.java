@@ -14,17 +14,17 @@ import java.time.LocalDateTime;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Long brandJoin(AddUserRequest dto) {
         LocalDateTime now = LocalDateTime.now();
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         return userRepository.save(User.builder()
                 .userStatus(1)
                 .userName(dto.getUserName())
                 .userNickname(dto.getUserName())
                 .userEmail(dto.getUserEmail())
-                .userPassword(bCryptPasswordEncoder.encode(dto.getUserPassword()))
+                .userPassword(encoder.encode(dto.getUserPassword()))
                 .userTelephone(dto.getUserTelephone())
                 .userImg("")
                 .userDeleted(1)
@@ -39,6 +39,11 @@ public class UserService {
 
     public User findByUserId(Long userId) {
         return userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
+
+    public User findByUserEmail(String email) {
+        return userRepository.findByUserEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 }

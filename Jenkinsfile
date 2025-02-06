@@ -1,78 +1,58 @@
 pipeline {
-   agent any
+    agent any
 
     environment {
-        BRANCH_NAME = "${env.GIT_BRANCH.split('/')[-1]}"
+        BRANCH_NAME = "${env.GIT_BRANCH}"
+        EC2_HOST = "i12d105.p.ssafy.io"
+        WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
 
-   stages {
-       stage('Check Branch') {
-           steps {
-               script {
-                   env.BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-               }
-           }
-       }
+    stages {
+        stage('Deploy') {
+            steps {
+                script {
+                    def deployBranch = ""
+                    
+                    if (env.GIT_BRANCH == 'origin/back_develop' || env.GIT_BRANCH.contains('origin/feat/BE/')) {
+                        deployBranch = 'backend'
+                        containerName = 'spring-backend'
+                    } else if (env.GIT_BRANCH == 'origin/front_develop') {
+                        deployBranch = 'frontend'
+                        containerName = 'react-frontend'
+                    }
 
-       stage('Backend Build') {
-           when {
-               expression { env.BRANCH_NAME == 'back_develop' }
-           }
-           steps {
-               dir('backend/pop4u') {
-                   sh 'chmod +x gradlew'
-                   sh './gradlew clean build'
-               }
-           }
-       }
+                    // 디버깅
+                    echo "Current branch: ${env.GIT_BRANCH}"
+                    echo "Deploy branch: ${deployBranch}"
+                    echo "Current workspace: ${WORKSPACE}"
+                    
+                    if (deployBranch) {
+                        sshagent(['ec2-ssh-key']) {
+                            sh """
+                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
+                            """
+                            sh """
+                            ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
+                                    cd ~
+                                    docker-compose down
+                                    docker rm -f ${containerName} || true
+                                    docker-compose build --no-cache ${deployBranch}
+                                    docker-compose up -d --no-deps --build ${deployBranch}
+                                '
+                            """
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-       stage('Frontend Build') {
-           when {
-               expression { env.BRANCH_NAME == 'front_develop' }
-           }
-           steps {
-               dir('frontend') {
-                   sh 'npm install'
-                   sh 'npm run build'
-               }
-           }
-       }
-
-       stage('Deploy') {
-           steps {
-               script {
-                   if (env.BRANCH_NAME == 'back_develop') {
-                       sshagent(['ec2-ssh-key']) {
-                           sh """
-                               ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
-                                   cd /home/ubuntu/S12P11D105
-                                   git pull origin back_develop
-                                   docker-compose up -d --build backend
-                               '
-                           """
-                       }
-                   } else if (env.BRANCH_NAME == 'front_develop') {
-                       sshagent(['ec2-ssh-key']) {
-                           sh """
-                               ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
-                                   cd /home/ubuntu/S12P11D105
-                                   git pull origin front_develop
-                                   docker-compose up -d --build frontend
-                               '
-                           """
-                       }
-                   }
-               }
-           }
-       }
-   }
-
-   post {
-       success {
-           echo 'Pipeline Successful'
-       }
-       failure {
-           echo 'Pipeline Failed'
-       }
-   }
+    post {
+        success {
+            echo 'Pipeline Successful'
+        }
+        failure {
+            echo 'Pipeline Failed'
+        }
+    }
 }

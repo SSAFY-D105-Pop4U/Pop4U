@@ -5,7 +5,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,11 +20,14 @@ import java.util.Set;
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class TokenProvider {
 
     private final JwtProperties jwtProperties;
 
     public String generateToken(User user, Duration expiredAt) {
+//        log.info("jwtSecret", jwtProperties.getSecretKey());
+//        Assert.hasText(jwtProperties.getSecretKey(), "base64-encoded secret key cannot be null or empty.");
         Date now = new Date();
         return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user);
     }
