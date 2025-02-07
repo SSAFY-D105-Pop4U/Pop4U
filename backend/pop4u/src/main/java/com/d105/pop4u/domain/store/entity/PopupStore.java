@@ -69,15 +69,12 @@ public class PopupStore {
     @Column(name = "popup_parking", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
     private Integer popupParking = 0;
 
-    @Column(name = "popup_description", nullable = false)
+    @Column(name = "popup_description", nullable = false, columnDefinition = "TEXT")
     private String popupDescription;
 
     @Builder.Default
     @Column(name = "popup_view_count", nullable = false)
     private Long popupViewCount = 0L;
-
-    @Column(name = "popup_url")
-    private String popupUrl;
 
     @Builder.Default
     @Column(name = "popup_maximum_capacity", nullable = false)
@@ -111,7 +108,6 @@ public class PopupStore {
         this.popupEndDate = dto.getPopupEndDate();
         this.popupOperationTime = dto.getPopupOperationTime();
         this.popupDescription = dto.getPopupDescription();
-        this.popupUrl = dto.getPopupUrl();
         this.popupMaximumCapacity = dto.getPopupMaximumCapacity();
         this.popupMaximumPeople = dto.getPopupMaximumPeople();
         this.popupFee = dto.getPopupFee();

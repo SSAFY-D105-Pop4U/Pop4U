@@ -60,9 +60,6 @@ public class PopupStoreDTO {
     @Size(max = 500, message = "설명은 최대 500자까지 가능합니다.")
     private String popupDescription;
 
-    @Size(max = 255, message = "브랜드 링크는 최대 255자까지 가능합니다.")
-    private String popupUrl;
-
     @NotNull(message = "최대 수용 인원은 필수입니다.")
     @Min(value = 1, message = "최대 수용 인원은 최소 1명 이상이어야 합니다.")
     private Integer popupMaximumCapacity;
@@ -89,12 +86,11 @@ public class PopupStoreDTO {
                 .popupEndDate(store.getPopupEndDate())
                 .popupOperationTime(store.getPopupOperationTime())
                 .popupDescription(store.getPopupDescription())
-                .popupUrl(store.getPopupUrl())
                 .popupMaximumCapacity(store.getPopupMaximumCapacity())
                 .popupMaximumPeople(store.getPopupMaximumPeople())
                 .popupFee(store.getPopupFee())
                 .popupParking(store.getPopupParking())
-                .popupViewCount(store.getPopupViewCount()) // 조회수 추가
+                .popupViewCount(store.getPopupViewCount())
                 .categoryIds(Optional.ofNullable(categoryIds).orElse(Collections.emptyList()))
                 .popupImages(Optional.ofNullable(popupImages).orElse(Collections.emptyList()))
                 .build();
@@ -111,7 +107,6 @@ public class PopupStoreDTO {
                 .popupEndDate(this.popupEndDate)
                 .popupOperationTime(this.popupOperationTime)
                 .popupDescription(this.popupDescription)
-                .popupUrl(this.popupUrl)
                 .popupMaximumCapacity(this.popupMaximumCapacity)
                 .popupMaximumPeople(this.popupMaximumPeople)
                 .popupFee(this.popupFee)
@@ -129,12 +124,11 @@ public class PopupStoreDTO {
         this.popupEndDate = store.getPopupEndDate();
         this.popupOperationTime = store.getPopupOperationTime();
         this.popupDescription = store.getPopupDescription();
-        this.popupUrl = store.getPopupUrl();
         this.popupMaximumCapacity = store.getPopupMaximumCapacity();
         this.popupMaximumPeople = store.getPopupMaximumPeople();
         this.popupFee = store.getPopupFee();
         this.popupParking = store.getPopupParking();
-        this.popupViewCount = store.getPopupViewCount(); // 조회수 추가
+        this.popupViewCount = store.getPopupViewCount();
         this.categoryIds = Collections.emptyList();
         this.popupImages = Collections.emptyList();
     }
