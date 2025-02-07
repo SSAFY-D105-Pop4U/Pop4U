@@ -40,11 +40,16 @@ public class PopupStoreService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public PopupStoreDTO getPopupStoreById(Long popupId) {
         PopupStore popupStore = popupStoreRepository.findById(popupId)
                 .orElseThrow(() -> new RuntimeException("팝업스토어를 찾을 수 없습니다."));
 
-        System.out.println("✅ getPopupStoreById() 최신 데이터 조회: " + popupStore);
+        // 조회수 증가
+        popupStore.increaseViewCount();
+        popupStoreRepository.save(popupStore);
+        // popupStoreRepository.flush(); // 즉시 DB에 반영
+
 
         return convertToDTO(popupStore);
     }
