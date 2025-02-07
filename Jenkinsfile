@@ -7,7 +7,15 @@ pipeline {
         WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
 
+    
+
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
         stage('Deploy') {
             steps {
                 script {
@@ -24,25 +32,18 @@ pipeline {
                     // 디버깅
                     echo "Current branch: ${env.GIT_BRANCH}"
                     echo "Deploy branch: ${deployBranch}"
-                    echo "Current workspace: ${WORKSPACE}"
                     
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
-                            sh """
-                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
-                                    cd ~
-                                    rm -rf *
-                                '
-                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
-                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
-                                    cd ~
-                                    docker-compose stop ${deployBranch}
-                                    docker rm -f ${containerName} || true
-                                    docker-compose build --no-cache ${deployBranch}
-                                    docker-compose up -d --no-deps --build ${deployBranch}
-                                '
-                            """
-                        }
+                        sh """
+                            scp -o StrictHostKeyChecking=no -r ${WORKSPACE_PATH}/* ubuntu@\${EC2_HOST}:~/
+                            ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                cd ~
+                                docker-compose down
+                                docker-compose up -d --build
+                            '
+                        """
+                    }
                     }
                 }
             }
