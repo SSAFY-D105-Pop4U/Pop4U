@@ -45,7 +45,7 @@ pipeline {
                                     docker-compose stop ${deployBranch}
                                     docker rm -f ${containerName} || true
                                     docker-compose build --no-cache ${deployBranch}
-                                    docker-compose up -d --no-deps --build ${deployBranch}
+                                    docker-compose up -d --build
                                 '
                             """
                         }
