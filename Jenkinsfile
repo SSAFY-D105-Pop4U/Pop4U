@@ -32,18 +32,21 @@ pipeline {
                     // 디버깅
                     echo "Current branch: ${env.GIT_BRANCH}"
                     echo "Deploy branch: ${deployBranch}"
+                    echo "Current workspace: ${WORKSPACE}"
                     
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
-                        sh """
-                            scp -o StrictHostKeyChecking=no -r ${WORKSPACE_PATH}/* ubuntu@\${EC2_HOST}:~/
-                            ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
-                                cd ~
-                                docker-compose down
-                                docker-compose up -d --build
-                            '
-                        """
-                    }
+                            sh """
+                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    docker-compose stop ${deployBranch}
+                                    docker rm -f ${containerName} || true
+                                    docker-compose build --no-cache ${deployBranch}
+                                    docker-compose up -d --no-deps --build ${deployBranch}
+                                '
+                            """
+                        }
                     }
                 }
             }
