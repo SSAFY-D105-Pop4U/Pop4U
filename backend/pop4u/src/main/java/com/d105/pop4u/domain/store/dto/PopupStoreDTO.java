@@ -1,11 +1,16 @@
 package com.d105.pop4u.domain.store.dto;
 
 import com.d105.pop4u.domain.store.entity.PopupStore;
+import com.d105.pop4u.domain.store.entity.PopupStoreImg;
+
 import lombok.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -59,10 +64,12 @@ public class PopupStoreDTO {
 
     private List<Long> categoryIds; // ✅ 선택된 카테고리 ID 리스트 추가
 
-    // ✅ 엔티티 -> DTO 변환 메서드 (카테고리 포함)
-    public static PopupStoreDTO fromEntity(PopupStore store, List<Long> categoryIds) {
+    private List<String> popupImages; // ✅ 이미지 URL 리스트 추가
+
+    // ✅ 엔티티 -> DTO 변환 메서드 (카테고리 및 이미지 포함)
+    public static PopupStoreDTO fromEntity(PopupStore store, List<Long> categoryIds, List<String> popupImages) {
         return PopupStoreDTO.builder()
-                .popupId(store.getPopupId()) // ✅ 팝업 ID 추가
+                .popupId(store.getPopupId()) // ✅ 조회 시 ID 포함
                 .userId(store.getUserId()) // 유저 ID 변환
                 .popupName(store.getPopupName())
                 .popupRegion(store.getPopupRegion())
@@ -75,7 +82,45 @@ public class PopupStoreDTO {
                 .popupUrl(store.getPopupUrl())
                 .popupMaximumCapacity(store.getPopupMaximumCapacity())
                 .popupMaximumPeople(store.getPopupMaximumPeople())
-                .categoryIds(categoryIds) // ✅ 카테고리 리스트 추가
+                .categoryIds(Optional.ofNullable(categoryIds).orElse(Collections.emptyList())) // ✅ Null 방지
+                .popupImages(Optional.ofNullable(popupImages).orElse(Collections.emptyList())) // ✅ Null 방지
                 .build();
     }
+
+    public PopupStore toEntity() {
+        return PopupStore.builder()
+                .popupId(this.popupId)
+                .userId(this.userId)
+                .popupName(this.popupName)
+                .popupRegion(this.popupRegion)
+                .popupAddress(this.popupAddress)
+                .popupStartDate(this.popupStartDate)
+                .popupEndDate(this.popupEndDate)
+                .popupOpenTime(this.popupOpenTime)
+                .popupClosedTime(this.popupClosedTime)
+                .popupDescription(this.popupDescription)
+                .popupUrl(this.popupUrl)
+                .popupMaximumCapacity(this.popupMaximumCapacity)
+                .popupMaximumPeople(this.popupMaximumPeople)
+                .build();
+    }
+
+    public PopupStoreDTO(PopupStore store) {
+        this.popupId = store.getPopupId();
+        this.userId = store.getUserId();
+        this.popupName = store.getPopupName();
+        this.popupRegion = store.getPopupRegion();
+        this.popupAddress = store.getPopupAddress();
+        this.popupStartDate = store.getPopupStartDate();
+        this.popupEndDate = store.getPopupEndDate();
+        this.popupOpenTime = store.getPopupOpenTime();
+        this.popupClosedTime = store.getPopupClosedTime();
+        this.popupDescription = store.getPopupDescription();
+        this.popupUrl = store.getPopupUrl();
+        this.popupMaximumCapacity = store.getPopupMaximumCapacity();
+        this.popupMaximumPeople = store.getPopupMaximumPeople();
+        this.categoryIds = Collections.emptyList(); // 기본값 설정 (필요시 수정)
+        this.popupImages = Collections.emptyList(); // 기본값 설정 (필요시 수정)
+    }
+
 }

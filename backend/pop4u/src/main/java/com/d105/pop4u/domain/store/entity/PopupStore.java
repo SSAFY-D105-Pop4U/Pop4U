@@ -1,12 +1,16 @@
 package com.d105.pop4u.domain.store.entity;
 
 import com.d105.pop4u.domain.category.entity.PopupCategory;
+import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,10 +49,12 @@ public class PopupStore {
 
     @Column(name = "popup_start_date", nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate popupStartDate;
 
     @Column(name = "popup_end_date", nullable = false)
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate popupEndDate;
 
     @Column(name = "popup_open_time", nullable = false)
@@ -84,7 +90,29 @@ public class PopupStore {
     @Column(name = "popup_updated_at", nullable = false)
     private LocalDateTime popupUpdatedAt = LocalDateTime.now();
 
+    @Builder.Default
     @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL)
-    private List<PopupCategory> popupCategories; // ✅ 팝업스토어가 가진 카테고리 리스트
+    private List<PopupCategory> popupCategories = new ArrayList<>(); // ✅ 팝업스토어가 가진 카테고리 리스트
+
+    @Builder.Default
+    @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PopupStoreImg> popupImages = new ArrayList<>(); // ✅ 팝업에 여러 개의 이미지 연결
+
+    public void updateInfo(PopupStoreDTO dto) {
+        // 모든 필드를 무조건 업데이트하도록 변경
+        this.popupName = dto.getPopupName();
+        this.popupRegion = dto.getPopupRegion();
+        this.popupAddress = dto.getPopupAddress();
+        this.popupStartDate = dto.getPopupStartDate();
+        this.popupEndDate = dto.getPopupEndDate();
+        this.popupOpenTime = dto.getPopupOpenTime();
+        this.popupClosedTime = dto.getPopupClosedTime();
+        this.popupDescription = dto.getPopupDescription();
+        this.popupUrl = dto.getPopupUrl();
+        this.popupMaximumCapacity = dto.getPopupMaximumCapacity();
+        this.popupMaximumPeople = dto.getPopupMaximumPeople();
+        this.popupUpdatedAt = LocalDateTime.now(); // 업데이트 시간 갱신
+    }
+
 
 }
