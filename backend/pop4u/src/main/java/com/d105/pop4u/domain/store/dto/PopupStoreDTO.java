@@ -43,7 +43,7 @@ public class PopupStoreDTO {
     private LocalDate popupEndDate;
 
     @NotBlank(message = "운영 시간은 필수입니다.")
-    @Size(max = 50, message = "운영 시간은 최대 50자까지 가능합니다.")
+    @Size(max = 100, message = "운영 시간은 최대 100자까지 가능합니다.")
     private String popupOperationTime;
 
     @NotNull(message = "입장료 정보는 필수입니다.")
@@ -75,6 +75,8 @@ public class PopupStoreDTO {
 
     private List<String> popupImages; // ✅ 이미지 URL 리스트 추가
 
+    private Long popupViewCount; // 조회수 필드 추가
+
     // ✅ 엔티티 -> DTO 변환 메서드 (카테고리 및 이미지 포함)
     public static PopupStoreDTO fromEntity(PopupStore store, List<Long> categoryIds, List<String> popupImages) {
         return PopupStoreDTO.builder()
@@ -92,6 +94,7 @@ public class PopupStoreDTO {
                 .popupMaximumPeople(store.getPopupMaximumPeople())
                 .popupFee(store.getPopupFee())
                 .popupParking(store.getPopupParking())
+                .popupViewCount(store.getPopupViewCount()) // 조회수 추가
                 .categoryIds(Optional.ofNullable(categoryIds).orElse(Collections.emptyList()))
                 .popupImages(Optional.ofNullable(popupImages).orElse(Collections.emptyList()))
                 .build();
@@ -131,6 +134,7 @@ public class PopupStoreDTO {
         this.popupMaximumPeople = store.getPopupMaximumPeople();
         this.popupFee = store.getPopupFee();
         this.popupParking = store.getPopupParking();
+        this.popupViewCount = store.getPopupViewCount(); // 조회수 추가
         this.categoryIds = Collections.emptyList();
         this.popupImages = Collections.emptyList();
     }

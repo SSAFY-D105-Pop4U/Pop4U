@@ -57,13 +57,8 @@ public class PopupStore {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate popupEndDate;
 
-    @Column(name = "popup_open_time", nullable = false)
-    private LocalTime popupOpenTime;
 
-    @Column(name = "popup_closed_time", nullable = false)
-    private LocalTime popupClosedTime;
-
-    @Column(name = "popup_operation_time", length = 50, nullable = false)
+    @Column(name = "popup_operation_time", length = 100, nullable = false)
     private String popupOperationTime;
 
     @Builder.Default
@@ -79,7 +74,7 @@ public class PopupStore {
 
     @Builder.Default
     @Column(name = "popup_view_count", nullable = false)
-    private Long popupViewCount = 0L; // 기본값 0
+    private Long popupViewCount = 0L;
 
     @Column(name = "popup_url")
     private String popupUrl;
@@ -124,5 +119,8 @@ public class PopupStore {
         this.popupUpdatedAt = LocalDateTime.now();
     }
 
+    public void increaseViewCount() {
+        this.popupViewCount = this.popupViewCount + 1;
+    }
 
 }
