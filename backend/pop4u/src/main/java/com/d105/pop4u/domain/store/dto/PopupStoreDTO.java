@@ -89,18 +89,38 @@ public class PopupStoreDTO {
 
     public PopupStore toEntity() {
         return PopupStore.builder()
-            .userId(userId)
-            .popupName(popupName)
-            .popupRegion(popupRegion)
-            .popupAddress(popupAddress)
-            .popupStartDate(popupStartDate)
-            .popupEndDate(popupEndDate)
-            .popupOpenTime(popupOpenTime)
-            .popupClosedTime(popupClosedTime)
-            .popupDescription(popupDescription)
-            .popupUrl(popupUrl)
-            .popupMaximumCapacity(popupMaximumCapacity)
-            .popupMaximumPeople(popupMaximumPeople)
-            .build();
+                .popupId(this.popupId)
+                .userId(this.userId)
+                .popupName(this.popupName)
+                .popupRegion(this.popupRegion)
+                .popupAddress(this.popupAddress)
+                .popupStartDate(this.popupStartDate)
+                .popupEndDate(this.popupEndDate)
+                .popupOpenTime(this.popupOpenTime)
+                .popupClosedTime(this.popupClosedTime)
+                .popupDescription(this.popupDescription)
+                .popupUrl(this.popupUrl)
+                .popupMaximumCapacity(this.popupMaximumCapacity)
+                .popupMaximumPeople(this.popupMaximumPeople)
+                .build();
     }
+
+    public PopupStoreDTO(PopupStore store) {
+        this.popupId = store.getPopupId();
+        this.userId = store.getUserId();
+        this.popupName = store.getPopupName();
+        this.popupRegion = store.getPopupRegion();
+        this.popupAddress = store.getPopupAddress();
+        this.popupStartDate = store.getPopupStartDate();
+        this.popupEndDate = store.getPopupEndDate();
+        this.popupOpenTime = store.getPopupOpenTime();
+        this.popupClosedTime = store.getPopupClosedTime();
+        this.popupDescription = store.getPopupDescription();
+        this.popupUrl = store.getPopupUrl();
+        this.popupMaximumCapacity = store.getPopupMaximumCapacity();
+        this.popupMaximumPeople = store.getPopupMaximumPeople();
+        this.categoryIds = Collections.emptyList(); // 기본값 설정 (필요시 수정)
+        this.popupImages = Collections.emptyList(); // 기본값 설정 (필요시 수정)
+    }
+
 }

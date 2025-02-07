@@ -99,6 +99,7 @@ public class PopupStore {
     private List<PopupStoreImg> popupImages = new ArrayList<>(); // ✅ 팝업에 여러 개의 이미지 연결
 
     public void updateInfo(PopupStoreDTO dto) {
+        // 모든 필드를 무조건 업데이트하도록 변경
         this.popupName = dto.getPopupName();
         this.popupRegion = dto.getPopupRegion();
         this.popupAddress = dto.getPopupAddress();
@@ -110,5 +111,8 @@ public class PopupStore {
         this.popupUrl = dto.getPopupUrl();
         this.popupMaximumCapacity = dto.getPopupMaximumCapacity();
         this.popupMaximumPeople = dto.getPopupMaximumPeople();
+        this.popupUpdatedAt = LocalDateTime.now(); // 업데이트 시간 갱신
     }
+
+
 }
