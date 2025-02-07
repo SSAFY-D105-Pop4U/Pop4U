@@ -1,15 +1,10 @@
 pipeline {
     agent any
-    
+
     environment {
-        MYSQL_ROOT_PASSWORD = credentials('MYSQL_ROOT_PASSWORD')
-        MYSQL_DATABASE = credentials('MYSQL_DATABASE')
-        MYSQL_USER = credentials('MYSQL_USER')
-        MYSQL_PASSWORD = credentials('MYSQL_PASSWORD')
-        MONGO_INITDB_ROOT_USERNAME = credentials('MONGO_INITDB_ROOT_USERNAME')
-        MONGO_INITDB_ROOT_PASSWORD = credentials('MONGO_INITDB_ROOT_PASSWORD')
-        MONGO_INITDB_DATABASE = credentials('MONGO_INITDB_DATABASE')
-        SPRING_PROFILES_ACTIVE = credentials('SPRING_PROFILES_ACTIVE')
+        BRANCH_NAME = "${env.GIT_BRANCH}"
+        EC2_HOST = "i12d105.p.ssafy.io"
+        WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
 
     stages {
@@ -17,7 +12,6 @@ pipeline {
             steps {
                 script {
                     def deployBranch = ""
-                    def containerName = ""
                     
                     if (env.GIT_BRANCH == 'origin/back_develop' || env.GIT_BRANCH.contains('origin/feat/BE/')) {
                         deployBranch = 'backend'
@@ -26,24 +20,14 @@ pipeline {
                         deployBranch = 'frontend'
                         containerName = 'react-frontend'
                     }
+
+                    // 디버깅
+                    echo "Current branch: ${env.GIT_BRANCH}"
+                    echo "Deploy branch: ${deployBranch}"
+                    echo "Current workspace: ${WORKSPACE}"
                     
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
-                            // .env 파일 생성
-                            sh """
-                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
-                                    cat > .env << EOL
-                                    MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-                                    MYSQL_DATABASE=${MYSQL_DATABASE}
-                                    MYSQL_USER=${MYSQL_USER}
-                                    MYSQL_PASSWORD=${MYSQL_PASSWORD}
-                                    MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
-                                    MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
-                                    MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
-                                    SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
-                                    EOL
-                                '
-                            """
                             sh """
                                 ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
                                     cd ~
@@ -62,6 +46,15 @@ pipeline {
                     }
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline Successful'
+        }
+        failure {
+            echo 'Pipeline Failed'
         }
     }
 }
