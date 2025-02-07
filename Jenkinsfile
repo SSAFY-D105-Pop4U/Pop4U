@@ -29,10 +29,12 @@ pipeline {
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
                             sh """
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    rm -rf *
+                                '
                                 scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
-                            """
-                            sh """
-                            ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
                                     cd ~
                                     docker-compose down
                                     docker rm -f ${containerName} || true
