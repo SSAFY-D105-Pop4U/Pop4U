@@ -7,15 +7,13 @@ pipeline {
         WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
 
-    
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        
+
         stage('Deploy') {
             steps {
                 script {
@@ -37,6 +35,10 @@ pipeline {
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
                             sh """
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    rm -rf *
+                                '
                                 scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
                                 ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
                                     cd ~
