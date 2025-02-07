@@ -1,6 +1,9 @@
 package com.d105.pop4u.domain.review.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -14,4 +17,7 @@ public class ReviewDto {
     private String reviewContent;   // 리뷰 내용
     private Integer reviewRating;   // 리뷰 별점
     private String reviewImg;       // 리뷰 사진
+
+    @JsonFormat(pattern = "yyyy-MM-dd") // 날짜 형식 지정
+    private LocalDate reviewCreatedAt; // 작성일자
 }

@@ -56,4 +56,8 @@ public class Review {
     public PopupStore getPopup() {
         return popupId; // PopupStore 엔티티 반환
     }
+
+    public LocalDateTime getReviewCreatedAt() {
+        return reviewCreatedAt; // 작성일자를 반환
+    }
 }

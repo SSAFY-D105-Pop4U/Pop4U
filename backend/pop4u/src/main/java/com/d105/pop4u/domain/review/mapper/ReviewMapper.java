@@ -24,7 +24,8 @@ public class ReviewMapper {
                 review.getPopup().getPopupId(), // Popup ID
                 review.getReviewContent(),
                 review.getReviewRating(),
-                review.getReviewImg()
+                review.getReviewImg(),
+                review.getReviewCreatedAt().toLocalDate()
         );
     }
 
