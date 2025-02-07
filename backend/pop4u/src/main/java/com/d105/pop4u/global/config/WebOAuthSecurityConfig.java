@@ -59,6 +59,8 @@ public class WebOAuthSecurityConfig {
 //                        .requestMatchers(new AntPathRequestMatcher("/api/token")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
+//                        .requestMatchers("/v3/api-docs/**").permitAll() // Swagger API 문서 접근 허용
+//                        .requestMatchers("/swagger-ui/**").permitAll() // Swagger UI 접근 허용
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/login")

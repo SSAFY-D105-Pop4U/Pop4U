@@ -5,6 +5,7 @@ import com.d105.pop4u.domain.user.dto.LoginRequest;
 import com.d105.pop4u.domain.user.service.TokenService;
 import com.d105.pop4u.domain.user.service.UserService;
 import com.d105.pop4u.global.config.BaseResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
