@@ -63,8 +63,18 @@ public class PopupStore {
     @Column(name = "popup_closed_time", nullable = false)
     private LocalTime popupClosedTime;
 
-    @Lob
-    @Column(name = "popup_description")
+    @Column(name = "popup_operation_time", length = 50, nullable = false)
+    private String popupOperationTime;
+
+    @Builder.Default
+    @Column(name = "popup_fee", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
+    private Integer popupFee = 0;
+
+    @Builder.Default
+    @Column(name = "popup_parking", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
+    private Integer popupParking = 0;
+
+    @Column(name = "popup_description", nullable = false)
     private String popupDescription;
 
     @Builder.Default
@@ -99,19 +109,19 @@ public class PopupStore {
     private List<PopupStoreImg> popupImages = new ArrayList<>(); // ✅ 팝업에 여러 개의 이미지 연결
 
     public void updateInfo(PopupStoreDTO dto) {
-        // 모든 필드를 무조건 업데이트하도록 변경
         this.popupName = dto.getPopupName();
         this.popupRegion = dto.getPopupRegion();
         this.popupAddress = dto.getPopupAddress();
         this.popupStartDate = dto.getPopupStartDate();
         this.popupEndDate = dto.getPopupEndDate();
-        this.popupOpenTime = dto.getPopupOpenTime();
-        this.popupClosedTime = dto.getPopupClosedTime();
+        this.popupOperationTime = dto.getPopupOperationTime();
         this.popupDescription = dto.getPopupDescription();
         this.popupUrl = dto.getPopupUrl();
         this.popupMaximumCapacity = dto.getPopupMaximumCapacity();
         this.popupMaximumPeople = dto.getPopupMaximumPeople();
-        this.popupUpdatedAt = LocalDateTime.now(); // 업데이트 시간 갱신
+        this.popupFee = dto.getPopupFee();
+        this.popupParking = dto.getPopupParking();
+        this.popupUpdatedAt = LocalDateTime.now();
     }
 
 
