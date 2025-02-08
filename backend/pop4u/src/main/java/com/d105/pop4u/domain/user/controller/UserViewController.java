@@ -12,7 +12,7 @@ public class UserViewController {
 
     @GetMapping("/join")
     public String join() {
-        return "signup";
+        return "join";
     }
     
 }
