@@ -63,7 +63,7 @@ public class WebOAuthSecurityConfig {
 //                        .requestMatchers("/swagger-ui/**").permitAll() // Swagger UI 접근 허용
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
+                        .loginPage("/user/login")
                         .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint.authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository()))
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(oAuth2UserCustomService))
                         .successHandler(oAuth2SuccessHandler())

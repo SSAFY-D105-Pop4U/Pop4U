@@ -35,7 +35,7 @@ public class BrandApiController {
     public ResponseEntity<BaseResponse<TokenResponse>> login(@RequestBody LoginRequest request) {
         // 로그인 처리 로직
         TokenResponse tokens = tokenService.login(request.getEmail(), request.getPassword()); // 로그인 메서드 호출
-        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "로그인이 완료되었습니다.", tokens)); // 액세스 + 리프레쉬 토큰 반환
+        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "브랜드 로그인이 완료되었습니다.", tokens)); // 액세스 + 리프레쉬 토큰 반환
     }
 
     @PostMapping("/logout")
