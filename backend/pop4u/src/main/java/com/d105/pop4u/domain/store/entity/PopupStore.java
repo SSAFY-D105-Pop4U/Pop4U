@@ -116,7 +116,7 @@ public class PopupStore {
     }
 
     public void increaseViewCount() {
-        this.popupViewCount = this.popupViewCount + 1;
+        this.popupViewCount++;
     }
 
 }

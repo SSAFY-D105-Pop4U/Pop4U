@@ -22,6 +22,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.HashMap;
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +36,30 @@ public class PopupStoreService {
     private final String UPLOAD_DIR = System.getProperty("user.home") + "/uploads/popup/";
 
     // ✅ 조회 메서드들
-    public List<PopupStoreDTO> getAllPopupStores() {
-        return popupStoreRepository.findAll().stream()
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
+        Map<String, List<PopupStoreDTO>> result = new HashMap<>();
+        
+        // 전체 목록
+        result.put("all", popupStoreRepository.findAll().stream()
                 .map(this::convertToDTO)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        
+        // 시작일 기준 정렬
+        result.put("byStartDate", popupStoreRepository.findAllByOrderByPopupStartDateDesc().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
+        
+        // 종료일 기준 정렬
+        result.put("byEndDate", popupStoreRepository.findAllByOrderByPopupEndDateDesc().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
+        
+        // 조회수 기준 정렬
+        result.put("byViewCount", popupStoreRepository.findAllByOrderByPopupViewCountDesc().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
+        
+        return result;
     }
 
     @Transactional
