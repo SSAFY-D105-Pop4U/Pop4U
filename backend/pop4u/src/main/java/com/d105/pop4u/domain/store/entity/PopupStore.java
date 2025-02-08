@@ -1,11 +1,18 @@
 package com.d105.pop4u.domain.store.entity;
 
+import com.d105.pop4u.domain.category.entity.PopupCategory;
+import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "popup_store")
@@ -42,28 +49,32 @@ public class PopupStore {
 
     @Column(name = "popup_start_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date popupStartDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate popupStartDate;
 
     @Column(name = "popup_end_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date popupEndDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate popupEndDate;
 
-    @Column(name = "popup_open_time", nullable = false)
-    private LocalTime popupOpenTime;
 
-    @Column(name = "popup_closed_time", nullable = false)
-    private LocalTime popupClosedTime;
+    @Column(name = "popup_operation_time", length = 100, nullable = false)
+    private String popupOperationTime;
 
-    @Lob
-    @Column(name = "popup_description")
+    @Builder.Default
+    @Column(name = "popup_fee", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
+    private Integer popupFee = 0;
+
+    @Builder.Default
+    @Column(name = "popup_parking", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
+    private Integer popupParking = 0;
+
+    @Column(name = "popup_description", nullable = false, columnDefinition = "TEXT")
     private String popupDescription;
 
     @Builder.Default
     @Column(name = "popup_view_count", nullable = false)
-    private Long popupViewCount = 0L; // 기본값 0
-
-    @Column(name = "popup_url")
-    private String popupUrl;
+    private Long popupViewCount = 0L;
 
     @Builder.Default
     @Column(name = "popup_maximum_capacity", nullable = false)
@@ -80,5 +91,32 @@ public class PopupStore {
     @Builder.Default
     @Column(name = "popup_updated_at", nullable = false)
     private LocalDateTime popupUpdatedAt = LocalDateTime.now();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL)
+    private List<PopupCategory> popupCategories = new ArrayList<>(); // ✅ 팝업스토어가 가진 카테고리 리스트
+
+    @Builder.Default
+    @OneToMany(mappedBy = "popupStore", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PopupStoreImg> popupImages = new ArrayList<>(); // ✅ 팝업에 여러 개의 이미지 연결
+
+    public void updateInfo(PopupStoreDTO dto) {
+        this.popupName = dto.getPopupName();
+        this.popupRegion = dto.getPopupRegion();
+        this.popupAddress = dto.getPopupAddress();
+        this.popupStartDate = dto.getPopupStartDate();
+        this.popupEndDate = dto.getPopupEndDate();
+        this.popupOperationTime = dto.getPopupOperationTime();
+        this.popupDescription = dto.getPopupDescription();
+        this.popupMaximumCapacity = dto.getPopupMaximumCapacity();
+        this.popupMaximumPeople = dto.getPopupMaximumPeople();
+        this.popupFee = dto.getPopupFee();
+        this.popupParking = dto.getPopupParking();
+        this.popupUpdatedAt = LocalDateTime.now();
+    }
+
+    public void increaseViewCount() {
+        this.popupViewCount = this.popupViewCount + 1;
+    }
 
 }

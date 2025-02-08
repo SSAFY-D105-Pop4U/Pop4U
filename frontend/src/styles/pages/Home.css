@@ -1,0 +1,33 @@
+.header {
+  padding-left: 27px;
+  padding-right: 27px;
+  padding-bottom: 11px;
+  margin: 0px;
+}
+
+h2 {
+  margin: 0px;
+  padding-bottom: 11px;
+}
+
+h3 {
+  padding-left: 27px;
+  padding-right: 27px;
+  margin: 9px;
+}
+
+.divider1 {
+  position: relative; /* 다른 요소와 독립적으로 배치 */
+  width: calc(100%); /* body padding 합만큼 추가 */
+  height: 10px; /* 선의 두께 */
+  background-color: #f6f7f7; /* 선의 색상 */
+  margin: 20px 0; /* 위아래 여백 */
+}
+
+.divider2 {
+  position: relative; /* 다른 요소와 독립적으로 배치 */
+  width: calc(100%); /* body padding 합만큼 추가 */
+  height: 5px; /* 선의 두께 */
+  background-color: #f6f7f7; /* 선의 색상 */
+  margin-bottom: 10px 0; /* 위아래 여백 */
+}

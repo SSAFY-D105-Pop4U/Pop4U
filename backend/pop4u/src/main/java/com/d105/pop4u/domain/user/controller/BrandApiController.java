@@ -1,8 +1,14 @@
 package com.d105.pop4u.domain.user.controller;
 
 import com.d105.pop4u.domain.user.dto.AddUserRequest;
+<<<<<<< HEAD
+=======
+import com.d105.pop4u.domain.user.dto.LoginRequest;
+import com.d105.pop4u.domain.user.service.TokenService;
+>>>>>>> 1334fdb3744b59937c573a6add7135424cae986f
 import com.d105.pop4u.domain.user.service.UserService;
 import com.d105.pop4u.global.config.BaseResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class BrandApiController {
 
     private final UserService userService;
+    private final TokenService tokenService;
 
     @PostMapping("/join")
     public ResponseEntity<BaseResponse<Void>> join(@RequestBody AddUserRequest request) {
@@ -25,6 +32,14 @@ public class BrandApiController {
 //        return "성공";   // 회원 가입이 완료된 이후에 로그인 페이지로 이동
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "브랜드 회원가입이 완료되었습니다."));
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<BaseResponse<String>> login(@RequestBody LoginRequest request) {
+        // 로그인 처리 로직
+        String accessToken = tokenService.login(request.getEmail(), request.getPassword()); // 로그인 메서드 호출
+        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), accessToken)); // 액세스 토큰 반환
+    }
+
 
     @GetMapping("/logout")
     public ResponseEntity<BaseResponse<Void>> logout(HttpServletRequest request, HttpServletResponse response) {

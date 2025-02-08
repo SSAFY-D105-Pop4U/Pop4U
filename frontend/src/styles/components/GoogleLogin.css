@@ -1,0 +1,11 @@
+.google-button {
+    width: 220px;
+    height: 50px;
+    background-image: url("../../assets/images/google.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 7px;
+}
