@@ -53,6 +53,8 @@ public class User implements UserDetails {
     @Column(name = "user_unchecked_alarm", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT '0'")
     private int userUncheckedAlarm;
 
+    // 리프레시 토큰 설정 메서드 추가
+    @Setter
     @Column(name = "user_refresh_token")
     private String userRefreshToken; // 일반 회원 전용 (소셜 로그인)
 
@@ -108,8 +110,4 @@ public class User implements UserDetails {
         return this;
     }
 
-    // 리프레시 토큰 설정 메서드 추가
-    public void setUserRefreshToken(String refreshToken) {
-        this.userRefreshToken = refreshToken;
-    }
 }

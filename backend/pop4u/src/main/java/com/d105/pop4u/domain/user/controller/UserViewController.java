@@ -10,8 +10,8 @@ public class UserViewController {
         return "oauthLogin";
     }
 
-    @GetMapping("/signup")
-    public String signup() {
+    @GetMapping("/join")
+    public String join() {
         return "signup";
     }
     

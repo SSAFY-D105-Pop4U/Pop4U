@@ -37,7 +37,6 @@ public class BrandApiController {
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), accessToken)); // 액세스 토큰 반환
     }
 
-
     @GetMapping("/logout")
     public ResponseEntity<BaseResponse<Void>> logout(HttpServletRequest request, HttpServletResponse response) {
         // DB에서 refreshToken 빈 문자열로 업데이트
