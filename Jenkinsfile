@@ -7,20 +7,20 @@ pipeline {
         WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
 
-    stage('application.yml download') {
-        steps {
-            withCredentials([file(credentialsId: 'application.yml', variable: 'dbConfigFile')]) {
-                script {
-                    sh 'cp $dbConfigFile backend/pop4u/src/main/resources/application.yml'
-                }
-            }
-        }
-    }
-
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
+            }
+        }
+
+        stage('application.yml download') {
+            steps {
+                withCredentials([file(credentialsId: 'application.yml', variable: 'dbConfigFile')]) {
+                    script {
+                        sh 'cp $dbConfigFile backend/pop4u/src/main/resources/application.yml'
+                    }
+                }
             }
         }
 
