@@ -42,14 +42,21 @@ dependencies {
     implementation 'org.springframework.security:spring-security-test'
 
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+	// Redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // MongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 
     implementation 'io.jsonwebtoken:jjwt:0.9.1' // 자바 JWT 라이브러리
     implementation 'javax.xml.bind:jaxb-api:2.3.1'  // XML 문서와 Java 객체 간 매핑 자동화
 
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'com.nimbusds:oauth2-oidc-sdk:11.10.1'
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'

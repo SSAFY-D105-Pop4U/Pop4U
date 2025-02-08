@@ -8,6 +8,12 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Deploy') {
             steps {
                 script {
@@ -29,15 +35,17 @@ pipeline {
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
                             sh """
-                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
-                            """
-                            sh """
-                            ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
                                     cd ~
-                                    docker-compose down
+                                    rm -rf ${deployBranch} || true
+                                '
+                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    docker-compose stop ${deployBranch} || true
                                     docker rm -f ${containerName} || true
                                     docker-compose build --no-cache ${deployBranch}
-                                    docker-compose up -d --no-deps --build ${deployBranch}
+                                    docker-compose up -d --build ${deployBranch}
                                 '
                             """
                         }
