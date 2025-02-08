@@ -16,7 +16,7 @@ pipeline {
 
         stage('application.yml download') {
             steps {
-                withCredentials([file(credentialsId: 'application.yml', variable: 'dbConfigFile')]) {
+                withCredentials([file(credentialsId: 'application-yml', variable: 'dbConfigFile')]) {
                     script {
                         sh 'cp $dbConfigFile backend/pop4u/src/main/resources/application.yml'
                     }
