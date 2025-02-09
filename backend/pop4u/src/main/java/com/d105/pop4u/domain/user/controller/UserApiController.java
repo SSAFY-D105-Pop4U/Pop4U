@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Controller
-public class UserViewController {
+public class UserApiController {
 
     private final UserService userService;
 
