@@ -1,8 +1,6 @@
 package com.d105.pop4u.domain.user.controller;
 
-import com.d105.pop4u.domain.user.dto.AddUserRequest;
-import com.d105.pop4u.domain.user.dto.LoginRequest;
-import com.d105.pop4u.domain.user.dto.TokenResponse;
+import com.d105.pop4u.domain.user.dto.*;
 import com.d105.pop4u.domain.user.service.TokenService;
 import com.d105.pop4u.domain.user.service.UserService;
 import com.d105.pop4u.global.config.BaseResponse;
@@ -13,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,5 +45,30 @@ public class BrandApiController {
         new SecurityContextLogoutHandler().logout(request, response,
                 SecurityContextHolder.getContext().getAuthentication());
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "브랜드 로그아웃이 완료되었습니다."));
+    }
+
+
+    // 브랜드 회원 정보 조회 (GET /brand)
+    @GetMapping
+    public ResponseEntity<BaseResponse<UserResponse>> getBrandInfo() {
+        String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        UserResponse userResponse = userService.getBrandInfo(email); // 브랜드 회원 정보 조회
+        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "브랜드 회원 정보 조회 성공", userResponse));
+    }
+
+    // 브랜드 회원 정보 수정 (PATCH /brand/edit)
+    @PatchMapping("/edit")
+    public ResponseEntity<BaseResponse<Void>> editBrandInfo(@RequestBody EditUserRequest request) {
+        String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        userService.editBrandInfo(email, request); // 브랜드 회원 정보 수정
+        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "브랜드 회원 정보 수정이 완료되었습니다."));
+    }
+
+    // 브랜드 회원 탈퇴 (DELETE /brand)
+    @DeleteMapping
+    public ResponseEntity<BaseResponse<Void>> deactivateBrand() {
+        String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        userService.deactivateBrand(email); // 브랜드 회원 비활성화
+        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "브랜드 회원 탈퇴가 완료되었습니다."));
     }
 }
