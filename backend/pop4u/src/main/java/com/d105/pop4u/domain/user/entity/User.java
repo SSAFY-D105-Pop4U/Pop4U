@@ -14,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@Setter // 추가 안해도 되는 거로 알지만 일단 추가
 @Entity
 @Builder
 public class User implements UserDetails {
@@ -109,5 +110,5 @@ public class User implements UserDetails {
         this.userRefreshToken = refreshtoken;
         return this;
     }
-
+    
 }
