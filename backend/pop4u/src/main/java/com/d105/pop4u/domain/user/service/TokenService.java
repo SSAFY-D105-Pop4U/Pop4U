@@ -40,7 +40,7 @@ public class TokenService {
         }
 
         // 액세스 토큰과 리프레시 토큰 생성
-        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(4800)); // 나중에 시간 바꿀 것. (1~2시간)
+        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(480)); // 나중에 시간 바꿀 것. (1~2시간)
         String refreshToken = refreshTokenService.createRefreshToken(user.getUserId());
 
         TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
