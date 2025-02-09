@@ -1,7 +1,6 @@
 package com.d105.pop4u.domain.user.controller;
 
 import com.d105.pop4u.domain.user.dto.UserResponse;
-import com.d105.pop4u.domain.user.dto.CouponResponse;
 import com.d105.pop4u.domain.user.dto.EditUserRequest;
 import com.d105.pop4u.domain.user.service.UserService;
 import com.d105.pop4u.global.config.BaseResponse;
@@ -51,14 +50,6 @@ public class UserViewController {
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "로그아웃이 완료되었습니다."));
     }
 
-    // 회원 쿠폰 조회 (GET /user/coupon)
-    @GetMapping("/coupon")
-    @ResponseBody
-    public ResponseEntity<BaseResponse<CouponResponse>> getUserCoupons() {
-        String email = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        CouponResponse couponResponse = userService.getUserCoupons(email); // 사용자 쿠폰 조회
-        return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "회원 쿠폰 조회 성공", couponResponse));
-    }
 
     // 내 정보 수정 (PATCH /user/edit)
     @PatchMapping("/edit")

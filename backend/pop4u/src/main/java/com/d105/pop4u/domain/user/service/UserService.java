@@ -1,7 +1,6 @@
 package com.d105.pop4u.domain.user.service;
 
 import com.d105.pop4u.domain.user.dto.UserResponse;
-import com.d105.pop4u.domain.user.dto.CouponResponse;
 import com.d105.pop4u.domain.user.dto.EditUserRequest;
 import com.d105.pop4u.domain.user.dto.AddUserRequest;
 import com.d105.pop4u.domain.user.entity.User;
@@ -11,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -57,14 +55,6 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
         return new UserResponse(user.getUserId(), user.getUserNickname(), user.getUserNickname(),
                 user.getUserEmail(), user.getUserTelephone(), user.getUserImg());
-    }
-
-    // 회원 쿠폰 조회
-    public CouponResponse getUserCoupons(String email) {
-        // 실제 쿠폰 조회 로직은 추가해야 합니다.
-        // 예시로 쿠폰 리스트를 반환
-        List<String> coupons = List.of("쿠폰1", "쿠폰2", "쿠폰3");
-        return new CouponResponse(coupons);
     }
 
     // 내 정보 수정
