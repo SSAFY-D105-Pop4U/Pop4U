@@ -1,5 +1,6 @@
 package com.d105.pop4u.global.config.oauth;
 
+import com.d105.pop4u.domain.user.dto.TokenResponse;
 import com.d105.pop4u.domain.user.entity.User;
 import com.d105.pop4u.domain.user.repository.UserRepository;
 import com.d105.pop4u.domain.user.service.UserService;
@@ -25,7 +26,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     public static final String REFRESH_TOKEN_COOKIE_NAME = "refresh_token";
     public static final Duration REFRESH_TOKEN_DURATION = Duration.ofDays(14);
     public static final Duration ACCESS_TOKEN_DURATION = Duration.ofDays(1);
-    public static final String REDIRECT_PATH = "/login";
+    public static final String REDIRECT_PATH = "/user/login";
 
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
@@ -43,6 +44,9 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         String accessToken = tokenProvider.generateToken(user, ACCESS_TOKEN_DURATION);
         String targetUrl = getTargetUrl(accessToken);
+
+        // 토큰 정보를 세션에 임시 저장
+        request.getSession().setAttribute("tokens", new TokenResponse(accessToken, refreshToken));
 
         clearAuthenticationAttributes(request, response);
 
