@@ -1,0 +1,25 @@
+.sort-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  width: 150px;
+  z-index: 1000;
+}
+
+.sort-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sort-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sort-menu li:hover {
+  background-color: #f0f0f0;
+}

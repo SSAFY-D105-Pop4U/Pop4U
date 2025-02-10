@@ -1,0 +1,66 @@
+/* .review-item{
+    /* margin-left: 20px;
+} */
+.profile-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover; /* 이미지 비율 유지 */
+    border-radius: 50%; /* 원형 이미지 */
+    margin-top: 13px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    
+  }
+  
+  .info{
+    padding: 0px 10px;
+    margin-top: 15px
+
+  }
+  .profile {
+    margin-left: 20px;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    
+  }
+    
+  .username {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 !important;
+  }
+  
+  .rating_day {
+    display: flex;
+    gap: 10px; /* 별점과 날짜 사이 간격 */
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .comment {
+    font-size: 15px;
+  }
+
+  .date{
+    margin: 0;
+  }
+
+  .review-img{
+    width: 135px;
+    height: 135px;
+    margin-left: 20px ;
+    margin-top: 10px;
+    border-radius: 10px;
+    
+  }
+  
+  .comment{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .star-img {
+    width: 16px;
+    height: 16px;
+    margin-right: 2px; /* 별 이미지 간격 조정 */
+    margin-top: 3px;
+  }

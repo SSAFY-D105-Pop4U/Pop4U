@@ -1,0 +1,62 @@
+/* .info div {
+   margin-bottom: 10px;
+  }
+  
+.name{
+    color: rgb(0, 0, 0);
+    font-size: 30px !important;
+    font-weight: 700;
+    word-wrap: break-word;
+  }
+  
+.startdate, .enddate {
+    color: rgb(142, 142, 142);
+    display: inline-block; 
+    font-weight: 500;
+    word-wrap: break-word;
+}
+.pin{
+  display: inline-block; 
+  display: flex;
+  width: 20px;
+  height: 20px;
+} */
+
+/* .info {
+  padding: 0px !important;
+} */
+
+
+.name{
+  color: rgb(0, 0, 0);
+  font-size: 30px !important;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.date{
+  display: flex;
+}
+.startdate{
+  margin-bottom: 10px;
+}
+.address{
+  display: flex;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  
+}
+
+.pin{
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  transform: translateX(-5px);
+ 
+}
+
+.opentime{
+  display: flex;
+  gap: 5px;
+  margin: 0px 0px 20px;
+}

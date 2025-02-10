@@ -1,18 +1,28 @@
-.header {
-  padding-left: 27px;
-  padding-right: 27px;
-  padding-bottom: 11px;
+.home-header {
+  padding-right: 18px;
+  padding-left: 5px;
+  padding-bottom: 12px;
   margin: 0px;
+}
+
+.home-title {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.home-area {
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 h2 {
   margin: 0px;
-  padding-bottom: 11px;
+  padding-bottom: 30px;
 }
 
 h3 {
-  padding-left: 27px;
-  padding-right: 27px;
+  padding-left: 11px;
+  padding-right: 11px;
   margin: 9px;
 }
 

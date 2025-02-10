@@ -7,24 +7,17 @@ import "../styles/components/GoogleLogin.css"
 const GoogleLogin = () => {
     // 첫 acess_token 받아오기기 (clientId, redirectUri는 env 파일에 넣어서 사용해야함 )
     const googleLogin = () => {
-        const clientId = "671548631068-5q80arkm66q7ksh2p9j32cscltu3ra5p.apps.googleusercontent.com";
-        const redirectUri = "http://localhost:5173";
-
-        console.log("Client ID:", clientId);
-        console.log("Redirect URI:", redirectUri);
-
         // const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
         //     "client_id=" + encodeURIComponent(clientId) +
         //     "&redirect_uri=" + encodeURIComponent(redirectUri) +
         //     "&response_type=token" +
         //     "&scope=email profile";
 
-        console.log("Google OAuth URL:", googleAuthUrl);
+        // console.log("Google OAuth URL:", googleAuthUrl);
 
-        window.location.href = "localhost:8080/login";
+        window.location.href = "http://localhost:8080/login";
+
     };
-
-
     return (
         <button onClick={googleLogin} className="google-button">
         </button>

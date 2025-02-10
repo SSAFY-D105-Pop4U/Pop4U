@@ -9,7 +9,7 @@
   padding: 20px;
   z-index: 1000;
   transform: translateX(100%);
-  animation: slideIn 0.3s forwards;
+  animation: slideIn 0.5s ease-out forwards;
   border-radius: 20px 0 0 20px;
 }
 .sidebar-overlay {
@@ -20,30 +20,59 @@
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
 @keyframes slideIn {
   from {
     transform: translateX(100%);
+    opacity: 0;
   }
   to {
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
-/* 슬라이드 아웃 애니메이션 추가 */
+/* 슬라이드 아웃 애니메이션 수정 */
 .sidebar.closing {
-  animation: slideOut 0.3s forwards;
+  animation: slideOut 0.5s ease-in forwards;
 }
 
 @keyframes slideOut {
   from {
     transform: translateX(0);
+    opacity: 1;
   }
   to {
     transform: translateX(100%);
+    opacity: 0;
   }
 }
+
+.sidebar-overlay.closing {
+  animation: fadeOut 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .menu-header {
   display: flex;
   justify-content: center;
@@ -77,10 +106,32 @@
   border-radius: 50%;
 }
 
-.profile-info {
+.profile-link {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+.profile-text {
+  display: flex;
   gap: 4px;
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.next-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.profile-info {
+  flex: 1;
 }
 
 .login-text {
@@ -122,4 +173,50 @@
 .menu-section li img {
   width: 20px;
   height: 20px;
+}
+
+.menu-section ul li a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 10px 0;
+}
+
+.menu-section ul li a img {
+  margin-right: 8px;
+}
+
+.menu-section ul li a:hover {
+  color: #6b4eff;
+}
+
+.profile-text span {
+  margin-right: 5px;
+}
+
+.logout-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  text-align: center;
+  background: white;
+}
+
+.logout-button {
+  width: 100%;
+  padding: 15px 0;
+  border: none;
+  background: none;
+  color: #6b4eff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border-top: 1px solid #eee;
+}
+
+.logout-button:hover {
+  opacity: 0.8;
 }

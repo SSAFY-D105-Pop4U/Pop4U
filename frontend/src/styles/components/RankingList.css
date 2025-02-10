@@ -1,0 +1,55 @@
+/* RankingList.css */
+.ranking-container {
+    padding: 8px 16px 16px 16px;
+    margin: 2.5% 2.5% 25px 2.5%;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+}
+  
+.ranking-header {
+    color: #666;
+    font-size: clamp(12px, 2vw, 16px); /* 최소 12px, 최대 16px, 화면 크기에 따라 조정 */
+    padding: 0 8px 8px 8px;
+}
+  
+.ranking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8%; /* 최소 8px, 기본 2vw, 최대 24px */
+}
+  
+
+.ranking-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px 6px 8px ;
+    background-color: #ffffff00;
+}
+  
+.ranking-name {
+    font-weight: bold;
+    font-size: clamp(12px, 1.8vw, 16px); /* 최소 12px, 최대 16px */
+    color: #00000079;
+}
+  
+.ranking-status {
+    color: #0000007b;
+    font-size: clamp(10px, 1.5vw, 14px); /* 최소 10px, 최대 14px */
+}
+  
+/* 추가적으로 작은 화면일 때 크기 조정 */
+@media (max-width: 600px) {
+    .ranking-header {
+        font-size: 12px;
+    }
+    .ranking-name {
+        font-size: 12px;
+    }
+    .ranking-status {
+        font-size: 10px;
+    }
+}

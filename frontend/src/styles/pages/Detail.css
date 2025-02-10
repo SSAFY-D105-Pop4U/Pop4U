@@ -1,0 +1,172 @@
+.container1 {
+    width: 100%;
+    max-width: 960px; /* 기본적으로 최대 너비 설정 */
+    height: 100%;
+    background: white;
+    overflow: hidden;
+    margin: 0 auto; /* 가운데 정렬 */
+    /* border-radius: 40px; */
+}
+/* 📌 화면이 일정 크기 이상(1024px)일 때, 양쪽 배경을 흰색으로 만들기 */
+@media (min-width: 960px) {
+    body {
+        background-color: white; /* 양쪽 배경을 흰색으로 설정 */
+    }
+
+    .container1 {
+        max-width: 960px; /* 본문 최대 너비 설정 */
+        background: white;
+    }
+}
+
+
+/* 이미지 영역 */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 414px; /* 기본 높이 */
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+}
+
+.image {
+    width: 100%;
+    max-width: 460px; /* 460px 이상 커지지 않도록 제한 */
+    height: 100%;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+}
+
+
+
+/* 정보 영역 스타일 */
+.info {
+    padding: 20px 20px;
+ 
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+    color: black;
+    /* font-weight: bold; */
+}
+
+.date, .location, .operating-hours {
+    font-size: 14px;
+    font-weight: 500;
+    color: #797F79;
+    margin: 5px 0;
+}
+
+/* 탭 스타일 */
+.tab-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+    border-bottom: 2px solid #EFEFF0;
+    position: relative;
+}
+
+.tab {
+    width: 50%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #74757B;
+    padding: 0px 0px 10px 0px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.tab.active {
+    color: #6631E5;
+    font-weight: 600;
+}
+
+/* 슬라이드 애니메이션 */
+.tab-slider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 2px;
+    background-color: #6631E5;
+    transition: left 0.3s ease-in-out; 
+}
+
+/* 탭 아래 구분선 */
+.divider1 {
+    width: 100%;
+    height: 3px;
+    color: #74757B;
+    position: relative;
+
+}   
+
+/* 정보 */
+.tab-content {
+    /* padding: 10px; */
+    /* background: #F1F6F7; */
+    /* border-radius: 10px; */
+    margin: 10px 0;
+}
+
+/* 버튼 영역 */
+.button-wrapper {
+    position: fixed; /* ✅ 항상 고정 */
+    bottom: 0; 
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 10px 20px;
+    z-index: 1000; /* 다른 요소보다 위에 배치 */
+}
+
+
+.button {
+    width: 45%;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #986CFF;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.button:hover {
+    background: #986CFF;
+    color: white;
+}
+
+.eye{
+    width: 20px;
+    height: 20px;
+    margin-top: 3.5px; 
+}
+.view{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    margin-top: 5px;
+    gap: 5px;
+  }
+
+.back {
+    position: absolute; /* 절대 위치 설정 */
+    top: 10px; /* 이미지 상단에서 10px 위치 */
+    left: 10px; /* 이미지 왼쪽에서 10px 위치 */
+    width: 30px; /* 버튼 크기 */
+    height: 30px;
+    cursor: pointer;
+    z-index: 10; /* 이미지보다 위에 배치 */
+  }
+

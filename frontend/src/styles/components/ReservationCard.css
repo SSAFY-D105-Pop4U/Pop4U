@@ -1,0 +1,68 @@
+.reservation-card-container {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #ffffff;
+    font-family: 'Arial', sans-serif;
+  }
+  .reservation-card-title{
+    padding: 0;
+  }
+  
+  .reservation-card-header {
+    background-color: #f9f9f9;
+  }
+  
+  .reservation-card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .reservation-card-content {
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .reservation-card-content h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  
+  .reservation-card-content p {
+    font-size: 14px;
+    color: #555555;
+    margin: 4px 0;
+  }
+  
+  .reservation-card-details {
+    display: grid;
+    flex-wrap: wrap;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 16px;
+  }
+  
+  .reservation-card-details div {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .reservation-card-details strong {
+    display: block;
+    font-size: 12px;
+    color: #333333;
+    text-align: left;
+    margin-bottom: 4px;
+  }
+  
+  .reservation-card-footer {
+    margin-top: 16px;
+    font-size: 12px;
+    color: #888888;
+    text-align: center;
+  }
+  

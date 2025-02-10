@@ -1,0 +1,19 @@
+.score{
+    display: flex;
+    margin-bottom: 10px;
+
+}
+.star{
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+    margin-top: 9px;
+}
+.average{
+    font-size: 30px;
+    font-weight: 700;
+}
+.total{
+    margin-top: 15px;
+
+}

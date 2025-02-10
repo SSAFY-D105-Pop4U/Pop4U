@@ -1,0 +1,30 @@
+.time-selector {
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+  overflow-x: scroll; /* 자동으로 스크롤바가 나타날 때만 */
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+  }
+  
+  
+  
+  .time-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #d9d9d9;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-shrink: 0; /* 버튼 크기가 줄어들지 않도록 설정 */
+  }
+  
+  .time-button.selected {
+    background-color: #a78bfa; /* 보라색 */
+    color: white;
+  }
+  
+  
+  

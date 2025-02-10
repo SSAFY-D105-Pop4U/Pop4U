@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+div {
+  user-select: none; /* 텍스트 선택 방지 */
+  pointer-events: auto; /* 클릭 가능하게 유지 */
+}
+* {
+  margin: 0;
+  padding: 0;
+  outline: none; /* 포커스 테두리 제거 */
+  -webkit-tap-highlight-color: transparent; /* 터치 하이라이트 제거 */
+  box-shadow: none; /* 포커스 그림자 제거 */
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 포커스 제거 기본 스타일 */
+*:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 버튼, 링크 및 포커스 가능한 요소에 추가적으로 적용 */
+button,
+a,
+input,
+select,
+textarea {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  border: none;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
