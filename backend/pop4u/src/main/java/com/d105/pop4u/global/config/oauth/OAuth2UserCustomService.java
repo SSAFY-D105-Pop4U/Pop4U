@@ -41,7 +41,6 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
                 .orElse(User.builder()
                         .userEmail(email)
                         .userNickname(name)
-
                         .userStatus(0)
                         .userName(name)
                         .userNickname(name)
