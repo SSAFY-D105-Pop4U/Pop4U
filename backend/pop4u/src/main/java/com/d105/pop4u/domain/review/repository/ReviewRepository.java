@@ -16,4 +16,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     // 특정 사용자의 리뷰 목록을 조회하는 메서드
     List<Review> findByUserId(User user);
+
+    boolean existsByUserIdAndPopupId(User user, PopupStore popupStore);
 }
