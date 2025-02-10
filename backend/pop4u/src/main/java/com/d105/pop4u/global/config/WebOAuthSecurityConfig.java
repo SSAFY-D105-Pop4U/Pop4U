@@ -55,6 +55,7 @@ public class WebOAuthSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS 설정 추가
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
@@ -79,7 +80,6 @@ public class WebOAuthSecurityConfig {
                                 new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
                                 new AntPathRequestMatcher("/api/**")
                         ))
-                .cors(Customizer.withDefaults())    // CORS 설정을 추가
                 .build();
     }
 
@@ -88,7 +88,7 @@ public class WebOAuthSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://localhost:5173")); // 허용할 출처
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173")); // 허용할 출처
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
         configuration.setAllowCredentials(true); // 쿠키 또는 인증 정보를 포함할 수 있도록 설정
         configuration.setAllowedHeaders(Arrays.asList("*")); // 허용할 헤더
