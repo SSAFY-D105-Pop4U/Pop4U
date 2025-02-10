@@ -31,33 +31,32 @@ public class PopupStoreService {
     private final PopupCategoryRepository popupCategoryRepository;
     private final PopupStoreImgRepository popupStoreImgRepository;
     private final S3Service s3Service;
-    private final String UPLOAD_DIR = System.getProperty("user.home") + "/uploads/popup/";
-
     // ===============================
     // 조회 메서드들
     // ===============================
-    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores(boolean fetchAll) {
         Map<String, List<PopupStoreDTO>> result = new HashMap<>();
 
-        // 전체 목록
-        result.put("all", popupStoreRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+        if (fetchAll) {
+            // 전체 목록
+            result.put("all", popupStoreRepository.findAll().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
 
-        // 시작일 기준 정렬
-        result.put("byStartDate", popupStoreRepository.findAllByOrderByPopupStartDateDesc().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+        } else {
+            // Top 10 목록
+            result.put("byStartDate", popupStoreRepository.findTop10ByOrderByPopupStartDateDesc().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
 
-        // 종료일 기준 정렬
-        result.put("byEndDate", popupStoreRepository.findAllByOrderByPopupEndDateDesc().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+            result.put("byEndDate", popupStoreRepository.findTop10ByOrderByPopupEndDateDesc().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
 
-        // 조회수 기준 정렬
-        result.put("byViewCount", popupStoreRepository.findAllByOrderByPopupViewCountDesc().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+            result.put("byViewCount", popupStoreRepository.findTop10ByOrderByPopupViewCountDesc().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
+        }
 
         return result;
     }

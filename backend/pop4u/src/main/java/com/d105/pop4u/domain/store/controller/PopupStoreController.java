@@ -25,11 +25,13 @@ public class PopupStoreController {
     private final PopupStoreService popupStoreService;
 
     // ✅ 모든 팝업스토어 조회
-    @GetMapping()
-    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
-        return popupStoreService.getAllPopupStores();
+    @GetMapping
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores(
+            @RequestParam(name = "fetchAll", defaultValue = "false") boolean fetchAll
+    ) {
+        // fetchAll 파라미터를 Service로 넘기기
+        return popupStoreService.getAllPopupStores(fetchAll);
     }
-
     // ✅ 특정 팝업스토어 조회
     @GetMapping("/{popup_id}")
     public ResponseEntity<PopupStoreDTO> getPopupStoreById(@PathVariable Long popup_id) {

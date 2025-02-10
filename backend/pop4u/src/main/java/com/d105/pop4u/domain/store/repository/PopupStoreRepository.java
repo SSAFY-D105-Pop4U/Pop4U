@@ -14,7 +14,7 @@ public interface PopupStoreRepository extends JpaRepository<PopupStore, Long> {
     // List<PopupStore> findByUser_UserId(Long userId); // 유저 연결 시 코드
     List<PopupStore> findByUserId(Long userId); // 유저 조회 메서드 수정
     Optional<PopupStore> findByPopupId(Long popupId);
-    List<PopupStore> findAllByOrderByPopupStartDateDesc();
-    List<PopupStore> findAllByOrderByPopupEndDateDesc();
-    List<PopupStore> findAllByOrderByPopupViewCountDesc();
+    List<PopupStore> findTop10ByOrderByPopupStartDateDesc();
+    List<PopupStore> findTop10ByOrderByPopupEndDateDesc();
+    List<PopupStore> findTop10ByOrderByPopupViewCountDesc();
 }
