@@ -1,13 +1,21 @@
 package com.d105.pop4u.domain.notification.entity;
 
+import com.d105.pop4u.domain.store.entity.PopupStore;
+import com.d105.pop4u.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "notification")
+@Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Notification {
 
     @Id
@@ -15,11 +23,13 @@ public class Notification {
     @Column(name = "notification_id", nullable = false)
     private Long notificationId;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "popup_id")  // nullable
-    private Long popupId;
+    @ManyToOne
+    @JoinColumn(name = "popup_id", nullable = false)
+    private PopupStore popupStore;
 
     @Column(name = "notification_title", length = 50, nullable = false)
     private String notificationTitle;
@@ -27,16 +37,20 @@ public class Notification {
     @Column(name = "notification_content", length = 255, nullable = false)
     private String notificationContent;
 
-    @Column(name = "notification_read", nullable = false)
+    @Column(name = "notification_read", nullable = false, columnDefinition = "TINYINT DEFAULT 0")
     private Boolean notificationRead;
 
-    @Column(name = "notification_created_at", nullable = false)
+    @Column(name = "notification_created_at", nullable = false, columnDefinition = "DATETIME DEFAULT NOW()")
     private LocalDateTime notificationCreatedAt;
 
-    // 알림 생성 시 자동으로 현재 시간 설정
     @PrePersist
     public void prePersist() {
+        this.notificationRead = false;
         this.notificationCreatedAt = LocalDateTime.now();
-        this.notificationRead = false;  // 기본값 false로 설정
+    }
+
+    // 읽음 상태 변경을 위한 메서드
+    public void markAsRead() {
+        this.notificationRead = true;
     }
 }
