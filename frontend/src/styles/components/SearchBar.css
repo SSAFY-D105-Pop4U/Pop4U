@@ -5,6 +5,7 @@
   background-color: white; /* 헤더 배경색 */
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 */
   width: 100%;
+  padding-left: 25px;
 }
 
 .search-container {

@@ -36,10 +36,9 @@
 
 .date{
   display: flex;
-  margin-bottom: 10px;
 }
 .startdate{
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .address{
   display: flex;

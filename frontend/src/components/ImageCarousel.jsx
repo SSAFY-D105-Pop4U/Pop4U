@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../styles/components/ImageCarousel.css";
 
 const ImageCarousel = ({ images }) => {
-
-  useEffect(() =>{
-
-  },[])
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const nextImage = () => {

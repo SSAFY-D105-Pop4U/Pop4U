@@ -1,0 +1,35 @@
+.user-category {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.categories-container {
+  flex: 1;
+  padding: 15px 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-item {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #e0d7fa;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1px;
+}
+
+.category-item.selected {
+  background-color: #e0d7fa;
+  color: #000;
+}
+
+.category-item:hover {
+  transform: scale(1.05);
+}

@@ -1,68 +1,78 @@
 .reservation-card-container {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-color: #ffffff;
-    font-family: 'Arial', sans-serif;
-  }
-  .reservation-card-title{
-    padding: 0;
-  }
-  
-  .reservation-card-header {
-    background-color: #f9f9f9;
-  }
-  
-  .reservation-card-image {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  .reservation-card-content {
-    padding: 20px;
-    text-align: left;
-  }
-  
-  .reservation-card-content h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  
-  .reservation-card-content p {
-    font-size: 14px;
-    color: #555555;
-    margin: 4px 0;
-  }
-  
-  .reservation-card-details {
-    display: grid;
-    flex-wrap: wrap;
-    gap: 12px;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 16px;
-  }
-  
-  .reservation-card-details div {
-    flex: 1;
-    text-align: left;
-  }
-  
-  .reservation-card-details strong {
-    display: block;
-    font-size: 12px;
-    color: #333333;
-    text-align: left;
-    margin-bottom: 4px;
-  }
-  
-  .reservation-card-footer {
-    margin-top: 16px;
-    font-size: 12px;
-    color: #888888;
-    text-align: center;
-  }
-  
+  width: 300px; /* 뷰포트 너비의 90% */
+  height: 70vh; /* 뷰포트 높이의 80% */
+  max-width: 300px; /* 카드의 최대 크기 제한 */
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #ffffff;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservation-card-header {
+  background-color: #f9f9f9;
+  flex: 0.2; /* 전체 높이의 20% 차지 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vh; /* 반응형 글자 크기 */
+  font-weight: bold;
+}
+
+.reservation-card-image {
+  width: 100%;
+  height: 30vh; /* 전체 높이의 30% */
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.reservation-card-content {
+  flex: 0.4; /* 전체 높이의 40% 차지 */
+  padding: 2vh;
+  text-align: left;
+  font-size: 2vh;
+}
+
+.reservation-card-content h2 {
+  font-size: 2.5vh;
+  font-weight: bold;
+  line-height: 1.4;
+  padding: 0;
+}
+
+.reservation-card-content p {
+  font-size: 1.8vh;
+  color: #555555;
+  margin: 0.5vh 0;
+}
+
+.reservation-card-details {
+  display: grid;
+  flex-wrap: wrap;
+  gap: 1.5vh;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2vh;
+}
+
+.reservation-card-details div {
+  flex: 1;
+  text-align: left;
+}
+
+.reservation-card-details strong {
+  display: block;
+  font-size: 1.6vh;
+  color: #333333;
+  text-align: left;
+  margin-bottom: 1vh;
+}
+
+.reservation-card-footer {
+  flex: 0.1; /* 전체 높이의 10% 차지 */
+  font-size: 0.5vh;
+  color: #888888;
+  text-align: center;
+  padding: 1vh;
+}
