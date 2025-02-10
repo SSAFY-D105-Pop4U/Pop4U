@@ -9,12 +9,19 @@ import { GetPopupDetail } from "../apis/api/api.js";
 import { getReviews } from "../apis/api/api.js";
 import eye from "../assets/icons/eye.png";
 import ImageCarousel from "../components/ImageCarousel.jsx";
+
+
 const Detail = () => {
   const nav = useNavigate();
 
   //✅ 후기 작성페이지로 이동 함수
   const handleWriteReview = () => {
     nav(`/writeReview?popupId=${popupId}`);
+  };
+  //✅ 예약하기 페이지도 이동 함수수
+  const appointment = () => {
+    if (!detail) return; // detail이 null이면 함수 실행 X
+    nav(`/appointment?popupId=${popupId}&popupName=${encodeURIComponent(detail.popupName)}`);
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -105,16 +112,11 @@ const Detail = () => {
 
       {/* ✅ 버튼 영역 */}
       <div className="button-wrapper">
-        {activeIndex === 1 ? (
+        {activeIndex === 1 ? null : (
           <>
-            <button className="button" onClick={handleWriteReview}>
-              후기작성
+            <button className="button" onClick={appointment}>
+              예약하기
             </button>
-            <button className="button">채팅하기</button>
-          </>
-        ) : (
-          <>
-            <button className="button" onClick={() => nav("/appointment")}>예약하기</button>
             <button className="button">채팅하기</button>
           </>
         )}
@@ -122,5 +124,4 @@ const Detail = () => {
     </div>
   );
 };
-
 export default Detail;

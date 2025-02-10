@@ -38,15 +38,25 @@ const WriteReview = () => {
   };
 
   const handleSubmit = () => {
-    // API 호출 로직 구현 필요
+    // {
+    //   "reviewId": 9007199254740991,
+    //   "userId": 9007199254740991,
+    //   "popupId": 9007199254740991,
+    //   "reviewContent": "string",
+    //   "reviewRating": 1073741824,
+    //   "reviewImg": "string",
+    //   "reviewCreatedAt": "2025-02-10"
+    // }
     console.log({
       rating,
       content,
       images,
     });
+    
     setShowCompleteModal(true);
   };
 
+  //후기 작성다하고나서 완료 나왔을때 확인 버튼임임
   const handleConfirm = () => {
     setShowCompleteModal(false);
     navigate("/detail");

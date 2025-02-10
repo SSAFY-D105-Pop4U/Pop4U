@@ -1,11 +1,11 @@
 import '../../styles/components/Recheck.css'
 
-const Recheck = ({ title, people, date }) => {
+const Recheck = ({ name, title, people, date }) => {
     return (
       <div className="recheck-container">
         <div className="recheck-item">
           <span className="recheck-label">팝업명</span>
-          <span className="recheck-value">{title}</span>
+          <span className="recheck-value">{name}</span>
         </div>
         <div className="recheck-item">
           <span className="recheck-label">인원</span>
