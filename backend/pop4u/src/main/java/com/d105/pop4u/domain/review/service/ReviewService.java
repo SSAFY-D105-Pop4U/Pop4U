@@ -83,4 +83,19 @@ public class ReviewService {
         }
         reviewRepository.deleteById(reviewId);
     }
+
+    public List<ReviewDto> getReviewsByUserId(Long userId) {
+        // User 엔티티 조회
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // 해당 사용자의 리뷰 목록 조회
+        List<Review> reviews = reviewRepository.findByUserId(user);
+
+        // Review -> ReviewDto 변환
+        return reviews.stream()
+                .map(ReviewMapper::toDto) // ReviewMapper를 사용하여 변환
+                .collect(Collectors.toList());
+    }
+
 }
