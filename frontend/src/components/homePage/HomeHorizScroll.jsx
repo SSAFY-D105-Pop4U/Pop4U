@@ -7,7 +7,7 @@ import Drag from "../../hooks/Drag";
 const HomeHorizScroll = ({ popups }) => {
   const nav = useNavigate();
 
-  console.log(popups);
+  
 
   const handleCardClick = (index) => {
     nav(`/detail?popupId=${index}`);
