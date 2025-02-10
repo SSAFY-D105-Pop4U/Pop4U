@@ -1,38 +1,33 @@
 package com.d105.pop4u.domain.chat.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "chatting")
+@Document(collection = "chatting") // ✅ MongoDB 컬렉션 설정
 public class ChatMessage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chatting_id")
-    private Long chattingId;
+    private String chattingId;  // MongoDB는 String 타입 ID 사용
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "chat_room_id", nullable = false)
-    private ChatRoom chatRoom; // 채팅방 정보
+    private Long chatRoomId; // 연결된 채팅방 ID
+    private Long userId; // 보낸 사용자 ID
+    private String chattingMessage; // 메시지 내용
+    private LocalDateTime chattingCreatedAt; // 생성 시간
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId; // 보낸 유저 ID
-
-    @Column(name = "chatting_message", nullable = false, columnDefinition = "TEXT")
-    private String chattingMessage;
-
-    @Column(name = "chatting_send_time", nullable = false)
-    private LocalTime chattingSendTime = LocalTime.now();
-
-    @Column(name = "chatting_created_at", nullable = false)
-    private LocalDateTime chattingCreatedAt = LocalDateTime.now();
+    public static ChatMessage create(Long chatRoomId, Long userId, String message) {
+        return ChatMessage.builder()
+                .chatRoomId(chatRoomId)
+                .userId(userId)
+                .chattingMessage(message)
+                .chattingCreatedAt(LocalDateTime.now())
+                .build();
+    }
 }

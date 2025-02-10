@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>채팅 테스트</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<h2>WebSocket 채팅 테스트</h2>
+<div>
+    <label>채팅방 ID:</label>
+    <input type="text" id="chatRoomId" value="1">
+    <button onclick="connect()">채팅방 입장</button>
+</div>
+<br>
+<div>
+    <label>유저 ID:</label>
+    <input type="text" id="userId" value="1001">
+</div>
+<div>
+    <label>메시지:</label>
+    <input type="text" id="message">
+    <button onclick="sendMessage()">보내기</button>
+</div>
+<br>
+<h3>채팅 내용</h3>
+<div id="chatArea"></div>
+
+<script>
+    var stompClient = null;
+    var chatRoomId = null;
+
+    function connect() {
+        chatRoomId = document.getElementById("chatRoomId").value;
+        var socket = new SockJS("http://localhost:8080/ws/chat");
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            console.log("Connected: " + frame);
+            stompClient.subscribe("/topic/chat/" + chatRoomId, function (response) {
+                var message = JSON.parse(response.body);
+                document.getElementById("chatArea").innerHTML += "<p><b>User " + message.userId + ":</b> " + message.chattingMessage + "</p>";
+            });
+        });
+    }
+
+    function sendMessage() {
+        var userId = document.getElementById("userId").value;
+        var message = document.getElementById("message").value;
+        stompClient.send("/app/chat/" + chatRoomId, {}, JSON.stringify({ userId: userId, chattingMessage: message }));
+        document.getElementById("message").value = "";
+    }
+</script>
+</body>
+</html>
