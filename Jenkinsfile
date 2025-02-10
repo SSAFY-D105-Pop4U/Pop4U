@@ -71,7 +71,7 @@ pipeline {
                 def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                 def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
                 mattermostSend (color: 'good',
-                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${deployBranch}\n(<${env.BUILD_URL}|Details>)",
+                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${env.GIT_BRANCH}\n(<${env.BUILD_URL}|Details>)",
                 endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
                 channel: 'd105-ci-cd-alert'
                 )
