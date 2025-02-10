@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/popup")
@@ -24,9 +25,9 @@ public class PopupStoreController {
     private final PopupStoreService popupStoreService;
 
     // ✅ 모든 팝업스토어 조회
-    @GetMapping
-    public ResponseEntity<List<PopupStoreDTO>> getAllPopupStores() {
-        return ResponseEntity.ok(popupStoreService.getAllPopupStores());
+    @GetMapping()
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
+        return popupStoreService.getAllPopupStores();
     }
 
     // ✅ 특정 팝업스토어 조회
