@@ -5,6 +5,7 @@ import com.d105.pop4u.domain.category.entity.Category;
 import com.d105.pop4u.domain.category.repository.CategoryRepository;
 import com.d105.pop4u.domain.category.entity.PopupCategory;
 import com.d105.pop4u.domain.category.repository.PopupCategoryRepository;
+import com.d105.pop4u.domain.chat.service.ChatRoomService;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.store.entity.PopupStoreImg;
@@ -31,6 +32,7 @@ public class PopupStoreService {
     private final PopupCategoryRepository popupCategoryRepository;
     private final PopupStoreImgRepository popupStoreImgRepository;
     private final S3Service s3Service;
+    private final ChatRoomService chatRoomService;
     // ===============================
     // 조회 메서드들
     // ===============================
@@ -94,6 +96,9 @@ public class PopupStoreService {
         // 1. 팝업스토어 저장
         PopupStore popupStore = popupStoreRepository.save(dto.toEntity());
 
+        // 채팅방 자동 생성 (팝업스토어당 1개)
+        chatRoomService.createChatRoomForPopup(popupStore);
+
         // 2. 이미지 업로드
         if (images != null && !images.isEmpty()) {
             for (MultipartFile file : images) {
@@ -116,6 +121,7 @@ public class PopupStoreService {
         if (dto.getCategoryIds() != null) {
             handleCategories(popupStore, dto.getCategoryIds());
         }
+
 
         return getPopupStoreById(popupStore.getPopupId());
     }
@@ -161,6 +167,7 @@ public class PopupStoreService {
     public void deletePopupStore(Long popupId) {
         PopupStore popupStore = findPopupStore(popupId);
         deleteAllImages(popupStore);
+        chatRoomService.deleteChatRoomByPopup(popupStore); // ✅ 채팅방 자동 삭제
         popupStoreRepository.delete(popupStore);
     }
 

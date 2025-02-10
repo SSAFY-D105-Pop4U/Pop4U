@@ -1,34 +1,28 @@
 package com.d105.pop4u.domain.chat.controller;
 
-import com.d105.pop4u.domain.chat.dto.ChatRoomDto;
-import com.d105.pop4u.domain.chat.service.ChatRoomService;
+import com.d105.pop4u.domain.chat.entity.ChatRoom;
+import com.d105.pop4u.domain.chat.repository.ChatRoomRepository;
+import com.d105.pop4u.domain.store.entity.PopupStore;
+import com.d105.pop4u.domain.store.repository.PopupStoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/chat-room")
+@RequestMapping("/chat")
 @RequiredArgsConstructor
 public class ChatRoomController {
-    private final ChatRoomService chatRoomService;
+    private final ChatRoomRepository chatRoomRepository;
+    private final PopupStoreRepository popupStoreRepository;
 
-    // ✅ 채팅방 목록 조회
-    @GetMapping
-    public ResponseEntity<List<ChatRoomDto>> getAllChatRooms() {
-        return ResponseEntity.ok(chatRoomService.getAllChatRooms());
-    }
-
-    // ✅ 특정 채팅방 조회
-    @GetMapping("/{chatRoomId}")
-    public ResponseEntity<ChatRoomDto> getChatRoomById(@PathVariable Long chatRoomId) {
-        return ResponseEntity.ok(chatRoomService.getChatRoomById(chatRoomId));
-    }
-
-    // ✅ 채팅방 생성 (팝업 ID 연결)
-    @PostMapping("/create/{popupId}")
-    public ResponseEntity<ChatRoomDto> createChatRoom(@PathVariable Long popupId) {
-        return ResponseEntity.ok(chatRoomService.createChatRoom(popupId));
+    // ✅ 특정 팝업스토어의 채팅방 조회
+    @GetMapping("/{popupId}")
+    public ResponseEntity<ChatRoom> getChatRoomByPopup(@PathVariable Long popupId) {
+        PopupStore popupStore = popupStoreRepository.findById(popupId)
+                .orElseThrow(() -> new IllegalArgumentException("팝업스토어를 찾을 수 없습니다."));
+        Optional<ChatRoom> chatRoom = chatRoomRepository.findByPopupStore(popupStore);
+        return chatRoom.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
