@@ -8,12 +8,28 @@ pipeline {
     }
 
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('application.yml download') {
+            steps {
+                withCredentials([file(credentialsId: 'application-yml', variable: 'dbConfigFile')]) {
+                    script {
+                        sh 'cp -f $dbConfigFile backend/pop4u/src/main/resources/application.yml'
+                    }
+                }
+            }
+        }
+
         stage('Deploy') {
             steps {
                 script {
                     def deployBranch = ""
                     
-                    if (env.GIT_BRANCH == 'origin/back_develop' || env.GIT_BRANCH.contains('origin/feat/BE/')) {
+                    if (env.GIT_BRANCH == 'origin/back_develop') {
                         deployBranch = 'backend'
                         containerName = 'spring-backend'
                     } else if (env.GIT_BRANCH == 'origin/front_develop') {
@@ -29,15 +45,17 @@ pipeline {
                     if (deployBranch) {
                         sshagent(['ec2-ssh-key']) {
                             sh """
-                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
-                            """
-                            sh """
-                            ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} '
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
                                     cd ~
-                                    docker-compose down
+                                    rm -rf ${deployBranch} || true
+                                '
+                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    docker-compose stop ${deployBranch} || true
                                     docker rm -f ${containerName} || true
                                     docker-compose build --no-cache ${deployBranch}
-                                    docker-compose up -d --no-deps --build ${deployBranch}
+                                    docker-compose up -d --build ${deployBranch}
                                 '
                             """
                         }
@@ -49,10 +67,26 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline Successful'
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'good',
+                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${env.GIT_BRANCH}\n(<${env.BUILD_URL}|Details>)",
+                endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
+                channel: 'd105-ci-cd-alert'
+                )
+            }
         }
         failure {
-            echo 'Pipeline Failed'
+            script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'danger',
+                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${deployBranch}\n(<${env.BUILD_URL}|Details>)",
+                endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
+                channel: 'd105-ci-cd-alert'
+                )
+            }
         }
     }
 }
