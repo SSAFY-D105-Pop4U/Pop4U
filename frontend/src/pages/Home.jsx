@@ -14,7 +14,7 @@ const Home = () => {
     setIsSidebarOpen(true);
   };
 
-  const [popups, setPopups] = useState([]);
+  const [popups, setPopups] = useState({});
 
   useEffect(() => {
     const fetchPopups = async () => {
@@ -22,10 +22,10 @@ const Home = () => {
         const data = await getPopups();
         setPopups(data);
         console.log("팝업 리스트트 조회완료")
-        console.log(data);
-        console.log(data[0].popupId);
+        
       } catch (error) {
         console.error("Failed to load popups");
+        
       }
     };
 
@@ -53,13 +53,13 @@ const Home = () => {
 
       <Divider height="10px" top="10px" bottom="10px" />
       <h3>#새로 생긴 팝업스토어 ✨</h3>
-      <HomeHorizScroll popups={popups} />
+      <HomeHorizScroll popups={popups.byStartDate || []} />
       <Divider height="5px" top="5px" bottom="5px" />
       <h3>#마감 임박 팝업스토어 ✨</h3>
-      <HomeHorizScroll popups={popups} />
+      <HomeHorizScroll popups={popups.byEndDate || []} />
       <Divider height="5px" top="5px" bottom="5px" />
       <h3>#요즘 뜨는 팝업스토어 ✨</h3>
-      <HomeHorizScroll popups={popups} />
+      <HomeHorizScroll popups={popups.byViewCount || []} />
     </div>
   );
 };
