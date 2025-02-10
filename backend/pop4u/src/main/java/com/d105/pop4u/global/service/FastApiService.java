@@ -26,6 +26,7 @@ public class FastApiService {
         // ✅ FastAPI에 multipart/form-data 요청 구성
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", file.getResource());
+        body.add("popup_id", popupId);
         body.add("remove_bg", true);  // 배경제거 옵션
         body.add("sticker", true);  // 스티커 효과 옵션
         body.add("width", 256);  // 리사이즈 옵션
