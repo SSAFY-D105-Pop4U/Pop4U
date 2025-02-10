@@ -1,0 +1,48 @@
+.card-container {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 5px 0;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.dot.active {
+    background-color: #000;
+}
+
+.update-time {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: 10px ;
+    margin-bottom: 25px;
+}
+
+.cancel-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    border: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    margin-top: auto;
+}
+
+.cancel-button:active {
+    transform: scale(1.1);  /* 클릭/터치 시 10% 크게 */
+    background-color: #fff;  /* 배경색은 그대로 유지 */
+}

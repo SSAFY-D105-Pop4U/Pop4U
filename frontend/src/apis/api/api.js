@@ -1,5 +1,5 @@
 // src/apis/popupApi.js
-import apiInstance from "./instance.js";
+import api from "./instance.js";
 
 
 {/* ✅ GET : 메인화면 상품 조회 */}

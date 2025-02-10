@@ -18,20 +18,20 @@ const ReservationCard = () => {
         <p>서울 강서구 마곡동</p>
         <div className="reservation-card-details">
           <div>
-            <strong>예약일</strong>
-            <p>01.22 (수)</p>
+          <strong>예약일</strong>
+          <strong className="detail-value">01.22 (수)</strong>
           </div>
           <div>
             <strong>예약시간</strong>
-            <p>14:00</p>
+            <strong className="detail-value">14:00</strong>
           </div>
           <div>
             <strong>인원</strong>
-            <p>성인 2</p>
+            <strong className="detail-value1">성인 2</strong>
           </div>
           <div>
             <strong>대기 번호</strong>
-            <p>15</p>
+            <strong className="detail-value1">15</strong>
           </div>
         </div>
         <div className="reservation-card-footer">
