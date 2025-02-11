@@ -59,10 +59,6 @@
   transition: all 0.2s ease;
 }
 
-.review-option-button:not(.completed):hover .option-box {
-  border-color: #666666;
-}
-
 .option-text {
   display: flex;
   justify-content: center;
@@ -96,4 +92,14 @@
 
 .review-option-button:disabled {
   cursor: not-allowed;
+}
+
+/* 클릭했을 때의 스타일 */
+.review-option-button:active .option-box {
+  border-color: #666666;
+}
+
+/* 비활성화된 버튼은 클릭 효과 제외 */
+.review-option-button:disabled:active .option-box {
+  border-color: #EEEEEE;
 } 

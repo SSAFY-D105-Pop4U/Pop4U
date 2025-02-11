@@ -43,7 +43,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  width: 100px;
+  width: 150px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -55,6 +55,24 @@
   cursor: grab; /* 드래그 가능함을 보여주는 커서 */
   user-select: none; /* 텍스트 선택 방지 */
 }
+
+.custom-dropdown1 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 80px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+  touch-action: pan-y; /* 수직 드래그 허용 */
+  cursor: grab; /* 드래그 가능함을 보여주는 커서 */
+  user-select: none; /* 텍스트 선택 방지 */
+}
+
 
 .custom-dropdown:active {
   cursor: grabbing; /* 드래그 중일 때 커서 변경 */
