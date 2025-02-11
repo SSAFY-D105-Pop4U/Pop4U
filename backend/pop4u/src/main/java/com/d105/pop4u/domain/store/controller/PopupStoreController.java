@@ -3,6 +3,7 @@ package com.d105.pop4u.domain.store.controller;
 
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.service.PopupStoreService;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +26,13 @@ public class PopupStoreController {
     private final PopupStoreService popupStoreService;
 
     // ✅ 모든 팝업스토어 조회
-    @GetMapping()
-    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
-        return popupStoreService.getAllPopupStores();
+    @GetMapping
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores(
+            @RequestParam(name = "fetchAll", defaultValue = "false") boolean fetchAll
+    ) {
+        // fetchAll 파라미터를 Service로 넘기기
+        return popupStoreService.getAllPopupStores(fetchAll);
     }
-
     // ✅ 특정 팝업스토어 조회
     @GetMapping("/{popup_id}")
     public ResponseEntity<PopupStoreDTO> getPopupStoreById(@PathVariable Long popup_id) {
@@ -48,20 +51,54 @@ public class PopupStoreController {
         return ResponseEntity.ok(popupStoreService.getPopupStoresByUser(user_id));
     }
 
+//    // ✅ 팝업스토어 생성
+//    @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<PopupStoreDTO> createPopupStore(
+//            @Valid @RequestPart(name = "data", required = true) String popupStoreJson,
+//            @RequestPart(value = "images", required = false) List<MultipartFile> imageFiles) throws IOException {
+//
+//        // ✅ JSON 데이터를 DTO 객체로 변환
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.registerModule(new JavaTimeModule()); // ✅ Java 8 날짜/시간 지원 추가
+//        PopupStoreDTO popupStoreDTO = objectMapper.readValue(popupStoreJson, PopupStoreDTO.class);
+//
+//
+//        return ResponseEntity.ok(popupStoreService.createPopupStore(popupStoreDTO, imageFiles));
+//    }
+
     // ✅ 팝업스토어 생성
     @PostMapping(value = "/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<PopupStoreDTO> createPopupStore(
-            @Valid @RequestPart(name = "data", required = true) String popupStoreJson,
+            @RequestParam(name = "data", required = true) String popupStoreJson, // ✅ @RequestPart → @RequestParam 변경
             @RequestPart(value = "images", required = false) List<MultipartFile> imageFiles) throws IOException {
+
+        // 🚀 **요청이 Controller에 들어왔는지 확인 (제일 먼저 추가해야 할 로그)**
+        System.out.println("🚀 [DEBUG] 팝업스토어 생성 요청이 도착했습니다.");
+
+        // ✅ JSON 디버깅 로그 추가
+        System.out.println("Received JSON: " + popupStoreJson);
 
         // ✅ JSON 데이터를 DTO 객체로 변환
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule()); // ✅ Java 8 날짜/시간 지원 추가
-        PopupStoreDTO popupStoreDTO = objectMapper.readValue(popupStoreJson, PopupStoreDTO.class);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // ✅ 불필요한 필드 무시 설정
 
+        PopupStoreDTO popupStoreDTO;
+        try {
+            popupStoreDTO = objectMapper.readValue(popupStoreJson, PopupStoreDTO.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("JSON 파싱 오류: " + e.getMessage());
+            return ResponseEntity.badRequest().body(null);
+        }
+
+        // ✅ DTO 변환 후 로그 출력
+        System.out.println("Parsed DTO: " + popupStoreDTO);
 
         return ResponseEntity.ok(popupStoreService.createPopupStore(popupStoreDTO, imageFiles));
     }
+
+
 
 
     // ✅ 팝업스토어 수정

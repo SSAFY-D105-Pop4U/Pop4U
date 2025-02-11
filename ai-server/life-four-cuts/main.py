@@ -25,6 +25,7 @@ S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 @app.post("/process_image")
 async def process_image(
     file: UploadFile = File(...),
+    popup_id: str = Form(...),
     remove_bg: bool = Form(True),
     sticker: bool = Form(True),
     width: int = Form(256),
@@ -52,7 +53,7 @@ async def process_image(
 
     # ✅ S3 업로드
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    file_key = f"icons/{timestamp}.png"
+    file_key = f"icons/{popup_id}/{timestamp}.png"
     s3_client.upload_fileobj(io.BytesIO(out_bytes), S3_BUCKET_NAME, file_key, ExtraArgs={"ContentType": "image/png"})
 
     # ✅ S3 URL 생성
