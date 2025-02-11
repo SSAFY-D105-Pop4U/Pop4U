@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        BRANCH_NAME = "${env.GIT_BRANCH}"
         EC2_HOST = "i12d105.p.ssafy.io"
         WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
