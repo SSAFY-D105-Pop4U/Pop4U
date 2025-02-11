@@ -71,7 +71,7 @@ pipeline {
                 def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                 def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
                 mattermostSend (color: 'good',
-                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${env.GIT_BRANCH}\n(<${env.BUILD_URL}|Details>)",
+                message: "Jenkins ${env.BUILD_NUMBER}번째 빌드:\n${env.JOB_NAME}의 ${Author_ID}(${Author_Name})님께서 ${env.GIT_BRANCH}에서 빌드 성공했습니다. \n(<${env.BUILD_URL}|상세 보기>)",
                 endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
                 channel: 'd105-ci-cd-alert'
                 )
@@ -82,7 +82,7 @@ pipeline {
                 def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                 def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
                 mattermostSend (color: 'danger',
-                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${deployBranch}\n(<${env.BUILD_URL}|Details>)",
+                message: "Jenkins ${env.BUILD_NUMBER}번째 빌드:\n${env.JOB_NAME}의 ${Author_Name}(${Author_ID})님께서 ${env.GIT_BRANCH}에서 빌드 실패했습니다. \n(<${env.BUILD_URL}|상세 보기>)",
                 endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
                 channel: 'd105-ci-cd-alert'
                 )
