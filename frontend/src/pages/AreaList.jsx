@@ -35,9 +35,8 @@ const AreaList = () => {
       </div>
 
       {popups.map((data, index) => (
-        <div>
+        <div key={data.id || `popup-${index}`}>
           <PopupList
-            key={index}
             image={data.popupImages[0]}
             title={data.popupName}
             popupAddress={data.popupAddress.split(' ').slice(0, 2).join(' ')}

@@ -5,7 +5,7 @@ import api from "./instance.js";
 {/* ✅ GET : 메인화면 상품 조회 */}
 export const getPopups = async () => {
     try {
-      const response = await apiInstance.get("/popup");
+      const response = await api.get("/popup");
       return response.data;
     } catch (error) {
       console.error("Error fetching popups:", error);
@@ -16,7 +16,7 @@ export const getPopups = async () => {
 {/* ✅ GET : 팝업 상세 정보 조회*/}
 export const GetPopupDetail = async (popupId) => {
   try {
-    const response = await apiInstance.get(`/popup/${popupId}`);
+    const response = await api.get(`/popup/${popupId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
@@ -38,7 +38,7 @@ export const getPopupsRegion = async (popupRegion) => {
 {/* ✅ GET : 리뷰 정보 조회*/}
 export const getReviews = async (popupId) => {
   try {
-    const response = await apiInstance.get(`/review/${popupId}`);
+    const response = await api.get(`/review/${popupId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
@@ -48,7 +48,7 @@ export const getReviews = async (popupId) => {
 
 export const postappointment = async (popupId) => {
   try {
-    const response = await apiInstance.post(`/reservation/${popupId}`,);
+    const response = await api.post(`/reservation/${popupId}`,);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);

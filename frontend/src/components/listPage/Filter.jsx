@@ -2,66 +2,80 @@ import { useState } from "react";
 import "../../styles/components/Filter.css";
 import "../../styles/components/SortMenu.css";
 
-const Filter = ({ showSort = true }) => {
-  const [sortOption, setSortOption] = useState("");
-  const [categorytOption, setCategoryOption] = useState("");
+const Filter = () => {
+  const [isSortOpen, setIsSortOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [selectedSort, setSelectedSort] = useState("정렬");
+  const [selectedCategory, setSelectedCategory] = useState("카테고리");
 
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-    console.log("Selected sort option:", event.target.value);
+  const sortOptions = ["정렬", "인기순", "최신순", "마감임박순"];
+  const categoryOptions = ["카테고리", "전시", "팝업스토어", "클래스"];
+
+  const handleSortClick = (option) => {
+    setSelectedSort(option);
+    setIsSortOpen(false);
   };
 
-  const handleCategoryChange = (event) => {
-    setCategoryOption(event.target.value);
-    console.log("Selected sort option:", event.target.value);
+  const handleCategoryClick = (option) => {
+    setSelectedCategory(option);
+    setIsCategoryOpen(false);
   };
 
   return (
-    <div>
-      <div className="filter-container">
-        {/* 체크박스와 텍스트 */}
-        <label className="filter-checkbox-container">
-          <input type="checkbox" />
-          <span className="filter-checkbox-label">예약가능</span>
-        </label>
-
-        <div className="filter-button-container">
-          {/* 카테고리 버튼 */}
-
-          <select
-            className="filter-oval-button"
-            value={categorytOption}
-            onChange={handleCategoryChange}
+    <div className="filter-wrapper">
+      <label className="reservation-checkbox">
+        <input type="checkbox" />
+        <span>예약가능</span>
+      </label>
+      
+      <div className="button-group">
+        <div className="filter-container">
+          <button 
+            className="filter-button"
+            onClick={() => setIsCategoryOpen(!isCategoryOpen)}
           >
-            <option value="" disabled>
-              카테고리
-            </option>
-            <option value="popular">카테고리1</option>
-            <option value="latest">카테고리2</option>
-            <option value="endingSoon">카테고리</option>
-            <option value="endingSoon1">카테고리1</option>
-            <option value="endingSoon2">카테고리2</option>
-            <option value="endingSoon3">카테고리3</option>
-            <option value="endingSoon4">카테고리4</option>
-            <option value="endingSoon5">카테고리5</option>
-            <option value="endingSoon6">카테고리6</option>
-            <option value="endingSoon7">카테고리7</option>
-          </select>
+            {selectedCategory}
+            <span className="arrow-down">▼</span>
+          </button>
+          
+          {isCategoryOpen && (
+            <div className="custom-dropdown">
+              {categoryOptions.map((option) => (
+                <div
+                  key={option}
+                  className={`dropdown-option ${selectedCategory === option ? 'selected' : ''}`}
+                  onClick={() => handleCategoryClick(option)}
+                >
+                  {selectedCategory === option && <span className="check-mark">✓</span>}
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
-          {/* 정렬 Select Box */}
-          {showSort && (
-            <select
-              className="filter-oval-button"
-              value={sortOption}
-              onChange={handleSortChange}
-            >
-              <option value="" disabled>
-                정렬
-              </option>
-              <option value="popular">인기순</option>
-              <option value="latest">최신순</option>
-              <option value="endingSoon">마감순</option>
-            </select>
+        <div className="filter-container">
+          <button 
+            className="filter-button"
+            onClick={() => setIsSortOpen(!isSortOpen)}
+          >
+            {selectedSort}
+            <span className="arrow-down">▼</span>
+          </button>
+          
+          {isSortOpen && (
+            <div className="custom-dropdown">
+              {sortOptions.map((option) => (
+                <div
+                  key={option}
+                  className={`dropdown-option ${selectedSort === option ? 'selected' : ''}`}
+                  onClick={() => handleSortClick(option)}
+                >
+                  {selectedSort === option && <span className="check-mark">✓</span>}
+                  {option}
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
