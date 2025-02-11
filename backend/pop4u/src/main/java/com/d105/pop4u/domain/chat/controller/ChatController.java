@@ -4,6 +4,7 @@ import com.d105.pop4u.domain.chat.dto.ChatMessageDto;
 import com.d105.pop4u.domain.chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -34,4 +35,13 @@ public class ChatController {
 
         return chatService.sendMessage(chatMessageDto);
     }
+
+    // ✅ 특정 채팅방의 기존 메시지 불러오기
+    @GetMapping("/{chatRoomId}/history")
+    public ResponseEntity<List<ChatMessageDto>> getChatHistory(@PathVariable Long chatRoomId) {
+        List<ChatMessageDto> chatHistory = chatService.getChatHistory(chatRoomId);
+        return ResponseEntity.ok(chatHistory);
+    }
+
+
 }

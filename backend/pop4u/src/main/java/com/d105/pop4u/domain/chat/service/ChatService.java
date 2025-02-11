@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -37,5 +38,11 @@ public class ChatService {
         messagingTemplate.convertAndSend("/topic/chat/" + chatMessage.getChatRoomId(), ChatMessageDto.fromEntity(chatMessage));
 
         return ChatMessageDto.fromEntity(chatMessage);
+    }
+
+    // 이전 메시지 조회
+    public List<ChatMessageDto> getChatHistory(Long chatRoomId) {
+        List<ChatMessage> messages = chatMessageRepository.findByChatRoomId(chatRoomId);
+        return messages.stream().map(ChatMessageDto::fromEntity).collect(Collectors.toList());
     }
 }

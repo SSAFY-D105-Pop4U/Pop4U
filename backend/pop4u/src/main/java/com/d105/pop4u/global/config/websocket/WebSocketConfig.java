@@ -1,4 +1,4 @@
-package com.d105.pop4u.global.config;
+package com.d105.pop4u.global.config.websocket;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.ChannelRegistration;
@@ -26,6 +26,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.interceptors(new com.d105.pop4u.global.config.StompHandler()); // ✅ STOMP 핸들러 적용 (존재하는 경우)
+        registration.interceptors(new com.d105.pop4u.global.config.stomp.StompHandler()); // ✅ STOMP 핸들러 적용 (존재하는 경우)
     }
 }
