@@ -2,12 +2,20 @@ import { useState } from "react";
 import "../styles/components/Sidebar.css";
 import { Link } from "react-router-dom";
 import basicProfile from "../assets/images/basicProfile.png";
-import center from "../assets/images/center.png";
+import phone from "../assets/icons/phone.svg";
+import file from "../assets/icons/file-lines-solid.svg";
+import officeSolid from "../assets/icons/office-solid.svg";
+import calendarPlus from "../assets/icons/calendar-plus-solid.svg";
+import penToSquare from "../assets/icons/pen-to-square-solid.svg";
+import chartSimple from "../assets/icons/chart-simple-solid.svg";
+import calendarDays from "../assets/icons/calendar-days-solid.svg";
+import camera from "../assets/icons/camera-solid.svg";
+import ticket from "../assets/icons/ticket-solid.svg";
 import next from "../assets/icons/next.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
 
@@ -46,7 +54,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <img src={next} alt="next" className="next-icon" />
               </Link>
             ) : (
-              <Link to="/login" className="profile-link">
+              <Link to="/sociallogin" className="profile-link">
                 <div className="profile-text">
                   <span>P4U에</span>
                   <span className="login-text">로그인</span>
@@ -64,24 +72,24 @@ const Sidebar = ({ isOpen, onClose }) => {
             <ul>
               <li>
                 <Link to="/create">
-                  <img src={center} alt="인생네컷 제작" />
+                  <img src={camera} alt="인생네컷 제작" />
                   인생네컷 제작
                 </Link>
               </li>
               <li>
                 <Link to="/profile">
-                  <img src={center} alt="내 정보 수정" /> 내 정보 수정
+                  <img src={penToSquare} alt="내 정보 수정" /> 내 정보 수정
                 </Link>
               </li>
               <li>
                 <Link to="/reservations">
-                  <img src={center} alt="예약 내역 확인" />
+                  <img src={calendarDays} alt="예약 내역 확인" />
                   예약 내역 확인
                 </Link>
               </li>
               <li>
                 <Link to="/coupons">
-                  <img src={center} alt="쿠폰함" />
+                  <img src={ticket} alt="쿠폰함" />
                   쿠폰함
                 </Link>
               </li>
@@ -95,25 +103,25 @@ const Sidebar = ({ isOpen, onClose }) => {
             <ul>
               <li>
                 <Link to="/admin/stores">
-                  <img src={center} alt="팝업 등록" />
+                  <img src={calendarPlus} alt="팝업 등록" />
                   팝업 등록
                 </Link>
               </li>
               <li>
                 <Link to="/admin/manage">
-                  <img src={center} alt="팝업 수정" />
+                  <img src={penToSquare} alt="팝업 수정" />
                   팝업 수정
                 </Link>
               </li>
               <li>
                 <Link to="/admin/sales">
-                  <img src={center} alt="매장 분석" />
+                  <img src={chartSimple} alt="매장 분석" />
                   매장 분석
                 </Link>
               </li>
               <li>
                 <Link to="/admin/reservations">
-                  <img src={center} alt="입장 예약자 관리" />
+                  <img src={calendarDays} alt="입장 예약자 관리" />
                   입장 예약자 관리
                 </Link>
               </li>
@@ -126,19 +134,19 @@ const Sidebar = ({ isOpen, onClose }) => {
           <ul>
             <li>
               <Link to="/support">
-                <img src={center} alt="고객센터" />
+                <img src={phone} alt="고객센터" />
                 고객센터
               </Link>
             </li>
             <li>
               <Link to="/terms">
-                <img src={center} alt="이용약관" />
+                <img src={file} alt="이용약관" />
                 이용약관
               </Link>
             </li>
             <li>
               <Link to="/company">
-                <img src={center} alt="회사정보" />
+                <img src={officeSolid} alt="회사정보" />
                 회사정보
               </Link>
             </li>
