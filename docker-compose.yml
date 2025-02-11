@@ -16,6 +16,7 @@ services:
       - mysql
       - redis
       - mongodb
+      - fastapi
 
   frontend:
     build:
@@ -38,8 +39,6 @@ services:
       - "8000:8000"
     networks:
       - app-network
-    depends_on:
-      - backend
 
   mysql:
     image: mysql:8.0
