@@ -24,6 +24,17 @@ export const GetPopupDetail = async (popupId) => {
   }
 }
 
+{/* ✅ GET : 지역별 리뷰 정보 조회*/}
+export const getPopupsRegion = async (popupRegion) => {
+  try {
+    const response = await api.get(`/popup/region/${popupRegion}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
+
 {/* ✅ GET : 리뷰 정보 조회*/}
 export const getReviews = async (popupId) => {
   try {
@@ -34,6 +45,8 @@ export const getReviews = async (popupId) => {
     throw error;
   }
 }
+
+
 
 
 

@@ -8,7 +8,7 @@ import WriteReview from "../pages/WriteReview";
 import AreaList from "../pages/AreaList";
 import Search from "../pages/Search";
 import Appointment from "../pages/Appointment";
-import Reservation from "../pages/reservation";
+import Reservation from "../pages/Reservation";
 import UserCategory from "../pages/UserCategory";
 
 const AppRoutes = () => {
