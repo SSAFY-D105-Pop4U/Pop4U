@@ -11,6 +11,8 @@ import Appointment from "../pages/Appointment";
 import Reservation from "../pages/Reservation";
 import UserCategory from "../pages/UserCategory";
 import NewPopupList from "../pages/NewPopupList";
+import EndingPopupList from "../pages/EndingPopupList";
+import TrendingPopupList from "../pages/TrendingPopupList";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +29,8 @@ const AppRoutes = () => {
       <Route path="/reservation" element={<Reservation />} />
       <Route path="/usercategory" element={<UserCategory />} />
       <Route path="/newpopups" element={<NewPopupList />} />
+      <Route path="/endingpopups" element={<EndingPopupList />} />
+      <Route path="/trendingpopups" element={<TrendingPopupList />} />
     </Routes>
   );
 };
