@@ -14,7 +14,7 @@ import Recheck from "../components/appointment/Recheck";
 import NewPopupList from "../pages/NewPopupList";
 import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
-
+import ReviewLifeShot from "../pages/ReviewLifeShot";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -33,6 +33,7 @@ const AppRoutes = () => {
       <Route path="/endingpopups" element={<EndingPopupList />} />
       <Route path="/trendingpopups" element={<TrendingPopupList />} />
       <Route path="/recheck" element={<Recheck />} />
+      <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
     </Routes>
   );
 };
