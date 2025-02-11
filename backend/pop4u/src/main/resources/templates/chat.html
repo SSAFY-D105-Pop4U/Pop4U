@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>채팅 테스트</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-xl font-bold text-center mb-4">WebSocket 채팅 테스트</h2>
+    <div class="mb-3">
+        <label class="block font-semibold">채팅방 ID:</label>
+        <div class="flex gap-2">
+            <input type="text" id="chatRoomId" value="1" class="border p-2 rounded w-full">
+            <button onclick="connect()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">입장</button>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label class="block font-semibold">유저 ID:</label>
+        <input type="text" id="userId" value="1001" class="border p-2 rounded w-full">
+    </div>
+    <div class="mb-3">
+        <label class="block font-semibold">메시지:</label>
+        <div class="flex gap-2">
+            <input type="text" id="message" class="border p-2 rounded w-full">
+            <button onclick="sendMessage()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">보내기</button>
+        </div>
+    </div>
+    <h3 class="text-lg font-semibold mt-4">채팅 내용</h3>
+    <div id="chatArea" class="mt-2 p-3 border rounded h-40 overflow-auto bg-gray-50"></div>
+</div>
+
+<script>
+    var stompClient = null;
+    var chatRoomId = null;
+
+    function connect() {
+        if (stompClient !== null) {
+            console.log("이미 연결됨");
+            return; // 중복 연결 방지
+        }
+
+        chatRoomId = document.getElementById("chatRoomId").value;
+        var socket = new SockJS("http://localhost:8080/ws/chat");
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function (frame) {
+            console.log("Connected: " + frame);
+
+            stompClient.subscribe("/topic/chat/" + chatRoomId, function (response) {
+                var message = JSON.parse(response.body);
+                document.getElementById("chatArea").innerHTML += "<p><b>User " + message.userId + ":</b> " + message.chattingMessage + "</p>";
+            });
+
+            // ✅ 채팅방 입장 시 기존 메시지 로드
+            fetch("http://localhost:8080/chat/" + chatRoomId + "/history")
+                .then(response => response.json())
+                .then(messages => {
+                    messages.forEach(message => {
+                        document.getElementById("chatArea").innerHTML += "<p><b>User " + message.userId + ":</b> " + message.chattingMessage + "</p>";
+                    });
+                });
+        });
+    }
+
+
+    function sendMessage() {
+        var userId = parseInt(document.getElementById("userId").value, 10);
+        var message = document.getElementById("message").value;
+        var roomId = parseInt(chatRoomId, 10);
+
+        stompClient.send("/app/chat/" + roomId, {}, JSON.stringify({
+            chatRoomId: roomId,
+            userId: userId,
+            chattingMessage: message
+        }));
+
+        document.getElementById("message").value = "";
+    }
+</script>
+</body>
+</html>

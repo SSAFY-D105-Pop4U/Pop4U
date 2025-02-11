@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
+
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Controller
@@ -23,9 +25,14 @@ public class UserApiController {
 
     private final UserService userService;
 
+//    @GetMapping("/login")
+//    public String login() {
+//        return "/oauth2/authorization/google";
+//    }
     @GetMapping("/login")
-    public String login() {
-        return "oauthLogin";
+    public ResponseEntity<Void> login(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/oauth2/authorization/google"); // 구글 인증 엔드포인트로 리디렉션
+        return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
     }
 
     @GetMapping("/join")
