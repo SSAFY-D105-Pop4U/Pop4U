@@ -56,6 +56,7 @@ const Appointment = () => {
             setSelectedPerson={setSelectedPerson}
           />
           <Time selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
+          <NextButton onClick={appointment}>다음</NextButton>
         </>
       ) : (
         <>
@@ -71,7 +72,6 @@ const Appointment = () => {
           />
         </>
       )}
-      <NextButton onClick={appointment}>다음</NextButton>
     </div>
   );
 };

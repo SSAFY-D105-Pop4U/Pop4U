@@ -1,35 +1,42 @@
+.recheck-text {
+  text-align: left;
+  margin-top: 120px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
 .recheck-container {
-    width: 90%;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    margin: 5%;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: Arial, sans-serif;
-  }
-  
-  .recheck-item {
-    display: flex;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
-    font-size: 16px;
-  }
-  
-  .recheck-item:last-child {
-    border-bottom: none;
-  }
-  
-  .recheck-label {
-    font-weight: bold;
-    color: #555;
-    width: 20%;
-  }
-  
-  .recheck-value {
-    color: #333;
-    text-align: right;
-  }
-  
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.recheck-item {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+}
+
+.recheck-item:last-child {
+  border-bottom: none;
+}
+
+.recheck-label {
+  font-weight: bold;
+  color: #555;
+  width: 20%;
+}
+
+.recheck-value {
+  color: #333;
+  text-align: right;
+}
