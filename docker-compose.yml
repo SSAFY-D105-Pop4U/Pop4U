@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build:
-      context: backend/pop4u
+      context: ./backend/pop4u
       dockerfile: Dockerfile
     container_name: spring-backend
     ports:
@@ -19,7 +19,7 @@ services:
 
   frontend:
     build:
-      context: frontend
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: react-frontend
     ports:
@@ -28,6 +28,18 @@ services:
       - backend
     networks:
       - app-network
+
+  fastapi:
+    build:
+      context: ./ai-server
+      dockerfile: Dockerfile
+    container_name: life-four-cuts
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
 
   mysql:
     image: mysql:8.0
