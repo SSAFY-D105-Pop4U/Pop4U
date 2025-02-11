@@ -10,6 +10,7 @@ import Search from "../pages/Search";
 import Appointment from "../pages/Appointment";
 import Reservation from "../pages/Reservation";
 import UserCategory from "../pages/UserCategory";
+import Recheck from "../components/appointment/Recheck";
 import NewPopupList from "../pages/NewPopupList";
 import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
@@ -31,6 +32,7 @@ const AppRoutes = () => {
       <Route path="/newpopups" element={<NewPopupList />} />
       <Route path="/endingpopups" element={<EndingPopupList />} />
       <Route path="/trendingpopups" element={<TrendingPopupList />} />
+      <Route path="/recheck" element={<Recheck />} />
     </Routes>
   );
 };

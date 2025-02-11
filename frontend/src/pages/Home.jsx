@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import "../styles/pages/Home.css";
 import HomeArea from "../components/homePage/HomeArea";
 import HomeHorizScroll from "../components/homePage/HomeHorizScroll";
-import Divider from "../components/public/Divider";
+import Divider from "../components/basic/Divider";
 import { getPopups } from "../apis/api/api.js";
 import { Link } from "react-router-dom";
 

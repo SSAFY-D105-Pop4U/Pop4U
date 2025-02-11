@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../../styles/components/Calendar.css";
+import { AppDataContext } from "../../Context.jsx"; // useContext 추가
 
-const Calendar = ({ resultDate, setResultDate }) => {
+const Calendar = ({ setResultDate }) => {
   const today = new Date();
-
   const startDay = new Date(2025, 2, 11);
-  const endDay = new Date(2025, 2, 15);
+  const endDay = new Date(2025, 2, 18);
 
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedDate, setSelectedDate] = useState(null); // 선택된 날짜 상태 추가
+  const [selectedDate, setSelectedDate] = useState(null);
 
-  const dayNames = ["일", "월", "화", "수", "목", "금", "토"]; // 요일 배열
+  const { setAppData } = useContext(AppDataContext); // useContext 사용
 
-  // 현재 월의 첫 날과 마지막 날 계산
+  const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
   const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
 
@@ -27,7 +28,7 @@ const Calendar = ({ resultDate, setResultDate }) => {
     } else {
       setCurrentMonth(currentMonth - 1);
     }
-    setSelectedDate(null); // 달 변경 시 선택 초기화
+    setSelectedDate(null);
   };
 
   const handleNextMonth = () => {
@@ -37,10 +38,9 @@ const Calendar = ({ resultDate, setResultDate }) => {
     } else {
       setCurrentMonth(currentMonth + 1);
     }
-    setSelectedDate(null); // 달 변경 시 선택 초기화
+    setSelectedDate(null);
   };
 
-  // 날짜 배열 생성
   const calendarDays = [];
   for (let i = 0; i < firstDayWeekIndex; i++) {
     calendarDays.push("");
@@ -49,11 +49,9 @@ const Calendar = ({ resultDate, setResultDate }) => {
     calendarDays.push(day);
   }
 
-  // 날짜 클릭 핸들러
   const handleDateClick = (day) => {
-    if (!day) return; // 빈 날짜 클릭 방지
+    if (!day) return;
 
-    // open된 날짜만 선택 가능하도록 설정
     const isWithinOpenRange =
       day >= startDay.getDate() &&
       currentMonth >= startDay.getMonth() - 1 &&
@@ -65,14 +63,17 @@ const Calendar = ({ resultDate, setResultDate }) => {
     if (isWithinOpenRange) {
       setSelectedDate(day);
 
-      // 선택된 날짜를 기반으로 요일 계산
       const selectedFullDate = new Date(currentYear, currentMonth, day);
-      const dayOfWeek = dayNames[selectedFullDate.getDay()]; // 요일 가져오기
-
+      const dayOfWeek = dayNames[selectedFullDate.getDay()];
       setResultDate(`${currentMonth + 1}월 ${day}일(${dayOfWeek})`);
+
+      // useContext에 저장하는 코드드
+      setAppData((prev) => ({
+        ...prev,
+        selectedDate: `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`,
+      })); 
     }
   };
-
   return (
     <div className="calendar-container">
       <div className="calendar-header">
@@ -90,7 +91,7 @@ const Calendar = ({ resultDate, setResultDate }) => {
       </div>
 
       <div className="day-names">
-        {["일", "월", "화", "수", "목", "금", "토"].map((day) => (
+        {dayNames.map((day) => (
           <div key={day} className="day-name">
             {day}
           </div>

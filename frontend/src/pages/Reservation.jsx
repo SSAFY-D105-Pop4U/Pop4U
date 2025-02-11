@@ -1,4 +1,4 @@
-import Header from "../components/public/Header"
+import Header from "../components/basic/Header"
 import Swipe from "../components/reservation/Swipe"
 import '../styles/pages/Reservation.css'
 const Reservation = () => {

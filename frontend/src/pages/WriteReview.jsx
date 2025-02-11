@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/public/Header";
+import Header from "../components/basic/Header";
 import star from "../assets/icons/star.png";
 import fullstar from "../assets/icons/fullstar.png";
 import "../styles/pages/WriteReview.css";
