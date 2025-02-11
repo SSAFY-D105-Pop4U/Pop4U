@@ -15,7 +15,7 @@ const Filter = () => {
   const dropdownRef = useRef(null);
 
   const sortOptions = [ "인기순", "최신순", "마감순"];
-  const categoryOptions = [ "전시", "팝업스토어", "클래스","전시", "팝업스토어", "클래스","전시", "팝업스토어", "클래스","전시", "팝업스토어", "클래스","전시", "팝업스토어", "클래스"];
+  const categoryOptions = [ "이벤트", "체험", "전시","굿즈", "패션", "뷰티","푸드", "쇼핑", "라이프스타일","테크", "스포츠", "음악","여행", "캐릭터", "도서", "플리마켓", "아트", "컬래버레이션", "리미티드 에디션", "커뮤니티"];
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -110,7 +110,7 @@ const Filter = () => {
           </button>
           
           {isSortOpen && (
-            <div className="custom-dropdown">
+            <div className="custom-dropdown1">
               {sortOptions.map((option) => (
                 <div
                   key={option}
