@@ -31,6 +31,7 @@ const Detail = () => {
     );
   };
 
+  // ✅ 탭바 이동리스트
   const tabList = [
     { id: 0, name: "정보", component: <Info detail={detail} /> },
     {
