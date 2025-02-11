@@ -82,7 +82,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/reservations">
+                <Link to="/reservation">
                   <img src={calendarDays} alt="예약 내역 확인" />
                   예약 내역 확인
                 </Link>
