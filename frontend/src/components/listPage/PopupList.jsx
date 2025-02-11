@@ -1,5 +1,6 @@
 import "../../styles/components/PopupList.css";
 import Divider from "../basic/Divider";
+import locationIcon from "../../assets/icons/location.svg";
 
 const PopupList = ({ image, title, popupAddress, date}) => {
   return (
@@ -9,7 +10,12 @@ const PopupList = ({ image, title, popupAddress, date}) => {
         <div className="list-popup-content">
           <h3 className="list-popup-title">{title}</h3>
           <p className="list-popup-time">
-            <span className="list-popup-icon">📍</span>
+            <img 
+              src={locationIcon} 
+              alt="location" 
+              className="list-popup-icon"
+              style={{ width: '12px', height: '12px' }}
+            />
             {popupAddress}
           </p>
           <div className="popup-date">{date}</div>

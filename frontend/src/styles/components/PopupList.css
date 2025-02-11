@@ -37,6 +37,10 @@
 
 .list-popup-icon {
   margin-right: 5px;
+  vertical-align: middle;
+  width: 12px;
+  height: 12px;
+  fill: #FF9589;
 }
 
 .list-popup-rating {
