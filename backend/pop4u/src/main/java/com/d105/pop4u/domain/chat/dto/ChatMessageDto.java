@@ -4,7 +4,6 @@ import com.d105.pop4u.domain.chat.entity.ChatMessage;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -12,21 +11,20 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 public class ChatMessageDto {
-    private Long chattingId;
-    private Long chatRoomId;
+    private String chattingId;  // ✅ 몽고DB 사용 시, ID 타입을 `String`으로 변경
+    private Long chatRoomId;  // ✅ 채팅방 ID도 `String`으로 변경 (몽고DB 연동 고려)
     private Long userId;
     private String chattingMessage;
-    private LocalTime chattingSendTime;
-    private LocalDateTime chattingCreatedAt;
+    private LocalDateTime chattingCreatedAt;  // ✅ 채팅 생성시간 통합
 
+    // ✅ 엔티티 → DTO 변환 메서드
     public static ChatMessageDto fromEntity(ChatMessage message) {
         return ChatMessageDto.builder()
-                .chattingId(message.getChattingId())
-                .chatRoomId(message.getChatRoom().getChatRoomId())
+                .chattingId(message.getChattingId())  // ✅ 몽고DB ObjectId 변환 고려
+                .chatRoomId(message.getChatRoomId())
                 .userId(message.getUserId())
                 .chattingMessage(message.getChattingMessage())
-                .chattingSendTime(message.getChattingSendTime())
-                .chattingCreatedAt(message.getChattingCreatedAt())
+                .chattingCreatedAt(message.getChattingCreatedAt())  // ✅ 통일된 시간 필드
                 .build();
     }
 }

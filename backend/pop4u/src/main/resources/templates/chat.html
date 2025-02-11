@@ -44,9 +44,16 @@
     }
 
     function sendMessage() {
-        var userId = document.getElementById("userId").value;
+        var userId = parseInt(document.getElementById("userId").value, 10);
         var message = document.getElementById("message").value;
-        stompClient.send("/app/chat/" + chatRoomId, {}, JSON.stringify({ userId: userId, chattingMessage: message }));
+        var roomId = parseInt(chatRoomId, 10);  // ✅ 숫자로 변환
+
+        stompClient.send("/app/chat/" + roomId, {}, JSON.stringify({
+            chatRoomId: roomId,   // ✅ 숫자로 변환하여 전송
+            userId: userId,       // ✅ 숫자로 변환하여 전송
+            chattingMessage: message
+        }));
+
         document.getElementById("message").value = "";
     }
 </script>

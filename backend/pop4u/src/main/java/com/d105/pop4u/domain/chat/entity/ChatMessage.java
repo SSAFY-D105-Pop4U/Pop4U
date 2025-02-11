@@ -1,5 +1,6 @@
 package com.d105.pop4u.domain.chat.entity;
 
+import com.d105.pop4u.domain.chat.dto.ChatMessageDto;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,22 +12,22 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "chatting") // ✅ MongoDB 컬렉션 설정
+@Document(collection = "chat_messages")
 public class ChatMessage {
 
     @Id
-    private String chattingId;  // MongoDB는 String 타입 ID 사용
+    private String chattingId;  // ✅ MongoDB의 ObjectId (자동 생성됨)
 
-    private Long chatRoomId; // 연결된 채팅방 ID
-    private Long userId; // 보낸 사용자 ID
-    private String chattingMessage; // 메시지 내용
-    private LocalDateTime chattingCreatedAt; // 생성 시간
+    private Long chatRoomId;  // ✅ 숫자로 유지해야 함
+    private Long userId;
+    private String chattingMessage;
+    private LocalDateTime chattingCreatedAt = LocalDateTime.now();
 
-    public static ChatMessage create(Long chatRoomId, Long userId, String message) {
+    public static ChatMessage fromDto(ChatMessageDto dto) {
         return ChatMessage.builder()
-                .chatRoomId(chatRoomId)
-                .userId(userId)
-                .chattingMessage(message)
+                .chatRoomId(dto.getChatRoomId())
+                .userId(dto.getUserId())
+                .chattingMessage(dto.getChattingMessage())
                 .chattingCreatedAt(LocalDateTime.now())
                 .build();
     }
