@@ -55,7 +55,6 @@ export const postappointment = async ({ popupId, userId, person, date, time }) =
       reservationDate: date,  // 예약 날짜
       reservationTime: time   // 예약 시간
     });
-
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);

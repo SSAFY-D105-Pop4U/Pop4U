@@ -10,7 +10,7 @@ import Search from "../pages/Search";
 import Appointment from "../pages/Appointment";
 import Reservation from "../pages/Reservation";
 import UserCategory from "../pages/UserCategory";
-import Recheck from "../components/appointment/Recheck";
+import Recheck from "../pages/Recheck";
 import NewPopupList from "../pages/NewPopupList";
 import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
@@ -18,7 +18,7 @@ import TrendingPopupList from "../pages/TrendingPopupList";
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Home />} />             
       <Route path="/login" element={<Login />} />
       <Route path="/sociallogin" element={<SocialLogin />} />
       <Route path="/signup" element={<Signup />} />

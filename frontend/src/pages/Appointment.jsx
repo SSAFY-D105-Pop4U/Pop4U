@@ -5,12 +5,13 @@ import ProgressBar from "../components/appointment/ProgressBar";
 import Header from "../components/basic/Header";
 import Time from "../components/appointment/Time";
 import NextButton from "../components/NextButton";
-import Recheck from "../components/appointment/Recheck";
-import { useSearchParams } from "react-router-dom";
+// import Recheck from "../components/appointment/Recheck";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { postappointment } from "../apis/api/api.js";
 import { AppDataContext } from "../Context.jsx";
 
 const Appointment = () => {
+  const nav = useNavigate()
   const { appData, setAppData } = useContext(AppDataContext); 
   const [selectedDate, setSelectedDate] = useState(""); // ✅ 추가: 선택한 날짜 상태
   const [selectedPerson, setSelectedPerson] = useState(0);
@@ -20,14 +21,15 @@ const Appointment = () => {
   const [searchParams] = useSearchParams();
   const popupName = searchParams.get("popupName");
   const popupId = searchParams.get("popupId");
-
+  const [userId, setUserId] = useState(1);//샘플 userId
   useEffect(() => {
     console.log("📦 Context 데이터 현황황:", appData);
   }, [appData]);  // ✅ appData 전체가 변경될 때마다 실행됨
 
-  const userId = 1; //샘플 userId
+  
   const appointment = async () => {
     try {
+      console.log(userId)
       const data = await postappointment({
         popupId,
         userId,
@@ -36,6 +38,7 @@ const Appointment = () => {
         time: appData.selectedTime,
       });
       console.log("API 응답 (팝업상세):", data);
+      nav("/Recheck");
     } catch (error) {
       console.error("api 호출 실패");
     }
