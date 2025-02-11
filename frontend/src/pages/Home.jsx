@@ -56,10 +56,14 @@ const Home = () => {
       </Link>
       <HomeHorizScroll popups={popups.byStartDate || []} />
       <Divider height="5px" top="5px" bottom="5px" />
-      <h3># 마감 임박 팝업스토어 ⏰</h3>
+      <Link to="/endingpopups">
+        <h3># 마감 임박 팝업스토어 ⏰</h3>
+      </Link>
       <HomeHorizScroll popups={popups.byEndDate || []} />
       <Divider height="5px" top="5px" bottom="5px" />
-      <h3># 요즘 뜨는 팝업스토어 🔥</h3>
+      <Link to="/trendingpopups">
+        <h3># 요즘 뜨는 팝업스토어 🔥</h3>
+      </Link>
       <HomeHorizScroll popups={popups.byViewCount || []} />
     </div>
   );

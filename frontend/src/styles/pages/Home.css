@@ -26,6 +26,17 @@ h3 {
   margin: 9px;
 }
 
+/* 링크의 기본 스타일 제거 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 링크 내부의 h3 스타일 유지 */
+a h3 {
+  color: inherit;
+}
+
 .divider1 {
   position: relative; /* 다른 요소와 독립적으로 배치 */
   width: calc(100%); /* body padding 합만큼 추가 */
