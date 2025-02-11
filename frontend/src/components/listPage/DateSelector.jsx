@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import "../../styles/components/DateSelector.css";
 
-const DateSelector = () => {
-  const [selectedDate, setSelectedDate] = useState("");
+const DateSelector = ({selectedDate, setSelectedDate}) => {
+  
   const [dates, setDates] = useState([]);
   const scrollRef = useRef(null);
 
@@ -30,6 +30,11 @@ const DateSelector = () => {
     setDates(generatedDates);
     setSelectedDate(generatedDates[0].date); // 오늘 날짜를 기본 선택
   }, []);
+
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+    console.log(date);
+  };
 
   const handleDragStart = (e) => {
     scrollRef.current.isDragging = true;
@@ -100,7 +105,10 @@ const DateSelector = () => {
             className={`date-selector-item ${
               item.date === selectedDate ? "selected" : ""
             }`}
-            onClick={() => setSelectedDate(item.date)}
+            onClick={() => handleDateClick(item.date)
+              
+              
+            }
           >
             <div className="date-selector-date">{item.date}</div>
             <div className="date-selector-label">{item.label}</div>
