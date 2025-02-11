@@ -1,6 +1,6 @@
 import GoogleLogin from "../components/GoogleLogin"
 import large_logo from "../assets/images/large_logo.png"
-import kakao from "../assets/images/Kakao.png"
+import kakao from "../assets/images/kakao.png"
 import "../styles/pages/SocialLogin.css"
 
 const SocialLogin = () => {
