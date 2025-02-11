@@ -19,7 +19,6 @@ const SocialLogin = () => {
             </div>
 
             {/* 구글 로그인 버튼 */}
-
             <GoogleLogin />
             <div className="kako-logo">
                 <img src={kakao} alt="Google Logo" />

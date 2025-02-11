@@ -7,7 +7,7 @@
     margin: 0 auto; /* 가운데 정렬 */
     /* border-radius: 40px; */
 }
-/* 📌 화면이 일정 크기 이상(1024px)일 때, 양쪽 배경을 흰색으로 만들기 */
+/* 📌 화면이 일정 크기 이상(960px)일 때, 양쪽 배경을 흰색으로 만들기 */
 @media (min-width: 960px) {
     body {
         background-color: white; /* 양쪽 배경을 흰색으로 설정 */
@@ -116,7 +116,6 @@
     margin: 10px 0;
 }
 
-/* 버튼 영역 */
 .button-wrapper {
     position: fixed; /* ✅ 항상 고정 */
     bottom: 0; 
@@ -128,7 +127,6 @@
     z-index: 1000; /* 다른 요소보다 위에 배치 */
 }
 
-
 .button {
     width: 45%;
     height: 40px;
@@ -139,12 +137,19 @@
     font-weight: 500;
     color: black;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease; /* ✅ 부드러운 전환 효과 */
 }
 
+/* ✅ 마우스를 올렸을 때 */
 .button:hover {
     background: #986CFF;
     color: white;
+    transform: scale(1.05); /* 살짝 확대 효과 */
+}
+
+/* ✅ 클릭했을 때 */
+.button:active {
+    transform: scale(0.99); /* 클릭 시 살짝 작아지는 효과 */
 }
 
 .eye{
