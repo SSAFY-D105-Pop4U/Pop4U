@@ -1,0 +1,210 @@
+Index: backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/repository/NotificationRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.d105.pop4u.domain.notification.repository;\r\n\r\nimport com.d105.pop4u.domain.notification.entity.Notification;\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\n\r\npublic interface NotificationRepository extends JpaRepository<Notification, Long> {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/repository/NotificationRepository.java b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/repository/NotificationRepository.java
+--- a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/repository/NotificationRepository.java	(revision dae6395a1749c16365269a24e3363c73d9e67695)
++++ b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/repository/NotificationRepository.java	(date 1739173818838)
+@@ -4,5 +4,4 @@
+ import org.springframework.data.jpa.repository.JpaRepository;
+ 
+ public interface NotificationRepository extends JpaRepository<Notification, Long> {
+-
+ }
+Index: backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/temp.txt
+===================================================================
+diff --git a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/temp.txt b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/temp.txt
+deleted file mode 100644
+--- a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/temp.txt	(revision dae6395a1749c16365269a24e3363c73d9e67695)
++++ /dev/null	(revision dae6395a1749c16365269a24e3363c73d9e67695)
+@@ -1,1 +0,0 @@
+-temp
+\ No newline at end of file
+Index: backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/temp.txt
+===================================================================
+diff --git a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/temp.txt b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/temp.txt
+deleted file mode 100644
+--- a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/temp.txt	(revision dae6395a1749c16365269a24e3363c73d9e67695)
++++ /dev/null	(revision dae6395a1749c16365269a24e3363c73d9e67695)
+@@ -1,1 +0,0 @@
+-temp
+\ No newline at end of file
+Index: backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/controller/NotificationController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/controller/NotificationController.java b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/controller/NotificationController.java
+new file mode 100644
+--- /dev/null	(date 1739173818892)
++++ b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/controller/NotificationController.java	(date 1739173818892)
+@@ -0,0 +1,42 @@
++package com.d105.pop4u.domain.notification.controller;
++
++import com.d105.pop4u.domain.notification.dto.NotificationDto;
++import com.d105.pop4u.domain.notification.service.NotificationService;
++import lombok.RequiredArgsConstructor;
++import org.springframework.http.ResponseEntity;
++import org.springframework.web.bind.annotation.*;
++
++import java.util.List;
++
++@RestController
++@RequestMapping("/notification")
++@RequiredArgsConstructor
++public class NotificationController {
++    private final NotificationService notificationService;
++
++    // 알림 목록 조회
++    @GetMapping
++    public ResponseEntity<List<NotificationDto>> getNotifications(
++            @RequestParam Long userId) {
++        List<NotificationDto> notifications = notificationService.getUserNotifications(userId);
++        return ResponseEntity.ok(notifications);
++    }
++
++    // 특정 알림 상세 조회
++    @GetMapping("/{notificationId}")
++    public ResponseEntity<NotificationDto> getNotificationDetail(
++            @PathVariable Long notificationId,
++            @RequestParam Long userId) {
++        NotificationDto notification = notificationService.getNotificationDetail(notificationId, userId);
++        return ResponseEntity.ok(notification);
++    }
++
++    // 알림 읽음 처리
++    @PatchMapping("/{notificationId}")
++    public ResponseEntity<Void> markAsRead(
++            @PathVariable Long notificationId,
++            @RequestParam Long userId) {
++        notificationService.markAsRead(userId, notificationId);
++        return ResponseEntity.ok().build();
++    }
++}
+\ No newline at end of file
+Index: backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/NotificationDto.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/NotificationDto.java b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/NotificationDto.java
+new file mode 100644
+--- /dev/null	(date 1739173818883)
++++ b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/dto/NotificationDto.java	(date 1739173818883)
+@@ -0,0 +1,20 @@
++package com.d105.pop4u.domain.notification.dto;
++
++import com.fasterxml.jackson.annotation.JsonFormat;
++import lombok.*;
++import java.time.LocalDateTime;
++
++@Getter
++@Setter
++@Builder
++@NoArgsConstructor
++@AllArgsConstructor
++public class NotificationDto {
++    private Long notificationId;
++    private Long userId;
++    private Long popupId;
++    private String notificationTitle;
++    private String notificationContent;
++    private boolean notificationRead;
++    private LocalDateTime notificationCreatedAt;
++}
+Index: backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/NotificationService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/NotificationService.java b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/NotificationService.java
+new file mode 100644
+--- /dev/null	(date 1739173818899)
++++ b/backend/pop4u/src/main/java/com/d105/pop4u/domain/notification/service/NotificationService.java	(date 1739173818899)
+@@ -0,0 +1,82 @@
++package com.d105.pop4u.domain.notification.service;
++
++import com.d105.pop4u.domain.notification.dto.NotificationDto;
++import com.d105.pop4u.domain.notification.entity.Notification;
++import com.d105.pop4u.domain.notification.repository.NotificationRepository;
++import com.d105.pop4u.domain.store.entity.PopupStore;
++import com.d105.pop4u.domain.store.repository.PopupStoreRepository;
++import com.d105.pop4u.domain.user.entity.User;
++import com.d105.pop4u.domain.user.repository.UserRepository;
++import lombok.RequiredArgsConstructor;
++import org.springframework.stereotype.Service;
++import org.springframework.transaction.annotation.Transactional;
++
++import java.util.List;
++import java.util.stream.Collectors;
++
++@Service
++@Transactional
++@RequiredArgsConstructor
++public class NotificationService {
++    private final NotificationRepository notificationRepository;
++    private final UserRepository userRepository;
++    private final PopupStoreRepository popupStoreRepository;
++
++    public NotificationDto createNotification(NotificationDto dto) {
++        User user = userRepository.findById(dto.getUserId())
++                .orElseThrow(() -> new RuntimeException("User not found"));
++
++        PopupStore popupStore = popupStoreRepository.findById(dto.getPopupId())
++                .orElseThrow(() -> new RuntimeException("PopupStore not found"));
++
++        Notification notification = Notification.builder()
++                .user(user)
++                .popupStore(popupStore)
++                .notificationTitle(dto.getNotificationTitle())
++                .notificationContent(dto.getNotificationContent())
++                .build();  // prePersist에서 나머지 필드 설정됨
++
++        notification = notificationRepository.save(notification);
++        return convertToDto(notification);
++    }
++
++    // 알림 목록 조회 (필드명은 동일하게 유지)
++    @Transactional(readOnly = true)
++    public List<NotificationDto> getUserNotifications(Long userId) {
++        User user = userRepository.findById(userId)
++                .orElseThrow(() -> new RuntimeException("User not found"));
++
++        return notificationRepository.findByUserOrderByNotificationCreatedAtDesc(user)
++                .stream()
++                .map(this::convertToDto)
++                .collect(Collectors.toList());
++    }
++
++    // 알림 상세 조회 메서드 추가
++    @Transactional(readOnly = true)
++    public NotificationDto getNotificationDetail(Long notificationId, Long userId) {
++        // 사용자 존재 확인
++        User user = userRepository.findById(userId)
++                .orElseThrow(() -> new RuntimeException("User not found"));
++
++        // 해당 사용자의 특정 알림 조회
++        Notification notification = notificationRepository
++                .findByNotificationIdAndUser(notificationId, user)
++                .orElseThrow(() -> new RuntimeException("Notification not found"));
++
++        return convertToDto(notification);
++    }
++
++    // Entity -> DTO 변환 메서드 수정
++    private NotificationDto convertToDto(Notification notification) {
++        return NotificationDto.builder()
++                .notificationId(notification.getNotificationId())
++                .userId(notification.getUser().getUserId())
++                .popupId(notification.getPopupStore().getPopupId())
++                .notificationTitle(notification.getNotificationTitle())
++                .notificationContent(notification.getNotificationContent())
++                .notificationRead(notification.getNotificationRead())
++                .notificationCreatedAt(notification.getNotificationCreatedAt())
++                .build();
++    }
++}
+\ No newline at end of file
