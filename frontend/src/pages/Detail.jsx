@@ -1,39 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../styles/pages/Detail.css";
 import BackButton from "../components/BackButton";
 import Info from "../components/Info";
 import Review from "../components/Review";
-import { useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom";
-import { GetPopupDetail } from "../apis/api/api.js";
-import { getReviews } from "../apis/api/api.js";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { GetPopupDetail, getReviews } from "../apis/api/api.js";
 import eye from "../assets/icons/eye.png";
 import ImageCarousel from "../components/ImageCarousel.jsx";
+import { AppDataContext } from "../Context.jsx"; // ✅ useContext 추가
 
 const Detail = () => {
   const nav = useNavigate();
+  const { appData, setAppData } = useContext(AppDataContext); // ✅ useContext 사용
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [detail, setDetail] = useState(null);
+  const [reviews, setReviews] = useState([]);
+  const [searchParams] = useSearchParams();
+  const popupId = searchParams.get("popupId"); // "popupId"의 값만 추출
 
   //✅ 후기 작성페이지로 이동 함수
   const handleWriteReview = () => {
     nav(`/writeReview?popupId=${popupId}`);
   };
-  //✅ 예약하기 페이지도 이동 함수수
+
+  //✅ 예약하기 페이지 이동 함수
   const appointment = () => {
-    if (!detail) return; // detail이 null이면 함수 실행 X
+    if (!detail) return;
     nav(
-      `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(
-        detail.popupName
-      )}`
+      `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(detail.popupName)}`
     );
   };
 
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [detail, setDetail] = useState(null);
-  const [reviews, setReviews] = useState([]);
-
-  const [searchParams] = useSearchParams(); // 🔥 URL의 쿼리스트링을 가져옴
-  const popupId = searchParams.get("popupId"); // "popupId"의 값만 추출
-
+  // ✅ 탭바 이동리스트
   const tabList = [
     { id: 0, name: "정보", component: <Info detail={detail} /> },
     {
@@ -43,32 +41,41 @@ const Detail = () => {
     },
   ];
 
-  // ✅ api 호출 (상세정보)
+  // ✅ API 호출 (상세정보 가져오기)
   const popupdetail = async () => {
     try {
       const data = await GetPopupDetail(popupId);
       setDetail(data);
-      console.log("API 응답 (팝업상세):", data);
+      console.log("📌 API 응답 (팝업상세):", data);
+
+      // ✅ useContext에 popup 정보 저장
+      setAppData((prev) => ({
+        ...prev,
+        popupId: popupId,
+        popupName: data.popupName,
+      }));
+
     } catch (error) {
-      console.error("Failed to load popups");
+      console.error("❌ Failed to load popups", error);
     }
   };
 
-  // ✅ api 호출 (리뷰정보보)
+  // ✅ API 호출 (리뷰정보 가져오기)
   const ReviewData = async () => {
     try {
-      const data = await getReviews(popupId); // API 호출
+      const data = await getReviews(popupId);
       setReviews(data);
-      console.log("API 응답 (리뷰정보):", data);
+      console.log("📌 API 응답 (리뷰정보):", data);
     } catch (error) {
-      console.error("Failed to load popups");
+      console.error("❌ Failed to load reviews", error);
     }
   };
+
   useEffect(() => {
     popupdetail();
     ReviewData();
-  }, []);
-
+    console.log("Context 데이터 현황:", appData)
+  }, []); // ✅ popupId 변경될 때마다 API 호출
   return (
     <div className="container1">
       <BackButton />
@@ -88,6 +95,7 @@ const Detail = () => {
         <img src={eye} alt="eye" className="eye" />
         <div>{detail?.popupViewCount ?? 0}</div>
       </div>
+
       {/* 탭 네비게이션 */}
       <div className="tab-container">
         {tabList.map((tab, index) => (
@@ -99,8 +107,6 @@ const Detail = () => {
             {tab.name}
           </div>
         ))}
-
-        {/* 슬라이드 바 */}
         <div
           className="tab-slider"
           style={{ left: `${activeIndex * 50}%` }}
@@ -109,9 +115,6 @@ const Detail = () => {
 
       {/* ✅ 선택된 탭의 컨텐츠 표시 */}
       <div className="tab-content">{tabList[activeIndex].component}</div>
-
-      {/* 탭 아래 구분선 */}
-      {/* <div className="divider1"></div> */}
 
       {/* ✅ 버튼 영역 */}
       <div className="button-wrapper">
@@ -127,4 +130,5 @@ const Detail = () => {
     </div>
   );
 };
+
 export default Detail;
