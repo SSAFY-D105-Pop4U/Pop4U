@@ -1,55 +1,53 @@
-import React, { useState } from "react";
+import React, { useContext, useState,useEffect  } from "react";
 import Calendar from "../components/appointment/Calendar";
 import PersonSelector from "../components/appointment/PersonSelector";
 import ProgressBar from "../components/appointment/ProgressBar";
-import Header from "../components/public/Header";
+import Header from "../components/basic/Header";
 import Time from "../components/appointment/Time";
 import NextButton from "../components/NextButton";
-import Recheck from "../components/appointment/recheck";
+import Recheck from "../components/appointment/Recheck";
 import { useSearchParams } from "react-router-dom";
-import {postappointment} from "../apis/api/api.js"
-
+import { postappointment } from "../apis/api/api.js";
+import { AppDataContext } from "../Context.jsx";
 
 const Appointment = () => {
-  const [resultDate, setResultDate] = useState(""); //날짜 
-  const [selectedPerson, setSelectedPerson] = useState(0); // 선택된 인원 수
-  const [selectedTime, setSelectedTime] = useState(null); // 선택된 시간
+  const { appData, setAppData } = useContext(AppDataContext); 
+  const [selectedDate, setSelectedDate] = useState(""); // ✅ 추가: 선택한 날짜 상태
+  const [selectedPerson, setSelectedPerson] = useState(0);
+  const [selectedTime, setSelectedTime] = useState(null);
   const [showAppointmentDetails, setShowAppointmentDetails] = useState(true);
 
-  // 버튼 활성화 조건
-  const isDisabled = !resultDate || selectedPerson === 0 || !selectedTime;
-  const [searchParams] = useSearchParams(); // 🔥 URL의 쿼리스트링을 가져옴
-  const popupName = searchParams.get("popupName"); // "popupId"의 값만 추출
-  const popupId = searchParams.get("popupId"); // "popupId"의 값만 추출
-  
+  const [searchParams] = useSearchParams();
+  const popupName = searchParams.get("popupName");
+  const popupId = searchParams.get("popupId");
 
-    const appointment = async () => {
-      try {
-        const data = await postappointment(popupId);
-        setDetail(data);
-        console.log("API 응답 (팝업상세):", data);
-      } catch (error) {
-        console.error("Failed to load popups");
-      }
-    };
-  
+  useEffect(() => {
+    console.log("📦 Context 데이터 현황황:", appData);
+  }, [appData]);  // ✅ appData 전체가 변경될 때마다 실행됨
 
-  const handleNextButtonClick = () => {
-    // Next 버튼 클릭 시 컴포넌트를 숨김김
-
-    setShowAppointmentDetails(false);
-    console.log(showAppointmentDetails);
-    console.log(resultDate);
-    console.log(selectedPerson);
-    console.log(selectedTime);
+  const userId = 1; //샘플 userId
+  const appointment = async () => {
+    try {
+      const data = await postappointment({
+        popupId,
+        userId,
+        person: appData.selectedPerson,
+        date: appData.selectedDate,
+        time: appData.selectedTime,
+      });
+      console.log("API 응답 (팝업상세):", data);
+    } catch (error) {
+      console.error("api 호출 실패");
+    }
   };
+
   return (
     <div>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
       {showAppointmentDetails ? (
         <>
-          <Calendar resultDate={resultDate} setResultDate={setResultDate} />
+          <Calendar setResultDate={setSelectedDate} /> {/* ✅ setResultDate를 전달 */}
           <PersonSelector
             selectedPerson={selectedPerson}
             setSelectedPerson={setSelectedPerson}
@@ -64,16 +62,13 @@ const Appointment = () => {
           </h3>
           <Recheck
             name={popupName}
-            date={resultDate}
+            date={appData.selectedDate} // ✅ 전역 상태에서 선택한 날짜 사용
             people={selectedPerson}
             title={selectedTime}
           />
         </>
       )}
-    <button onClick={appointment}>확인</button>
-      {/* <NextButton isDisabled={isDisabled} onClick={handleNextButtonClick;appointme nt}>
-        확인
-      </NextButton> */}
+      <button onClick={appointment} className="okbutton">확인</button>
     </div>
   );
 };

@@ -5,8 +5,6 @@ const ProgressBar = ({showAppointmentDetails}) => {
     
     return (
         <div>
-        
-            
             {showAppointmentDetails ? (
                 <div>
                     <div className="progress-bar-container">

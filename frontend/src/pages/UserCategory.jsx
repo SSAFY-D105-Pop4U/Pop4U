@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../components/public/Header";
+import Header from "../components/basic/Header";
 import NextButton from "../components/NextButton";
 import "../styles/pages/UserCategory.css";
 
