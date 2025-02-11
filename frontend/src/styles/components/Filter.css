@@ -18,7 +18,7 @@
 }
 
 .filter-button {
-  width: 100px;
+  width: auto;
   padding: 6px 16px;
   border-radius: 10px;
   border: 1px solid #E0E0E0;
@@ -40,28 +40,43 @@
 }
 
 .custom-dropdown {
-  width: 100px;
   position: absolute;
-  top: calc(100% + 5px);
-  right: 0;
-  background: #ffffff;
-  padding: 6px 16px;
-  border-radius: 10px;
-  border: 1px solid #E0E0E0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  min-width: auto;
+  top: 100%;
+  left: 0;
+  width: 100px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   z-index: 1000;
-  padding: 8px 0;
+  max-height: 200px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+  touch-action: pan-y; /* 수직 드래그 허용 */
+  cursor: grab; /* 드래그 가능함을 보여주는 커서 */
+  user-select: none; /* 텍스트 선택 방지 */
 }
 
+.custom-dropdown:active {
+  cursor: grabbing; /* 드래그 중일 때 커서 변경 */
+}
+
+/* 스크롤바 숨기기 */
+.custom-dropdown::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-dropdown {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 드롭다운 옵션의 높이 고정 */
 .dropdown-option {
-  padding: 10px 16px;
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-  position: relative;
-  font-size: 14px;
+  padding: 8px 12px;
+  height: 40px; /* 각 옵션의 높이를 고정 */
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .dropdown-option:hover {
