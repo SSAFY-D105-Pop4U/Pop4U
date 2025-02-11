@@ -10,7 +10,6 @@ import { getReviews } from "../apis/api/api.js";
 import eye from "../assets/icons/eye.png";
 import ImageCarousel from "../components/ImageCarousel.jsx";
 
-
 const Detail = () => {
   const nav = useNavigate();
 
@@ -21,7 +20,11 @@ const Detail = () => {
   //✅ 예약하기 페이지도 이동 함수수
   const appointment = () => {
     if (!detail) return; // detail이 null이면 함수 실행 X
-    nav(`/appointment?popupId=${popupId}&popupName=${encodeURIComponent(detail.popupName)}`);
+    nav(
+      `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(
+        detail.popupName
+      )}`
+    );
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -35,7 +38,7 @@ const Detail = () => {
     { id: 0, name: "정보", component: <Info detail={detail} /> },
     {
       id: 1,
-      name: `후기(${reviews?.length || 0})`,
+      name: `리뷰(${reviews?.length || 0})`,
       component: <Review reviews={reviews || []} />,
     },
   ];

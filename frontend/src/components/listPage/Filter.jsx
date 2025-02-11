@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../../styles/components/Filter.css";
 import "../../styles/components/SortMenu.css";
 
-const Filter = () => {
+const Filter = ({ showSort = true }) => {
   const [sortOption, setSortOption] = useState("");
   const [categorytOption, setCategoryOption] = useState("");
 
@@ -49,18 +49,20 @@ const Filter = () => {
           </select>
 
           {/* 정렬 Select Box */}
-          <select
-            className="filter-oval-button"
-            value={sortOption}
-            onChange={handleSortChange}
-          >
-            <option value="" disabled>
-              정렬
-            </option>
-            <option value="popular">인기순</option>
-            <option value="latest">최신순</option>
-            <option value="endingSoon">마감순</option>
-          </select>
+          {showSort && (
+            <select
+              className="filter-oval-button"
+              value={sortOption}
+              onChange={handleSortChange}
+            >
+              <option value="" disabled>
+                정렬
+              </option>
+              <option value="popular">인기순</option>
+              <option value="latest">최신순</option>
+              <option value="endingSoon">마감순</option>
+            </select>
+          )}
         </div>
       </div>
     </div>
