@@ -46,7 +46,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <img src={next} alt="next" className="next-icon" />
               </Link>
             ) : (
-              <Link to="/" className="profile-link">
+              <Link to="/login" className="profile-link">
                 <div className="profile-text">
                   <span>P4U에</span>
                   <span className="login-text">로그인</span>
