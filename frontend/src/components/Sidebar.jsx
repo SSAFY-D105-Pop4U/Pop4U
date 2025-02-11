@@ -15,7 +15,7 @@ import next from "../assets/icons/next.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
 
@@ -122,7 +122,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <li>
                 <Link to="/admin/reservations">
                   <img src={calendarDays} alt="입장 예약자 관리" />
-                  입장 예약자 관리
+                  예약자 관리
                 </Link>
               </li>
             </ul>
