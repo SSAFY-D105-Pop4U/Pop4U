@@ -44,7 +44,24 @@ pipeline {
                     echo "Deploy branch: ${deployBranch}"
                     echo "Current workspace: ${WORKSPACE}"
                     
-                    if (deployBranch) {
+                    if (deployBranch == 'frontend') {
+                        sshagent(['ec2-ssh-key']) {
+                            sh """
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    rm -rf ${deployBranch} || true
+                                '
+                                scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/frontend ${WORKSPACE}/docker-compose.yml ubuntu@\${EC2_HOST}:~/
+                                ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
+                                    cd ~
+                                    docker-compose stop ${deployBranch} || true
+                                    docker rm -f ${containerName} || true
+                                    docker-compose build --no-cache ${deployBranch}
+                                    docker-compose up -d --build ${deployBranch}
+                                '
+                            """
+                        }
+                    } else if (deployBranch == 'backend') {
                         sshagent(['ec2-ssh-key']) {
                             sh """
                                 ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
