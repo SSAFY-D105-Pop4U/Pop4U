@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        BRANCH_NAME = "${env.GIT_BRANCH}"
         EC2_HOST = "i12d105.p.ssafy.io"
         WORKSPACE_PATH = "/var/jenkins_home/workspace/S12P11D105"
     }
@@ -15,6 +14,9 @@ pipeline {
         }
 
         stage('application.yml download') {
+            when {
+                expression { env.GIT_BRANCH == 'origin/back_develop' }
+            }
             steps {
                 withCredentials([file(credentialsId: 'application-yml', variable: 'dbConfigFile')]) {
                     script {
@@ -70,8 +72,9 @@ pipeline {
             script {
                 def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                 def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                def Name = Author_ID.substring(1)
                 mattermostSend (color: 'good',
-                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${env.GIT_BRANCH}\n(<${env.BUILD_URL}|Details>)",
+                message: "${env.JOB_NAME}의 Jenkins ${env.BUILD_NUMBER}번째 빌드:\n${Name}카이가 ${env.GIT_BRANCH}에서 빌드를 성공했습니다!\n(<${env.BUILD_URL}|상세 보기>)",
                 endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
                 channel: 'd105-ci-cd-alert'
                 )
@@ -81,8 +84,9 @@ pipeline {
             script {
                 def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
                 def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                def Name = Author_ID.substring(1)
                 mattermostSend (color: 'danger',
-                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name}), ${deployBranch}\n(<${env.BUILD_URL}|Details>)",
+                message: "${env.JOB_NAME}의 Jenkins ${env.BUILD_NUMBER}번째 빌드:\n${Name}카이가 ${env.GIT_BRANCH}에서 빌드를 실패했습니다...\n(<${env.BUILD_URL}|상세 보기>)",
                 endpoint: 'https://meeting.ssafy.com/hooks/ciw46xyw1td98yepnryh9yagjc',
                 channel: 'd105-ci-cd-alert'
                 )
