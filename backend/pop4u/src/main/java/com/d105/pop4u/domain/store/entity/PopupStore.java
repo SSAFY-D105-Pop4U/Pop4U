@@ -3,6 +3,7 @@ package com.d105.pop4u.domain.store.entity;
 import com.d105.pop4u.domain.category.entity.PopupCategory;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 
+import com.d105.pop4u.domain.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,15 +29,14 @@ public class PopupStore {
     @Column(name = "popup_id", nullable = false)
     private Long popupId;
 
-    // 유저 ID를 직접 저장하는 방식으로 변경 (User 엔티티 연결 X)
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+//    // 유저 ID를 직접 저장하는 방식으로 변경 (User 엔티티 연결 X)
+//    @Column(name = "user_id", nullable = false)
+//    private Long userId;
 
     // 유저 연결 시 아래 코드
-
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "user_id", nullable = false) // 브랜드 유저와 연결
-    // private User user;
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "user_id", nullable = false) // 브랜드 유저와 연결
+     private User user;
 
     @Column(name = "popup_name", length = 50, nullable = false)
     private String popupName;

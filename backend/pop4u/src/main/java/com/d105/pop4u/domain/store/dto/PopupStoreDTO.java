@@ -3,6 +3,7 @@ package com.d105.pop4u.domain.store.dto;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.store.entity.PopupStoreImg;
 
+import com.d105.pop4u.domain.user.entity.User;
 import lombok.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDate;
@@ -78,7 +79,7 @@ public class PopupStoreDTO {
     public static PopupStoreDTO fromEntity(PopupStore store, List<Long> categoryIds, List<String> popupImages) {
         return PopupStoreDTO.builder()
                 .popupId(store.getPopupId())
-                .userId(store.getUserId())
+                .userId(store.getUser() != null ? store.getUser().getUserId() : null)
                 .popupName(store.getPopupName())
                 .popupRegion(store.getPopupRegion())
                 .popupAddress(store.getPopupAddress())
@@ -97,9 +98,13 @@ public class PopupStoreDTO {
     }
 
     public PopupStore toEntity() {
+        // userId를 사용하여 최소한의 User 객체를 생성합니다.
+        User user = User.builder()
+                .userId(this.userId)
+                .build();
         return PopupStore.builder()
                 .popupId(this.popupId)
-                .userId(this.userId)
+                .user(user)
                 .popupName(this.popupName)
                 .popupRegion(this.popupRegion)
                 .popupAddress(this.popupAddress)
@@ -116,7 +121,7 @@ public class PopupStoreDTO {
 
     public PopupStoreDTO(PopupStore store) {
         this.popupId = store.getPopupId();
-        this.userId = store.getUserId();
+        this.userId = store.getUser() != null ? store.getUser().getUserId() : null;
         this.popupName = store.getPopupName();
         this.popupRegion = store.getPopupRegion();
         this.popupAddress = store.getPopupAddress();
