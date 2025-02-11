@@ -15,7 +15,7 @@ import next from "../assets/icons/next.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
 
