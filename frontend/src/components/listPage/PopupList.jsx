@@ -1,5 +1,5 @@
 import "../../styles/components/PopupList.css";
-import Divider from "../public/Divider";
+import Divider from "../basic/Divider";
 
 const PopupList = ({ image, title, time, rating }) => {
   return (

@@ -3,7 +3,7 @@ import RankingList from "../components/searchPage/RankingList";
 import SearchBar from "../components/searchPage/SearchBar";
 import Suggest from "../components/searchPage/Suggest";
 import SearchList from "../components/searchPage/SearchList";
-import Divider from "../components/public/Divider";
+import Divider from "../components/basic/Divider";
 
 
 const Search = () => {

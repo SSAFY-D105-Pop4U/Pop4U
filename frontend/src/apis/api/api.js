@@ -35,18 +35,22 @@ export const getReviews = async (popupId) => {
   }
 }
 
-export const postappointment = async (popupId) => {
+{/* ✅ post : 예약하기기*/}
+export const postappointment = async ({ popupId, userId, person, date, time }) => {
   try {
-    const response = await apiInstance.post(`/reservation/${popupId}`,);
+    const response = await apiInstance.post(`/reservation/${popupId}`, {
+      userId,                 // 사용자 ID
+      reservationPeople: person, // 예약 인원
+      reservationDate: date,  // 예약 날짜
+      reservationTime: time   // 예약 시간
+    });
+
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
-
-
-
+};
 
 
 // import axios from "axios";

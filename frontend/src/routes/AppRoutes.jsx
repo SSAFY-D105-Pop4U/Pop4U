@@ -10,6 +10,7 @@ import Search from "../pages/Search";
 import Appointment from "../pages/Appointment";
 import Reservation from "../pages/reservation";
 import UserCategory from "../pages/UserCategory";
+import Recheck from "../components/appointment/Recheck";
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,8 @@ const AppRoutes = () => {
       <Route path="/appointment" element={<Appointment />} />
       <Route path="/reservation" element={<Reservation />} />
       <Route path="/usercategory" element={<UserCategory />} />
+      <Route path="/recheck" element={<Recheck />} />
+      
     </Routes>
   );
 };

@@ -1,8 +1,8 @@
-import Header from "../components/public/Header";
+import Header from "../components/basic/Header";
 import DateSelector from "../components/listPage/DateSelector";
 import { useSearchParams } from "react-router-dom";
 import Filter from "../components/listPage/Filter";
-import Divider from "../components/public/Divider";
+import Divider from "../components/basic/Divider";
 import PopupList from "../components/listPage/PopupList";
 import "../styles/pages/AreaList.css";
 const AreaList = () => {

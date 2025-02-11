@@ -1,5 +1,5 @@
 import '../../styles/components/SearchList.css'
-import Divider from '../public/Divider'
+import Divider from '../basic/Divider'
 const SearchList = () => {
     const searchResults = [
         {
