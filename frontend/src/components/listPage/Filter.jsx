@@ -46,7 +46,7 @@ const Filter = () => {
                   className={`dropdown-option ${selectedCategory === option ? 'selected' : ''}`}
                   onClick={() => handleCategoryClick(option)}
                 >
-                  {selectedCategory === option && <span className="check-mark">✓</span>}
+                  
                   {option}
                 </div>
               ))}
@@ -71,7 +71,7 @@ const Filter = () => {
                   className={`dropdown-option ${selectedSort === option ? 'selected' : ''}`}
                   onClick={() => handleSortClick(option)}
                 >
-                  {selectedSort === option && <span className="check-mark">✓</span>}
+                  
                   {option}
                 </div>
               ))}
