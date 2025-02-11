@@ -83,7 +83,7 @@ public class PopupStoreService {
     }
 
     public List<PopupStoreDTO> getPopupStoresByUser(Long userId) {
-        return popupStoreRepository.findByUserId(userId).stream()
+        return popupStoreRepository.findByUser_UserId(userId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
