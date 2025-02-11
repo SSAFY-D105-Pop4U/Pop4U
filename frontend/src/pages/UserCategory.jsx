@@ -4,7 +4,7 @@ import NextButton from "../components/NextButton";
 import "../styles/pages/UserCategory.css";
 
 const UserCategory = () => {
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(new Set());
 
   const categories = [
     "전시",
@@ -32,10 +32,13 @@ const UserCategory = () => {
 
   const toggleCategory = (category) => {
     setSelectedCategories((prev) => {
-      if (prev.includes(category)) {
-        return prev.filter((item) => item !== category);
+      const newSelected = new Set(prev);
+      if (newSelected.has(category)) {
+        newSelected.delete(category);
+      } else {
+        newSelected.add(category);
       }
-      return [...prev, category];
+      return newSelected;
     });
   };
 
@@ -47,7 +50,7 @@ const UserCategory = () => {
           <button
             key={index}
             className={`category-item ${
-              selectedCategories.includes(category) ? "selected" : ""
+              selectedCategories.has(category) ? "selected" : ""
             }`}
             onClick={() => toggleCategory(category)}
           >
@@ -55,7 +58,7 @@ const UserCategory = () => {
           </button>
         ))}
       </div>
-      <NextButton onClick={() => console.log(selectedCategories)}>
+      <NextButton onClick={() => console.log(Array.from(selectedCategories))}>
         등록하기
       </NextButton>
     </div>

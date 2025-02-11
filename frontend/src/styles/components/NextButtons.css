@@ -1,47 +1,43 @@
 .button-container {
-    display: flex;
-    
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    width: 100%;
-   
-  }
-  
-  .next-button {
-    width: 100%;
-    padding: 15px 30px;
-    background-color: #e0d7fa; /* 연한 보라색 */
-    color: #000; /* 검정색 텍스트 */
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
-    border-radius: 20px; /* 둥근 모서리 */
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .next-button:hover {
-    background-color: #d0c0f0; /* 더 진한 보라색 */
-  }
-  
-  .next-button:active {
-    transform: scale(0.95); /* 클릭 시 버튼 크기 감소 */
-  }
-  
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
 
-  .next-button.disabled {
-    background-color: #d3d3d3; /* 비활성화 상태 배경색 */
-    cursor: not-allowed;
-  }
-  
-  .next-button:disabled {
-    pointer-events: none;
-  }
-  
-  /* 비활성화 상태에서 클릭 시 효과 제거 */
+.next-button {
+  width: 100%;
+  padding: 15px 30px;
+  background-color: #e0d7fa; /* 연한 보라색 */
+  color: #000; /* 검정색 텍스트 */
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 20px; /* 둥근 모서리 */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.next-button:hover {
+  background-color: #d0c0f0; /* 더 진한 보라색 */
+}
+
+.next-button:active {
+  transform: scale(0.95); /* 클릭 시 버튼 크기 감소 */
+}
+
+.next-button.disabled {
+  background-color: #d3d3d3; /* 비활성화 상태 배경색 */
+  cursor: not-allowed;
+}
+
+.next-button:disabled {
+  pointer-events: none;
+}
+
+/* 비활성화 상태에서 클릭 시 효과 제거 */
 .next-button.disabled:active {
-    transform: none;
-  }
+  transform: none;
+}
