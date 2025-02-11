@@ -32,7 +32,7 @@ services:
 
   fastapi:
     build:
-      context: ./ai-server
+      context: ./ai-server/life-four-cuts
       dockerfile: Dockerfile
     container_name: life-four-cuts
     ports:
