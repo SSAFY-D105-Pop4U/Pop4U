@@ -27,7 +27,9 @@ const Detail = () => {
   const appointment = () => {
     if (!detail) return;
     nav(
-      `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(detail.popupName)}`
+      `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(
+        detail.popupName
+      )}`
     );
   };
 
@@ -54,7 +56,6 @@ const Detail = () => {
         popupId: popupId,
         popupName: data.popupName,
       }));
-
     } catch (error) {
       console.error("❌ Failed to load popups", error);
     }
@@ -74,21 +75,26 @@ const Detail = () => {
   useEffect(() => {
     popupdetail();
     ReviewData();
-    console.log("Context 데이터 현황:", appData)
+    console.log("Context 데이터 현황:", appData);
   }, []); // ✅ popupId 변경될 때마다 API 호출
+
   return (
     <div className="container1">
       <BackButton />
 
       {/* ✅ 캐러셀 컴포넌트에 detail.popupImages 전달 */}
       {detail?.popupImages?.length > 0 ? (
-        <ImageCarousel images={detail.popupImages} />
+        <div className="image-container">
+          <ImageCarousel images={detail.popupImages} />
+        </div>
       ) : (
-        <img
-          src="https://via.placeholder.com/414x414"
-          alt="event"
-          className="image"
-        />
+        <div className="image-container">
+          <img
+            src="https://via.placeholder.com/414x414"
+            alt="event"
+            className="image"
+          />
+        </div>
       )}
 
       <div className="view">

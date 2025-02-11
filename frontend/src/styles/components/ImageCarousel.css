@@ -1,32 +1,74 @@
-.carousel-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* ✅ 이미지 컨테이너 (전체 영역) */
+.image-container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  max-width: 414px;
-  margin: 0 auto;
+  overflow: hidden;
+  cursor: grab;
 }
 
+/* ✅ 캐러셀 트랙 (슬라이드 이동) */
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* ✅ 부드러운 슬라이딩 효과 */
+  width: 100%;
+}
+
+/* ✅ 개별 슬라이드 */
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* ✅ 이미지 스타일 */
 .carousel-image {
   width: 100%;
   height: auto;
-  border-radius: 10px;
-  transition: opacity 0.5s ease-in-out;
+  object-fit: contain;
 }
 
-.prev-btn, .next-btn {
+/* ✅ 이미지 하단 그라데이션 효과 추가 */
+.carousel-slide::after {
+  content: "";
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 18px;
-  border-radius: 50%;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10%; /* ✅ 원하는 높이 설정 가능 */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,   /* 투명 */
+    #ffffff1a 50%, /* 중간 */
+    white 100%                     /* 완전 흰색 */
+  );
+  z-index: 1; /* ✅ 그라데이션이 이미지 위에 위치 */
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+/* ✅ 인디케이터 컨테이너 (하단 중앙 정렬, 그라데이션 위로 배치) */
+.indicator-container {
+  position: absolute;
+  bottom: 5cqh; /* ✅ 기존보다 조금 위로 이동 */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2; /* ✅ 인디케이터가 그라데이션 위로 올라오게 함 */
+}
+
+/* ✅ 인디케이터 (작은 동그라미) */
+.indicator {
+  width: 10px;
+  height: 10px;
+  background-color: lightgray;
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.indicator.active {
+  background-color: black;
+}
