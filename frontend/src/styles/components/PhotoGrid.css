@@ -1,0 +1,27 @@
+.photo-grid-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: calc(20/160 * 100%); /* 이미지 가로 길이의 20/160 */
+  padding: calc(58/208 * 100%) calc(20/160 * 100%); /* 세로의 58/208, 가로는 gap과 동일 */
+  box-sizing: border-box;
+}
+
+.photo-cell {
+  aspect-ratio: 11.6/16.5;
+  width: 100%;
+  height: auto;
+  background-color: #ffffff;
+}
+
+@media (max-width: 800px) {
+  .photo-grid {
+    gap: calc(20/160 * 100%);
+    padding: calc(58/208 * 100%) calc(20/160 * 100%);
+  }
+} 

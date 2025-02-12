@@ -15,7 +15,7 @@ import next from "../assets/icons/next.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
 
@@ -71,7 +71,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             <h3>개인 페이지</h3>
             <ul>
               <li>
-                <Link to="/create">
+                <Link to="/reviewlifeshot">
                   <img src={camera} alt="인생네컷 제작" />
                   인생네컷 제작
                 </Link>
