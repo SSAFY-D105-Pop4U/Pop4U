@@ -22,20 +22,27 @@ public class OAuth2AuthorizationRequestBasedOnCookieRepository implements Author
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest
                                                                        request) {
         Cookie cookie = WebUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
+
+        if (cookie != null) {
+            System.out.println("Loaded cookie: " + cookie.getValue());
+        } else {
+            System.out.println("No cookie found.");
+            return null;
+        }
+
         return CookieUtil.deserialize(cookie, OAuth2AuthorizationRequest.class);
     }
 
     @Override
-    public void saveAuthorizationRequest(OAuth2AuthorizationRequest
-                                                 authorizationRequest, HttpServletRequest request, HttpServletResponse response) {
-
+    public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest, HttpServletRequest request, HttpServletResponse response) {
         if (authorizationRequest == null) {
             removeAuthorizationRequestCookies(request, response);
             return;
         }
-        CookieUtil.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME,
-                CookieUtil.serialize(authorizationRequest), COOKIE_EXPIRE_SECONDS);
+        CookieUtil.addCookie(response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME, CookieUtil.serialize(authorizationRequest), COOKIE_EXPIRE_SECONDS);
+        System.out.println("Saved authorization request cookie: " + CookieUtil.serialize(authorizationRequest));
     }
+
 
     public void removeAuthorizationRequestCookies(HttpServletRequest request,
                                                   HttpServletResponse response) {

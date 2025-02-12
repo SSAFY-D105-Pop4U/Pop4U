@@ -119,23 +119,4 @@ public class PopupStoreDTO {
                 .build();
     }
 
-    public PopupStoreDTO(PopupStore store) {
-        this.popupId = store.getPopupId();
-        this.userId = store.getUser() != null ? store.getUser().getUserId() : null;
-        this.popupName = store.getPopupName();
-        this.popupRegion = store.getPopupRegion();
-        this.popupAddress = store.getPopupAddress();
-        this.popupStartDate = store.getPopupStartDate();
-        this.popupEndDate = store.getPopupEndDate();
-        this.popupOperationTime = store.getPopupOperationTime();
-        this.popupDescription = store.getPopupDescription();
-        this.popupMaximumCapacity = store.getPopupMaximumCapacity();
-        this.popupMaximumPeople = store.getPopupMaximumPeople();
-        this.popupFee = store.getPopupFee();
-        this.popupParking = store.getPopupParking();
-        this.popupViewCount = store.getPopupViewCount();
-        this.categoryIds = Collections.emptyList();
-        this.popupImages = Collections.emptyList();
-    }
-
 }

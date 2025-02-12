@@ -34,15 +34,15 @@ public class ChatService {
         // ✅ 채팅 메시지 저장
         ChatMessage chatMessage = chatMessageRepository.save(ChatMessage.fromDto(chatMessageDto));
 
-        // ✅ WebSocket으로 메시지 전송
-        messagingTemplate.convertAndSend("/topic/chat/" + chatMessage.getChatRoomId(), ChatMessageDto.fromEntity(chatMessage));
+//        // ✅ WebSocket으로 메시지 전송
+//        messagingTemplate.convertAndSend("/topic/chat/" + chatMessage.getChatRoomId(), ChatMessageDto.fromEntity(chatMessage));
 
         return ChatMessageDto.fromEntity(chatMessage);
     }
 
-    // 이전 메시지 조회
-    public List<ChatMessageDto> getChatHistory(Long chatRoomId) {
-        List<ChatMessage> messages = chatMessageRepository.findByChatRoomId(chatRoomId);
-        return messages.stream().map(ChatMessageDto::fromEntity).collect(Collectors.toList());
-    }
+//    // 이전 메시지 조회
+//    public List<ChatMessageDto> getChatHistory(Long chatRoomId) {
+//        List<ChatMessage> messages = chatMessageRepository.findByChatRoomId(chatRoomId);
+//        return messages.stream().map(ChatMessageDto::fromEntity).collect(Collectors.toList());
+//    }
 }
