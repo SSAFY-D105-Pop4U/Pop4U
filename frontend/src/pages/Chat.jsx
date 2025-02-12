@@ -7,7 +7,7 @@ const SOCKET_URL = "http://localhost:8080/ws/chat"; // ✅ 백엔드 웹소켓 U
 
 const Chat = () => {
   const [chatRoomId, setChatRoomId] = useState("1"); // ✅ 기본 채팅방 ID
-  const [userId, setUserId] = useState("1001"); // ✅ 기본 유저 ID
+  const [userId, setUserId] = useState("1"); // ✅ 기본 유저 ID
   const [message, setMessage] = useState(""); // 내가 보내는 메세지
   const [messages, setMessages] = useState([]); // ✅ 기존 메세지
   const stompClientRef = useRef(null);

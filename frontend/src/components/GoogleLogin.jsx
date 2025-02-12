@@ -1,30 +1,38 @@
-// import { useEffect } from "react";
-// import { getToken } from "../apis/getToken"
-// import google from "../assets/images/google.png"
-import "../styles/components/GoogleLogin.css"
-import "../styles/components/GoogleLogin.css"
+import { useEffect } from "react";
+import "../styles/components/GoogleLogin.css";
 
 const GoogleLogin = () => {
-    // 첫 acess_token 받아오기기 (clientId, redirectUri는 env 파일에 넣어서 사용해야함 )
     const googleLogin = () => {
-        // const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
-        //     "client_id=" + encodeURIComponent(clientId) +
-        //     "&redirect_uri=" + encodeURIComponent(redirectUri) +
-        //     "&response_type=token" +
-        //     "&scope=email profile";
-
-        // console.log("Google OAuth URL:", googleAuthUrl);
-
         window.location.href = "http://localhost:8080/user/login";
-
     };
+
+    useEffect(() => {
+        // URL이 /oauth/success인 경우에만 토큰 처리
+        if (window.location.pathname === '/oauth/success') {
+            // Authorization 헤더에서 토큰 읽기
+            const accessToken = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('access_token='))
+                ?.split('=')[1];
+
+            if (accessToken) {
+                // 토큰을 localStorage에 저장
+                localStorage.setItem('access_token', accessToken);
+                console.log('Access Token received:', accessToken);
+
+                // 메인 페이지나 다른 페이지로 리다이렉트
+                window.location.href = '/';
+            } else {
+                console.error('No access token found');
+            }
+        }
+    }, []);
+
     return (
         <button onClick={googleLogin} className="google-button">
+            {/* 버튼 내용 */}
         </button>
     );
-    
-    //엑세스 토큰 받아오면 저장하기 
-
 };
 
 export default GoogleLogin;
