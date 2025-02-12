@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   define: {
-    global: "window", // ✅ { } 대신 : 사용
+    global: "window",
   },
   server: {
     proxy: {

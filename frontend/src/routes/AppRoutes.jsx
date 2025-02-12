@@ -40,7 +40,6 @@ const AppRoutes = () => {
       <Route path="/recheck" element={<Recheck />} />
       <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
       <Route path="/chat" element={<Chat />} />
-      
     </Routes>
   );
 };
