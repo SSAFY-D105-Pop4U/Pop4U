@@ -54,7 +54,7 @@ public class UserApiController {
             OAuth2AuthorizationRequest authorizationRequest = OAuth2AuthorizationRequest
                     .authorizationCode()
                     .clientId(clientId) // 클라이언트 ID를 가져옵니다.
-                    .redirectUri("http://localhost:8080/login/oauth2/code/google") // 리디렉션 URI
+                    .redirectUri("http://i12d105.p.ssafy.io:8081/login/oauth2/code/google") // 리디렉션 URI
                     .scope("email", "profile") // 요청할 스코프
                     .authorizationUri("https://accounts.google.com/o/oauth2/auth") // 구글의 인증 URI
                     .build();
@@ -64,7 +64,7 @@ public class UserApiController {
         }
 
         // 구글 인증 엔드포인트로 리디렉션
-        response.sendRedirect("http://localhost:5173/");
+        response.sendRedirect("http://i12d105.p.ssafy.io:5173/");
         return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
     }
 
