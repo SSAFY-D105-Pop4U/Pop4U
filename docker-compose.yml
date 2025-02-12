@@ -71,7 +71,6 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=pop4u
       - MONGO_INITDB_ROOT_PASSWORD=pop4u123
-      - MONGO_INITDB_DATABASE=pop4u
     volumes:
       - mongo-data:/data/db
     networks:
