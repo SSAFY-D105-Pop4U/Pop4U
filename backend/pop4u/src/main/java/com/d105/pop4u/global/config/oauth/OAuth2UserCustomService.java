@@ -46,7 +46,7 @@ public class OAuth2UserCustomService extends DefaultOAuth2UserService {
                         .userNickname(name)
                         .userEmail(email)
                         .userPassword(encoder.encode(""))
-                        .userTelephone("")
+                        .userTelephone("010-1234-5678")
                         .userImg("")
                         .userDeleted(1)
                         .userCoupon(0)
