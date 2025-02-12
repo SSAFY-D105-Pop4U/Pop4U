@@ -1,0 +1,34 @@
+.lifeshot-frame {
+  width: 100%;
+  max-width: 414px;
+  margin: 0 auto;
+}
+
+.frame-container {
+  background-color: #89B5AF;  /* 프레임 배경색 */
+  padding: 10px 10px 50px;
+  aspect-ratio: 3/4;  /* 세로로 긴 비율 */
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 2x2 그리드 */
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  height: 100%;
+  padding: 10px;
+}
+
+.photo-slot { 
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+}
+

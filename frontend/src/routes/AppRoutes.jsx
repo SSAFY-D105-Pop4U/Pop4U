@@ -15,6 +15,7 @@ import NewPopupList from "../pages/NewPopupList";
 import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
 import ReviewLifeShot from "../pages/ReviewLifeShot";
+import LifeShot from "../pages/LifeShot";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -34,6 +35,7 @@ const AppRoutes = () => {
       <Route path="/trendingpopups" element={<TrendingPopupList />} />
       <Route path="/recheck" element={<Recheck />} />
       <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
+      <Route path="/lifeshot" element={<LifeShot />} />
     </Routes>
   );
 };

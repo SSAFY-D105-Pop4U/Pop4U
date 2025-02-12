@@ -14,6 +14,8 @@ const ReviewLifeShotCard = ({ placeInfo,isReview=false}) => {
     if (option === 'review') {
       // 리뷰 작성 페이지로 이동하는 로직 추가
       nav(`/writeReview?popupId=${popupId}`)
+    }else{
+      nav(`/lifeshot`)
     }
     setSelectedOption(option);
   };
