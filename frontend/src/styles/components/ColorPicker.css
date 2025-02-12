@@ -1,0 +1,23 @@
+.color-picker {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+  
+.color-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 2px solid transparent;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15); /* 기본 그림자 */
+}
+  
+.color-circle.selected {
+    border: 2px solid black;
+    transform: scale(1.1);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* 더 강한 그림자 */
+}

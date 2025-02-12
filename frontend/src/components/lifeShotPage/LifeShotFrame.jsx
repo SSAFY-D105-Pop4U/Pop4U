@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../styles/components/LifeShotFrame.css';
 
-const LifeShotFrame = () => {
+const LifeShotFrame = ({selectedColor}) => {
   return (
     <div className="lifeshot-frame">
-      <div className="frame-container">
+      <div className="frame-container" style={{ backgroundColor: selectedColor }}>
         {/* 4개의 사진 영역 */}
         <div className="photo-grid">
           <div className="photo-slot">
@@ -28,7 +28,9 @@ const LifeShotFrame = () => {
             </div>
           </div>
         </div>
+        
       </div>
+      
     </div>
   );
 };

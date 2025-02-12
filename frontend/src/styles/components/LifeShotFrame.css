@@ -1,11 +1,11 @@
 .lifeshot-frame {
-  width: 100%;
+  width: 96%;
   max-width: 414px;
   margin: 0 auto;
 }
 
 .frame-container {
-  background-color: #89B5AF;  /* 프레임 배경색 */
+  background-color: var(--frame-background-color, #89B5AF);  /* 기본값으로 #89B5AF 사용 */
   padding: 10px 10px 50px;
   aspect-ratio: 3/4;  /* 세로로 긴 비율 */
 }

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/components/ShotToggleButton.css"; // CSS 파일 가져오기
 
-const ShotToggleButton = () =>{
-    const [active, setActive] = useState("테마");
+const ShotToggleButton = ({active, setActive}) =>{
+    
     return(
         <div>
 <div className="toggle-container">
