@@ -18,6 +18,7 @@ import ReviewLifeShot from "../pages/ReviewLifeShot";
 import Chat from "../pages/Chat";
 
 
+import LifeShot from "../pages/LifeShot";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -40,6 +41,8 @@ const AppRoutes = () => {
       <Route path="/recheck" element={<Recheck />} />
       <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
       <Route path="/chat" element={<Chat />} />
+      
+      <Route path="/lifeshot" element={<LifeShot />} />
     </Routes>
   );
 };

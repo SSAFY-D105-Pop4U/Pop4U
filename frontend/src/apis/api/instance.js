@@ -2,8 +2,12 @@
 import axios from "axios";
 
 const api = axios.create({
+<<<<<<< HEAD
   baseURL: 'http://i12d105.p.ssafy.io:8081',
   withCredentials: true, 
+=======
+  baseURL: "http://i12d105.p.ssafy.io:8081", // 기본 API 주소
+>>>>>>> 625f053602fbf0e78b10a4090b239762574e4277
   headers: {
       'Content-Type': 'application/json',
   },
