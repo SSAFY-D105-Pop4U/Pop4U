@@ -2,8 +2,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
-  withCredentials: true, // 이 설정이 매우 중요합니다! 쿠키를 주고받을 수 있게 합니다.
+  baseURL: 'http://i12d105.p.ssafy.io:8081',
+  withCredentials: true, 
   headers: {
       'Content-Type': 'application/json',
   },
@@ -46,4 +46,6 @@ api.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+
 export default api;

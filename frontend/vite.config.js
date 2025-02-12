@@ -10,7 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/popup": {
-        target: "http://localhost:8080",
+        target: "http://i12d105.p.ssafy.io:8081",
         changeOrigin: true,
         secure: false,
       },

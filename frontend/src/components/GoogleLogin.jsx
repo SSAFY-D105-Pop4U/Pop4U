@@ -3,7 +3,7 @@ import "../styles/components/GoogleLogin.css";
 
 const GoogleLogin = () => {
     const googleLogin = () => {
-        window.location.href = "http://localhost:8080/user/login";
+        window.location.href = "http://i12d105.p.ssafy.io:8081/user/login";
     };
 
     useEffect(() => {
