@@ -55,30 +55,26 @@ public class ChatController {
 //        return chatService.sendMessage(chatMessageDto);
 //    }
 
-    @MessageMapping("/chat/{chatRoomId}")
-    @SendTo("/topic/chat/{chatRoomId}")
-    public ChatMessageDto sendMessage(@Payload ChatMessageDto chatMessageDto, Principal principal) {
-        // Principal을 Authentication으로 캐스팅
-        if (principal instanceof Authentication) {
-            Authentication authentication = (Authentication) principal;
-            Object principalObj = authentication.getPrincipal();
-            if (principalObj instanceof User) {
-                User user = (User) principalObj;
-                // User 엔티티에 정의된 getter를 통해 이름과 ID를 가져옴
-                chatMessageDto.setUserName(user.getUsername());
-                chatMessageDto.setUserId(user.getUserId());
-            } else {
-                // 만약 principal.getPrincipal()이 User 타입이 아니라면,
-                // 추가 처리가 필요합니다. 예를 들어, userRepository를 사용해서 조회할 수 있습니다.
-                chatMessageDto.setUserName(principal.getName());
-            }
-        } else {
-            // 기본 fallback: principal.getName() 사용 (하지만 ID는 설정할 수 없음)
-            chatMessageDto.setUserName(principal.getName());
-        }
+   @MessageMapping("/chat/{chatRoomId}")
+   @SendTo("/topic/chat/{chatRoomId}")
+   public ChatMessageDto sendMessage(@Payload ChatMessageDto chatMessageDto, Principal principal) {
+       // 기본적으로 principal.getName()을 사용해 사용자 이름을 설정
+       chatMessageDto.setUserName(principal.getName());
 
-        log.info("채팅 메시지 수신(수정됨): {}", chatMessageDto);
-        return chatService.sendMessage(chatMessageDto);
+       // 만약 사용자 ID가 필요하면, Principal을 Authentication으로 캐스팅하여 도메인 User 객체에서 가져옵니다.
+       if (principal instanceof Authentication) {
+           Authentication authentication = (Authentication) principal;
+           Object principalObj = authentication.getPrincipal();
+           if (principalObj instanceof User) {
+               User user = (User) principalObj;
+               chatMessageDto.setUserId(user.getUserId());
+           } else {
+               // 만약 principal 객체가 도메인 User가 아니라면, 필요시 추가로 UserRepository 등을 사용해 도메인 User 객체를 조회할 수 있습니다.
+           }
+       }
+
+       log.info("채팅 메시지 수신(수정됨): {}", chatMessageDto);
+       return chatService.sendMessage(chatMessageDto);
     }
 
 
