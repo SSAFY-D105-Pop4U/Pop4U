@@ -68,21 +68,6 @@ public class UserApiController {
         return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
     }
 
-    // 이건 전리품으로 냅두자. 화가나요
-//    @GetMapping("/login/oauth2/code/google")
-//    public ResponseEntity<Void> googleCallback(@RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        // Google OAuth2 클라이언트를 사용하여 토큰 요청
-//        String accessToken = userService.getAccessTokenFromGoogle(code); // 토큰 요청 메소드
-//        UserInfo userInfo = userService.getUserInfoFromGoogle(accessToken); // 사용자 정보 요청 메소드
-//
-//        // 사용자 정보를 세션에 저장
-//        request.getSession().setAttribute("user", userInfo);
-//
-//        // 리액트 앱의 메인 페이지로 리디렉션
-//        response.sendRedirect("http://localhost:5173/");
-//        return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
-//    }
-
     @GetMapping("/join")
     public String join() {
         return "join";
@@ -123,3 +108,20 @@ public class UserApiController {
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "회원 탈퇴가 완료되었습니다."));
     }
 }
+
+
+
+// 이건 전리품으로 냅두자. 화가나요
+//    @GetMapping("/login/oauth2/code/google")
+//    public ResponseEntity<Void> googleCallback(@RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        // Google OAuth2 클라이언트를 사용하여 토큰 요청
+//        String accessToken = userService.getAccessTokenFromGoogle(code); // 토큰 요청 메소드
+//        UserInfo userInfo = userService.getUserInfoFromGoogle(accessToken); // 사용자 정보 요청 메소드
+//
+//        // 사용자 정보를 세션에 저장
+//        request.getSession().setAttribute("user", userInfo);
+//
+//        // 리액트 앱의 메인 페이지로 리디렉션
+//        response.sendRedirect("http://localhost:5173/");
+//        return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
+//    }
