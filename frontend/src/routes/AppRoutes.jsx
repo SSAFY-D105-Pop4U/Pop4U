@@ -15,6 +15,9 @@ import NewPopupList from "../pages/NewPopupList";
 import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
 import ReviewLifeShot from "../pages/ReviewLifeShot";
+import Chat from "../pages/Chat";
+
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -36,6 +39,8 @@ const AppRoutes = () => {
       
       <Route path="/recheck" element={<Recheck />} />
       <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
+      <Route path="/chat" element={<Chat />} />
+      
     </Routes>
   );
 };
