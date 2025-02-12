@@ -7,6 +7,8 @@ const ReviewLifeShot = () => {
   const navigate = useNavigate();
   const title = "리뷰&인생네컷";
 
+ 
+
   // 실제 데이터로 교체 필요
   const placeInfo = {
     name: "스미코구라시 팝업스토어",
