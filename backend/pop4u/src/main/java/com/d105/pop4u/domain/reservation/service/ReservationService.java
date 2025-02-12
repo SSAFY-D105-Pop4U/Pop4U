@@ -50,7 +50,7 @@ public class ReservationService {
      * 특정 유저의 예약 조회
      */
     public List<ReservationDTO> getReservationsByUser(Long userId) {
-        return reservationRepository.findByUserId(userId)
+        return reservationRepository.findByUser_UserId(userId)
                 .stream()
                 .map(ReservationDTO::fromEntity)
                 .collect(Collectors.toList());
@@ -75,7 +75,7 @@ public class ReservationService {
      */
     @Transactional
     public void cancelReservation(Long popupId, Long userId) {
-        Reservation reservation = reservationRepository.findByPopupStore_PopupIdAndUserId(popupId, userId)
+        Reservation reservation = reservationRepository.findByPopupStore_PopupIdAndUser_UserId(popupId, userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 예약을 찾을 수 없습니다."));
         reservationRepository.delete(reservation);
     }
