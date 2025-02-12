@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import "../../styles/components/Filter.css";
 import "../../styles/components/SortMenu.css";
 
-const Filter = () => {
+const Filter = ({selectedSort,setSelectedSort}) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [selectedSort, setSelectedSort] = useState("정렬");
+ 
   const [selectedCategory, setSelectedCategory] = useState("카테고리");
   const sortRef = useRef(null);
   const categoryRef = useRef(null);
@@ -13,7 +13,6 @@ const Filter = () => {
   const [startY, setStartY] = useState(0);
   const [scrollTop, setScrollTop] = useState(0);
   const dropdownRef = useRef(null);
-
   const sortOptions = [ "인기순", "최신순", "마감순"];
   const categoryOptions = [ "이벤트", "체험", "전시","굿즈", "패션", "뷰티","푸드", "쇼핑", "라이프스타일","테크", "스포츠", "음악","여행", "캐릭터", "도서", "플리마켓", "아트", "컬래버레이션", "리미티드 에디션", "커뮤니티"];
 
