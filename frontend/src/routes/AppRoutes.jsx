@@ -29,9 +29,11 @@ const AppRoutes = () => {
       <Route path="/appointment" element={<Appointment />} />
       <Route path="/reservation" element={<Reservation />} />
       <Route path="/usercategory" element={<UserCategory />} />
+
       <Route path="/newpopups" element={<NewPopupList />} />
       <Route path="/endingpopups" element={<EndingPopupList />} />
       <Route path="/trendingpopups" element={<TrendingPopupList />} />
+      
       <Route path="/recheck" element={<Recheck />} />
       <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
     </Routes>

@@ -24,26 +24,6 @@ const GoogleLogin = () => {
     );
     
     //엑세스 토큰 받아오면 저장하기
-    // useEffect(() => {
-    //     const getAccessTokenFromUrl = () => {
-    //         const hashParams = new URLSearchParams(window.location.hash.substring(1));
-    //         return hashParams.get("access_token");
-    //     };
-
-    
-    // //백엔드로 accessToken 전송
-    //     const accessToken = getAccessTokenFromUrl();
-    //     if (accessToken) {
-    //         console.log("Access Token:", accessToken);
-    //         getToken(accessToken)
-    //             .then((data) => console.log("유저 정보:", data))
-    //             .catch((error) => console.error("API 호출 오류:", error));
-
-    //         //  URL 정리 (access_token 삭제)
-    //         window.history.replaceState({}, document.title, window.location.pathname);
-
-    //     }
-    // }, []);
 
 };
 
