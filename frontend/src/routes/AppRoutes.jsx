@@ -40,12 +40,9 @@ const AppRoutes = () => {
       
       <Route path="/recheck" element={<Recheck />} />
       <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
-<<<<<<< HEAD
       <Route path="/chat" element={<Chat />} />
       
-=======
       <Route path="/lifeshot" element={<LifeShot />} />
->>>>>>> feat/FE/reservation
     </Routes>
   );
 };
