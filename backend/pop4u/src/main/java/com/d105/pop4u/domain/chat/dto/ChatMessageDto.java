@@ -11,20 +11,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class ChatMessageDto {
-    private String chattingId;  // ✅ 몽고DB 사용 시, ID 타입을 `String`으로 변경
-    private Long chatRoomId;  // ✅ 채팅방 ID도 `String`으로 변경 (몽고DB 연동 고려)
-    private Long userId;
-    private String chattingMessage;
-    private LocalDateTime chattingCreatedAt;  // ✅ 채팅 생성시간 통합
+    private String chattingId;         // MongoDB의 ObjectId (문자열)
+    private Long chatRoomId;           // 채팅방 ID
+    private Long userId;             // 발신자 ID
+    private String userName;         // 발신자 이름 (추가)
+    private String chattingMessage;  // 채팅 내용
+    private LocalDateTime chattingCreatedAt;  // 채팅 생성 시간
 
-    // ✅ 엔티티 → DTO 변환 메서드
+    // 엔티티 → DTO 변환 메서드
     public static ChatMessageDto fromEntity(ChatMessage message) {
         return ChatMessageDto.builder()
-                .chattingId(message.getChattingId())  // ✅ 몽고DB ObjectId 변환 고려
+                .chattingId(message.getChattingId())
                 .chatRoomId(message.getChatRoomId())
                 .userId(message.getUserId())
+                .userName(message.getUserName())  // 추가된 필드
                 .chattingMessage(message.getChattingMessage())
-                .chattingCreatedAt(message.getChattingCreatedAt())  // ✅ 통일된 시간 필드
+                .chattingCreatedAt(message.getChattingCreatedAt())
                 .build();
     }
 }
