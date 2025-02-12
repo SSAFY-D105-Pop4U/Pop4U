@@ -1,6 +1,5 @@
 package com.d105.pop4u.domain.user.controller;
 
-import com.d105.pop4u.domain.user.dto.UserInfo;
 import com.d105.pop4u.domain.user.dto.UserResponse;
 import com.d105.pop4u.domain.user.dto.EditUserRequest;
 import com.d105.pop4u.domain.user.service.UserService;
