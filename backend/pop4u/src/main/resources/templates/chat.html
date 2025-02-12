@@ -21,6 +21,10 @@
         <input type="text" id="userId" value="1001" class="border p-2 rounded w-full">
     </div>
     <div class="mb-3">
+        <label class="block font-semibold">유저 이름:</label>
+        <input type="text" id="userName" value="TestUser" class="border p-2 rounded w-full">
+    </div>
+    <div class="mb-3">
         <label class="block font-semibold">메시지:</label>
         <div class="flex gap-2">
             <input type="text" id="message" class="border p-2 rounded w-full">
@@ -50,29 +54,34 @@
 
             stompClient.subscribe("/topic/chat/" + chatRoomId, function (response) {
                 var message = JSON.parse(response.body);
-                document.getElementById("chatArea").innerHTML += "<p><b>User " + message.userId + ":</b> " + message.chattingMessage + "</p>";
+                // userName이 있으면 userName을, 없으면 userId를 표시
+                var sender = message.userName ? message.userName : ("User " + message.userId);
+                document.getElementById("chatArea").innerHTML += "<p><b>" + sender + ":</b> " + message.chattingMessage + "</p>";
             });
 
-            // ✅ 채팅방 입장 시 기존 메시지 로드
-            fetch("http://localhost:8080/chat/" + chatRoomId + "/history")
+            // 채팅방 입장 시 기존 메시지 로드
+            fetch("http://localhost:8080/chat/" + chatRoomId)
                 .then(response => response.json())
                 .then(messages => {
                     messages.forEach(message => {
-                        document.getElementById("chatArea").innerHTML += "<p><b>User " + message.userId + ":</b> " + message.chattingMessage + "</p>";
+                        var sender = message.userName ? message.userName : ("User " + message.userId);
+                        document.getElementById("chatArea").innerHTML += "<p><b>" + sender + ":</b> " + message.chattingMessage + "</p>";
                     });
                 });
         });
     }
 
-
     function sendMessage() {
         var userId = parseInt(document.getElementById("userId").value, 10);
+        var userName = document.getElementById("userName").value;
         var message = document.getElementById("message").value;
         var roomId = parseInt(chatRoomId, 10);
 
+        // 채팅 메시지 전송 시 userId와 userName을 모두 포함하여 전송
         stompClient.send("/app/chat/" + roomId, {}, JSON.stringify({
             chatRoomId: roomId,
             userId: userId,
+            userName: userName,
             chattingMessage: message
         }));
 

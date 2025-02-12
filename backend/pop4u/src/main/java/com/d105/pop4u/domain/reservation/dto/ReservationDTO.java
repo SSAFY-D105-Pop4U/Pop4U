@@ -12,7 +12,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 public class ReservationDTO {
-    private Long userId;  // ✅ 유저 ID 직접 입력
+    private Long userId;
     private Long popupId;
     private Integer reservationPeople;
     private LocalDate reservationDate;
@@ -22,7 +22,7 @@ public class ReservationDTO {
     // ✅ 엔티티 → DTO 변환 메서드
     public static ReservationDTO fromEntity(Reservation reservation) {
         return ReservationDTO.builder()
-                .userId(reservation.getUserId())
+                .userId(reservation.getUser() != null ? reservation.getUser().getUserId() : null)
                 .popupId(reservation.getPopupStore().getPopupId())
                 .reservationPeople(reservation.getReservationPeople())
                 .reservationDate(reservation.getReservationDate())
