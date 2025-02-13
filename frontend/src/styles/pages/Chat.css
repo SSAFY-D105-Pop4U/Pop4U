@@ -1,70 +1,111 @@
-.chat-container {
-  width: 400px;
-  margin: auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.chat-header {
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 15px;
-}
-
-.input-group {
-  margin-bottom: 10px;
-}
-
-.input-group label {
-  font-weight: bold;
-  display: block;
-}
-
-.input-row {
+/* 화면 전체 중앙 정렬 및 배경색 */
+.page-container {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f3f4f6; /* bg-gray-100 유사 */
 }
 
-.chat-input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  outline: none;
+/* 채팅 컴포넌트 컨테이너 */
+.chat-container {
+  background-color: #ffffff;
+  padding: 1.5rem; /* p-6 => 24px */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* 대략적인 shadow-lg */
+  width: 100%;
+  max-width: 28rem; /* max-w-md => 448px */
 }
 
-.chat-button {
-  padding: 8px 15px;
-  background: #28a745;
-  color: white;
+/* 제목 스타일 (text-xl, font-bold, text-center, mb-4) */
+.title {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 700;   /* bold */
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* 소제목 (채팅 내용, 채팅 요약) */
+.subtitle {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;    /* semibold */
+  margin-top: 1rem;
+}
+
+/* 폼 그룹 (mb-3) */
+.form-group {
+  margin-bottom: 0.75rem; /* 12px */
+}
+
+/* 라벨 (block, font-semibold) */
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* 인풋 그룹 (flex, gap-2) */
+.input-group {
+  display: flex;
+  gap: 0.5rem; /* 8px */
+}
+
+/* 기본 인풋 스타일 */
+.input {
+  border: 1px solid #ccc;
+  padding: 0.5rem;     /* 8px */
+  border-radius: 0.25rem; /* 4px */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 버튼 공통 스타일 */
+.button {
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  border-radius: 0.25rem; /* 4px */
+  color: #fff;           /* text-white */
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.chat-button:hover {
-  background: #218838;
+/* 호버 시 약간 투명도 변화 */
+.button:hover {
+  opacity: 0.9;
 }
 
-.chat-title {
-  font-size: 16px;
-  font-weight: bold;
-  margin-top: 15px;
+/* 색상별 버튼 */
+.button-blue {
+  background-color: #3b82f6; /* Tailwind의 bg-blue-500 유사 */
 }
 
-.chat-messages {
-  height: 200px;
+.button-green {
+  background-color: #10b981; /* bg-green-500 */
+}
+
+.button-purple {
+  background-color: #8b5cf6; /* bg-purple-500 */
+}
+
+/* 채팅 내용 영역 (h-40, overflow-auto, bg-gray-50) */
+.chat-area {
+  margin-top: 0.5rem; /* mt-2 */
+  padding: 0.75rem;   /* p-3 */
+  border: 1px solid #ccc;
+  border-radius: 0.25rem; /* 4px */
+  height: 10rem; /* 160px */
   overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 5px;
-  background: #f9f9f9;
+  background-color: #f9fafb; /* gray-50 유사 */
 }
 
-.chat-message {
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
+/* 채팅 요약 영역 (h-20, overflow-auto, bg-gray-50) */
+.summary-area {
+  margin-top: 0.5rem; /* mt-2 */
+  padding: 0.75rem;   /* p-3 */
+  border: 1px solid #ccc;
+  border-radius: 0.25rem; /* 4px */
+  height: 5rem; /* 80px */
+  overflow-y: auto;
+  background-color: #f9fafb;
 }
