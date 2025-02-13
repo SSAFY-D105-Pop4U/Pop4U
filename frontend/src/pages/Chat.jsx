@@ -3,7 +3,7 @@ import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import "../styles/pages/Chat.css";
 
-const SOCKET_URL = "http://i12d105.p.ssafy.io:8081/ws/chat"; // ✅ 백엔드 웹소켓 URL
+const SOCKET_URL = "/ws/chat"; // ✅ 백엔드 웹소켓 URL
 
 const Chat = () => {
   const [chatRoomId, setChatRoomId] = useState("1"); // ✅ 기본 채팅방 ID
@@ -55,7 +55,7 @@ const Chat = () => {
   const fetchChatHistory = async () => {
     try {
       const response = await fetch(
-        `http://i12d105.p.ssafy.io:8081/chat/${chatRoomId}`
+        `/api/chat/${chatRoomId}`
       );
       const data = await response.json();
 

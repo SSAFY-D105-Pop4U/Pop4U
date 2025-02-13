@@ -88,7 +88,10 @@ public class WebOAuthSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://i12d105.p.ssafy.io:5173")); // 허용할 출처
+        configuration.setAllowedOrigins(Arrays.asList(
+//                "http://i12d105.p.ssafy.io",    // 배포 환경
+                "http://i12d105.p.ssafy.io:5173" // 개발 환경 (Vite 등)
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
         configuration.setAllowCredentials(true); // 쿠키 또는 인증 정보를 포함할 수 있도록 설정
         configuration.setAllowedHeaders(Arrays.asList("*")); // 허용할 헤더
