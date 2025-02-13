@@ -18,9 +18,7 @@ const ChatRoom = () => {
   useEffect(() => {
     if (!chatRoomId) return;
 
-    // const socket = new SockJS(SOCKET_URL);
-    const socket = new SockJS(SOCKET_URL, null, { transports: ['websocket'] });
-
+    const socket = new SockJS(SOCKET_URL);
     const stompClient = new Client({
       webSocketFactory: () => socket,
       debug: (msg) => console.log("[STOMP]:", msg),
@@ -34,7 +32,7 @@ const ChatRoom = () => {
         });
 
         // 기존 채팅 기록 불러오기
-        fetch(`https://i12d105.p.ssafy.io/chat/${chatRoomId}`)
+        fetch(`https://i12d105.p.ssafy.io/api/chat/${chatRoomId}`)
           .then((response) => response.json())
           .then((chatHistory) => {
             setMessages(chatHistory);
