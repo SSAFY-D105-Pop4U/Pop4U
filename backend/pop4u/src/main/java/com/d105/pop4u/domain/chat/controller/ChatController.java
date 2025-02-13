@@ -73,8 +73,4 @@ public class ChatController {
        log.info("채팅 메시지 수신(수정됨): {}", chatMessageDto);
        return chatService.sendMessage(chatMessageDto);
     }
-
-
-
-
 }

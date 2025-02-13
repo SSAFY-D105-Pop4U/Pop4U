@@ -68,3 +68,22 @@
     background: #7d43a1;
     color: white;
 }
+.checkbox{
+    display: flex;
+    gap: 60px;
+}
+.user{
+    display:flex;
+    gap: 5px;
+}
+.manager{
+    display:flex;
+    gap: 5px;
+}
+
+#user{
+    margin-top: 3px;
+}
+#manager{
+    margin-top: 3px;
+}
