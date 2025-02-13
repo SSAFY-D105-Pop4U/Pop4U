@@ -89,7 +89,7 @@ public class WebOAuthSecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-//                "http://i12d105.p.ssafy.io",    // 배포 환경
+                "https://i12d105.p.ssafy.io",    // 배포 환경
                 "http://i12d105.p.ssafy.io:5173" // 개발 환경 (Vite 등)
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")); // 허용할 HTTP 메서드
