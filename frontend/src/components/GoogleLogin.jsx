@@ -1,38 +1,54 @@
-import { useEffect } from "react";
-import "../styles/components/GoogleLogin.css";
+// import { useEffect } from "react";
+// import { getToken } from "../apis/getToken"
+// import google from "../assets/images/google.png"
+import "../styles/components/GoogleLogin.css"
+import "../styles/components/GoogleLogin.css"
 
 const GoogleLogin = () => {
+    // 첫 acess_token 받아오기기 (clientId, redirectUri는 env 파일에 넣어서 사용해야함 )
     const googleLogin = () => {
-        window.location.href = "http://i12d105.p.ssafy.io:8081/user/login";
+        const clientId = "671548631068-5q80arkm66q7ksh2p9j32cscltu3ra5p.apps.googleusercontent.com";
+        const redirectUri = "http://localhost:5173";
+
+        console.log("Client ID:", clientId);
+        console.log("Redirect URI:", redirectUri);
+
+        // const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
+        //     "client_id=" + encodeURIComponent(clientId) +
+        //     "&redirect_uri=" + encodeURIComponent(redirectUri) +
+        //     "&response_type=token" +
+        //     "&scope=email profile";
+
+        console.log("Google OAuth URL:", googleAuthUrl);
+
+        window.location.href = "localhost:8080/login";
     };
 
-    // useEffect(() => {
-    //     // URL이 /oauth/success인 경우에만 토큰 처리
-    //     if (window.location.pathname === '/oauth/success') {
-    //         // Authorization 헤더에서 토큰 읽기
-    //         const accessToken = document.cookie
-    //             .split('; ')
-    //             .find(row => row.startsWith('access_token='))
-    //             ?.split('=')[1];
-
-    //         if (accessToken) {
-    //             // 토큰을 localStorage에 저장
-    //             localStorage.setItem('access_token', accessToken);
-    //             console.log('Access Token received:', accessToken);
-
-    //             // 메인 페이지나 다른 페이지로 리다이렉트
-    //             window.location.href = '/';
-    //         } else {
-    //             console.error('No access token found');
-    //         }
-    //     }
-    // }, []);
 
     return (
         <button onClick={googleLogin} className="google-button">
-            {/* 버튼 내용 */}
         </button>
     );
+    // useEffect(() => {
+    //     const getAccessTokenFromUrl = () => {
+    //         const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    //         return hashParams.get("access_token");
+    //     };
+
+    // //백엔드로 accessToken 전송
+    //     const accessToken = getAccessTokenFromUrl();
+    //     if (accessToken) {
+    //         console.log("Access Token:", accessToken);
+    //         getToken(accessToken)
+    //             .then((data) => console.log("유저 정보:", data))
+    //             .catch((error) => console.error("API 호출 오류:", error));
+
+    //         //  URL 정리 (access_token 삭제)
+    //         window.history.replaceState({}, document.title, window.location.pathname);
+
+    //     }
+    // }, []);
+
 };
 
 export default GoogleLogin;
