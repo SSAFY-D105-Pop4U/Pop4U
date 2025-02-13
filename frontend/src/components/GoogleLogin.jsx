@@ -3,20 +3,7 @@ import "../styles/components/GoogleLogin.css";
 
 const GoogleLogin = () => {
     const googleLogin = () => {
-<<<<<<< HEAD
         window.location.href = "http://i12d105.p.ssafy.io:8081/user/login";
-=======
-        // const googleAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth?" +
-        //     "client_id=" + encodeURIComponent(clientId) +
-        //     "&redirect_uri=" + encodeURIComponent(redirectUri) +
-        //     "&response_type=token" +
-        //     "&scope=email profile";
-
-        // console.log("Google OAuth URL:", googleAuthUrl);
-
-        window.location.href = "hhttp://i12d105.p.ssafy.io:8081/user/login";
-
->>>>>>> 625f053602fbf0e78b10a4090b239762574e4277
     };
 
     // useEffect(() => {
