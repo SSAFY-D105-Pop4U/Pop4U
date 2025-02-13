@@ -89,7 +89,7 @@ export const getpopup = async () => {
 {/* ✅ ??? : 회원가입*/}
 export const postsignup = async () => {
   try {
-    const response = await api.get(`/reservation/my`);
+    const response = await api.get(`/user/join`);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
