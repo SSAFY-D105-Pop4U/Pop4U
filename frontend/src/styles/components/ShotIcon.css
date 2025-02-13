@@ -1,0 +1,48 @@
+.emoticon-picker {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    user-select: none; /* 텍스트 선택 방지 */
+}
+
+.emoticon-picker:active {
+    cursor: grabbing;
+}
+
+.emoticon-picker::-webkit-scrollbar {
+    display: none;
+}
+
+.emoticon-item {
+    width: 80px;
+    height: 80px;
+    flex: 0 0 auto;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    padding: 2px;
+    transition: all 0.2s ease;
+}
+
+.emoticon-item:hover {
+    transform: scale(1.1);
+}
+
+.emoticon-item.selected {
+    border-color: #007AFF;
+    background-color: rgba(0, 122, 255, 0.1);
+}
+
+.emoticon-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none; /* 이미지 드래그 방지 */
+}
