@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brand")
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin("*")
 public class BrandApiController {
 
     private final UserService userService;

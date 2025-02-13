@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ChatController {
 
     private final ChatService chatService;

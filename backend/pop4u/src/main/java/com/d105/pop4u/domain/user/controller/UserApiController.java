@@ -25,6 +25,7 @@ import java.io.IOException;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Controller
+@CrossOrigin("*")
 public class UserApiController {
 
     private final UserService userService;
