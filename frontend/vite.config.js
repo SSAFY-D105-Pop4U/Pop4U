@@ -9,10 +9,11 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/popup": {
+      "/api": {
         target: "http://i12d105.p.ssafy.io:8081",
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
     },
   },

@@ -15,7 +15,7 @@ const GoogleLogin = () => {
 
         // console.log("Google OAuth URL:", googleAuthUrl);
 
-        window.location.href = "hhttp://i12d105.p.ssafy.io:8081/user/login";
+        window.location.href = "/api/user/login";
 
     };
     return (
