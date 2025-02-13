@@ -601,8 +601,7 @@ public class ProfanityFilterService {
             Pattern pattern = Pattern.compile("(?i)" + Pattern.quote(bannedWord));
             Matcher matcher = pattern.matcher(filteredMessage);
             // 금칙어의 길이만큼 별표(*)로 치환
-            String replacement = "클린봇이 부적절한 표현을 감지하였습니다.";
-            filteredMessage = matcher.replaceAll(replacement);
+            filteredMessage = "클린봇이 부적절한 표현을 감지하였습니다.";
         }
         return filteredMessage;
     }
