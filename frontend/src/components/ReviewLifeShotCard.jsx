@@ -2,6 +2,8 @@ import { useState } from 'react';
 import '../styles/components/ReviewLifeShotCard.css';
 import Divider from '../components/basic/Divider';
 import { useNavigate } from "react-router-dom";
+
+
 const ReviewLifeShotCard = ({ placeInfo,isReview=false}) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isReviewCompleted, setIsReviewCompleted] = useState(isReview);
@@ -19,6 +21,8 @@ const ReviewLifeShotCard = ({ placeInfo,isReview=false}) => {
     }
     setSelectedOption(option);
   };
+
+
 
   return (
     <div className="review-life-content">

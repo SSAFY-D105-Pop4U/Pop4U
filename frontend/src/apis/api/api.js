@@ -46,7 +46,7 @@ export const getReviews = async (popupId) => {
   }
 }
 
-{/* ✅ post : 예약하기기*/}
+{/* ✅ post : 예약하기*/}
 export const postappointment = async ({ popupId, userId, person, date, time }) => {
   try {
     const response = await api.post(`/reservation/${popupId}`, {
@@ -63,7 +63,58 @@ export const postappointment = async ({ popupId, userId, person, date, time }) =
 };
 
 
+{/* ✅ ??? : 내예약확인*/}
+export const getmyreservation = async () => {
+  try {
+    const response = await api.get(`/reservation/my`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
 
+{/* ✅  get : 팝업정보 불러오기*/}
+export const getpopup = async () => {
+  try {
+    const response = await api.get(`/reservation/my`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
+
+
+{/* ✅ ??? : 회원가입*/}
+export const postsignup = async () => {
+  try {
+    const response = await api.get(`/reservation/my`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
+
+
+
+
+
+// export const Login = async ({Login}) => {
+//   try {
+//     const response = await api.post(`/reservation/${popupId}`, {
+//       userId,                 // 사용자 ID
+//       reservationPeople: person, // 예약 인원
+//       reservationDate: date,  // 예약 날짜
+//       reservationTime: time   // 예약 시간
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching popups:", error);
+//     throw error;
+//   }
+// };
 
 // import axios from "axios";
 
