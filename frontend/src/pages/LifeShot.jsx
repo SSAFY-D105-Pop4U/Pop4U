@@ -1,5 +1,5 @@
 import Divider from "../components/basic/Divider";
-import { useState } from "react";
+import React,{ useState , useRef} from "react";
 import Header from "../components/basic/Header";
 import LifeShotFrame from "../components/lifeShotPage/LifeShotFrame";
 import ShotToggleButton from "../components/lifeShotPage/ShotToggleButton";
@@ -8,6 +8,7 @@ import '../styles/pages/LifeShot.css';
 import DraggableGallery from "../components/lifeShotPage/DraggableGallery";
 import ShotIcon from "../components/lifeShotPage/ShotIcon"; 
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import html2canvas from "html2canvas";
 
 const LifeShot = () => {
 
@@ -17,6 +18,31 @@ const LifeShot = () => {
     const [selectedColor, setSelectedColor] = useState("#DDDDD");
     const [frameImages, setFrameImages] = useState(Array(4).fill(null));
     const [selectedIcon, setSelectedIcon] = useState("");
+
+    const captureRef = useRef(null);
+    // 캡처 실행 함수
+    const handleCapture = async () => {
+        if (captureRef.current) {
+            try {
+                const canvas = await html2canvas(captureRef.current, {
+                    allowTaint: true,
+                    useCORS: true,
+                    backgroundColor: null,
+                    scale: 2, // 해상도를 높이기 위해 scale 추가
+                    logging: true, // 디버깅을 위한 로깅 활성화
+                });
+                const image = canvas.toDataURL("image/png");
+
+                // 이미지 다운로드
+                const link = document.createElement("a");
+                link.href = image;
+                link.download = "capture.png";
+                link.click();
+            } catch (error) {
+                console.error("캡처 중 오류 발생:", error);
+            }
+        }
+    };
 
     // 드래그가 끝났을 때 실행되는 핸들러
     const handleDragEnd = (result) => {
@@ -66,7 +92,11 @@ const LifeShot = () => {
       <div className="lifeshot-page">
         <Header title={"인생네컷 제작"}/>
         
-        <div style={{ position: 'relative' }}>
+        <div ref={captureRef} style={{ 
+            position: 'relative',
+            transform: 'translateZ(0)', // 새로운 스택 컨텍스트 생성
+            WebkitTransform: 'translateZ(0)'
+        }}>
           <LifeShotFrame 
             selectedColor={selectedColor}
             frameImages={frameImages}
@@ -142,7 +172,7 @@ const LifeShot = () => {
                       />
                       사진넣기
                   </label>
-                  <button className="button">저장하기</button>
+                  <button onClick={handleCapture} className="button" >저장하기</button>
               </div>
           </div>
         </DragDropContext>

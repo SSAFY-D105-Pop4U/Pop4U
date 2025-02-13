@@ -2,11 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import '../../styles/components/DraggableGallery.css';
 
 const DraggableGallery = ({ selectedIcon }) => {
-  const [images] = useState([
-    { id: '1', url: 'https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d', title: '이미지 1' },
-    { id: '2', url: 'https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d', title: '이미지 2' },
-    { id: '3', url: '/image3.jpg', title: '이미지 3' },
-  ]);
+
 
   const [canvasImages, setCanvasImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
