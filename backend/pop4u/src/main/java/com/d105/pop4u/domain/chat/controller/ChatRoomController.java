@@ -13,6 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/chatroom")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ChatRoomController {
     private final ChatRoomRepository chatRoomRepository;
     private final PopupStoreRepository popupStoreRepository;
