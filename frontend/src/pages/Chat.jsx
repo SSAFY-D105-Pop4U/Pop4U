@@ -3,7 +3,7 @@ import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import "../styles/pages/Chat.css"
 
-const SOCKET_URL = "http://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 주소
+const SOCKET_URL = "https://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 주소
 
 const ChatRoom = () => {
   const [chatRoomId, setChatRoomId] = useState("1");
@@ -32,7 +32,7 @@ const ChatRoom = () => {
         });
 
         // 기존 채팅 기록 불러오기
-        fetch(`http://i12d105.p.ssafy.io/chat/${chatRoomId}`)
+        fetch(`https://i12d105.p.ssafy.io/chat/${chatRoomId}`)
           .then((response) => response.json())
           .then((chatHistory) => {
             setMessages(chatHistory);
