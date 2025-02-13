@@ -18,7 +18,9 @@ const ChatRoom = () => {
   useEffect(() => {
     if (!chatRoomId) return;
 
-    const socket = new SockJS(SOCKET_URL);
+    // const socket = new SockJS(SOCKET_URL);
+    const socket = new SockJS(SOCKET_URL, null, { transports: ['websocket'] });
+
     const stompClient = new Client({
       webSocketFactory: () => socket,
       debug: (msg) => console.log("[STOMP]:", msg),
