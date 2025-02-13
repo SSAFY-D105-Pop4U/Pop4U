@@ -4,9 +4,9 @@ import { AppDataProvider } from "./Context.jsx";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <AppDataProvider>
-      <AppRouter />
+        <AppRouter />
       </AppDataProvider>
     </div>
   );
