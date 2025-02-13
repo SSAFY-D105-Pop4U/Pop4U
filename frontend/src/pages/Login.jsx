@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/pages/Login.css";
 import large_logo from "../assets/images/large_logo.png";
 import { useNavigate } from "react-router-dom";
-import { Login } from "../apis/api/api";
+import { getlogin } from "../apis/api/api.js";
 
 const Login = () => {
     const nav = useNavigate()
@@ -23,7 +23,7 @@ const Login = () => {
         const handleLogin = async () => {
             try {
                 console.log("회원가입 요청:", login);
-                const response = await Login(login); // postsignup 함수 호출
+                const response = await getlogin(login); // postsignup 함수 호출
     
                 if (response) {
                     console.log("회원가입 성공:", response);

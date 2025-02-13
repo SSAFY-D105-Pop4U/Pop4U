@@ -97,7 +97,7 @@ export const postsignup = async () => {
   }
 }
 
-export const Login = async ({Login}) => {
+export const getlogin = async ({login}) => {
   try {
     const response = await api.post(`/reservation/${popupId}`, {
       userId,                 // 사용자 ID
