@@ -22,13 +22,18 @@ const Appointment = () => {
   const popupName = searchParams.get("popupName");
   const popupId = searchParams.get("popupId");
   const [userId, setUserId] = useState(1); //샘플 userId
-  useEffect(() => {
-    console.log("📦 Context 데이터 현황황:", appData);
-  }, [appData]); // ✅ appData 전체가 변경될 때마다 실행됨
+  
+
 
   const appointment = async () => {
     try {
-      console.log(userId);
+      console.log("API 요청 데이터:", {
+        popupId,
+        userId,
+        person: appData.selectedPerson,
+        date: appData.selectedDate,
+        time: appData.selectedTime,
+      });
       const data = await postappointment({
         popupId,
         userId,
@@ -42,6 +47,9 @@ const Appointment = () => {
       console.error("api 호출 실패");
     }
   };
+  useEffect(() => {
+    console.log("📦 Context 데이터 현황:", appData);
+  }, [appData]); // ✅ appData 전체가 변경될 때마다 실행됨
 
   return (
     <div>

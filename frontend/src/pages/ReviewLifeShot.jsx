@@ -3,11 +3,27 @@ import Header from "../components/basic/Header";
 import ReviewLifeShotCard from '../components/ReviewLifeShotCard';
 import '../styles/pages/ReviewLifeShot.css';
 import Divider from '../components/basic/Divider';
+import { useEffect } from 'react';
+import { getmyreservation } from '../apis/api/api';
+
+
 const ReviewLifeShot = () => {
   const navigate = useNavigate();
   const title = "리뷰&인생네컷";
 
+
+
+  useEffect(() =>{
+    try {
+            const data =  getmyreservation();
+            setPopups(data);
+            console.log("팝업 리스트트 조회완료");
+          } catch (error) {
+            console.error("Failed to load popups");
+          }
+  },[])
  
+
 
   // 실제 데이터로 교체 필요
   const placeInfo = {
