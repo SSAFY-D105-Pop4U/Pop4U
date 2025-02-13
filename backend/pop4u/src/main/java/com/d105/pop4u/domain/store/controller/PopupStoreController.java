@@ -25,6 +25,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/popup")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class PopupStoreController {
 
     private final PopupStoreService popupStoreService;

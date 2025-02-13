@@ -52,7 +52,7 @@
         }
 
         chatRoomId = document.getElementById("chatRoomId").value;
-        var socket = new SockJS("http://localhost:8080/ws/chat");
+        var socket = new SockJS("http://localhost:8081/ws/chat");
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, function (frame) {
@@ -65,8 +65,8 @@
                 document.getElementById("chatArea").innerHTML += "<p><b>" + sender + ":</b> " + message.chattingMessage + "</p>";
             });
 
-            // 채팅방 입장 시 기존 메시지 로드 (REST API)
-            fetch("http://localhost:8080/chat/" + chatRoomId)
+            // 채팅방 입장 시 기존 메시지 로드
+            fetch("http://localhost:8081/chat/" + chatRoomId)
                 .then(response => response.json())
                 .then(messages => {
                     messages.forEach(function(message) {

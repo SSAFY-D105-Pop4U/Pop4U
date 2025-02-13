@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/four_cuts")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class PopupCutsIconController {
 
     private final PopupCutsIconService popupCutsIconService;

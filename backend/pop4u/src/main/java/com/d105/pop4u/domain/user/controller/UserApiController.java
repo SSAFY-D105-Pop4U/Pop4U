@@ -1,6 +1,5 @@
 package com.d105.pop4u.domain.user.controller;
 
-import com.d105.pop4u.domain.user.dto.UserInfo;
 import com.d105.pop4u.domain.user.dto.UserResponse;
 import com.d105.pop4u.domain.user.dto.EditUserRequest;
 import com.d105.pop4u.domain.user.service.UserService;
@@ -26,6 +25,7 @@ import java.io.IOException;
 @RequestMapping("/user")
 @RequiredArgsConstructor
 @Controller
+@CrossOrigin("*")
 public class UserApiController {
 
     private final UserService userService;
@@ -55,7 +55,7 @@ public class UserApiController {
             OAuth2AuthorizationRequest authorizationRequest = OAuth2AuthorizationRequest
                     .authorizationCode()
                     .clientId(clientId) // 클라이언트 ID를 가져옵니다.
-                    .redirectUri("http://localhost:8080/login/oauth2/code/google") // 리디렉션 URI
+                    .redirectUri("http://i12d105.p.ssafy.io:8081/login/oauth2/code/google") // 리디렉션 URI
                     .scope("email", "profile") // 요청할 스코프
                     .authorizationUri("https://accounts.google.com/o/oauth2/auth") // 구글의 인증 URI
                     .build();
@@ -65,24 +65,9 @@ public class UserApiController {
         }
 
         // 구글 인증 엔드포인트로 리디렉션
-        response.sendRedirect("http://localhost:5173/");
+        response.sendRedirect("http://i12d105.p.ssafy.io:5173/");
         return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
     }
-
-    // 이건 전리품으로 냅두자. 화가나요
-//    @GetMapping("/login/oauth2/code/google")
-//    public ResponseEntity<Void> googleCallback(@RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        // Google OAuth2 클라이언트를 사용하여 토큰 요청
-//        String accessToken = userService.getAccessTokenFromGoogle(code); // 토큰 요청 메소드
-//        UserInfo userInfo = userService.getUserInfoFromGoogle(accessToken); // 사용자 정보 요청 메소드
-//
-//        // 사용자 정보를 세션에 저장
-//        request.getSession().setAttribute("user", userInfo);
-//
-//        // 리액트 앱의 메인 페이지로 리디렉션
-//        response.sendRedirect("http://localhost:5173/");
-//        return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
-//    }
 
     @GetMapping("/join")
     public String join() {
@@ -124,3 +109,20 @@ public class UserApiController {
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "회원 탈퇴가 완료되었습니다."));
     }
 }
+
+
+
+// 이건 전리품으로 냅두자. 화가나요
+//    @GetMapping("/login/oauth2/code/google")
+//    public ResponseEntity<Void> googleCallback(@RequestParam String code, HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        // Google OAuth2 클라이언트를 사용하여 토큰 요청
+//        String accessToken = userService.getAccessTokenFromGoogle(code); // 토큰 요청 메소드
+//        UserInfo userInfo = userService.getUserInfoFromGoogle(accessToken); // 사용자 정보 요청 메소드
+//
+//        // 사용자 정보를 세션에 저장
+//        request.getSession().setAttribute("user", userInfo);
+//
+//        // 리액트 앱의 메인 페이지로 리디렉션
+//        response.sendRedirect("http://localhost:5173/");
+//        return ResponseEntity.status(HttpStatus.FOUND).build(); // 302 FOUND 응답
+//    }

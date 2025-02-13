@@ -18,6 +18,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ChatController {
 
     private final ChatService chatService;
@@ -57,8 +58,20 @@ public class ChatController {
             }
         }
 
-        log.info("채팅 메시지 수신(수정됨): {}", chatMessageDto);
-        return chatService.sendMessage(chatMessageDto);
+       // 만약 사용자 ID가 필요하면, Principal을 Authentication으로 캐스팅하여 도메인 User 객체에서 가져옵니다.
+       if (principal instanceof Authentication) {
+           Authentication authentication = (Authentication) principal;
+           Object principalObj = authentication.getPrincipal();
+           if (principalObj instanceof User) {
+               User user = (User) principalObj;
+               chatMessageDto.setUserId(user.getUserId());
+           } else {
+               // 만약 principal 객체가 도메인 User가 아니라면, 필요시 추가로 UserRepository 등을 사용해 도메인 User 객체를 조회할 수 있습니다.
+           }
+       }
+
+       log.info("채팅 메시지 수신(수정됨): {}", chatMessageDto);
+       return chatService.sendMessage(chatMessageDto);
     }
 
 
