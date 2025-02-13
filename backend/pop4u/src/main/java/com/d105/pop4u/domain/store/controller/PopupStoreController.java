@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/popup")
+@RequestMapping("/popup")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class PopupStoreController {
