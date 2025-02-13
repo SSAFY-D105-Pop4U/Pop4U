@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../styles/pages/Login.css";
 import large_logo from "../assets/images/large_logo.png";
 import { useNavigate } from "react-router-dom";
+import { getlogin } from "../apis/api/api.js";
 
 const Login = () => {
     const nav = useNavigate()
@@ -18,11 +19,21 @@ const Login = () => {
         }));
     };
 
-    /// api 쏘는거 따로 빼야함
-    const handleLogin = () => {
-        // 나중에 API 호출 로직 추가
-        console.log("로그인 요청:", login);
-    };
+    /// api 호출 따로 빼야함
+        const handleLogin = async () => {
+            try {
+                console.log("회원가입 요청:", login);
+                const response = await getlogin(login); // postsignup 함수 호출
+    
+                if (response) {
+                    console.log("회원가입 성공:", response);
+                    nav("/login"); // 회원가입 성공 후 이동할 페이지
+                }
+            } catch (error) {
+                console.error("회원가입 실패:", error);
+            }
+        }
+    
 
     return (
         <div className="login-container">

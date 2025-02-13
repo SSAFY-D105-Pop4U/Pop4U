@@ -5,13 +5,13 @@
     padding-bottom: 70px; /* 버튼이 가리는 부분을 방지 */
   }
 /* 📌 화면이 일정 크기 이상(960px)일 때, 양쪽 배경을 흰색으로 만들기 */
-@media (min-width: 960px) {
+@media (min-width: 530px) {
     body {
         background-color: white; /* 양쪽 배경을 흰색으로 설정 */
     }
 
     .container1 {
-        max-width: 960px; /* 본문 최대 너비 설정 */
+        max-width: 530px; /* 본문 최대 너비 설정 */
         background: white;
     }
 }
