@@ -1,184 +1,121 @@
-import React, { useState, useRef } from 'react';
-import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
-import './Chat.css';
+import React, { useEffect, useRef, useState } from "react";
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+import "../styles/pages/Chat.css"
 
-function Chat() {
-  const [chatRoomId, setChatRoomId] = useState('1');
-  const [userId, setUserId] = useState('1001');
-  const [userName, setUserName] = useState('TestUser');
-  const [message, setMessage] = useState('');
+const SOCKET_URL = "http://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 주소
+
+const ChatRoom = () => {
+  const [chatRoomId, setChatRoomId] = useState("1");
+  const [userId, setUserId] = useState("1001");
+  const [userName, setUserName] = useState("TestUser");
+  const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [summary, setSummary] = useState('');
   const stompClientRef = useRef(null);
+  const inputRef = useRef(null);
 
-  // 웹소켓 연결 함수
-  const connect = () => {
-    // 이미 연결되어 있다면 중복 연결 방지
-    if (stompClientRef.current) {
-      console.log('이미 연결됨');
-      return;
-    }
+  // WebSocket 연결 및 메시지 구독
+  useEffect(() => {
+    if (!chatRoomId) return;
 
-    // 실제 백엔드 주소 (포트나 도메인에 맞게 수정)
-    const socket = new SockJS('http://localhost:8081/ws/chat');
-    const stompClient = Stomp.over(socket);
+    const socket = new SockJS(SOCKET_URL);
+    const stompClient = new Client({
+      webSocketFactory: () => socket,
+      debug: (msg) => console.log("[STOMP]:", msg),
+      onConnect: () => {
+        console.log("[STOMP] 연결 성공!");
 
-    // 연결 시도
-    stompClient.connect({}, (frame) => {
-      console.log('Connected: ' + frame);
+        // 채팅방 구독
+        stompClient.subscribe(`/topic/chat/${chatRoomId}`, (response) => {
+          const receivedMessage = JSON.parse(response.body);
+          setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        });
 
-      // 특정 채팅방에 대한 구독
-      stompClient.subscribe(`/topic/chat/${chatRoomId}`, (response) => {
-        const newMessage = JSON.parse(response.body);
-        const sender = newMessage.userName || `User ${newMessage.userId}`;
-        setMessages((prev) => [
-          ...prev,
-          { sender, text: newMessage.chattingMessage },
-        ]);
-      });
-
-      // 채팅방 입장 시 기존 메시지 로드
-      fetch(`http://localhost:8081/chat/${chatRoomId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          // data는 [{ chatRoomId, userId, userName, chattingMessage }, ...] 형태라고 가정
-          const initialMessages = data.map((m) => ({
-            sender: m.userName || `User ${m.userId}`,
-            text: m.chattingMessage,
-          }));
-          setMessages(initialMessages);
-        })
-        .catch((err) => console.error('기존 메시지 로드 오류:', err));
+        // 기존 채팅 기록 불러오기
+        fetch(`http://i12d105.p.ssafy.io/chat/${chatRoomId}`)
+          .then((response) => response.json())
+          .then((chatHistory) => {
+            setMessages(chatHistory);
+          })
+          .catch((error) => console.error("채팅 기록 요청 오류:", error));
+      },
+      onStompError: (e) => {
+        console.error("[STOMP] 연결 실패:", e);
+      },
     });
 
-    // stompClient를 ref에 저장
+    stompClient.activate();
     stompClientRef.current = stompClient;
-  };
 
-  // 메시지 전송 함수
+    return () => {
+      stompClient.deactivate();
+    };
+  }, [chatRoomId]);
+
+  // 메시지 전송
   const sendMessage = () => {
-    if (!stompClientRef.current) {
-      alert('먼저 채팅방에 입장하세요.');
-      return;
-    }
+    if (!message.trim() || !stompClientRef.current || !stompClientRef.current.connected) return;
 
-    stompClientRef.current.send(
-      `/app/chat/${chatRoomId}`,
-      {},
-      JSON.stringify({
-        chatRoomId: parseInt(chatRoomId, 10),
-        userId: parseInt(userId, 10),
-        userName,
-        chattingMessage: message,
-      })
-    );
+    const chatMessage = {
+      chatRoomId: parseInt(chatRoomId, 10),
+      userId: parseInt(userId, 10),
+      userName: userName,
+      chattingMessage: message,
+    };
 
-    setMessage('');
-  };
+    stompClientRef.current.publish({
+      destination: `/app/chat/${chatRoomId}`,
+      body: JSON.stringify(chatMessage),
+    });
 
-  // 채팅 요약 함수
-  const summarizeChat = () => {
-    if (!chatRoomId) {
-      alert('먼저 채팅방에 입장하세요.');
-      return;
-    }
-
-    // 실제 요약 API 주소 (포트/도메인 수정)
-    fetch(`http://localhost:8080/chat-summary/${chatRoomId}`)
-      .then((res) => res.text())
-      .then((data) => {
-        setSummary(data);
-      })
-      .catch((err) => {
-        console.error('요약 요청 오류:', err);
-      });
+    setMessage("");
+    inputRef.current?.focus();
   };
 
   return (
-    <div className="page-container">
-      <div className="chat-container">
-        <h2 className="title">WebSocket 채팅 테스트</h2>
+    <div className="chat-container">
+      <h2 className="chat-header">WebSocket 채팅 테스트</h2>
 
-        {/* 채팅방 ID */}
-        <div className="form-group">
-          <label className="label">채팅방 ID:</label>
-          <div className="input-group">
-            <input
-              type="text"
-              value={chatRoomId}
-              onChange={(e) => setChatRoomId(e.target.value)}
-              className="input"
-            />
-            <button onClick={connect} className="button button-blue">
-              입장
-            </button>
+      {/* 채팅방 ID 입력 */}
+      <div className="input-group">
+        <label>채팅방 ID:</label>
+        <div className="input-row">
+          <input type="text" value={chatRoomId} onChange={(e) => setChatRoomId(e.target.value)} className="chat-input" />
+        </div>
+      </div>
+
+      {/* 유저 ID 입력 */}
+      <div className="input-group">
+        <label>유저 ID:</label>
+        <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} className="chat-input" />
+      </div>
+
+      {/* 유저 이름 입력 */}
+      <div className="input-group">
+        <label>유저 이름:</label>
+        <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} className="chat-input" />
+      </div>
+
+      {/* 메시지 입력창 */}
+      <div className="input-group">
+        <label>메시지:</label>
+        <div className="input-row">
+          <input ref={inputRef} type="text" value={message} onChange={(e) => setMessage(e.target.value)} className="chat-input" />
+          <button onClick={sendMessage} className="chat-button">보내기</button>
+        </div>
+      </div>
+
+      {/* 채팅 내용 표시 */}
+      <h3 className="chat-title">채팅 내용</h3>
+      <div className="chat-messages">
+        {messages.map((msg, index) => (
+          <div key={index} className="chat-message">
+            <b>{msg.userName || `User ${msg.userId}`}:</b> {msg.chattingMessage}
           </div>
-        </div>
-
-        {/* 유저 ID */}
-        <div className="form-group">
-          <label className="label">유저 ID:</label>
-          <input
-            type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
-            className="input"
-          />
-        </div>
-
-        {/* 유저 이름 */}
-        <div className="form-group">
-          <label className="label">유저 이름:</label>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            className="input"
-          />
-        </div>
-
-        {/* 메시지 입력 */}
-        <div className="form-group">
-          <label className="label">메시지:</label>
-          <div className="input-group">
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="input"
-            />
-            <button onClick={sendMessage} className="button button-green">
-              보내기
-            </button>
-          </div>
-        </div>
-
-        {/* 요약 요청 버튼 */}
-        <div className="form-group">
-          <button onClick={summarizeChat} className="button button-purple">
-            요약 요청
-          </button>
-        </div>
-
-        {/* 채팅 내용 */}
-        <h3 className="subtitle">채팅 내용</h3>
-        <div className="chat-area">
-          {messages.map((msg, idx) => (
-            <p key={idx}>
-              <b>{msg.sender}:</b> {msg.text}
-            </p>
-          ))}
-        </div>
-
-        {/* 채팅 요약 */}
-        <h3 className="subtitle">채팅 요약</h3>
-        <div className="summary-area">
-          <p>{summary}</p>
-        </div>
+        ))}
       </div>
     </div>
   );
-}
+};
 
-export default Chat;
+export default ChatRoom;
