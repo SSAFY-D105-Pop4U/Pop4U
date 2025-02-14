@@ -70,6 +70,7 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
               <div
                 key={item.rank}
                 className="ranking-item"
+                onClick={() => handleSearchClick(item.keyword)}
               >
                 <span className="ranking-name">{item.rank} {item.keyword}</span>
                 <span className="ranking-status">{getStatusIcon('up')}</span>
