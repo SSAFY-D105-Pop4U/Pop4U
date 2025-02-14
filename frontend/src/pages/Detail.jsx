@@ -9,6 +9,8 @@ import eye from "../assets/icons/eye.png";
 import ImageCarousel from "../components/ImageCarousel.jsx";
 import { AppDataContext } from "../Context.jsx"; // ✅ useContext 추가
 
+
+
 const Detail = () => {
   const nav = useNavigate();
   const { appData, setAppData } = useContext(AppDataContext); // ✅ useContext 사용

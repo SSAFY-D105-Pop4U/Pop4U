@@ -1,26 +1,31 @@
 // src/apis/instance.js
 import axios from "axios";
 
+const token = sessionStorage.getItem("accessToken"); 
+
 const api = axios.create({
-  baseURL: "/api",
-//   baseURL: "http://localhost:8081/",
-  withCredentials: true, 
-  headers: {
+    baseURL: "/api",
+    withCredentials: true,
+    headers: {
       'Content-Type': 'application/json',
-  },
-});
-api.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('access_token');
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        }   
-        return config;
+      'Authorization': token ? `${token}` : "", 
     },
-    (error) => {
-        return Promise.reject(error);
-    }
-);
+  });
+
+// api.interceptors.request.use(
+//     (config) => {
+//       const token = sessionStorage.getItem("accessToken"); // sessionStorage에서 토큰 가져오기
+//       if (token) {
+//         config.headers["Authorization"] = `Bearer ${token}`; // Authorization 헤더에 토큰 추가
+//         console.log(token)
+//       }
+//       return config;
+//     },
+//     (error) => {
+//       return Promise.reject(error);
+//     }
+    
+//   );
 
 // 응답 인터셉터
 api.interceptors.response.use(
