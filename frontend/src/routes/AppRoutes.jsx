@@ -22,8 +22,8 @@ import LifeShot from "../pages/LifeShot";
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />             
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />             
+      <Route path="/home" element={<Home />} />
       <Route path="/sociallogin" element={<SocialLogin />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/detail" element={<Detail />} />

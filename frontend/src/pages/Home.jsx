@@ -7,8 +7,11 @@ import HomeHorizScroll from "../components/homePage/HomeHorizScroll";
 import Divider from "../components/basic/Divider";
 import { getPopups } from "../apis/api/api.js";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AppDataContext } from "../Context.jsx";
 
 const Home = () => {
+  const { appData, setAppData } = useContext(AppDataContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleMenuClick = () => {
@@ -19,6 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPopups = async () => {
+      console.log("usecontext데이터 ", appData)
       try {
         const data = await getPopups();
         setPopups(data);

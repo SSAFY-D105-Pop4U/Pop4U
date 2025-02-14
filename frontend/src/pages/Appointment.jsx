@@ -13,7 +13,7 @@ import { AppDataContext } from "../Context.jsx";
 const Appointment = () => {
   const nav = useNavigate();
   const { appData, setAppData } = useContext(AppDataContext);
-  const [selectedDate, setSelectedDate] = useState(""); // ✅ 추가: 선택한 날짜 상태
+  const [selectedDate, setSelectedDate] = useState(""); 
   const [selectedPerson, setSelectedPerson] = useState(0);
   const [selectedTime, setSelectedTime] = useState(null);
   const [showAppointmentDetails, setShowAppointmentDetails] = useState(true);
@@ -58,7 +58,7 @@ const Appointment = () => {
       {showAppointmentDetails ? (
         <>
           <Calendar setResultDate={setSelectedDate} />{" "}
-          {/* ✅ setResultDate를 전달 */}
+        
           <PersonSelector
             selectedPerson={selectedPerson}
             setSelectedPerson={setSelectedPerson}

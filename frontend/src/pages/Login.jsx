@@ -3,8 +3,13 @@ import "../styles/pages/Login.css";
 import large_logo from "../assets/images/large_logo.png";
 import { useNavigate } from "react-router-dom";
 import { postlogin } from "../apis/api/api.js";
+import { useContext } from "react";
+import { AppDataContext } from "../Context.jsx";
+
 
 const Login = () => {
+
+    const { appData, setAppData } = useContext(AppDataContext);
     const nav = useNavigate()
     const [login, setlogin] = useState({
         userid: "",
@@ -19,8 +24,10 @@ const Login = () => {
         }));
     };
 
-    /// api 호출 따로 빼야함
+        //api 호출출
         const handleLogin = async () => {
+
+            
             try {
                 const loginData = {
                     email: login.userid,       
@@ -32,7 +39,12 @@ const Login = () => {
                 if (response && response.data && response.data.accessToken) {
                     console.log("로그인인 성공:", response);
                     sessionStorage.setItem("accessToken", response.data.accessToken);
-                    nav("/"); // 회원가입 성공 후 이동할 페이지
+                    setAppData((prev) => ({  // Context에 저장
+                        ...prev,
+                        userId: response.data.userId, 
+                      }));
+                    nav("/home"); // 회원가입 성공 후 이동할 페이지
+                    
                 }
             } catch (error) {
                 console.error("로그인인 실패:", error);
