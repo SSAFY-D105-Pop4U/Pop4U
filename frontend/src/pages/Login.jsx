@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../styles/pages/Login.css";
 import large_logo from "../assets/images/large_logo.png";
 import { useNavigate } from "react-router-dom";
-import { getlogin } from "../apis/api/api.js";
+import { postlogin } from "../apis/api/api.js";
 
 const Login = () => {
     const nav = useNavigate()
@@ -22,15 +22,20 @@ const Login = () => {
     /// api 호출 따로 빼야함
         const handleLogin = async () => {
             try {
-                console.log("회원가입 요청:", login);
-                const response = await getlogin(login); // postsignup 함수 호출
+                const loginData = {
+                    email: login.userid,       
+                    password: login.password 
+                };
+                console.log("로그인인 요청:", loginData);
+                const response = await postlogin(loginData); 
     
-                if (response) {
-                    console.log("회원가입 성공:", response);
-                    nav("/login"); // 회원가입 성공 후 이동할 페이지
+                if (response && response.data && response.data.accessToken) {
+                    console.log("로그인인 성공:", response);
+                    sessionStorage.setItem("accessToken", response.data.accessToken);
+                    nav("/"); // 회원가입 성공 후 이동할 페이지
                 }
             } catch (error) {
-                console.error("회원가입 실패:", error);
+                console.error("로그인인 실패:", error);
             }
         }
     
@@ -73,7 +78,6 @@ const Login = () => {
                 <div className="signup-section">
                     <span className="signup-text">아직 회원이 아니신가요? </span>
                     <span className="signup-link" onClick={() => nav("/signup")}>회원가입</span>
-
                 </div>
             </div>
         </div>

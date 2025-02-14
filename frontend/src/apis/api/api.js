@@ -87,9 +87,11 @@ export const getpopup = async () => {
 
 
 {/* ✅ ??? : 회원가입*/}
-export const postsignup = async () => {
+export const postsignup = async (formattedData) => {
   try {
-    const response = await api.get(`/user/join`);
+    console.log(formattedData)
+    
+    const response = await api.post(`/user/join`,formattedData);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
@@ -97,14 +99,11 @@ export const postsignup = async () => {
   }
 }
 
-export const getlogin = async ({login}) => {
+{/* ✅ ??? : 로그인*/}
+export const postlogin = async (loginData) => {
   try {
-    const response = await api.post(`/reservation/${popupId}`, {
-      userId,                 // 사용자 ID
-      reservationPeople: person, // 예약 인원
-      reservationDate: date,  // 예약 날짜
-      reservationTime: time   // 예약 시간
-    });
+    console.log(loginData)
+    const response = await api.post(`/user/login`,loginData)
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);

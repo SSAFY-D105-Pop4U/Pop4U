@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import "../styles/pages/Signup.css";
 import large_logo from "../assets/images/large_logo.png";
 import { useNavigate } from "react-router-dom";
+import { postsignup } from "../apis/api/api";
 
 const Signup = () => {
     
@@ -34,10 +35,17 @@ const Signup = () => {
     // 회원가입 요청
     const handleSignup = async () => {
         try {
-            console.log("회원가입 요청:", formData);
-            const response = await postsignup(formData); // postsignup 함수 호출
+            const formattedData = {
+                userEmail: formData.id,        
+                userPassword: formData.password, 
+                userName: formData.name,       
+                userTelephone: formData.phone,  
+                userRole: formData.type          
+            };
+            console.log("회원가입 요청:", formattedData);
+            const response = await postsignup(formattedData); // postsignup 함수 호출
 
-            if (response) {
+            if (response ) {
                 console.log("회원가입 성공:", response);
                 nav("/login"); // 회원가입 성공 후 이동할 페이지
             }
