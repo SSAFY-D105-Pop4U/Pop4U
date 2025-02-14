@@ -10,7 +10,7 @@ const api = axios.create({
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token ? `${token}` : "", 
+      'Authorization': token ? `bearer ${token}` : "", 
     },
   });
 
