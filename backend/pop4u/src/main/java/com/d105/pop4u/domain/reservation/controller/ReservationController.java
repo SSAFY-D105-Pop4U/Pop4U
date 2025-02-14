@@ -28,6 +28,9 @@ public class ReservationController {
             @PathVariable("popupId") Long popupId,
             @RequestBody ReservationDTO dto,
             @AuthenticationPrincipal User user) { // 여기서 User는 UserDetails를 구현한 엔티티입니다.
+        if (user == null) {
+            throw new IllegalArgumentException("인증된 사용자가 없습니다."); // 사용자 정보가 null인 경우 예외 처리
+        }
         Long userId = user.getUserId();
         dto.setPopupId(popupId);
         dto.setUserId(userId);
