@@ -4,7 +4,7 @@ import axios from "axios";
 const token = sessionStorage.getItem("accessToken"); 
 
 const api = axios.create({
-    baseURL: "http://localhost:8081/",
+    baseURL: "/api",
 
     withCredentials: true,
     headers: {
