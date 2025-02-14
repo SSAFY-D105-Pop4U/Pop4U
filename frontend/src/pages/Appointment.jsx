@@ -21,7 +21,8 @@ const Appointment = () => {
   const [searchParams] = useSearchParams();
   const popupName = searchParams.get("popupName");
   const popupId = searchParams.get("popupId");
-  const [userId, setUserId] = useState(1); //샘플 userId
+  // const [userId, setUserId] = useState(1); //샘플 userId
+  const [userId, setUserId] = useState(appData.userId); // appData에서 사용자 ID 가져오기
   
 
 
