@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../styles/pages/Recheck.css";
 import Header from "../components/basic/Header";
 import ProgressBar from "../components/appointment/ProgressBar";
 import NextButton from "../components/NextButton";
 import { useNavigate } from "react-router-dom";
+import { AppDataContext } from "../Context.jsx";
+import { Title } from "chart.js";
 
 const Recheck = ({ name, title, people, date }) => {
+
+const { appData, setAppData } = useContext(AppDataContext);
   const navigate = useNavigate();
 
   return (
@@ -25,7 +29,7 @@ const Recheck = ({ name, title, people, date }) => {
         </div>
         <div className="recheck-item">
           <span className="recheck-label">인원</span>
-          <span className="recheck-value">{people}명</span>
+          <span className="recheck-value">{Title}명</span>
         </div>
         <div className="recheck-item">
           <span className="recheck-label">날짜</span>

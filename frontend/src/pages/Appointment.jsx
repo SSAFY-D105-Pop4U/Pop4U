@@ -29,14 +29,14 @@ const Appointment = () => {
     try {
       console.log("API 요청 데이터:", {
         popupId,
-        userId,
+        userId: appData.userId,
         person: appData.selectedPerson,
         date: appData.selectedDate,
         time: appData.selectedTime,
       });
       const data = await postappointment({
         popupId,
-        userId,
+        userId: appData.userId,
         person: appData.selectedPerson,
         date: appData.selectedDate,
         time: appData.selectedTime,

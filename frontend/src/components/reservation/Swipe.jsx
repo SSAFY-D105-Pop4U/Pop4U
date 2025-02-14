@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/components/Swipe.css"
 import ReservationCard from "./ReservationCard";
+import { myreservation } from "../../apis/api/api.js";
+
 
 const Swipe = () => {
   const cards = [
@@ -77,8 +79,21 @@ const Swipe = () => {
   const [isDragging, setIsDragging] = useState(false);
   const dragThreshold = 50; // 드래그 임계값 (픽셀)
   const [isWebVersion, setIsWebVersion] = useState(window.innerWidth >= 768);
+  
+  // 내예약 api 호출
+  const handlemy = async () => {
+    try {
+      const data = await myreservation();
+      console.log("📌 API 내예약호출출:", data);
+    } catch (error) {
+      console.error("❌ Failed to load reviews", error);
+    }
+  };
+
 
   useEffect(() => {
+    handlemy()
+
     const handleResize = () => {
       setIsWebVersion(window.innerWidth >= 768);
     };
