@@ -38,12 +38,22 @@ public interface PopupStoreRepository extends JpaRepository<PopupStore, Long> {
             "LEFT JOIN p.popupCategories pc " +
             "LEFT JOIN pc.category c " +
             "WHERE " +
-            "REPLACE(LOWER(p.popupName), ' ', '') LIKE LOWER(CONCAT('%', REPLACE(:keyword, ' ', ''), '%')) OR " +
-            "LOWER(p.popupName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(p.popupDescription) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(p.popupRegion) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "EXISTS (SELECT 1 FROM Category cat " +
-            "WHERE cat IN (SELECT pc2.category FROM PopupCategory pc2 WHERE pc2.popupStore = p) " +
-            "AND LOWER(cat.categoryName) LIKE LOWER(CONCAT('%', :keyword, '%')))")
-    List<PopupStore> searchByKeywordIncludingCategories(@Param("keyword") String keyword);
+            // 각 글자가 순서대로 포함되어 있는지 확인
+            "(" +
+            "LOWER(p.popupName) LIKE LOWER(CONCAT('%', :k1, '%')) AND " +
+            "LOWER(p.popupName) LIKE LOWER(CONCAT('%', :k2, '%')) AND " +
+            "LOWER(p.popupName) LIKE LOWER(CONCAT('%', :k3, '%'))) OR " +
+            // 설명에서도 동일하게 적용
+            "(" +
+            "LOWER(p.popupDescription) LIKE LOWER(CONCAT('%', :k1, '%')) AND " +
+            "LOWER(p.popupDescription) LIKE LOWER(CONCAT('%', :k2, '%')) AND " +
+            "LOWER(p.popupDescription) LIKE LOWER(CONCAT('%', :k3, '%'))) OR " +
+            // 카테고리 이름도 동일하게 적용
+            "(" +
+            "LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :k1, '%')) AND " +
+            "LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :k2, '%')) AND " +
+            "LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :k3, '%')))")
+    List<PopupStore> searchByKeywordIncludingCategories(@Param("k1") String keyword1,
+                                                        @Param("k2") String keyword2,
+                                                        @Param("k3") String keyword3);
 }

@@ -255,7 +255,6 @@ public class PopupStoreService {
     }
 
     public List<PopupStoreDTO> searchPopupStores(String keyword) {
-        // 검색어가 비어있으면 빈 리스트 반환
         if (keyword == null || keyword.trim().isEmpty()) {
             return Collections.emptyList();
         }
@@ -263,8 +262,22 @@ public class PopupStoreService {
         // 검색어 카운트 증가
         searchRankingService.incrementSearchCount(keyword.trim().toLowerCase());
 
-        // 카테고리를 포함한 통합 검색 수행
-        return popupStoreRepository.searchByKeywordIncludingCategories(keyword.trim())
+        // 검색어를 한 글자씩 늘려가며 검색
+        String[] searchTerms = new String[3];
+        keyword = keyword.trim().toLowerCase();
+
+        // "최애의" -> ["최", "최애", "최애의"]
+        for(int i = 0; i < Math.min(keyword.length(), 3); i++) {
+            searchTerms[i] = keyword.substring(0, i + 1);
+        }
+
+        // 나머지 배열 요소를 마지막 검색어로 채움
+        for(int i = keyword.length(); i < 3; i++) {
+            searchTerms[i] = keyword;
+        }
+
+        return popupStoreRepository.searchByKeywordIncludingCategories(
+                        searchTerms[0], searchTerms[1], searchTerms[2])
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
