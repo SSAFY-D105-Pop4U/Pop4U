@@ -172,7 +172,7 @@ const LifeShot = () => {
                       />
                       사진넣기
                   </label>
-                  <button onClick={handleCapture} className="button" >저장하기</button>
+                  <button onClick={handleCapture} className="chat-button" >저장하기</button>
               </div>
           </div>
         </DragDropContext>
