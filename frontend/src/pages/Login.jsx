@@ -24,10 +24,8 @@ const Login = () => {
         }));
     };
 
-        //api 호출출
+        //api 호출
         const handleLogin = async () => {
-
-            
             try {
                 const loginData = {
                     email: login.userid,       
