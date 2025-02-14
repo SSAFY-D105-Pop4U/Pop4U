@@ -14,7 +14,7 @@ const SearchList = () => {
         },
       ];
     return (
-        <div>
+        
         <div className="search-results">
           {searchResults.map((result, index) => (
             <div>
@@ -30,7 +30,7 @@ const SearchList = () => {
             </div>
           ))}
         </div>
-        </div>
+       
     )
 
 }
