@@ -13,12 +13,13 @@ import { AppDataContext } from "../Context.jsx";
 const Home = () => {
   const { appData, setAppData } = useContext(AppDataContext);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [popups, setPopups] = useState({});
 
   const handleMenuClick = () => {
     setIsSidebarOpen(true);
   };
 
-  const [popups, setPopups] = useState({});
+  
 
   useEffect(() => {
     const fetchPopups = async () => {

@@ -26,7 +26,7 @@ const Search = () => {
     <Suggest/>
     </div>
     ):(<div> 
-       <SearchList/> 
+       <SearchList searchQuery={searchQuery}/> 
        </div>)}
   </div>;
 };

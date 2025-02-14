@@ -1,5 +1,9 @@
 import '../../styles/components/Suggest.css'
+
 const Suggest = () => {
+
+  
+  
 
     const cards = [
         {
