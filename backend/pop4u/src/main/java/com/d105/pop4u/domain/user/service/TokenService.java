@@ -40,14 +40,22 @@ public class TokenService {
         }
 
         // 액세스 토큰과 리프레시 토큰 생성
-        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(480)); // 나중에 시간 바꿀 것. (1~2시간)
+        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(2));
         String refreshToken = refreshTokenService.createRefreshToken(user.getUserId());
 
-        TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
+        // 사용자 ID를 포함한 토큰 응답 생성
+        return new TokenResponse(accessToken, refreshToken, user.getUserId()); // 사용자 ID 포함
 
-        // 리프레시 토큰 데이터베이스에 저장
-        refreshTokenService.saveRefreshToken(user.getUserId(), refreshToken);
 
-        return tokenResponse; // 액세스 토큰 반환
+//        // 액세스 토큰과 리프레시 토큰 생성
+//        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(480)); // 나중에 시간 바꿀 것. (1~2시간)
+//        String refreshToken = refreshTokenService.createRefreshToken(user.getUserId());
+//
+//        TokenResponse tokenResponse = new TokenResponse(accessToken, refreshToken);
+//
+//        // 리프레시 토큰 데이터베이스에 저장
+//        refreshTokenService.saveRefreshToken(user.getUserId(), refreshToken);
+//
+//        return tokenResponse; // 액세스 토큰 반환
     }
 }
