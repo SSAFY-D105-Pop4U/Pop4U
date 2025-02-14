@@ -4,13 +4,13 @@ import axios from "axios";
 const token = sessionStorage.getItem("accessToken"); 
 
 const api = axios.create({
-    baseURL: "/api",
-    // baseURL: "http://localhost:8081/",
+    // baseURL: "/api",
+    // baseURL: "/api",
 
     withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': token ? `bearer ${token}` : "", 
+      'Authorization': token ? `${token}` : "", 
     },
   });
 

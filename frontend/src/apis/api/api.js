@@ -123,14 +123,14 @@ export const postlogin = async (loginData) => {
   }
 };
 
-// 내예약 조회회
+// 내예약 조회
 export const myreservation = async () => {
   try {
     const response = await api.get(`/reservation/my`);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
-    throw error;ㄴ
+    throw error;
   }
 }
 
