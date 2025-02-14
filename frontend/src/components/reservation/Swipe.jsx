@@ -34,44 +34,7 @@ const Swipe = () => {
         position: "15번째",
         waitingTime: "15분",
         image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-      },{
-        id: 4,
-        date: "01.23(목)",
-        time: "16:00",
-        people: "성인 3",
-        queue: "12",
-        position: "15번째",
-        waitingTime: "15분",
-        image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-      },{
-        id: 5,
-        date: "01.23(목)",
-        time: "16:00",
-        people: "성인 3",
-        queue: "12",
-        position: "15번째",
-        waitingTime: "15분",
-        image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-      },{
-        id: 6,
-        date: "01.23(목)",
-        time: "16:00",
-        people: "성인 3",
-        queue: "12",
-        position: "15번째",
-        waitingTime: "15분",
-        image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-      },{
-        id: 7,
-        date: "01.23(목)",
-        time: "16:00",
-        people: "성인 3",
-        queue: "12",
-        position: "15번째",
-        waitingTime: "15분",
-        image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
       },
-    // Add more cards as needed
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -84,7 +47,7 @@ const Swipe = () => {
   const handlemy = async () => {
     try {
       const data = await myreservation();
-      console.log("📌 API 내예약호출출:", data);
+      console.log("📌 API 내예약호출:", data);
     } catch (error) {
       console.error("❌ Failed to load reviews", error);
     }
@@ -93,6 +56,7 @@ const Swipe = () => {
 
   useEffect(() => {
     handlemy()
+
 
     const handleResize = () => {
       setIsWebVersion(window.innerWidth >= 768);

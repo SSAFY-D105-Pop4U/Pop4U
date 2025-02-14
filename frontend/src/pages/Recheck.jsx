@@ -5,12 +5,36 @@ import ProgressBar from "../components/appointment/ProgressBar";
 import NextButton from "../components/NextButton";
 import { useNavigate } from "react-router-dom";
 import { AppDataContext } from "../Context.jsx";
-import { Title } from "chart.js";
+import { postappointment } from "../apis/api/api.js";
 
-const Recheck = ({ name, title, people, date }) => {
+const Recheck = () => {
+  const { appData, setAppData } = useContext(AppDataContext);
+  const nav = useNavigate(); 
 
-const { appData, setAppData } = useContext(AppDataContext);
-  const navigate = useNavigate();
+  const appointment = async () => {
+    try {
+      // console.log("API 요청 데이터:", {
+      //   popupId: appData.popupId, 
+      //   userId: appData.userId,
+      //   person: appData.selectedPerson,
+      //   date: appData.selectedDate,
+      //   time: appData.selectedTime,
+      // });
+
+      const data = await postappointment({
+        popupId: appData.popupId, 
+        userId: appData.userId,
+        person: appData.selectedPerson,
+        date: appData.selectedDate,
+        time: appData.selectedTime?.toString() || "시간 미선택", 
+      });
+
+      console.log("API 응답 (예약완료):", data);
+      nav("/reservation"); 
+    } catch (error) {
+      console.error("api 호출 실패", error);
+    }
+  };
 
   return (
     <div>
@@ -25,23 +49,31 @@ const { appData, setAppData } = useContext(AppDataContext);
       <div className="recheck-container">
         <div className="recheck-item">
           <span className="recheck-label">팝업명</span>
-          <span className="recheck-value">{name}</span>
+          <span className="recheck-value">
+            {appData.popupName || "팝업 이름 없음"} 
+          </span>
         </div>
         <div className="recheck-item">
           <span className="recheck-label">인원</span>
-          <span className="recheck-value">{Title}명</span>
+          <span className="recheck-value">
+            {appData.selectedPerson ? `${appData.selectedPerson}명` : "인원 미선택"}
+          </span>
         </div>
         <div className="recheck-item">
           <span className="recheck-label">날짜</span>
-          <span className="recheck-value">{date}</span>
+          <span className="recheck-value">
+            {appData.selectedDate || "날짜 미선택"} 
+          </span>
         </div>
         <div className="recheck-item">
           <span className="recheck-label">시간</span>
-          <span className="recheck-value">{title}</span>
+          <span className="recheck-value">
+            {appData.selectedTime ? String(appData.selectedTime) : "시간 미선택"}
+          </span>
         </div>
       </div>
 
-      <NextButton onClick={() => navigate("/reservation")}>확정</NextButton>
+      <NextButton onClick={appointment}>확정</NextButton>
     </div>
   );
 };

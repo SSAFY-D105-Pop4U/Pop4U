@@ -1,4 +1,5 @@
 // src/apis/popupApi.js
+import { ssrExportAllKey } from "vite/module-runner";
 import api from "./instance.js";
 
 
@@ -146,32 +147,24 @@ export const myreservation = async () => {
   }
 }
 
+// 리뷰작성성
+export const postwritereview = async ({ popupId, userId, person, date, time }) => {
+  try {
+    const response = await api.post(`/review/create`, {
+      userId: userId,          // 사용자 ID
+      popupId: person, // 예약 인원
+      reservationId: date,  // 예약 날짜
+      reviewContent: date,
+      reviewRating: time   // 예약 시간
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
 
 
 
 
 
-// import axios from "axios";
-
-// export const getToken = async (accessToken) => {
-//   try {
-//     const response = await axios.post("restapi 주소소", {
-//       access_token: accessToken,
-//     });
-//     console.log("백엔드 응답:", response.data);
-//     return response.data; // 필요하면 응답 데이터를 반환
-//   } catch (error) {
-//     console.error("백엔드 요청 오류:", error);
-//     throw error;
-//   }
-// };
-
-// export const getReviews = async (popupId) => {
-//   try {
-//     const response = await axios.get(`/api/reviews?popupId=${popupId}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error("리뷰 데이터를 불러오지 못했습니다.", error);
-//     return [];
-//   }
-// };

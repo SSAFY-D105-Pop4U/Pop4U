@@ -7,7 +7,6 @@ import Time from "../components/appointment/Time";
 import NextButton from "../components/NextButton";
 // import Recheck from "../components/appointment/Recheck";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { postappointment } from "../apis/api/api.js";
 import { AppDataContext } from "../Context.jsx";
 
 const Appointment = () => {
@@ -26,37 +25,16 @@ const Appointment = () => {
   
 
 
-  const appointment = async () => {
-    try {
-      console.log("API 요청 데이터:", {
-        popupId,
-        userId: appData.userId,
-        person: appData.selectedPerson,
-        date: appData.selectedDate,
-        time: appData.selectedTime,
-      });
-      const data = await postappointment({
-        popupId,
-        userId: appData.userId,
-        person: appData.selectedPerson,
-        date: appData.selectedDate,
-        time: appData.selectedTime,
-      });
-      console.log("API 응답 (팝업상세):", data);
-      nav("/recheck");
-    } catch (error) {
-      console.error("api 호출 실패");
-    }
-  };
+  
   useEffect(() => {
-    console.log("📦 Context 데이터 현황:", appData);
+    console.log("⭐Context 데이터⭐", appData);
   }, [appData]); // ✅ appData 전체가 변경될 때마다 실행됨
 
   return (
     <div style={{ width: "100%", maxWidth: "960px", margin: "0 auto" }}>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
-      {showAppointmentDetails ? (
+      
         <>
           <Calendar setResultDate={setSelectedDate} />{" "}
         
@@ -65,22 +43,9 @@ const Appointment = () => {
             setSelectedPerson={setSelectedPerson}
           />
           <Time selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-          <NextButton onClick={appointment}>다음</NextButton>
+          <NextButton onClick={()=>nav("/recheck")}>다음</NextButton>
         </>
-      ) : (
-        <>
-          <h3>
-            예약 정보를 다시 한 번<br />
-            확인해주세요.
-          </h3>
-          <Recheck
-            name={popupName}
-            date={appData.selectedDate} // ✅ 전역 상태에서 선택한 날짜 사용
-            people={selectedPerson}
-            title={selectedTime}
-          />
-        </>
-      )}
+  
     </div>
   );
 };
