@@ -40,7 +40,7 @@ public class TokenService {
         }
 
         // 액세스 토큰과 리프레시 토큰 생성
-        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(2));
+        String accessToken = tokenProvider.generateToken(user, Duration.ofHours(480));
         String refreshToken = refreshTokenService.createRefreshToken(user.getUserId());
 
         // 사용자 ID를 포함한 토큰 응답 생성
