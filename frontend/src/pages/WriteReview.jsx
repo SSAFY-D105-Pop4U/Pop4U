@@ -5,6 +5,8 @@ import star from "../assets/icons/star.png";
 import fullstar from "../assets/icons/fullstar.png";
 import "../styles/pages/WriteReview.css";
 import NextButton from "../components/NextButton";
+import { postwritereview } from "../apis/api/api";
+
 
 const WriteReview = () => {
   const navigate = useNavigate();
@@ -24,7 +26,6 @@ const WriteReview = () => {
       alert(`이미지는 최대 ${maxImages}장까지 업로드 가능합니다.`);
       return;
     }
-
     const newImages = files.map((file) => ({
       file,
       preview: URL.createObjectURL(file),
@@ -37,22 +38,22 @@ const WriteReview = () => {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = () => {
-    // {
-    //   "reviewId": 9007199254740991,
-    //   "userId": 9007199254740991,
-    //   "popupId": 9007199254740991,
-    //   "reviewContent": "string",
-    //   "reviewRating": 1073741824,
-    //   "reviewImg": "string",
-    //   "reviewCreatedAt": "2025-02-10"
-    // }
+
+  //api 호출출
+  const handleSubmit = async () => {
+    try {
+      const data = await postwritereview();
+      console.log("📌 API 내예약호출:", data);
+    } catch (error) {
+      console.error("❌ Failed to load reviews", error);
+    }
+
     console.log({
       rating,
       content,
       images,
     });
-    
+
     setShowCompleteModal(true);
   };
 

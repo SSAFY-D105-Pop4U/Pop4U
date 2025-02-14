@@ -1,7 +1,6 @@
 import '../../styles/components/ProgressBar.css'
 
 const ProgressBar = ({showAppointmentDetails}) => {
-    console.log(showAppointmentDetails);
     
     return (
         <div>

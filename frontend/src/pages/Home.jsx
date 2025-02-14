@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPopups = async () => {
-      console.log("usecontext데이터 ", appData)
+      console.log("⭐usecontext데이터⭐", appData)
       try {
         const data = await getPopups();
         setPopups(data);
