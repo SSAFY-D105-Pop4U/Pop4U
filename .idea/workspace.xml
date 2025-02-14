@@ -5,7 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4859ccc8-cc2e-4590-b323-39b1b5a515e3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/game/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/src/main/java/com/d105/game/GameApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/game/src/test/java/com/d105/game/GameApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatSummaryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/service/ChatSummaryService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/service/ProfanityFilterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/gpt/GptClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/category/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/category/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/category/controller/PopupCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/category/controller/PopupCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/category/controller/UserCategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/category/controller/UserCategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/controller/ChatViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/chat/service/ChatService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/life/controller/PopupCutsIconController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/life/controller/PopupCutsIconController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/life/service/PopupCutsIconService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/life/service/PopupCutsIconService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/reservation/controller/ReservationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/reservation/controller/ReservationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/review/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/review/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/review/repository/ReviewRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/review/repository/ReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/store/controller/PopupStoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/store/controller/PopupStoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/controller/BrandApiController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/controller/TokenApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/controller/TokenApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/controller/UserApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/controller/UserApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/dto/AddUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/dto/AddUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/dto/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/dto/TokenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/dto/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/dto/UserInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/service/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/service/TokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/user/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/config/WebOAuthSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/config/WebOAuthSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/config/oauth/OAuth2SuccessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/config/oauth/OAuth2SuccessHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/config/swagger/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/global/config/swagger/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/resources/templates/chat.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/resources/templates/chat.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,12 +96,17 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2sh2Ot1mf2hwvmqDdIL2iQUmIrp" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Gradle.Build pop4u.executor": "Run",
     "Gradle.C:/Users/SSAFY/Desktop/pop4u/S12P11D105/backend/pop4u/build.gradle.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
@@ -67,7 +116,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.Pop4uApplication.executor": "Run",
-    "git-widget-placeholder": "back__develop",
+    "git-widget-placeholder": "Merging feat/BE/search",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -78,6 +127,17 @@
   }
 }]]></component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Pop4uApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="pop4u.main" />
@@ -98,8 +158,9 @@
       <workItem from="1738893462824" duration="662000" />
       <workItem from="1739098909453" duration="25988000" />
       <workItem from="1739173758678" duration="3275000" />
-      <workItem from="1739403434381" duration="4846000" />
-      <workItem from="1739428223288" duration="1161000" />
+      <workItem from="1739343308900" duration="854000" />
+      <workItem from="1739344476110" duration="1061000" />
+      <workItem from="1739492563783" duration="4078000" />
     </task>
     <servers />
   </component>
@@ -128,5 +189,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
