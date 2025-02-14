@@ -40,14 +40,14 @@ const Signup = () => {
                 userPassword: formData.password, 
                 userName: formData.name,       
                 userTelephone: formData.phone,  
-                userRole: formData.type          
+                userStatus: formData.type          
             };
             console.log("회원가입 요청:", formattedData);
             const response = await postsignup(formattedData); // postsignup 함수 호출
 
             if (response ) {
                 console.log("회원가입 성공:", response);
-                nav("/login"); // 회원가입 성공 후 이동할 페이지
+                nav("/"); // 회원가입 성공 후 이동할 페이지
             }
         } catch (error) {
             console.error("회원가입 실패:", error);
