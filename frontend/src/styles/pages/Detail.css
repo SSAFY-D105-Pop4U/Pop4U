@@ -141,7 +141,20 @@
      /* border-top: 1px solid #ddd;  */
   }
 
-.button {
+.chat-button {
+    width: 45%;
+    height: 40px;
+    background: #986CFF;
+    border-radius: 10px;
+    border: 1px solid #986CFF;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease; /* ✅ 부드러운 전환 효과 */
+}
+
+.apointment-button {
     width: 45%;
     height: 40px;
     background: white;
@@ -153,18 +166,24 @@
     cursor: pointer;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease; /* ✅ 부드러운 전환 효과 */
 }
-
 /* ✅ 마우스를 올렸을 때 */
-.button:hover {
+.chat-button:hover {
     background: #986CFF;
     color: white;
     transform: scale(1.05); /* 살짝 확대 효과 */
 }
+.apointment-button:hover {
+    transform: scale(1.05); /* 살짝 확대 효과 */
+}
 
 /* ✅ 클릭했을 때 */
-.button:active {
+.chat-button:active {
     transform: scale(0.99); /* 클릭 시 살짝 작아지는 효과 */
 }
+.apointment-button:active {
+    transform: scale(0.99); /* 클릭 시 살짝 작아지는 효과 */
+}
+
 
 .eye{
     width: 20px;

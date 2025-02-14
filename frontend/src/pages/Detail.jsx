@@ -128,10 +128,10 @@ const Detail = () => {
       <div className="button-wrapper">
         {activeIndex === 1 ? null : (
           <>
-            <button className="button" onClick={appointment}>
+            <button className="apointment-button" onClick={appointment}>
               예약하기
             </button>
-            <button className="button">채팅하기</button>
+            <button className="chat-button">채팅하기</button>
           </>
         )}
       </div>
