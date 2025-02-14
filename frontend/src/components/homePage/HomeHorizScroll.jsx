@@ -5,10 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Drag from "../../hooks/Drag";
 
 const HomeHorizScroll = ({ popups }) => {
+
   const nav = useNavigate();
-
-  
-
   const handleCardClick = (index) => {
     nav(`/detail?popupId=${index}`);
   };
