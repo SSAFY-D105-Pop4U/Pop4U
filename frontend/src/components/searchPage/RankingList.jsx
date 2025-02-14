@@ -1,19 +1,35 @@
 import '../../styles/components/RankingList.css';
+import { useEffect, useState } from "react";
+
+import { getSearchRanking } from "../../apis/api/api.js";
+
+
+
+  
 
 const RankingList = () => {
-    const rankings = [
-      { rank: 1, name: '오징어 게임', status: 'up' },
-      { rank: 2, name: '빵빵이', status: 'up' },
-      { rank: 3, name: '더현대', status: 'down' },
-      { rank: 4, name: '키즈', status: 'up' },
-      { rank: 5, name: '오징어 게임', status: 'up' },
-      { rank: 6, name: '신세계 백화점', status: 'neutral' },
-      { rank: 7, name: '패션', status: 'up' },
-      { rank: 8, name: '이벤트', status: 'down' },
-      { rank: 9, name: '전시', status: 'neutral' },
-      { rank: 10, name: '데이트', status: 'up' },
-    ];
+
+  const [searchRank, setSearchRank] = useState([]);
+
   
+  useEffect(() => {
+
+    {/* 인기 검색어 조회 api 호출 */}
+      const fetchPopups = async () => {
+        try {
+          const data = await getSearchRanking();
+          setSearchRank(data);
+          console.log("실시간 검색어 조회완료");
+        } catch (error) {
+          console.error("Failed to load popups");
+        }
+      };
+  
+      fetchPopups();
+    }, []);
+  
+    
+    {/* 순위 변동 아이콘 */}
     const getStatusIcon = (status) => {
       if (status === 'up') return '🔺';
       if (status === 'down') return '🔹';
@@ -21,28 +37,33 @@ const RankingList = () => {
     };
   
     return (
+      
       <div className="ranking-container">
         <div className="ranking-header">01.20 00:00 기준</div>
         <div className="ranking-grid">
+          
+          {/* 1 ~ 5등 까지 인기 검색 순위 */}
           <div>
-            {rankings.slice(0, 5).map((item) => (
+            {searchRank.slice(0, 5).map((item) => (
               <div
                 key={item.rank}
                 className="ranking-item"
               >
-                <span className="ranking-name">{item.rank} {item.name}</span>
-                <span className="ranking-status">{getStatusIcon(item.status)}</span>
+                <span className="ranking-name">{item.rank} {item.keyword}</span>
+                <span className="ranking-status">{getStatusIcon('up')}</span>
               </div>
             ))}
           </div>
+
+           {/* 6 ~ 10등 까지 인기 검색 순위 */}
           <div>
-            {rankings.slice(5).map((item) => (
+            {searchRank.slice(5).map((item) => (
               <div
                 key={item.rank}
                 className="ranking-item"
               >
-                <span className="ranking-name">{item.rank} {item.name}</span>
-                <span className="ranking-status">{getStatusIcon(item.status)}</span>
+                <span className="ranking-name">{item.rank} {item.keyword}</span>
+                <span className="ranking-status">{getStatusIcon('up')}</span>
               </div>
             ))}
           </div>
