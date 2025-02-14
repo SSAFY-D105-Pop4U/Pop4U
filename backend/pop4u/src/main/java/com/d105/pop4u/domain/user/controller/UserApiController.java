@@ -32,11 +32,14 @@ public class UserApiController {
 
     // 로그인 (POST /user/login)
     @PostMapping("/login")
-    public ResponseEntity<BaseResponse<TokenResponse>> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+    public ResponseEntity<BaseResponse<TokenResponse>> login(@RequestBody LoginRequest request) {
         TokenResponse tokens = tokenService.login(request.getEmail(), request.getPassword()); // 로그인 메서드 호출
 
-        // 액세스 토큰을 세션에 저장
-        response.setHeader("Authorization", "Bearer " + tokens.getAccessToken());
+//        // 액세스 토큰을 세션에 저장
+//        response.setHeader("Authorization", "Bearer " + tokens.getAccessToken());
+
+        // 사용자 ID를 포함한 응답 생성
+//        TokenResponse response = new TokenResponse(tokens.getAccessToken(), tokens.getRefreshToken(), userService.findByUserId();
 
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "로그인이 완료되었습니다.", tokens)); // 액세스 + 리프레쉬 토큰 반환
     }
