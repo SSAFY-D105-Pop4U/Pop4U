@@ -37,9 +37,13 @@ public interface PopupStoreRepository extends JpaRepository<PopupStore, Long> {
     @Query("SELECT DISTINCT p FROM PopupStore p " +
             "LEFT JOIN p.popupCategories pc " +
             "LEFT JOIN pc.category c " +
-            "WHERE LOWER(p.popupName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "WHERE " +
+            "REPLACE(LOWER(p.popupName), ' ', '') LIKE LOWER(CONCAT('%', REPLACE(:keyword, ' ', ''), '%')) OR " +
+            "LOWER(p.popupName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(p.popupDescription) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(p.popupRegion) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
-            "LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+            "EXISTS (SELECT 1 FROM Category cat " +
+            "WHERE cat IN (SELECT pc2.category FROM PopupCategory pc2 WHERE pc2.popupStore = p) " +
+            "AND LOWER(cat.categoryName) LIKE LOWER(CONCAT('%', :keyword, '%')))")
     List<PopupStore> searchByKeywordIncludingCategories(@Param("keyword") String keyword);
 }
