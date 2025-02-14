@@ -60,7 +60,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         response.setHeader("Authorization", "Bearer " + accessToken);
 
         // 응답 헤더 설정 (CORS 관련)
-        response.setHeader("Access-Control-Allow-Origin", "http://i12d105.p.ssafy.io:5173");
+        response.setHeader("Access-Control-Allow-Origin", "https://i12d105.p.ssafy.io:5173/");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
 
