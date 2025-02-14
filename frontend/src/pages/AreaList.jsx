@@ -15,22 +15,27 @@ const AreaList = () => {
   const [popups, setPopups] = useState([]);
   const [selectedSort, setSelectedSort] = useState("정렬"); // 정렬기준
   const [selectedDate, setSelectedDate] = useState(""); // 날짜선택
+
+  const area = type.split("/")
   
   const nav = useNavigate();
 
-  const popupsRegion = async () => {
-    try {
-      const data = await getPopupsRegion("서울");
-      setPopups(data);
-      console.log("API 응답 (팝업상세):", data);
-    } catch (error) {
-      console.error("Failed to load popups");
-    }
-  };
   
-  useEffect(() => {
-    popupsRegion();
-  }, []);
+const popupsRegion = async () => {
+  try {
+    const results = await Promise.all(area.map(region => getPopupsRegion(region)));
+    
+    setPopups(prevPopups => [...prevPopups, ...results.flat()]);
+// 이전 상태 유지하면서 업데이트
+    console.log("API 응답 (팝업상세):", results);
+  } catch (error) {
+    console.error("Failed to load popups", error);
+  }
+};
+
+useEffect(() => {
+  popupsRegion(); // 컴포넌트가 마운트될 때 실행
+}, []);
 
   // selectedSort 값이 변경될 때마다 정렬 수행
   useEffect(() => {
