@@ -18,25 +18,26 @@ const SearchList = ({searchQuery}) => {
     handleCardClick
   }; 
     
-    useEffect(() => {
-      console.log("searchQuery 값:",searchQuery);
-      {/* 인기 검색어 조회 api 호출 */}
-        const fetchPopups = async () => {
-          try {
-            
-            
-            const data = await getSearch(searchQuery);
-            setsearchData(data);
-            
-          } catch (error) {
-            console.error("Failed to load popups");
-          }
-        };
-    
-        fetchPopups();
+  useEffect(() => {
+    console.log("searchQuery 값:", searchQuery);
   
-        
-      }, [searchQuery]);
+    const fetchPopups = async () => {
+      try {
+        const data = await getSearch(searchQuery);
+        setsearchData(data);
+      } catch (error) {
+        console.error("Failed to load popups");
+      }
+    };
+  
+    // 🔹 5초 후에 fetchPopups 실행
+    const timeoutId = setTimeout(() => {
+      fetchPopups();
+    }, 500); // 5초 (5000ms)
+  
+    // 🔹 컴포넌트가 언마운트되거나 `searchQuery`가 변경되면 기존 타이머를 취소
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
 
     return (
         
