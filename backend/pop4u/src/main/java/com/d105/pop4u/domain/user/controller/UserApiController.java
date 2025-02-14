@@ -41,7 +41,7 @@ public class UserApiController {
         // 사용자 ID를 포함한 응답 생성
 //        TokenResponse response = new TokenResponse(tokens.getAccessToken(), tokens.getRefreshToken(), userService.findByUserId();
         // Bearer 형식으로 액세스 토큰 설정
-        tokens.setAccessToken(tokens.getBearerAccessToken());
+        tokens.setAccessToken(tokens.getAccessToken());
 
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "로그인이 완료되었습니다.", tokens)); // 액세스 + 리프레쉬 토큰 반환
     }
