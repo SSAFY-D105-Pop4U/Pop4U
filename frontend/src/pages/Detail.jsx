@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import "../styles/pages/Detail.css";
-import BackButton from "../components/BackButton";
+import Header from "../components/basic/Header";
 import Info from "../components/Info";
 import Review from "../components/Review";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -80,7 +80,7 @@ const Detail = () => {
 
   return (
     <div className="container1">
-      <BackButton />
+      <Header title="팝업 상세" />
 
       {/* ✅ 캐러셀 컴포넌트에 detail.popupImages 전달 */}
       {detail?.popupImages?.length > 0 ? (
