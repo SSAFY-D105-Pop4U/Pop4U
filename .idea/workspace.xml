@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4859ccc8-cc2e-4590-b323-39b1b5a515e3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/store/repository/PopupStoreRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/store/repository/PopupStoreRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/store/service/PopupStoreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/store/service/PopupStoreService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,32 +54,48 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2sh2Ot1mf2hwvmqDdIL2iQUmIrp" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build pop4u.executor": "Run",
-    "Gradle.C:/Users/SSAFY/Desktop/pop4u/S12P11D105/backend/pop4u/build.gradle.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.Pop4uApplication.executor": "Run",
-    "git-widget-placeholder": "back__develop",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.Build pop4u.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.C:/Users/SSAFY/Desktop/pop4u/S12P11D105/backend/pop4u/build.gradle.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Pop4uApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;back__develop&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Pop4uApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="pop4u.main" />
@@ -98,8 +116,10 @@
       <workItem from="1738893462824" duration="662000" />
       <workItem from="1739098909453" duration="25988000" />
       <workItem from="1739173758678" duration="3275000" />
-      <workItem from="1739403434381" duration="4846000" />
-      <workItem from="1739428223288" duration="1161000" />
+      <workItem from="1739343308900" duration="854000" />
+      <workItem from="1739344476110" duration="1061000" />
+      <workItem from="1739492563783" duration="4078000" />
+      <workItem from="1739508011855" duration="5229000" />
     </task>
     <servers />
   </component>
@@ -128,5 +148,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

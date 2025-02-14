@@ -16,6 +16,6 @@ public class TokenResponse {
 
     // 액세스 토큰을 Bearer 형식으로 반환하는 메서드 추가
     public String getBearerAccessToken() {
-        return "Bearer " + accessToken;
+        return accessToken;
     }
 }

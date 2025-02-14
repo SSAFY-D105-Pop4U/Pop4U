@@ -1,6 +1,8 @@
 package com.d105.pop4u.domain.store.controller;
 
 
+import com.d105.pop4u.domain.search.dto.SearchRankDTO;
+import com.d105.pop4u.domain.search.service.SearchRankingService;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.service.PopupStoreService;
 import com.d105.pop4u.domain.user.entity.User;
@@ -29,6 +31,7 @@ import java.util.Map;
 public class PopupStoreController {
 
     private final PopupStoreService popupStoreService;
+    private final SearchRankingService searchRankingService;
 
     // ✅ 모든 팝업스토어 조회
     @GetMapping
@@ -128,5 +131,16 @@ public class PopupStoreController {
         }
         popupStoreService.deletePopupStore(popup_id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PopupStoreDTO>> searchPopupStores(
+            @RequestParam String keyword) {
+        return ResponseEntity.ok(popupStoreService.searchPopupStores(keyword));
+    }
+
+    @GetMapping("/search/ranking")
+    public ResponseEntity<List<SearchRankDTO>> getSearchRanking() {
+        return ResponseEntity.ok(searchRankingService.getTopSearches());
     }
 }

@@ -6,6 +6,7 @@ import com.d105.pop4u.domain.category.repository.CategoryRepository;
 import com.d105.pop4u.domain.category.entity.PopupCategory;
 import com.d105.pop4u.domain.category.repository.PopupCategoryRepository;
 import com.d105.pop4u.domain.chat.service.ChatRoomService;
+import com.d105.pop4u.domain.search.service.SearchRankingService;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.store.entity.PopupStoreImg;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class PopupStoreService {
     private final PopupStoreImgRepository popupStoreImgRepository;
     private final S3Service s3Service;
     private final ChatRoomService chatRoomService;
+    private final SearchRankingService searchRankingService;
     // ===============================
     // 조회 메서드들
     // ===============================
@@ -249,6 +252,23 @@ public class PopupStoreService {
             }
         }
         popupStoreImgRepository.deleteByPopupStore(store);
+    }
+
+    public List<PopupStoreDTO> searchPopupStores(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        // 검색어 카운트 증가
+        searchRankingService.incrementSearchCount(keyword.trim().toLowerCase());
+
+        // 검색어 전체를 하나의 키워드로 사용
+        keyword = keyword.trim().toLowerCase();
+
+        return popupStoreRepository.searchByKeywordIncludingCategories(keyword)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
 
