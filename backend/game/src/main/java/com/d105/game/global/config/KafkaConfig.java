@@ -23,7 +23,7 @@ public class KafkaConfig {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9092");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GameEventSerializer.class); // 사용자 정의 직렬화
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GameEventSerializer.class); // 사용자 정의 직렬화 
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
