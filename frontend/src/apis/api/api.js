@@ -13,6 +13,18 @@ export const getPopups = async () => {
     }
 }
 
+
+{/* ✅ GET : 인기 검색어 조회 */}
+export const getSearchRanking = async () => {
+  try {
+    const response = await api.get("/popup/search/ranking");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
+
 {/* ✅ GET : 팝업 상세 정보 조회*/}
 export const GetPopupDetail = async (popupId) => {
   try {
