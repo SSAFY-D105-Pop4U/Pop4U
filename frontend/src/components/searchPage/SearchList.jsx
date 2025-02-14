@@ -2,9 +2,21 @@ import '../../styles/components/SearchList.css'
 import Divider from '../basic/Divider'
 import { useEffect, useState } from "react";
 import { getSearch } from "../../apis/api/api.js";
+import { useNavigate } from "react-router-dom";
 
 const SearchList = ({searchQuery}) => {
   const [searchData, setsearchData] = useState([]);
+
+  const nav = useNavigate();
+  const handleCardClick = (index) => {
+    nav(`/detail?popupId=${index}`);
+  };
+  
+  const handleOnClick = (query) => {
+    console.log(query);
+    
+    handleCardClick
+  }; 
     
     useEffect(() => {
       console.log("searchQuery 값:",searchQuery);
@@ -26,24 +38,11 @@ const SearchList = ({searchQuery}) => {
         
       }, [searchQuery]);
 
-
-    const searchResults = [
-        {
-          title: "2025 아이파크몰 키보드 페스티벌",
-          time: "11:00 ~ 20:00",
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/46798713%2C0c53%2C4b22%2Ca60d%2C447074851f7f", // Replace with actual image URLs
-        },
-        {
-          title: "캡틴 아메리카 : 브레이브 뉴 월드asdfasdfsaf",
-          time: "11:00 ~ 20:00",
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/46798713%2C0c53%2C4b22%2Ca60d%2C447074851f7f",
-        },
-      ];
     return (
         
         <div className="search-results">
           {searchData.map((result, index) => (
-            <div>
+            <div onClick={()=>handleCardClick(result.popupId)}>
                
             <div className="result-item" key={index}>
               <img src={result.popupImages[0]} alt={result.popupName} className="result-image" />
