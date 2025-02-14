@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
 	// 정민규
+	implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE"
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'

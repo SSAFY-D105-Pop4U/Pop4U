@@ -19,6 +19,7 @@ public class ChatService {
 
     private final ChatMessageRepository chatMessageRepository;
     private final SimpMessagingTemplate messagingTemplate;
+    private final ProfanityFilterService profanityFilterService; // 비속어 필터 서비스 주입
 
     // ✅ 특정 채팅방 메시지 조회
     public List<ChatMessageDto> getMessagesByChatRoomId(Long chatRoomId) {
@@ -31,6 +32,9 @@ public class ChatService {
     // ✅ 메시지 저장 및 전송
     @Transactional
     public ChatMessageDto sendMessage(ChatMessageDto chatMessageDto) {
+        // 1. 입력된 메시지에서 금칙어 필터 적용
+        String filteredMessage = profanityFilterService.filter(chatMessageDto.getChattingMessage());
+        chatMessageDto.setChattingMessage(filteredMessage);
         // ✅ 채팅 메시지 저장
         ChatMessage chatMessage = chatMessageRepository.save(ChatMessage.fromDto(chatMessageDto));
 
