@@ -16,7 +16,7 @@ export const getPopups = async () => {
 {/* ✅ GET : 검색어 조회 */}
 export const getSearch = async (keyword) => {
   try {
-    const response = await api.get(`http://localhost:8081/popup/search`, {
+    const response = await api.get(`popup/search`, {
       params: { keyword } // ✅ 자동으로 `popup/search?keyword=캐릭터` 형태로 변환됨
     });
     return response.data;
