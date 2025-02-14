@@ -25,7 +25,7 @@ public class UserService {
 
         // 사용자 저장
         User user = User.builder()
-                .userStatus(dto.getRole()) // 0: 일반회원, 1: 관리자
+                .userStatus(dto.getUserStatus()) // 0: 일반회원, 1: 관리자
                 .userName(dto.getUserName())
                 .userNickname(dto.getUserName())
                 .userEmail(dto.getUserEmail())
