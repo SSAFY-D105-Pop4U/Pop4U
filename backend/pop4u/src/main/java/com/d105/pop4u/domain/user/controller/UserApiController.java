@@ -32,8 +32,12 @@ public class UserApiController {
 
     // 로그인 (POST /user/login)
     @PostMapping("/login")
-    public ResponseEntity<BaseResponse<TokenResponse>> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<BaseResponse<TokenResponse>> login(@RequestBody LoginRequest request, HttpServletResponse response) {
         TokenResponse tokens = tokenService.login(request.getEmail(), request.getPassword()); // 로그인 메서드 호출
+
+        // 액세스 토큰을 세션에 저장
+        response.setHeader("Authorization", "Bearer " + tokens.getAccessToken());
+
         return ResponseEntity.ok(BaseResponse.create(HttpStatus.OK.value(), "로그인이 완료되었습니다.", tokens)); // 액세스 + 리프레쉬 토큰 반환
     }
 
