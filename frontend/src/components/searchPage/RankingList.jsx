@@ -7,10 +7,16 @@ import { getSearchRanking } from "../../apis/api/api.js";
 
   
 
-const RankingList = () => {
+const RankingList = ({onClickSearch, setOnClickSearch}) => {
 
   const [searchRank, setSearchRank] = useState([]);
 
+  const handleSearchClick = (col) => {
+    console.log(col);
+    
+    setOnClickSearch(col);
+    
+  };
   
   useEffect(() => {
 
@@ -26,6 +32,8 @@ const RankingList = () => {
       };
   
       fetchPopups();
+
+      
     }, []);
   
     
@@ -48,6 +56,7 @@ const RankingList = () => {
               <div
                 key={item.rank}
                 className="ranking-item"
+                onClick={() => handleSearchClick(item.keyword)}
               >
                 <span className="ranking-name">{item.rank} {item.keyword}</span>
                 <span className="ranking-status">{getStatusIcon('up')}</span>
