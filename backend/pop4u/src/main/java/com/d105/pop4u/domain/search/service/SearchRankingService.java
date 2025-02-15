@@ -4,6 +4,7 @@ import com.d105.pop4u.domain.search.dto.SearchRankDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,28 +15,32 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@EnableScheduling  // 스케줄링 활성화
 public class SearchRankingService {
     private final RedisTemplate<String, String> redisTemplate;
-    private static final String CURRENT_RANKING_KEY = "search:ranking:current";  // 현재 순위
-    private static final String PREVIOUS_RANKING_KEY = "search:ranking:previous";  // 이전 순위
-    private static final String LAST_UPDATE_TIME_KEY = "search:lastUpdateTime";  // 마지막 업데이트 시간
+    private static final String CURRENT_RANKING_KEY = "search:ranking:current";
+    private static final String PREVIOUS_RANKING_KEY = "search:ranking:previous";
+    private static final String LAST_UPDATE_TIME_KEY = "search:lastUpdateTime";
     private static final long RANKING_SIZE = 10;
 
+    // 검색어 카운트 증가 시 바로 시간도 업데이트
     public void incrementSearchCount(String keyword) {
         redisTemplate.opsForZSet().incrementScore(CURRENT_RANKING_KEY, keyword, 1);
+        updateLastUpdateTime();  // 검색할 때마다 시간 업데이트
     }
 
-    // 순위 정보 업데이트 (매 시간 또는 매일 실행)
+    // 시간 업데이트 메서드 분리
+    private void updateLastUpdateTime() {
+        redisTemplate.opsForValue().set(LAST_UPDATE_TIME_KEY,
+                LocalDateTime.now(ZoneId.of("Asia/Seoul"))
+                        .format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
+    }
+
     @Scheduled(cron = "0 0 * * * *")  // 매시간 실행
     public void updateRankings() {
-        // 이전 순위 데이터 저장
         redisTemplate.delete(PREVIOUS_RANKING_KEY);
         redisTemplate.opsForZSet().unionAndStore(CURRENT_RANKING_KEY, Collections.emptySet(), PREVIOUS_RANKING_KEY);
-
-        // 현재 시간 저장 (한국 시간)
-        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-        redisTemplate.opsForValue().set(LAST_UPDATE_TIME_KEY,
-                now.format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
+        updateLastUpdateTime();
     }
 
     public List<SearchRankDTO> getTopSearches() {
