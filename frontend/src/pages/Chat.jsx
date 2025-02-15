@@ -82,7 +82,11 @@ const ChatRoom = () => {
 
   // 메시지 전송
   const sendMessage = () => {
-    if (!message.trim() || !stompClientRef.current || !stompClientRef.current.connected)
+    if (
+      !message.trim() ||
+      !stompClientRef.current ||
+      !stompClientRef.current.connected
+    )
       return;
 
     // 프론트엔드에서는 userId나 userName 정보를 전송하지 않아도,
@@ -101,15 +105,44 @@ const ChatRoom = () => {
     inputRef.current?.focus();
   };
 
-  // 메시지 시간(UTC)을 한국시간으로 변환하는 함수
+  // UTC를 한국 날짜("YYYY. MM. DD")로 변환
+  const convertUTCToKoreanDate = (utcTime) => {
+    if (!utcTime) return "";
+    const date = new Date(utcTime);
+    return date.toLocaleDateString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    });
+  };
+
+  // UTC를 한국 시간("오전/오후 hh시 mm분")으로 변환
   const convertUTCToKoreanTime = (utcTime) => {
     if (!utcTime) return "";
     const date = new Date(utcTime);
-    return date.toLocaleString("ko-KR", {
+    return date.toLocaleTimeString("ko-KR", {
       timeZone: "Asia/Seoul",
-      hour12: false,
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
     });
   };
+
+  // messages를 날짜별로 그룹화 (날짜 문자열을 key로)
+  const groupedMessages = messages.reduce((groups, msg) => {
+    const dateKey = convertUTCToKoreanDate(msg.chattingCreatedAt);
+    if (!groups[dateKey]) {
+      groups[dateKey] = [];
+    }
+    groups[dateKey].push(msg);
+    return groups;
+  }, {});
+
+  // 그룹의 날짜 순서를 정렬 (오름차순)
+  const sortedDates = Object.keys(groupedMessages).sort((a, b) => {
+    return new Date(a) - new Date(b);
+  });
 
   return (
     <div className="chat-container">
@@ -148,16 +181,20 @@ const ChatRoom = () => {
       {/* 채팅 내용 표시 */}
       <h3 className="chat-title">채팅 내용</h3>
       <div className="chat-messages">
-        {messages.map((msg, index) => (
-          <div key={index} className="chat-message">
-            <b>{msg.userName || `User ${msg.userId}`}:</b> {msg.chattingMessage}
-            {/* sentAt 필드가 있다고 가정하고, 한국 시간으로 변환하여 표시 */}
-            {msg.chattingCreatedAt && (
-              <span className="chat-time">
-                {" "}
-                ({convertUTCToKoreanTime(msg.chattingCreatedAt)})
-              </span>
-            )}
+        {sortedDates.map((dateKey) => (
+          <div key={dateKey}>
+            {/* 날짜 헤더 */}
+            <div className="chat-date">{dateKey}</div>
+            {/* 해당 날짜의 메시지 목록 */}
+            {groupedMessages[dateKey].map((msg, index) => (
+              <div key={index} className="chat-message">
+                <b>{msg.userName || `User ${msg.userId}`}:</b>{" "}
+                {msg.chattingMessage}{" "}
+                <span className="chat-time">
+                  ({convertUTCToKoreanTime(msg.chattingCreatedAt)})
+                </span>
+              </div>
+            ))}
           </div>
         ))}
       </div>
