@@ -8,7 +8,7 @@ import { AppDataContext } from "../Context.jsx";
 
 
 const Login = () => {
-
+    const [token, setToken] = useState(localStorage.getItem("accessToken") || ""); 
     const { appData, setAppData } = useContext(AppDataContext);
     const nav = useNavigate()
     const [login, setlogin] = useState({
@@ -31,23 +31,30 @@ const Login = () => {
                     email: login.userid,       
                     password: login.password 
                 };
-                console.log("로그인인 요청:", loginData);
+                console.log("로그인 요청:", loginData);
                 const response = await postlogin(loginData); 
-    
+        
                 if (response && response.data && response.data.accessToken) {
-                    console.log("로그인인 성공:", response);
+                    console.log("로그인 성공:", response);
+                    
+                    // 최신 토큰을 저장
                     sessionStorage.setItem("accessToken", response.data.accessToken);
-                    setAppData((prev) => ({  // Context에 저장
+                    setToken(response.data.accessToken); // useState의 토큰도 업데이트
+                    
+                    // Context에도 반영
+                    setAppData((prev) => ({  
                         ...prev,
                         userId: response.data.userId, 
-                      }));
-                    nav("/home"); // 회원가입 성공 후 이동할 페이지
+                        Token: response.data.accessToken  
+                    }));
                     
+                    nav("/home"); // 로그인 성공 후 이동
                 }
             } catch (error) {
-                console.error("로그인인 실패:", error);
+                console.error("로그인 실패:", error);
             }
         }
+        
     
 
     return (
