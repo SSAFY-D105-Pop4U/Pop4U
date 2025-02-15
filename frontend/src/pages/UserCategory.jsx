@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/basic/Header";
 import NextButton from "../components/NextButton";
+import api from "../apis/instance"; // Axios 인스턴스 임포트
 import "../styles/pages/UserCategory.css";
 
 const UserCategory = () => {
@@ -9,15 +10,15 @@ const UserCategory = () => {
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const navigate = useNavigate();
 
-  // 백엔드의 GET /category API를 호출하여 모든 카테고리 목록을 불러옵니다.
+  // GET /category API 호출하여 모든 카테고리 목록 불러오기
   useEffect(() => {
-    fetch("/category")
-      .then((response) => response.json())
-      .then((data) => setCategories(data))
-      .catch((error) => console.error("Error fetching categories: ", error));
+    api
+      .get("/category")
+      .then((response) => setCategories(response.data))
+      .catch((error) => console.error("카테고리 불러오기 실패:", error));
   }, []);
 
-  // 카테고리 id를 기반으로 선택/해제 처리합니다.
+  // 선택/해제 처리: 카테고리의 id를 기준으로 관리합니다.
   const toggleCategory = (categoryId) => {
     setSelectedCategories((prev) => {
       const newSelected = new Set(prev);
@@ -30,26 +31,15 @@ const UserCategory = () => {
     });
   };
 
-  // PATCH /category/user API를 호출하여 선택한 카테고리를 저장하고 메인 페이지로 이동합니다.
+  // PATCH /category/user API 호출하여 선택한 카테고리 저장 후 메인 페이지로 이동
   const handleSubmit = () => {
     const selectedIds = Array.from(selectedCategories);
 
-    fetch("/category/user", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(selectedIds),
-    })
-      .then((response) => {
-        if (response.ok) {
-          navigate("/home");
-        } else {
-          console.error("Failed to update user categories");
-        }
-      })
+    api
+      .patch("/category/user", selectedIds)
+      .then(() => navigate("/home"))
       .catch((error) =>
-        console.error("Error updating user categories:", error)
+        console.error("관심 카테고리 업데이트 실패:", error)
       );
   };
 
