@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/basic/Header";
 import NextButton from "../components/NextButton";
-import api from "../apis/api/instance"; // Axios 인스턴스 임포트
+import api from "../apis/api/instance";
 import "../styles/pages/UserCategory.css";
 
 const UserCategory = () => {
@@ -10,46 +10,74 @@ const UserCategory = () => {
   const [selectedCategories, setSelectedCategories] = useState(new Set());
   const navigate = useNavigate();
 
-  // GET /category API 호출하여 모든 카테고리 목록 불러오기
+  // 모든 카테고리 불러오기
   useEffect(() => {
+    console.log("카테고리 데이터를 불러옵니다...");
     api
       .get("/category")
-      .then((response) => setCategories(response.data))
-      .catch((error) => console.error("카테고리 불러오기 실패:", error));
+      .then((response) => {
+        console.log("카테고리 응답 데이터:", response.data);
+        setCategories(response.data);
+      })
+      .catch((error) =>
+        console.error("카테고리 데이터를 불러오는 중 오류 발생:", error)
+      );
   }, []);
 
-  // 선택/해제 처리: 카테고리의 id를 기준으로 관리합니다.
+  // 카테고리 선택/해제 처리
   const toggleCategory = (categoryId) => {
+    console.log("카테고리 선택/해제 시도, id:", categoryId);
     setSelectedCategories((prev) => {
       const newSelected = new Set(prev);
       if (newSelected.has(categoryId)) {
         newSelected.delete(categoryId);
+        console.log(`카테고리 ${categoryId} 선택 해제됨`);
       } else {
         newSelected.add(categoryId);
+        console.log(`카테고리 ${categoryId} 선택됨`);
       }
+      console.log("현재 선택된 카테고리 목록:", Array.from(newSelected));
       return newSelected;
     });
   };
 
-  // PATCH /category/user API 호출하여 선택한 카테고리 저장 후 메인 페이지로 이동
+  // PATCH 요청 후 메인 페이지로 이동
   const handleSubmit = () => {
     const selectedIds = Array.from(selectedCategories);
-
+    console.log("선택된 카테고리 id 목록 제출:", selectedIds);
     api
       .patch("/category/user", selectedIds)
-      .then(() => navigate("/home"))
-      .catch((error) => console.error("관심 카테고리 업데이트 실패:", error));
+      .then((response) => {
+        console.log("관심 카테고리 업데이트 성공:", response.data);
+        navigate("/home");
+      })
+      .catch((error) =>
+        console.error("관심 카테고리 업데이트 실패:", error)
+      );
   };
 
   return (
     <div className="user-category">
       <Header title="카테고리" />
       <div className="categories-container">
-        {categories.map((category) => (
-          <button key={category.id} className={`category-item ${selectedCategories.has(category.id) ? "selected" : ""}`} onClick={() => toggleCategory(category.id)}>
-            {category.name}
-          </button>
-        ))}
+        {categories && categories.length > 0 ? (
+          categories.map((category) => {
+            console.log("렌더링 카테고리:", category);
+            return (
+              <button
+                key={category.id}
+                className={`category-item ${
+                  selectedCategories.has(category.id) ? "selected" : ""
+                }`}
+                onClick={() => toggleCategory(category.id)}
+              >
+                {category.name}
+              </button>
+            );
+          })
+        ) : (
+          <p>카테고리를 불러오는 중입니다...</p>
+        )}
       </div>
       <NextButton onClick={handleSubmit}>등록하기</NextButton>
     </div>
