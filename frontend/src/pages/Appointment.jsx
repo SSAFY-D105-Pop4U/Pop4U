@@ -23,21 +23,16 @@ const Appointment = () => {
   // const [userId, setUserId] = useState(1); //샘플 userId
   const [userId, setUserId] = useState(appData.userId); // appData에서 사용자 ID 가져오기
   
-
-
-  
   useEffect(() => {
     console.log("⭐Context 데이터⭐", appData);
-  }, [appData]); // ✅ appData 전체가 변경될 때마다 실행됨
+  }, [appData]); 
 
   return (
     <div style={{ width: "100%", maxWidth: "960px", margin: "0 auto" }}>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
-      
         <>
           <Calendar setResultDate={setSelectedDate} />{" "}
-        
           <PersonSelector
             selectedPerson={selectedPerson}
             setSelectedPerson={setSelectedPerson}
