@@ -40,14 +40,15 @@ const Login = () => {
                     // 최신 토큰을 저장
                     sessionStorage.setItem("accessToken", response.data.accessToken);
                     setToken(response.data.accessToken); // useState의 토큰도 업데이트
-                    
-                    // Context에도 반영
-                    setAppData((prev) => ({  
-                        ...prev,
-                        userId: response.data.userId, 
-                        Token: response.data.accessToken  
-                    }));
-                    
+
+                    sessionStorage.setItem("userId" , response.data.userId)
+
+                    // // Context에도 반영
+                    // setAppData((prev) => ({  
+                    //     ...prev,
+                    //     userId: response.data.userId, 
+                    //     Token: response.data.accessToken  
+                    // }));
                     nav("/home"); // 로그인 성공 후 이동
                 }
             } catch (error) {

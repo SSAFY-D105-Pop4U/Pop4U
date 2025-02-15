@@ -10,14 +10,14 @@ const ReviewLifeShot = () => {
   const nav = useNavigate();
   const title = "리뷰&인생네컷";
 
-  // API 응답 데이터를 저장할 state
+  
   const [popups, setPopups] = useState([]);
 
-  // API 호출 함수
-  const fetchMyReservation = async () => {
+  // API 내 예약팝업리스트 호출
+  const MyReservation = async () => {
     try {
-      const data = await getmyreservation(); // 배열 형태의 응답
-      setPopups(data);                      // popups 배열에 저장
+      const data = await getmyreservation(); 
+      setPopups(data);                      
       console.log("팝업 리스트 조회 완료:", data);
     } catch (error) {
       console.error("Failed to load popups", error);
@@ -25,7 +25,7 @@ const ReviewLifeShot = () => {
   };
 
   useEffect(() => {
-    fetchMyReservation(); // 컴포넌트 마운트 시 한번만 실행
+    MyReservation(); // 컴포넌트 마운트 시 한번만 실행
   }, []);
 
   return (

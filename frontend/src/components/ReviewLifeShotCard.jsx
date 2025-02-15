@@ -1,30 +1,33 @@
 import { useState } from "react";
 import "../styles/components/ReviewLifeShotCard.css";
 import { useNavigate } from "react-router-dom";
-import { getreviewcheck } from "../apis/api/api.js";
-
+// import { getreviewcheck } from "../apis/api/api.js";
 
 const ReviewLifeShotCard = ({ placeInfo }) => {
   const nav = useNavigate();
 
   //axios통신으로 팝업 아이콘 불러오는 get요청보내기
   // 에러 터지면 리뷰 모달 출력 or 정상요청되면 인생네컷으로 이동
-    const reviewcheck = async () => {
-      try {
-        const data = await getreviewcheck(placeInfo.popupId);
-        console.log("📌 API 응답 (리뷰체크):", data);
-        nav("/reviewlifeshot")
-        }
-       catch (error) {
-        console.error("❌ Failed to load popups", error);
-        //리뷰작성하러 가시겠습니까 모달창 뜨면서 확인 누르면 이동!!!!!
-        nav("/writereview")
-      }
-    };
-  
+  // const reviewcheck = async () => {
+  //   try {
+  //     const data = await getreviewcheck(placeInfo.popupId);
+  //     console.log("📌 API 응답 (리뷰체크):", data);
+  //   } catch (error) {
+  //     console.error("❌ Failed to load popups", error);
+  //     nav(
+  //       `/writereview?popupId=${placeInfo.popupId}&reservationId=${placeInfo.reservationId}`
+  //     );
+  //   }
+  // };
+
+
   const handleOptionClick = () => {
-    reviewcheck()
+    nav(`/writereview?popupId=${placeInfo.popupId}&reservationId=${placeInfo.reservationId}`);
   };
+  const handlelifeshot = () =>{
+    nav("/lifeshot")
+  }
+
 
   return (
     <div className="review-life-content">
@@ -34,17 +37,38 @@ const ReviewLifeShotCard = ({ placeInfo }) => {
           alt="image"
           className="place-thumbnail"
         />
-        <div className="place-details">
-          {placeInfo?.popupName}
-        </div>
+        <div className="place-details">{placeInfo?.popupName}</div>
       </div>
 
-      {/* 버튼 영역 */}
+
       <div className="review-options">
-        <button className="review-option-button" onClick={handleOptionClick}>
+        {placeInfo.reviewWritten ? (
+          // 리뷰작성 잘했다
+          <button className="review-option-button">
+            <div className="option-box">
+              <div className="option-text">
+                <h3>리뷰작성 완료</h3>
+              </div>
+            </div>
+          </button>
+        ) : (
+          // 리뷰작성 해라
+          <button className="review-option-button" onClick={handleOptionClick}>
+            <div className="option-box">
+              <div className="option-text">
+                <h3>리뷰작성 해라</h3>
+              </div>
+            </div>
+          </button>
+        )}
+      </div>
+
+       {/* 인생네컷 */}
+      <div className="review-options">
+        <button className="review-option-button" onClick={handlelifeshot}>
           <div className="option-box">
             <div className="option-text">
-              <h3>인생네컷 제작하러 가기</h3>
+              <h3>인생네컷 만들어라</h3>
             </div>
           </div>
         </button>

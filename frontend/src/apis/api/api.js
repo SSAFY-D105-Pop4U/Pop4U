@@ -1,7 +1,33 @@
 // src/apis/popupApi.js
 import { ssrExportAllKey } from "vite/module-runner";
 import api from "./instance.js";
+import {imgapi} from "./instance.js";
+import axios from "axios";
 
+{/* ✅ post : 회원가입*/}
+export const postsignup = async (formattedData) => {
+  try {
+    console.log(formattedData)
+    
+    const response = await api.post(`/user/join`,formattedData);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
+
+{/* ✅ post : 로그인*/}
+export const postlogin = async (loginData) => {
+  try {
+    console.log(loginData)
+    const response = await api.post(`/user/login`,loginData)
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
 
 {/* ✅ GET : 메인화면 상품 조회 */}
 export const getPopups = async () => {
@@ -88,7 +114,7 @@ export const postappointment = async ({ popupId, userId, person, date, time }) =
 };
 
 
-{/* ✅ ??? : 내예약확인*/}
+{/* ✅ get : 내예약팝업 리스트*/}
 export const getmyreservation = async () => {
   try {
     const response = await api.get(`/reservation/my`);
@@ -99,7 +125,11 @@ export const getmyreservation = async () => {
   }
 }
 
-{/* ✅  get : 팝업정보 불러오기*/}
+
+
+
+
+{/* ✅  get :*/}
 export const getpopup = async () => {
   try {
     const response = await api.get(`/reservation/my`);
@@ -111,30 +141,7 @@ export const getpopup = async () => {
 }
 
 
-{/* ✅ ??? : 회원가입*/}
-export const postsignup = async (formattedData) => {
-  try {
-    console.log(formattedData)
-    
-    const response = await api.post(`/user/join`,formattedData);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching popups:", error);
-    throw error;
-  }
-}
 
-{/* ✅ ??? : 로그인*/}
-export const postlogin = async (loginData) => {
-  try {
-    console.log(loginData)
-    const response = await api.post(`/user/login`,loginData)
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching popups:", error);
-    throw error;
-  }
-};
 
 // 내예약 조회
 export const myreservation = async () => {
@@ -147,34 +154,34 @@ export const myreservation = async () => {
   }
 }
 
-// 리뷰작성성
-export const postwritereview = async ({ popupId, userId, person, date, time }) => {
+
+
+
+// 리뷰작성
+export const postwritereview = async (formData) => {
   try {
-    const response = await api.post(`/review/create`, {
-      userId: userId,          // 사용자 ID
-      popupId: person, // 예약 인원
-      reservationId: date,  // 예약 날짜
-      reviewContent: date,
-      reviewRating: time   // 예약 시간
-    });
+    // imgapi는 이미 "Content-Type": "multipart/form-data" 설정되어 있다고 가정
+    // FormData를 그대로 보냄
+    const response = await imgapi.post("/review/create", formData);
     return response.data;
   } catch (error) {
-    console.error("Error fetching popups:", error);
+    console.error("Error posting review:", error);
     throw error;
   }
 };
 
+
+
  // 리뷰 썻는지 체킹(팝업 아이콘 가져오기로 대체체)
-export const getreviewcheck = async (popupId) => {
-  console.log(popupId)
-  try {
-    const response = await api.get(`/four_cuts/${popupId}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching popups:", error);
-    throw error;
-  }
-}
+// export const getreviewcheck = async (popupId) => {
+//   try {
+//     const response = await api.get(`/four_cuts/${popupId}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching popups:", error);
+//     throw error;
+//   }
+// }
 
 
 

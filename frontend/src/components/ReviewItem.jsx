@@ -14,7 +14,7 @@ const ReviewItem = ({ reviews }) => {
       {reviews.map((review) => (
         <div key={review.reviewId} className="review-item">
           <div className="profile">
-            <img src={basicProfile} alt="프로필" className="profile-img" />
+            {/* <img src={basicProfile} alt="프로필" className="profile-img" /> */}
             <div className="info">
               <div className="username">{review.userName || "익명"}</div>
               <div className="rating_day">
