@@ -6,6 +6,7 @@ export const AppDataContext = createContext();
 export const AppDataProvider = ({ children }) => {
     
   const [appData, setAppData] = useState({
+    Token: null,
     userId: null,           // 로그인한 사용자 id
     isAuthenticated: false, // 로그인 상태 여부
     selectedDate: null,     // 선택된 날짜
@@ -14,6 +15,7 @@ export const AppDataProvider = ({ children }) => {
     reservationStatus: null, // 예약 상태
     popupName: null,
     popupId:null
+  
     
 
   });
