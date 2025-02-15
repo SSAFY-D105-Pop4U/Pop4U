@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/basic/Header";
 import star from "../assets/icons/star.png";
@@ -6,7 +6,9 @@ import fullstar from "../assets/icons/fullstar.png";
 import "../styles/pages/WriteReview.css";
 import NextButton from "../components/NextButton";
 import { postwritereview } from "../apis/api/api";
-
+import { useContext } from "react";
+import { AppDataContext } from "../Context.jsx"; 
+import { useLocation } from "react-router-dom";
 
 const WriteReview = () => {
   const navigate = useNavigate();
@@ -15,7 +17,20 @@ const WriteReview = () => {
   const [images, setImages] = useState([]);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
   const maxImages = 12;
+  const { appData, setAppData } = useContext(AppDataContext);
+  
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const popupId = searchParams.get("popupId");
+  const reservationId = searchParams.get("reservationId");
 
+  const userId = appData.userId
+  useEffect(()=>{
+    console.log(popupId)
+    console.log(reservationId)
+    console.log(appData)
+    console.log(appData.userId)
+  },[])
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
   };
@@ -38,24 +53,54 @@ const WriteReview = () => {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-
-  //api 호출출
+  // 리뷰작성 api 호출
   const handleSubmit = async () => {
+    console.log({
+      userId,
+      popupId,
+      reservationId,
+      content,
+      rating
+    });
+  
     try {
-      const data = await postwritereview();
-      console.log("📌 API 내예약호출:", data);
+      // ① FormData 객체 생성
+      const formData = new FormData();
+  
+      // ② review라는 JSON 객체 생성
+      const reviewData = {
+        userId,
+        popupId,
+        reservationId,
+        reviewContent: content,
+        reviewRating: rating
+      };
+  
+      // ③ JSON 객체를 문자열로 변환하여 "review"라는 필드로 추가
+      formData.append(
+        "review",
+        new Blob([JSON.stringify(reviewData)], { type: "application/json" })
+      );
+  
+      // ④ (옵션) 이미지가 있다면 "file"이라는 키로 단일 파일만 추가
+      // 백엔드가 MultipartFile file 하나만 받으므로, 
+      // images[0]만 전송하거나, 백엔드가 여러 파일 받도록 수정해야 합니다.
+      if (images && images.length > 0) {
+        formData.append("file", images[0].file);
+      }
+  
+      // ⑤ API 호출
+      const data = await postwritereview(formData);
+      console.log("📌 API 리뷰작성완료:", data);
+  
+      setShowCompleteModal(true);
     } catch (error) {
       console.error("❌ Failed to load reviews", error);
     }
-
-    console.log({
-      rating,
-      content,
-      images,
-    });
-
-    setShowCompleteModal(true);
   };
+
+
+
 
   //후기 작성다하고나서 완료 나왔을때 확인 버튼임임
   const handleConfirm = () => {
