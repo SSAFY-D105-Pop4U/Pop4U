@@ -105,28 +105,31 @@ const ChatRoom = () => {
     inputRef.current?.focus();
   };
 
-  // UTC를 한국 날짜("YYYY. MM. DD")로 변환
-  const convertUTCToKoreanDate = (utcTime) => {
-    if (!utcTime) return "";
-    const date = new Date(utcTime);
-    return date.toLocaleDateString("ko-KR", {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-  };
-
-  // UTC를 한국 시간("오전/오후 hh시 mm분")으로 변환
+  // UTC를 한국 시간("오전/오후 hh시 mm분")으로 변환 (Intl.DateTimeFormat 사용)
   const convertUTCToKoreanTime = (utcTime) => {
     if (!utcTime) return "";
-    const date = new Date(utcTime);
-    return date.toLocaleTimeString("ko-KR", {
+    // 만약 문자열에 "Z"가 없으면 추가해서 UTC로 인식하도록 함
+    const timeString = utcTime.endsWith("Z") ? utcTime : utcTime + "Z";
+    const date = new Date(timeString);
+    return new Intl.DateTimeFormat("ko-KR", {
       timeZone: "Asia/Seoul",
       hour: "numeric",
       minute: "numeric",
       hour12: true,
-    });
+    }).format(date);
+  };
+
+  // UTC를 한국 날짜("YYYY. MM. DD")로 변환
+  const convertUTCToKoreanDate = (utcTime) => {
+    if (!utcTime) return "";
+    const timeString = utcTime.endsWith("Z") ? utcTime : utcTime + "Z";
+    const date = new Date(timeString);
+    return new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(date);
   };
 
   // messages를 날짜별로 그룹화 (날짜 문자열을 key로)
