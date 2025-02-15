@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae4e20cd-74ac-4e93-8267-9cce95d58bc7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/search/dto/SearchRankDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/search/dto/SearchRankDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/search/dto/temp.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/search/service/SearchRankingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/search/service/SearchRankingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pop4u/src/main/java/com/d105/pop4u/domain/search/service/temp.txt" beforeDir="false" />
-    </list>
+    <list default="true" id="ae4e20cd-74ac-4e93-8267-9cce95d58bc7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,12 +18,12 @@
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "feat/BE/search",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;feat/BE/search&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Pop4uApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
