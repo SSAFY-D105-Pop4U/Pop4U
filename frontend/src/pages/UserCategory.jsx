@@ -26,7 +26,7 @@ const UserCategory = () => {
 
   // 카테고리 선택/해제 처리
   const toggleCategory = (categoryId) => {
-    console.log("카테고리 선택/해제 시도, id:", categoryId);
+    console.log("카테고리 선택/해제 시도, categoryId:", categoryId);
     setSelectedCategories((prev) => {
       const newSelected = new Set(prev);
       if (newSelected.has(categoryId)) {
@@ -65,13 +65,13 @@ const UserCategory = () => {
             console.log("렌더링 카테고리:", category);
             return (
               <button
-                key={category.id}
+                key={category.categoryId}
                 className={`category-item ${
-                  selectedCategories.has(category.id) ? "selected" : ""
+                  selectedCategories.has(category.categoryId) ? "selected" : ""
                 }`}
-                onClick={() => toggleCategory(category.id)}
+                onClick={() => toggleCategory(category.categoryId)}
               >
-                {category.name}
+                {category.categoryName}
               </button>
             );
           })
