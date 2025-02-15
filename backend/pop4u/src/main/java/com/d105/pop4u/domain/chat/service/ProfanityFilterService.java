@@ -595,14 +595,14 @@ public class ProfanityFilterService {
      * @return 필터링된 메시지
      */
     public String filter(String message) {
-        String filteredMessage = message;
         for (String bannedWord : bannedWords) {
-            // 단어 경계 없이 금칙어가 포함되어 있으면 치환
             Pattern pattern = Pattern.compile("(?i)" + Pattern.quote(bannedWord));
-            Matcher matcher = pattern.matcher(filteredMessage);
-            // 금칙어의 길이만큼 별표(*)로 치환
-            filteredMessage = "클린봇이 부적절한 표현을 감지하였습니다.";
+            Matcher matcher = pattern.matcher(message);
+            if (matcher.find()) {
+                return "클린봇이 부적절한 표현을 감지하였습니다.";
+            }
         }
-        return filteredMessage;
+        return message;
     }
+
 }

@@ -37,7 +37,7 @@ public class PopupCutsIconService {
 
         // User 객체와 PopupStore 객체를 사용하여 리뷰 존재 여부 확인
         if (!reviewRepository.existsByUserAndPopup(user, popupStore)) {
-            throw new IllegalArgumentException("해당 팝업에 리뷰를 작성한 사용자만 아이콘을 조회할 수 있습니다.");
+            throw new IllegalArgumentException("이 팝업에 리뷰를 작성한 사용자만 인생네컷을 만들 수 있습니다.");
         }
 
         return popupCutsIconRepository.findByPopupStore(popupStore)
