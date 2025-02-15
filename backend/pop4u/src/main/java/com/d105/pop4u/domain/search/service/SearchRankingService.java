@@ -35,18 +35,27 @@ public class SearchRankingService {
     // 매시 정각에 실행
     @Scheduled(cron = "0 0 * * * *")
     public void updateRankings() {
-        // 이전 순위를 저장
+        // 1. 이전 순위를 저장
         redisTemplate.delete(PREVIOUS_RANKING_KEY);
         redisTemplate.opsForZSet().unionAndStore(CURRENT_RANKING_KEY, Collections.emptySet(), PREVIOUS_RANKING_KEY);
 
-        // 현재 집계된 카운트를 순위로 변환
+        // 2. 현재 집계된 카운트를 순위로 변환
         redisTemplate.delete(CURRENT_RANKING_KEY);
         redisTemplate.opsForZSet().unionAndStore(CURRENT_COUNT_KEY, Collections.emptySet(), CURRENT_RANKING_KEY);
 
-        // 새로운 집계 시작을 위해 카운트 초기화
+        // 3. 이전 시간대 TOP 10 키워드들을 count 1로 새로운 집계에 추가
+        Set<ZSetOperations.TypedTuple<String>> top10 =
+                redisTemplate.opsForZSet().reverseRangeWithScores(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
+
+        // 4. 새로운 집계 시작을 위해 카운트 초기화
         redisTemplate.delete(CURRENT_COUNT_KEY);
 
-        // 시간 업데이트 (현재 시각의 정각으로)
+        // 5. TOP 10 키워드들을 count 1로 새 집계에 추가
+        for (ZSetOperations.TypedTuple<String> tuple : top10) {
+            redisTemplate.opsForZSet().add(CURRENT_COUNT_KEY, tuple.getValue(), 1.0);
+        }
+
+        // 6. 시간 업데이트
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         redisTemplate.opsForValue().set(LAST_UPDATE_TIME_KEY,
                 now.format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
