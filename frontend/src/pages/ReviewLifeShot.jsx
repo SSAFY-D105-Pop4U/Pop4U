@@ -1,50 +1,48 @@
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/basic/Header";
-import ReviewLifeShotCard from '../components/ReviewLifeShotCard';
-import '../styles/pages/ReviewLifeShot.css';
-import Divider from '../components/basic/Divider';
-import { useEffect } from 'react';
-import { getmyreservation } from '../apis/api/api';
-
+import ReviewLifeShotCard from "../components/ReviewLifeShotCard";
+import "../styles/pages/ReviewLifeShot.css";
+import Divider from "../components/basic/Divider";
+import { getmyreservation } from "../apis/api/api";
 
 const ReviewLifeShot = () => {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const title = "리뷰&인생네컷";
 
+  
+  const [popups, setPopups] = useState([]);
 
-
-  useEffect(() =>{
+  // API 내 예약팝업리스트 호출
+  const MyReservation = async () => {
     try {
-            const data =  getmyreservation();
-            setPopups(data);
-            console.log("팝업 리스트트 조회완료");
-          } catch (error) {
-            console.error("Failed to load popups");
-          }
-  },[])
- 
-
-
-  // 실제 데이터로 교체 필요
-  const placeInfo = {
-    name: "스미코구라시 팝업스토어",
-    image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a"
+      const data = await getmyreservation(); 
+      setPopups(data);                      
+      console.log("팝업 리스트 조회 완료:", data);
+    } catch (error) {
+      console.error("Failed to load popups", error);
+    }
   };
+
+  useEffect(() => {
+    MyReservation(); // 컴포넌트 마운트 시 한번만 실행
+  }, []);
 
   return (
     <div>
-      <div className='review-life-header'>
+      <div className="review-life-header">
         <Header title={title} />
       </div>
-      <ReviewLifeShotCard placeInfo={placeInfo} isReview={true} />
 
-      <Divider top='0px'/>
-
-      <ReviewLifeShotCard placeInfo={placeInfo} />
-
-      <Divider top='0px'/>
+      {popups.map((popup, index) => (
+        <div key={index}>            
+          <ReviewLifeShotCard placeInfo={popup} />
+          
+          <Divider top="0px" />
+        </div>
+      ))}
     </div>
   );
 };
 
-export default ReviewLifeShot; 
+export default ReviewLifeShot;

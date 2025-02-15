@@ -1,49 +1,54 @@
-import '../../styles/components/ReservationCard.css'
+import React, { useEffect } from "react";
+import '../../styles/components/ReservationCard.css';
 
-const ReservationCard = () => {
-    return (
-        <div>
-<div className="reservation-card-container">
+
+const ReservationCard = ({reservation} ) => {
+  if (!reservation) return null;
+  
+  useEffect(()=>{
+    console.log("예약내역")
+  },[])
+
+  return (
+    <div className="reservation-card-container">
       <div className="reservation-card-header">
         <img
-          src="https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a"
-          alt="마루는 강쥐 이벤트 이미지"
+          src={reservation.image}
+          alt="예약 이미지"
           className="reservation-card-image"
         />
       </div>
       <div className="reservation-card-content">
-        <h2 className='reservation-card-title'>
-          <span>&lt;마루는 강쥐&gt;</span> X 롯데월드 ‘마루의 럭키 NEW YEAR’
+        <h2 className="reservation-card-title">
+          {/* 예약 제목이 있다면 표시 */}
+          {reservation.popupName ? reservation.popupName : "<예약 제목>"}
         </h2>
-        <p>서울 강서구 마곡동</p>
+        <p>{reservation.location ? reservation.location : "예약 위치"}</p>
         <div className="reservation-card-details">
           <div>
-          <strong>예약일</strong>
-          <strong className="detail-value">01.22 (수)</strong>
+            <strong>예약일</strong>
+            <strong className="detail-value">{reservation.date}</strong>
           </div>
           <div>
             <strong>예약시간</strong>
-            <strong className="detail-value">14:00</strong>
+            <strong className="detail-value">{reservation.time}</strong>
           </div>
           <div>
             <strong>인원</strong>
-            <strong className="detail-value1">성인 2</strong>
+            <strong className="detail-value">{reservation.people}</strong>
           </div>
           <div>
             <strong>대기 번호</strong>
-            <strong className="detail-value1">15</strong>
+            <strong className="detail-value">{reservation.queue}</strong>
           </div>
         </div>
         <div className="reservation-card-footer">
-          <p>순서: 20번째</p>
-          <p>예상 대기 시간: 20분</p>
+          <p>순서: {reservation.position}</p>
+          <p>예상 대기 시간: {reservation.waitingTime}</p>
         </div>
       </div>
     </div>
-        </div>
-    )
+  );
+};
 
-}
- 
-export default ReservationCard
-
+export default ReservationCard;

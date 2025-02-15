@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { GetPopupDetail, getReviews } from "../apis/api/api.js";
 import eye from "../assets/icons/eye.png";
 import ImageCarousel from "../components/ImageCarousel.jsx";
-import { AppDataContext } from "../Context.jsx"; // ✅ useContext 추가
+import { AppDataContext } from "../Context.jsx"; 
 
 
 

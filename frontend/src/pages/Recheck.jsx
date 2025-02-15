@@ -13,14 +13,6 @@ const Recheck = () => {
 
   const appointment = async () => {
     try {
-      // console.log("API 요청 데이터:", {
-      //   popupId: appData.popupId, 
-      //   userId: appData.userId,
-      //   person: appData.selectedPerson,
-      //   date: appData.selectedDate,
-      //   time: appData.selectedTime,
-      // });
-
       const data = await postappointment({
         popupId: appData.popupId, 
         userId: appData.userId,
@@ -28,7 +20,6 @@ const Recheck = () => {
         date: appData.selectedDate,
         time: appData.selectedTime?.toString() || "시간 미선택", 
       });
-
       console.log("API 응답 (예약완료):", data);
       nav("/reservation"); 
     } catch (error) {

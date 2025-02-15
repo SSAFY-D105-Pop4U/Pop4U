@@ -1,70 +1,42 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/components/Swipe.css"
+import "../../styles/components/Swipe.css";
 import ReservationCard from "./ReservationCard";
 import { myreservation } from "../../apis/api/api.js";
 
-
 const Swipe = () => {
-  const cards = [
-    {
-      id: 1,
-      date: "01.22(수)",
-      time: "14:00",
-      people: "성인 2",
-      queue: "15",
-      position: "20번째",
-      waitingTime: "20분",
-      image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-    },
-    {
-      id: 2,
-      date: "01.23(목)",
-      time: "16:00",
-      people: "성인 3",
-      queue: "12",
-      position: "15번째",
-      waitingTime: "15분",
-      image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-    },{
-        id: 3,
-        date: "01.23(목)",
-        time: "16:00",
-        people: "성인 3",
-        queue: "12",
-        position: "15번째",
-        waitingTime: "15분",
-        image: "https://d8nffddmkwqeq.cloudfront.net/store/41e90e0e%2C905a%2C4601%2C93e5%2Cbf8b5aa99d7a",
-      },
-  ];
-
+  // API 데이터를 저장할 상태로 변경
+  const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [startX, setStartX] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const dragThreshold = 50; // 드래그 임계값 (픽셀)
   const [isWebVersion, setIsWebVersion] = useState(window.innerWidth >= 768);
-  
-  // 내예약 api 호출
-  const handlemy = async () => {
+
+  // 내예약 API 호출 및 상태 업데이트
+  const fetchReservations = async () => {
     try {
-      const data = await myreservation();
-      console.log("📌 API 내예약호출:", data);
+      const response = await myreservation();
+      console.log("📌 API 내예약 호출 결과:", response);
+      if (response && response.data) {
+        setCards(response.data); // API 응답 데이터를 상태에 저장
+      }
     } catch (error) {
-      console.error("❌ Failed to load reviews", error);
+      console.error("❌ Failed to load reservations", error);
     }
   };
 
-
   useEffect(() => {
-    handlemy()
-
-
+    fetchReservations();
+    console.log(cards.length)
     const handleResize = () => {
       setIsWebVersion(window.innerWidth >= 768);
     };
 
+
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, []); // []: 마운트 시 한 번만 실행
+  
 
   const handleSwipe = (direction) => {
     if (direction === "left" && currentIndex < cards.length - 1) {
@@ -90,11 +62,7 @@ const Swipe = () => {
     const diff = startX - currentX;
 
     if (Math.abs(diff) > dragThreshold) {
-      if (diff > 0 && currentIndex < cards.length - 1) {
-        handleSwipe("left");
-      } else if (diff < 0 && currentIndex > 0) {
-        handleSwipe("right");
-      }
+      diff > 0 ? handleSwipe("left") : handleSwipe("right");
       setStartX(null);
       setIsDragging(false);
     }
@@ -106,11 +74,7 @@ const Swipe = () => {
     const diff = startX - currentX;
 
     if (Math.abs(diff) > dragThreshold) {
-      if (diff > 0 && currentIndex < cards.length - 1) {
-        handleSwipe("left");
-      } else if (diff < 0 && currentIndex > 0) {
-        handleSwipe("right");
-      }
+      diff > 0 ? handleSwipe("left") : handleSwipe("right");
       setStartX(null);
       setIsDragging(false);
     }
@@ -131,17 +95,13 @@ const Swipe = () => {
     let dotsToShow = [];
 
     if (totalDots <= 3) {
-      // 전체 dots가 3개 이하면 모두 표시
       dotsToShow = Array.from({ length: totalDots }, (_, i) => i);
     } else {
       if (currentIndex === 0) {
-        // 첫 부분
         dotsToShow = [0, 1, 2];
       } else if (currentIndex === totalDots - 1) {
-        // 마지막 부분
         dotsToShow = [totalDots - 3, totalDots - 2, totalDots - 1];
       } else {
-        // 중간 부분 - 순서를 반대로
         dotsToShow = [currentIndex + 1, currentIndex, currentIndex - 1];
       }
     }
@@ -149,14 +109,16 @@ const Swipe = () => {
     return (
       <div className="progress-dots">
         {dotsToShow.map((index) => (
-          <span
-            key={index}
-            className={`dot ${index === currentIndex ? 'active' : ''}`}
-          />
+          <span key={index} className={`dot ${index === currentIndex ? 'active' : ''}`} />
         ))}
       </div>
     );
   };
+
+  // 카드 데이터가 없으면 메시지 표시
+  if (cards.length === 0) {
+    return <p className="no-reservations">예약된 내역이 없습니다.</p>;
+  }
 
   return (
     <div 
@@ -176,7 +138,7 @@ const Swipe = () => {
 
         return (
           <div
-            key={card.id}
+            key={card.popupId}
             className={`slider-card ${isActive ? "slider-active" : ""} ${isNext ? "slider-next" : ""} ${isPrevious ? "slider-previous" : ""}`}
             style={{
               transform: isActive
@@ -191,7 +153,8 @@ const Swipe = () => {
               opacity: isActive || isNext || isPrevious ? 1 : 0,
             }}
           >
-            <ReservationCard/>
+            {/* ReservationCard에 각 카드의 데이터를 prop으로 전달 */}
+            <ReservationCard reservation={card} />
           </div>
         );
       })}
