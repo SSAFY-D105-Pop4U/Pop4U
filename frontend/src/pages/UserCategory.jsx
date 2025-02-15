@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/basic/Header";
 import NextButton from "../components/NextButton";
-import api from "../apis/instance"; // Axios 인스턴스 임포트
+import api from "../apis/api/instance"; // Axios 인스턴스 임포트
 import "../styles/pages/UserCategory.css";
 
 const UserCategory = () => {
@@ -38,9 +38,7 @@ const UserCategory = () => {
     api
       .patch("/category/user", selectedIds)
       .then(() => navigate("/home"))
-      .catch((error) =>
-        console.error("관심 카테고리 업데이트 실패:", error)
-      );
+      .catch((error) => console.error("관심 카테고리 업데이트 실패:", error));
   };
 
   return (
@@ -48,13 +46,7 @@ const UserCategory = () => {
       <Header title="카테고리" />
       <div className="categories-container">
         {categories.map((category) => (
-          <button
-            key={category.id}
-            className={`category-item ${
-              selectedCategories.has(category.id) ? "selected" : ""
-            }`}
-            onClick={() => toggleCategory(category.id)}
-          >
+          <button key={category.id} className={`category-item ${selectedCategories.has(category.id) ? "selected" : ""}`} onClick={() => toggleCategory(category.id)}>
             {category.name}
           </button>
         ))}
