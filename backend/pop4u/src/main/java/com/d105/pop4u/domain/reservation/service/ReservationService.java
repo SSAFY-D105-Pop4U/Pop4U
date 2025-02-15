@@ -50,10 +50,7 @@ public class ReservationService {
      * 특정 유저의 예약 조회
      */
     public List<ReservationDTO> getReservationsByUser(Long userId) {
-        return reservationRepository.findByUser_UserId(userId)
-                .stream()
-                .map(ReservationDTO::fromEntity)
-                .collect(Collectors.toList());
+        return reservationRepository.findReservationsWithPopupInfo(userId);
     }
 
     /**
