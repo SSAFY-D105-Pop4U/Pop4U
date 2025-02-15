@@ -20,9 +20,15 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     // 특정 팝업의 특정 사용자 예약 조회: PopupStore의 popupId와 User의 userId로 조회
     Optional<Reservation> findByPopupStore_PopupIdAndUser_UserId(Long popupId, Long userId);
 
-    // 커스텀 DTO 프로젝션 쿼리
     @Query("SELECT new com.d105.pop4u.domain.reservation.dto.ReservationDTO(" +
-            "r.reservationId, p.popupName, img.popupImg) " +
+            "r.user.userId, " +
+            "p.popupId, " +
+            "r.reservationPeople, " +
+            "r.reservationDate, " +
+            "r.reservationTime, " +
+            "r.reservationConfirmed, " +
+            "p.popupName, " +
+            "img.popupImg) " +
             "FROM Reservation r " +
             "JOIN r.popupStore p " +
             "LEFT JOIN p.popupImages img " +
