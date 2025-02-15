@@ -7,8 +7,6 @@ const SOCKET_URL = "https://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 
 
 const ChatRoom = () => {
   const [chatRoomId, setChatRoomId] = useState("1");
-  const [userId, setUserId] = useState("1001");
-  const [userName, setUserName] = useState("TestUser");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const stompClientRef = useRef(null);
@@ -23,7 +21,12 @@ const ChatRoom = () => {
   useEffect(() => {
     if (!chatRoomId) return;
 
-    fetch(`https://i12d105.p.ssafy.io/api/chat/${chatRoomId}`)
+    fetch(`https://i12d105.p.ssafy.io/api/chat/${chatRoomId}`, {
+      headers: {
+        // sessionStorage에 저장된 토큰 사용 (instance.js와 동일한 방식)
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error("채팅 기록 요청 실패");
@@ -40,15 +43,21 @@ const ChatRoom = () => {
   useEffect(() => {
     if (!chatRoomId) return;
 
-    // const socket = new SockJS(SOCKET_URL);
+    const token = sessionStorage.getItem("accessToken");
+    if (!token) {
+      console.warn("토큰이 없어서 WebSocket 연결을 할 수 없습니다.");
+      return;
+    }
 
-    const socket = new SockJS(SOCKET_URL, null, { transports: ['websocket'] });
+    const socket = new SockJS(SOCKET_URL, null, { transports: ["websocket"] });
     const stompClient = new Client({
       webSocketFactory: () => socket,
+      connectHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
       debug: (msg) => console.log("[STOMP]:", msg),
       onConnect: () => {
         console.log("[STOMP] 연결 성공!");
-
         // 채팅방 구독
         stompClient.subscribe(`/topic/chat/${chatRoomId}`, (response) => {
           const receivedMessage = JSON.parse(response.body);
@@ -76,10 +85,10 @@ const ChatRoom = () => {
     if (!message.trim() || !stompClientRef.current || !stompClientRef.current.connected)
       return;
 
+    // 프론트엔드에서는 userId나 userName 정보를 전송하지 않아도,
+    // 백엔드에서 토큰을 이용해 Principal을 채워줍니다.
     const chatMessage = {
       chatRoomId: parseInt(chatRoomId, 10),
-      userId: parseInt(userId, 10),
-      userName: userName,
       chattingMessage: message,
     };
 
@@ -90,6 +99,16 @@ const ChatRoom = () => {
 
     setMessage("");
     inputRef.current?.focus();
+  };
+
+  // 메시지 시간(UTC)을 한국시간으로 변환하는 함수
+  const convertUTCToKoreanTime = (utcTime) => {
+    if (!utcTime) return "";
+    const date = new Date(utcTime);
+    return date.toLocaleString("ko-KR", {
+      timeZone: "Asia/Seoul",
+      hour12: false,
+    });
   };
 
   return (
@@ -107,28 +126,6 @@ const ChatRoom = () => {
             className="chat-input"
           />
         </div>
-      </div>
-
-      {/* 유저 ID 입력 */}
-      <div className="input-group">
-        <label>유저 ID:</label>
-        <input
-          type="text"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          className="chat-input"
-        />
-      </div>
-
-      {/* 유저 이름 입력 */}
-      <div className="input-group">
-        <label>유저 이름:</label>
-        <input
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          className="chat-input"
-        />
       </div>
 
       {/* 메시지 입력창 */}
@@ -154,6 +151,13 @@ const ChatRoom = () => {
         {messages.map((msg, index) => (
           <div key={index} className="chat-message">
             <b>{msg.userName || `User ${msg.userId}`}:</b> {msg.chattingMessage}
+            {/* sentAt 필드가 있다고 가정하고, 한국 시간으로 변환하여 표시 */}
+            {msg.sentAt && (
+              <span className="chat-time">
+                {" "}
+                ({convertUTCToKoreanTime(msg.sentAt)})
+              </span>
+            )}
           </div>
         ))}
       </div>
