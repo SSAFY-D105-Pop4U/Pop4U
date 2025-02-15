@@ -12,11 +12,9 @@ const UserCategory = () => {
 
   // 모든 카테고리 불러오기
   useEffect(() => {
-    console.log("카테고리 데이터를 불러옵니다...");
     api
       .get("/category")
       .then((response) => {
-        console.log("카테고리 응답 데이터:", response.data);
         setCategories(response.data);
       })
       .catch((error) =>
@@ -26,17 +24,13 @@ const UserCategory = () => {
 
   // 카테고리 선택/해제 처리
   const toggleCategory = (categoryId) => {
-    console.log("카테고리 선택/해제 시도, categoryId:", categoryId);
     setSelectedCategories((prev) => {
       const newSelected = new Set(prev);
       if (newSelected.has(categoryId)) {
         newSelected.delete(categoryId);
-        console.log(`카테고리 ${categoryId} 선택 해제됨`);
       } else {
         newSelected.add(categoryId);
-        console.log(`카테고리 ${categoryId} 선택됨`);
       }
-      console.log("현재 선택된 카테고리 목록:", Array.from(newSelected));
       return newSelected;
     });
   };
@@ -44,11 +38,9 @@ const UserCategory = () => {
   // PATCH 요청 후 메인 페이지로 이동
   const handleSubmit = () => {
     const selectedIds = Array.from(selectedCategories);
-    console.log("선택된 카테고리 id 목록 제출:", selectedIds);
     api
       .patch("/category/user", selectedIds)
       .then((response) => {
-        console.log("관심 카테고리 업데이트 성공:", response.data);
         navigate("/home");
       })
       .catch((error) =>
@@ -62,7 +54,6 @@ const UserCategory = () => {
       <div className="categories-container">
         {categories && categories.length > 0 ? (
           categories.map((category) => {
-            console.log("렌더링 카테고리:", category);
             return (
               <button
                 key={category.categoryId}
