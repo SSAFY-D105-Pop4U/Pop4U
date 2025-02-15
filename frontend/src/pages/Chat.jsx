@@ -155,7 +155,7 @@ const ChatRoom = () => {
             {msg.sentAt && (
               <span className="chat-time">
                 {" "}
-                ({convertUTCToKoreanTime(msg.sentAt)})
+                ({convertUTCToKoreanTime(msg.chattingCreatedAt)})
               </span>
             )}
           </div>
