@@ -3,6 +3,7 @@ package com.d105.pop4u.domain.reservation.service;
 import com.d105.pop4u.domain.reservation.dto.ReservationDTO;
 import com.d105.pop4u.domain.reservation.entity.Reservation;
 import com.d105.pop4u.domain.reservation.repository.ReservationRepository;
+import com.d105.pop4u.domain.review.repository.ReviewRepository;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.store.repository.PopupStoreRepository;
 import com.d105.pop4u.domain.user.entity.User;
@@ -12,6 +13,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,7 @@ public class ReservationService {
     private final ReservationRepository reservationRepository;
     private final PopupStoreRepository popupStoreRepository;
     private final UserRepository userRepository; // User 엔티티 조회용
+    private final ReviewRepository reviewRepository; // 리뷰 Repository 주입
 
     /**
      * 예약 생성
@@ -49,8 +52,17 @@ public class ReservationService {
     /**
      * 특정 유저의 예약 조회
      */
-    public List<ReservationDTO> getReservationsByUser(Long userId) {
-        return reservationRepository.findReservationsWithPopupInfo(userId);
+    public List<ReservationDTO> getReservationsByUser(Long userId, User user) {
+        // 기존 엔티티 조회
+        List<Reservation> reservations = reservationRepository.findByUser_UserId(userId);
+        List<ReservationDTO> dtos = new ArrayList<>();
+
+        for (Reservation reservation : reservations) {
+            // 각 예약에 대해 해당 팝업에 리뷰를 작성했는지 확인
+            boolean reviewWritten = reviewRepository.existsByUserAndPopup(user, reservation.getPopupStore());
+            dtos.add(ReservationDTO.fromEntity(reservation, reviewWritten));
+        }
+        return dtos;
     }
 
     /**

@@ -21,21 +21,21 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Optional<Reservation> findByPopupStore_PopupIdAndUser_UserId(Long popupId, Long userId);
 
     @Query("SELECT new com.d105.pop4u.domain.reservation.dto.ReservationDTO(" +
-            "r.reservationId, " +
-            "r.user.userId, " +
-            "p.popupId, " +
-            "r.reservationPeople, " +
-            "r.reservationDate, " +
-            "r.reservationTime, " +
-            "r.reservationConfirmed, " +
-            "p.popupName, " +
-            "img.popupImg) " +
-            "FROM Reservation r " +
+            "  r.reservationId, " +
+            "  r.user.userId, " +
+            "  p.popupId, " +
+            "  r.reservationPeople, " +
+            "  r.reservationDate, " +
+            "  r.reservationTime, " +
+            "  r.reservationConfirmed, " +
+            "  p.popupName, " +
+            "  img.popupImg, " +
+            "  CASE WHEN EXISTS (SELECT 1 FROM Review rev WHERE rev.userId = r.user AND rev.popupId = p) THEN true ELSE false END" +
+            ") FROM Reservation r " +
             "JOIN r.popupStore p " +
             "LEFT JOIN p.popupImages img " +
-            "WHERE img.popupImgId = (" +
-            "   SELECT MIN(img2.popupImgId) FROM PopupStoreImg img2 WHERE img2.popupStore = p" +
-            ") " +
+            "WHERE img.popupImgId = (SELECT MIN(img2.popupImgId) FROM PopupStoreImg img2 WHERE img2.popupStore = p) " +
             "AND r.user.userId = :userId")
     List<ReservationDTO> findReservationsWithPopupInfo(@Param("userId") Long userId);
+
 }
