@@ -47,7 +47,7 @@ const Signup = () => {
 
             if (response ) {
                 console.log("회원가입 성공:", response);
-                nav("/"); // 회원가입 성공 후 이동할 페이지
+                nav("/usercategory"); // 회원가입 성공 후 이동할 페이지
             }
         } catch (error) {
             console.error("회원가입 실패:", error);

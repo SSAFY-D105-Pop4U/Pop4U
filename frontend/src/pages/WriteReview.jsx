@@ -91,7 +91,7 @@ const WriteReview = () => {
   
       // ⑤ API 호출
       const data = await postwritereview(formData);
-      console.log("📌 API 리뷰작성:", data);
+      console.log("📌 API 리뷰작성완료:", data);
   
       setShowCompleteModal(true);
     } catch (error) {
