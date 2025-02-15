@@ -15,36 +15,45 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-@EnableScheduling  // 스케줄링 활성화
+@EnableScheduling
 public class SearchRankingService {
     private final RedisTemplate<String, String> redisTemplate;
+    // 현재 집계 중인 시간대의 검색어 카운트
+    private static final String CURRENT_COUNT_KEY = "search:count:current";
+    // 현재 표시 중인 순위 (이전 시간대의 결과)
     private static final String CURRENT_RANKING_KEY = "search:ranking:current";
+    // 이전 시간대의 순위 (순위 변동 비교용)
     private static final String PREVIOUS_RANKING_KEY = "search:ranking:previous";
     private static final String LAST_UPDATE_TIME_KEY = "search:lastUpdateTime";
     private static final long RANKING_SIZE = 10;
 
-    // 검색어 카운트 증가 시 바로 시간도 업데이트
+    // 검색어 카운트 증가 (현재 집계 중인 시간대에 추가)
     public void incrementSearchCount(String keyword) {
-        redisTemplate.opsForZSet().incrementScore(CURRENT_RANKING_KEY, keyword, 1);
-        updateLastUpdateTime();  // 검색할 때마다 시간 업데이트
+        redisTemplate.opsForZSet().incrementScore(CURRENT_COUNT_KEY, keyword, 1);
     }
 
-    // 시간 업데이트 메서드 분리
-    private void updateLastUpdateTime() {
-        redisTemplate.opsForValue().set(LAST_UPDATE_TIME_KEY,
-                LocalDateTime.now(ZoneId.of("Asia/Seoul"))
-                        .format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
-    }
-
-    @Scheduled(cron = "0 0 * * * *")  // 매시간 실행
+    // 매시 정각에 실행
+    @Scheduled(cron = "0 0 * * * *")
     public void updateRankings() {
+        // 이전 순위를 저장
         redisTemplate.delete(PREVIOUS_RANKING_KEY);
         redisTemplate.opsForZSet().unionAndStore(CURRENT_RANKING_KEY, Collections.emptySet(), PREVIOUS_RANKING_KEY);
-        updateLastUpdateTime();
+
+        // 현재 집계된 카운트를 순위로 변환
+        redisTemplate.delete(CURRENT_RANKING_KEY);
+        redisTemplate.opsForZSet().unionAndStore(CURRENT_COUNT_KEY, Collections.emptySet(), CURRENT_RANKING_KEY);
+
+        // 새로운 집계 시작을 위해 카운트 초기화
+        redisTemplate.delete(CURRENT_COUNT_KEY);
+
+        // 시간 업데이트 (현재 시각의 정각으로)
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        redisTemplate.opsForValue().set(LAST_UPDATE_TIME_KEY,
+                now.format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
     }
 
     public List<SearchRankDTO> getTopSearches() {
-        // 현재 순위 조회
+        // 현재 표시 중인 순위 조회 (이전 시간대의 결과)
         Set<ZSetOperations.TypedTuple<String>> currentRankings =
                 redisTemplate.opsForZSet().reverseRangeWithScores(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
 
@@ -52,12 +61,12 @@ public class SearchRankingService {
         Map<String, Integer> prevRankMap = new HashMap<>();
         Set<ZSetOperations.TypedTuple<String>> prevRankings =
                 redisTemplate.opsForZSet().reverseRangeWithScores(PREVIOUS_RANKING_KEY, 0, -1);
+
         int prevRank = 1;
         for (ZSetOperations.TypedTuple<String> tuple : prevRankings) {
             prevRankMap.put(tuple.getValue(), prevRank++);
         }
 
-        // 결과 생성
         List<SearchRankDTO> rankings = new ArrayList<>();
         int currentRank = 1;
 
@@ -72,7 +81,6 @@ public class SearchRankingService {
                     .keyword(keyword)
                     .count(tuple.getScore().longValue())
                     .status(status)
-                    .prevRank(previousRank)
                     .build());
 
             currentRank++;
@@ -82,13 +90,9 @@ public class SearchRankingService {
     }
 
     private String calculateStatus(int currentRank, Integer previousRank) {
-        if (previousRank == null) return "up";
+        if (previousRank == null) return "up";  // 새로운 검색어는 상승으로 표시
         if (currentRank == previousRank) return "neutral";
         if (currentRank < previousRank) return "up";
         return "down";
-    }
-
-    public String getLastUpdateTime() {
-        return redisTemplate.opsForValue().get(LAST_UPDATE_TIME_KEY);
     }
 }
