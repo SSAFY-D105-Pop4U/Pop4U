@@ -152,7 +152,7 @@ const ChatRoom = () => {
           <div key={index} className="chat-message">
             <b>{msg.userName || `User ${msg.userId}`}:</b> {msg.chattingMessage}
             {/* sentAt 필드가 있다고 가정하고, 한국 시간으로 변환하여 표시 */}
-            {msg.sentAt && (
+            {msg.chattingCreatedAt && (
               <span className="chat-time">
                 {" "}
                 ({convertUTCToKoreanTime(msg.chattingCreatedAt)})
