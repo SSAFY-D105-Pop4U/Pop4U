@@ -12,6 +12,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 public class ReservationDTO {
+    private Long reservationId; // 추가: 예약 id
     private Long userId;
     private Long popupId;
     private Integer reservationPeople;
@@ -33,6 +34,7 @@ public class ReservationDTO {
             popupImage = reservation.getPopupStore().getPopupImages().get(0).getPopupImg();
         }
         return ReservationDTO.builder()
+                .reservationId(reservation.getReservationId())
                 .userId(reservation.getUser() != null ? reservation.getUser().getUserId() : null)
                 .popupId(reservation.getPopupStore().getPopupId())
                 .reservationPeople(reservation.getReservationPeople())

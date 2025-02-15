@@ -21,6 +21,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Optional<Reservation> findByPopupStore_PopupIdAndUser_UserId(Long popupId, Long userId);
 
     @Query("SELECT new com.d105.pop4u.domain.reservation.dto.ReservationDTO(" +
+            "r.reservationId, " +
             "r.user.userId, " +
             "p.popupId, " +
             "r.reservationPeople, " +

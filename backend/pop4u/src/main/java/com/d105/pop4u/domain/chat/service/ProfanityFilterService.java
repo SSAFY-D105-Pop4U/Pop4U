@@ -604,5 +604,5 @@ public class ProfanityFilterService {
         }
         return message;
     }
-    
+
 }
