@@ -1,6 +1,6 @@
 package com.d105.pop4u.global.config.kafka;
 
-import com.d105.pop4u.domain.game.entity.GameEvent;
+import com.d105.pop4u.domain.game.GameEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

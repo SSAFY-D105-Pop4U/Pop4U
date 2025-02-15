@@ -1,4 +1,4 @@
-package com.d105.pop4u.domain.game.entity;
+package com.d105.pop4u.domain.game;
 
 import lombok.Data;
 
