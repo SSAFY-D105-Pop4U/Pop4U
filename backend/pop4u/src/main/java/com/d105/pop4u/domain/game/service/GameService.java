@@ -43,6 +43,7 @@ public class GameService {
     public GameInfo initializeGame(String popupId, LocalDateTime startTime) throws JsonProcessingException {
         // 팝업스토어 존재 여부 확인
         if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+            log.error("존재하지 않는 팝업스토어입니다: {}", popupId);
             throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
         }
 
