@@ -51,6 +51,15 @@ const AppRoutes = () => {
       <Route path="/chat" element={<Chat />} />
       
       <Route path="/lifeshot" element={<LifeShot />} />
+
+      <Route path="/newhome" element={<NewHome />} />
+      <Route path="/twohome" element={<TowHome />} /> 
+      <Route path="/testlife" element={<TestLifeShot />} /> 
+      <Route path="/creategame" element={<Creategame />} />
+      <Route path="/game" element={<Game />} />
+      
+
+      
     </Routes>
   );
 };
