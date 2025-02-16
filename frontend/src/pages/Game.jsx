@@ -1,6 +1,7 @@
 import React from "react";
+import "../styles/pages/game.css"
 
-const GameEvent = () => {
+const Game = () => {
   return (
     <div className="game-event-container">
       <div className="game-event-header" />
@@ -24,9 +25,6 @@ const GameEvent = () => {
       </div>
 
       <div className="game-event-status">
-        <div className="status-bar">
-          <div className="status-time">9:41</div>
-        </div>
         <div className="back-icon">
           <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 16L1 8.5L9 1" stroke="black" strokeWidth="1.51" strokeLinecap="round" strokeLinejoin="round"/>
@@ -40,4 +38,4 @@ const GameEvent = () => {
   );
 };
 
-export default GameEvent;
+export default Game;
