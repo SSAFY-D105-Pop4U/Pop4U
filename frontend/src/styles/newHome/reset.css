@@ -1,0 +1,295 @@
+@charset "utf-8";
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+main {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+	font-family: "Hyundai Sans Text KR", "Apple SD Gothic Neo", "Malgun Gothic", 돋움, Dotum, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    overflow-x: hidden;
+    min-width: 320px;
+    font-family: "Hyundai Sans Text KR", "Apple SD Gothic Neo", "Malgun Gothic", 돋움, Dotum, sans-serif;
+    color: #000;
+    line-height: 1;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+main,
+nav,
+section {
+    display: block;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: #000;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+
+img {
+    vertical-align: top;
+    max-width: 100%;
+}
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+label {
+    outline: 0;
+}
+
+input {
+    margin: 0;
+    font-family: "Hyundai Sans Text KR", "Apple SD Gothic Neo", "Malgun Gothic", 돋움, Dotum, sans-serif;
+    font-size: 1.4rem;
+    color: #000;
+    vertical-align: top;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+}
+
+input[type=submit] {
+    border-width: 0;
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    border-width: 0;
+}
+
+input[type=button] {
+    background-color: transparent;
+}
+
+::-webkit-input-placeholder {
+    color: #8e8e8e;
+}
+
+:-moz-placeholder {
+    color: #8e8e8e;
+}
+
+::-moz-placeholder {
+    color: #8e8e8e;
+}
+
+:-ms-input-placeholder {
+    color: #8e8e8e;
+}
+
+::placeholder {
+    color: #8e8e8e;
+}
+
+textarea {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 0;
+    resize: vertical;
+    -webkit-appearance: none;
+}
+
+strong {
+    font-size: inherit;
+    font-weight: 500;
+    color: inherit;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    color: inherit;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+input[type=text]::-ms-reveal {
+    display: none;
+}
+
+
+
+/* Chrome */
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {
+    display: none;
+}
+
+/* OR  */
+::-webkit-search-decoration,
+::-webkit-search-cancel-button,
+::-webkit-search-results-button,
+::-webkit-search-results-decoration {
+    display: none;
+}
+
+label,
+select,
+a,
+button {
+    font-family: "HDSansT";
+    font-size: 1.6rem;
+    box-sizing: border-box;
+}
+
+textarea {
+    font-family: "Hyundai Sans Text KR", "Apple SD Gothic Neo", "Malgun Gothic", 돋움, Dotum, sans-serif;
+    font-size: 1.4rem;
+    box-sizing: border-box;
+}
+
+select {
+    background-color: transparent;
+    border-width: 0;
+    font-weight: 400;
+    color: #000;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select option {
+    font-weight: 400;
+}
+
+span,
+em {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+}
+
+em {
+    font-style: normal;
+}
+
+sup {
+    font-size: 1.6rem;
+    vertical-align: super;
+}
+
+b {
+    font-weight: 500;
+}
+
+/*::selection{background-color:#002c5f;}*/
+/*::-moz-selection{background-color:#002c5f;}*/

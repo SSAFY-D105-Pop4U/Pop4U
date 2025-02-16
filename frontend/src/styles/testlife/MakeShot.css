@@ -1,0 +1,36 @@
+.lifeshot-frame {
+    width: 90%;
+    max-width: 414px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.lifeshot-frame-container {
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--frame-background-color, #ffffff);  /* 기본값으로 #89B5AF 사용 */
+    padding: 5px 5px 50px;
+    margin-top: 20px;
+    aspect-ratio: 3/4;  /* 세로로 긴 비율 */
+}
+
+.lifeshot-frame-item {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(76, 80, 79);
+    border: 1px solid rgb(189, 196, 196);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.lifeshot-frame-bg{
+    width: 90%;
+    aspect-ratio: 3/4;
+    background-color: rgb(76, 80, 79);
+}
