@@ -3,7 +3,7 @@ import '../../styles/components/LifeShotFrame.css';
 import { Droppable } from '@hello-pangea/dnd';
 
 const LifeShotFrame = ({selectedColor, frameImages}) => {
-  return (
+  return (  
     <div className="lifeshot-frame">
       <div className="frame-container" style={{ backgroundColor: selectedColor }}>
         {/* 4개의 사진 영역 */}
