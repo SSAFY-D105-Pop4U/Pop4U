@@ -1,7 +1,7 @@
 // src/apis/instance.js
 import axios from "axios";
 
-export const api = axios.create({
+const api = axios.create({
     baseURL: "/api",
     withCredentials: true,
     headers: {
