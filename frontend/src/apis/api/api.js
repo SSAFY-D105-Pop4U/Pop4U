@@ -126,9 +126,6 @@ export const getmyreservation = async () => {
 }
 
 
-
-
-
 {/* ✅  get :*/}
 export const getpopup = async () => {
   try {
