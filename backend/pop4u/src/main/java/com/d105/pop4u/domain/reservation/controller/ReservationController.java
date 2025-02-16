@@ -48,10 +48,9 @@ public class ReservationController {
      * 로그인한 사용자의 예약 조회
      */
     @GetMapping("/my")
-    public ResponseEntity<List<ReservationDTO>> getMyReservations(
-            @AuthenticationPrincipal User user) {
+    public ResponseEntity<List<ReservationDTO>> getMyReservations(@AuthenticationPrincipal User user) {
         Long userId = user.getUserId();
-        return ResponseEntity.ok(reservationService.getReservationsByUser(userId));
+        return ResponseEntity.ok(reservationService.getReservationsByUser(userId, user));
     }
 
     /**
