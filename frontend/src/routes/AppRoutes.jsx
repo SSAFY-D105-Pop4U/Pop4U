@@ -21,7 +21,12 @@ import TowHome from "../pages/TowHome";
 
 import TestLifeShot from "../pages/new/LifeShot"
 
+import Creategame from "../pages/Creategame"
 import LifeShot from "../pages/LifeShot";
+import Game from "../pages/Game"
+
+
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -46,11 +51,6 @@ const AppRoutes = () => {
       <Route path="/chat" element={<Chat />} />
       
       <Route path="/lifeshot" element={<LifeShot />} />
-
-      <Route path="/newhome" element={<NewHome />} />
-      <Route path="/twohome" element={<TowHome />} /> 
-      <Route path="/testlife" element={<TestLifeShot />} /> 
-      
     </Routes>
   );
 };

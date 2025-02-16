@@ -16,7 +16,7 @@ const ReviewItem = ({ reviews }) => {
           <div className="profile">
             {/* <img src={basicProfile} alt="프로필" className="profile-img" /> */}
             <div className="info">
-              <div className="username">{review.userName || "익명"}</div>
+              <div className="username">{review.userNickname || "익명"}</div>
               <div className="rating_day">
                 
                 <div className="rating">
