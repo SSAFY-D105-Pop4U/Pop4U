@@ -25,11 +25,9 @@ public class GameController {
     private GameService gameService;
 
     // 1. 브랜드 회원이 게임 생성
-    @PostMapping("/start/{popupId}")
-    public ResponseEntity<GameInfo> startGame(
-            @PathVariable String popupId,
-            @RequestParam LocalDateTime startTime) throws JsonProcessingException {
-        GameInfo gameInfo = gameService.initializeGame(popupId, startTime);
+    @PostMapping("/start")
+    public ResponseEntity<GameInfo> startGame(@RequestBody GameStartRequest request) throws JsonProcessingException {
+        GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
         return ResponseEntity.ok(gameInfo);
     }
 
