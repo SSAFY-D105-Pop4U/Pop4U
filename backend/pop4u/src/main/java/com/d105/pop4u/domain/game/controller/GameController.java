@@ -25,27 +25,25 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-    // 1. 브랜드 회원이 게임 생성
-    @PostMapping("/start")
-    public ResponseEntity<GameInfo> startGame(@RequestBody GameStartRequest request) {
-        try {
-            GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
-            return ResponseEntity.ok(gameInfo);
-        } catch (Exception e) {
-            log.error("게임 시작 중 오류 발생: {}", e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+//    // 1. 브랜드 회원이 게임 생성
+//    @PostMapping("/start")
+//    public ResponseEntity<GameInfo> startGame(@RequestBody GameStartRequest request) {
+//        try {
+//            GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
+//            return ResponseEntity.ok(gameInfo);
+//        } catch (Exception e) {
+//            log.error("게임 시작 중 오류 발생: {}", e.getMessage(), e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+//        }
+//    }
 
-    // 링크 생성
-    @PostMapping("/create-link/{popupId}")
-    public ResponseEntity<String> createGameLink(
-            @PathVariable String popupId,
-            @RequestParam LocalDateTime startTime) throws JsonProcessingException {
+    // 1. 게임 생성 + 링크 생성 후 제공
+    @PostMapping("/start/{popupId}")
+    public ResponseEntity<String> createGameLink(@RequestBody GameStartRequest request) throws JsonProcessingException {
         // 게임 초기화 후 링크 생성
-        GameInfo gameInfo = gameService.initializeGame(popupId, startTime);
+        GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
         // 프론트엔드 게임 페이지 URL 생성
-        String gameLink = "/Event_Game/" + popupId;
+        String gameLink = "/Event_Game/" + gameInfo.getPopupId();
         return ResponseEntity.ok(gameLink);
     }
 
