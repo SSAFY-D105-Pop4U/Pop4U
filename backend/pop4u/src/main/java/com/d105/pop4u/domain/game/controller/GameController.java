@@ -5,6 +5,7 @@ import com.d105.pop4u.domain.game.service.GameService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,9 +27,14 @@ public class GameController {
 
     // 1. 브랜드 회원이 게임 생성
     @PostMapping("/start")
-    public ResponseEntity<GameInfo> startGame(@RequestBody GameStartRequest request) throws JsonProcessingException {
-        GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
-        return ResponseEntity.ok(gameInfo);
+    public ResponseEntity<GameInfo> startGame(@RequestBody GameStartRequest request) {
+        try {
+            GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
+            return ResponseEntity.ok(gameInfo);
+        } catch (Exception e) {
+            log.error("게임 시작 중 오류 발생: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     // 링크 생성
