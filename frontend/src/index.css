@@ -40,8 +40,4 @@ textarea {
   margin: 0;
   padding: 0;
 }
-img {
-    user-select: none;
-    pointer-events: none;
-  }
 
