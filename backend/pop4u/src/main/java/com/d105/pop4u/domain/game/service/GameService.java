@@ -1,7 +1,6 @@
 package com.d105.pop4u.domain.game.service;
 
 import com.d105.pop4u.domain.store.repository.PopupStoreRepository;
-import com.d105.pop4u.domain.game.dto.GameClickResult;
 import com.d105.pop4u.domain.game.dto.GameCompletionEvent;
 import com.d105.pop4u.domain.game.dto.GameInfo;
 import com.d105.pop4u.domain.game.dto.GameStatus;
