@@ -19,6 +19,8 @@ import NewHome from "../pages/newHome";
 import Chat from "../pages/Chat";
 import TowHome from "../pages/TowHome"; 
 
+import TestLifeShot from "../pages/new/LifeShot"
+
 import LifeShot from "../pages/LifeShot";
 const AppRoutes = () => {
   return (
@@ -47,6 +49,8 @@ const AppRoutes = () => {
 
       <Route path="/newhome" element={<NewHome />} />
       <Route path="/twohome" element={<TowHome />} /> 
+      <Route path="/testlife" element={<TestLifeShot />} /> 
+      
     </Routes>
   );
 };
