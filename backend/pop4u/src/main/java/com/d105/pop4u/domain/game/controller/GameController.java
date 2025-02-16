@@ -33,6 +33,7 @@ public class GameController {
         return ResponseEntity.ok(gameInfo);
     }
 
+    // 링크 생성
     @PostMapping("/create-link/{popupId}")
     public ResponseEntity<String> createGameLink(
             @PathVariable String popupId,
@@ -57,13 +58,13 @@ public class GameController {
             @PathVariable String popupId,
             @AuthenticationPrincipal UserDetails userDetails) {
 
-        if (userDetails == null) {
-            return ResponseEntity.badRequest().body(new ClickResponse(false, "로그인이 필요합니다."));
-        }
-
-        if (!gameService.isGameActive(popupId)) {
-            return ResponseEntity.badRequest().body(new ClickResponse(false, "Game is not active"));
-        }
+//        if (userDetails == null) {
+//            return ResponseEntity.badRequest().body(new ClickResponse(false, "로그인이 필요합니다."));
+//        }
+//
+//        if (!gameService.isGameActive(popupId)) {
+//            return ResponseEntity.badRequest().body(new ClickResponse(false, "Game is not active"));
+//        }
 
         Long userId = Long.parseLong(userDetails.getUsername());
 
