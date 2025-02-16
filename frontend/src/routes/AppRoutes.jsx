@@ -15,8 +15,11 @@ import NewPopupList from "../pages/NewPopupList";
 import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
 import ReviewLifeShot from "../pages/ReviewLifeShot";
+import NewHome from "../pages/newHome";
 import Chat from "../pages/Chat";
+import TowHome from "../pages/TowHome"; 
 
+import TestLifeShot from "../pages/new/LifeShot"
 
 import LifeShot from "../pages/LifeShot";
 const AppRoutes = () => {
@@ -43,6 +46,11 @@ const AppRoutes = () => {
       <Route path="/chat" element={<Chat />} />
       
       <Route path="/lifeshot" element={<LifeShot />} />
+
+      <Route path="/newhome" element={<NewHome />} />
+      <Route path="/twohome" element={<TowHome />} /> 
+      <Route path="/testlife" element={<TestLifeShot />} /> 
+      
     </Routes>
   );
 };

@@ -1,0 +1,57 @@
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px) rotate(-2deg); }
+    40% { transform: translateX(5px) rotate(2deg); }
+    60% { transform: translateX(-5px) rotate(-2deg); }
+    80% { transform: translateX(5px) rotate(2deg); }
+    100% { transform: translateX(0); }
+}
+
+.frames-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.frames-title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.frames-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.shot-frame {
+    width: 150px;
+    height: 180px;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(76, 80, 79);
+    border: 1px solid rgb(189, 196, 196);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* ✅ 흔들리는 애니메이션 (5초마다 실행되지만 0.5초 후 사라짐) */
+.shake {
+    animation: shake 0.5s ease-in-out 1; /* 0.5초 동안 한 번만 실행 */
+}
+
+.shot-frame p {
+    margin-top: 5px;
+}
