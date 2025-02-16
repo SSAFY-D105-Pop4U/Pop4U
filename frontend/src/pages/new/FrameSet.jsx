@@ -5,7 +5,7 @@ import frame3 from '../../assets/icons/shotframe3.png';
 import frame4 from '../../assets/icons/shotframe4.png';
 import '../../styles/testlife/LifeFrame.css';
 
-const Frameset = () => {
+const Frameset = ({handleFrame}) => {
     const [shakeIndex, setShakeIndex] = useState(-1);
 
     useEffect(() => {
@@ -25,20 +25,20 @@ const Frameset = () => {
         <div className="frames-wrapper">
             <h2 className="frames-title">Choose Your Frame</h2>
 
-            <div className="frames-container">
-                <div className={`shot-frame ${shakeIndex === 0 ? "shake" : ""}`}>
+            <div className="frames-container" >
+                <div className={`shot-frame ${shakeIndex === 0 ? "shake" : ""}`} onClick={()=>handleFrame(1)}>
                     <img src={frame1} alt="Frame 1"/>
                     <p>One</p>
                 </div>
-                <div className={`shot-frame ${shakeIndex === 1 ? "shake" : ""}`}>
+                <div className={`shot-frame ${shakeIndex === 1 ? "shake" : ""}`} onClick={()=>handleFrame(2)}>
                     <img src={frame2} alt="Frame 2"/>
                     <p>Two</p>
                 </div>
-                <div className={`shot-frame ${shakeIndex === 2 ? "shake" : ""}`}>
+                <div className={`shot-frame ${shakeIndex === 2 ? "shake" : ""}`} onClick={()=>handleFrame(3)}>
                     <img src={frame3} alt="Frame 3"/>
                     <p>Three</p>
                 </div>
-                <div className={`shot-frame ${shakeIndex === 3 ? "shake" : ""}`}>
+                <div className={`shot-frame ${shakeIndex === 3 ? "shake" : ""}`} onClick={()=>handleFrame(4)}>
                     <img src={frame4} alt="Frame 4"/>
                     <p>Four</p>
                 </div>

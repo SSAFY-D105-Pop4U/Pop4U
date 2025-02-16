@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import InsertShot from "./InsertShot";
 import Frameset from "./FrameSet";
+import MakeShot from "./MakeShot";
 
 const LifeShot = () => {
     const [isNext, setIsNext] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [frameCount, setFrameCount] = useState(0);
 
     // 📱 터치 드래그 종료 (애니메이션 시작)
     const handleNext = () => {
@@ -17,13 +19,30 @@ const LifeShot = () => {
         }, 500); // 애니메이션 지속 시간 (0.5초 후 상태 변경)
     };
 
+    // 📱 프레임 개수 선택 (애니메이션 시작)
+    const handleFrame = (count) => {
+        
+        console.log("애니메이션 시작됨! (isAnimating = true)");
+
+        setTimeout(() => {
+            setFrameCount(count); // ✅ 애니메이션이 끝난 후 새로운 화면 렌더링
+            console.log("Framecount",count);
+        }, 500); // 애니메이션 지속 시간 (0.5초 후 상태 변경)
+    };
+
     return (
         <div style={{ backgroundColor: "black", height: "100vh", overflow: "hidden" }}>
-            {!isNext ? (
+            {(!isNext) && (
                 <InsertShot handleNext={handleNext} isAnimating={isAnimating} />
-            ) : (
-                <Frameset />
+            ) }
+            {isNext && (frameCount==0) && (
+                <Frameset handleFrame={handleFrame}/>
             )}
+            {(frameCount>0) &&(
+                <MakeShot frameCount={frameCount}/>
+            )}
+
+            
         </div>
     );
 };
