@@ -28,7 +28,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     public static final Duration REFRESH_TOKEN_DURATION = Duration.ofDays(14);
     public static final Duration ACCESS_TOKEN_DURATION = Duration.ofDays(1);
 //    public static final String REDIRECT_PATH = "/user/login";
-    public static final String REDIRECT_PATH = "http://localhost:5173/";  // 프론트엔드 성공 페이지 URL
+    public static final String REDIRECT_PATH = "https://i12d105.p.ssafy.io:5173/";  // 프론트엔드 성공 페이지 URL
 
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
@@ -60,7 +60,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         response.setHeader("Authorization", "Bearer " + accessToken);
 
         // 응답 헤더 설정 (CORS 관련)
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173/");
+        response.setHeader("Access-Control-Allow-Origin", "https://i12d105.p.ssafy.io:5173/");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Expose-Headers", "Authorization");
 

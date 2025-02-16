@@ -1,5 +1,6 @@
 package com.d105.pop4u.domain.game.service;
 
+import com.d105.pop4u.domain.store.repository.PopupStoreRepository;
 import com.d105.pop4u.domain.game.dto.GameClickResult;
 import com.d105.pop4u.domain.game.dto.GameCompletionEvent;
 import com.d105.pop4u.domain.game.dto.GameInfo;
@@ -34,19 +35,23 @@ public class GameService {
     private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
-    private PopupRepository popupRepository;  // 또는 PopupService
+    private PopupStoreRepository popupStoreRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     public GameInfo initializeGame(String popupId, LocalDateTime startTime) throws JsonProcessingException {
+        // 팝업스토어 존재 여부 확인
+        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
+        }
+
         String statusKey = STATUS_PREFIX + popupId;
         GameStatus status = new GameStatus(startTime, startTime.plusSeconds(GAME_DURATION_SECONDS));
 
         String statusJson = objectMapper.writeValueAsString(status);
         redisTemplate.opsForValue().set(statusKey, statusJson);
 
-        // 이전 게임 데이터 초기화
         clearPreviousGameData(popupId);
 
         return new GameInfo(status, popupId);
@@ -62,6 +67,11 @@ public class GameService {
     }
 
     public GameStatus getGameStatus(String popupId) {
+        // 팝업스토어 존재 여부 확인
+        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
+        }
+
         try {
             String statusKey = STATUS_PREFIX + popupId;
             String statusJson = redisTemplate.opsForValue().get(statusKey);
@@ -78,6 +88,11 @@ public class GameService {
     }
 
     public boolean isGameActive(String popupId) {
+        // 팝업스토어 존재 여부 확인
+        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
+        }
+
         GameStatus status = getGameStatus(popupId);
         if (status == null) {
             return false;
@@ -89,6 +104,11 @@ public class GameService {
     }
 
     public GameClickResult processClick(String popupId, Long userId) {
+        // 팝업스토어 존재 여부 확인
+        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
+        }
+
         if (!isGameActive(popupId)) {
             return new GameClickResult(0, false, null);
         }
@@ -128,9 +148,14 @@ public class GameService {
                 .collect(Collectors.groupingBy(GameCompletionEvent::getPopupId));
 
         completionsByStore.forEach((popupId, storeCompletions) -> {
+            // 팝업스토어 존재 여부 확인
+            if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+                log.error("존재하지 않는 팝업스토어입니다: {}", popupId);
+                return;
+            }
+
             String rankingKey = RANKINGS_PREFIX + popupId;
 
-            // 완료 시간을 score로 사용하여 정렬
             storeCompletions.forEach(completion -> {
                 double score = completion.getCompletionTime().toEpochSecond(ZoneOffset.UTC);
                 redisTemplate.opsForZSet().add(
@@ -143,6 +168,11 @@ public class GameService {
     }
 
     public List<RankingEntry> getRankings(String popupId) {
+        // 팝업스토어 존재 여부 확인
+        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
+        }
+
         String rankingKey = RANKINGS_PREFIX + popupId;
         Set<ZSetOperations.TypedTuple<String>> rankingSet =
                 redisTemplate.opsForZSet().rangeWithScores(rankingKey, 0, 4);

@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -35,15 +37,20 @@ public class GameController {
         return ResponseEntity.ok(status);
     }
 
-    @PostMapping("/click/{popupId}/{userId}")
+    @PostMapping("/click/{popupId}")  // userId 파라미터 제거
     public ResponseEntity<ClickResponse> clickGiftBox(
             @PathVariable String popupId,
-            @PathVariable Long userId) {
+            @AuthenticationPrincipal UserDetails userDetails) {  // Spring Security로 현재 사용자 정보 가져오기
+
+        if (userDetails == null) {
+            return ResponseEntity.badRequest().body(new ClickResponse(false, "로그인이 필요합니다."));
+        }
 
         if (!gameService.isGameActive(popupId)) {
             return ResponseEntity.badRequest().body(new ClickResponse(false, "Game is not active"));
         }
 
+        Long userId = Long.parseLong(userDetails.getUsername());  // 현재 로그인한 사용자의 ID
         GameClickResult result = gameService.processClick(popupId, userId);
 
         // 게임 완료 시 Kafka로 완료 이벤트 전송
