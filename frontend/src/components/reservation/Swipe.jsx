@@ -11,32 +11,47 @@ const Swipe = () => {
   const [isDragging, setIsDragging] = useState(false);
   const dragThreshold = 50; // 드래그 임계값 (픽셀)
   const [isWebVersion, setIsWebVersion] = useState(window.innerWidth >= 768);
+  const [loading, setLoading] = useState(true);
 
   // 내예약 API 호출 및 상태 업데이트
   const fetchReservations = async () => {
     try {
       const response = await myreservation();
       console.log("📌 API 내예약 호출 결과:", response);
-      if (response && response.data) {
-        setCards(response.data); // API 응답 데이터를 상태에 저장
+      if (response) {
+        setCards(response);
+        console.log("저장완료")
       }
     } catch (error) {
       console.error("❌ Failed to load reservations", error);
+    } finally {
+      setLoading(false); // 로딩 완료
     }
   };
 
   useEffect(() => {
     fetchReservations();
-    console.log(cards.length)
     const handleResize = () => {
       setIsWebVersion(window.innerWidth >= 768);
     };
-
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []); // []: 마운트 시 한 번만 실행
+
+  useEffect(() => {
+    console.log(cards.length); // 데이터가 업데이트될 때 확인 가능
+  }, []);
+
   
+  if (loading) {
+    return <p className="loading">로딩 중...</p>;
+  }
+  
+  if (cards.length === 0) {
+    return <p className="no-reservations">예약된 내역이 없습니다.</p>;
+  }
+
+
 
   const handleSwipe = (direction) => {
     if (direction === "left" && currentIndex < cards.length - 1) {
@@ -115,10 +130,6 @@ const Swipe = () => {
     );
   };
 
-  // 카드 데이터가 없으면 메시지 표시
-  if (cards.length === 0) {
-    return <p className="no-reservations">예약된 내역이 없습니다.</p>;
-  }
 
   return (
     <div 
@@ -138,7 +149,7 @@ const Swipe = () => {
 
         return (
           <div
-            key={card.popupId}
+            key={card.reservationId}
             className={`slider-card ${isActive ? "slider-active" : ""} ${isNext ? "slider-next" : ""} ${isPrevious ? "slider-previous" : ""}`}
             style={{
               transform: isActive

@@ -3,6 +3,7 @@ import '../../styles/components/ReservationCard.css';
 
 
 const ReservationCard = ({reservation} ) => {
+  console.log(reservation)
   if (!reservation) return null;
   
   useEffect(()=>{
@@ -13,7 +14,7 @@ const ReservationCard = ({reservation} ) => {
     <div className="reservation-card-container">
       <div className="reservation-card-header">
         <img
-          src={reservation.image}
+          src={reservation.popupImage}
           alt="예약 이미지"
           className="reservation-card-image"
         />
@@ -27,15 +28,15 @@ const ReservationCard = ({reservation} ) => {
         <div className="reservation-card-details">
           <div>
             <strong>예약일</strong>
-            <strong className="detail-value">{reservation.date}</strong>
+            <strong className="detail-value"> {reservation.reservationDate.substring(5).replaceAll("-", ".")}</strong>
           </div>
           <div>
             <strong>예약시간</strong>
-            <strong className="detail-value">{reservation.time}</strong>
+            <strong className="detail-value">{reservation.reservationTime.slice(0, -3)}</strong>
           </div>
           <div>
             <strong>인원</strong>
-            <strong className="detail-value">{reservation.people}</strong>
+            <strong className="detail-value">{reservation.reservationPeople}</strong>
           </div>
           <div>
             <strong>대기 번호</strong>
