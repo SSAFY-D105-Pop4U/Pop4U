@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/pages/game.css"
+// import "../styles/pages/game.css"
+// import "../assets/images/present.png"
 
 const Game = () => {
   return (
@@ -32,7 +33,7 @@ const Game = () => {
         </div>
       </div>
 
-      <img className="game-event-image" src="https://placehold.co/276x296" alt="Event" />
+      {/* <img className="game-event-image" src={} alt="Event" /> */}
       <div className="game-event-count">49</div>
     </div>
   );
