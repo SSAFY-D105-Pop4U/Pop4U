@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { postcreategame } from "../apis/api/api.js";
-import {useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-const HourlyDial = () => {
+const Creategame = () => {
   const [selectedTime, setSelectedTime] = useState({ hours: 12, minutes: 0 });
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId");
+
+  // ✅ 모달 상태
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [gameLink, setGameLink] = useState("");
 
   useEffect(() => {
     const handleScroll = (e, type) => {
@@ -38,24 +42,27 @@ const HourlyDial = () => {
     return `${year}-${month}-${day}`;
   };
 
-  // api 요청임✅
+  // ✅ API 요청 및 모달 열기
   const handleSubmit = async () => {
+    setIsModalOpen(true); // 모달 열기
+
     const formattedTime = {
       date: getCurrentDate(),
       hours: selectedTime.hours.toString().padStart(2, "0"),
       minutes: selectedTime.minutes.toString().padStart(2, "0"),
     };
-  
-    // `startTime` 형식 변환
+    
     const startTime = `${formattedTime.date}T${formattedTime.hours}:${formattedTime.minutes}:00`;
-  
-    console.log(startTime); // 예: "2025-02-15T14:00:00"
-  
+
+    console.log("전송 데이터:", { startTime, popupId });
+
     try {
-      const data = await postcreategame({startTime,popupId});
+      const data = await postcreategame({ startTime, popupId });
       console.log("API 응답 (게임생성):", data);
+      setIsModalOpen(true); // 모달 열기
+
     } catch (error) {
-      console.error("api 호출 실패(게임생성)", error);
+      console.error("API 호출 실패(게임생성)", error);
     }
   };
 
@@ -95,12 +102,75 @@ const HourlyDial = () => {
       <p>
         선택한 시간: <strong>{selectedTime.hours.toString().padStart(2, "0")}:{selectedTime.minutes.toString().padStart(2, "0")}</strong>
       </p>
-      <button onClick={handleSubmit} style={styles.button}>만들기</button>
+      <button onClick={handleSubmit} style={styles.button}>게임 만들기</button>
+
+
+
+      {/* ✅ 모달 */}
+      {isModalOpen && (
+  <div style={styles.modalOverlay}>
+    <div style={styles.modalContent}>
+      <h2>게임 링크</h2>
+      
+      {/* ✅ URL을 복사할 수 있도록 버튼 추가 */}
+      <div style={styles.copyContainer}>
+        <input
+          type="text"
+          value={`https://i12d105.p.ssafy.io/game/Event_Game/${popupId}`}
+          readOnly
+          style={styles.copyInput}
+        />
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(`https://i12d105.p.ssafy.io/game/Event_Game/${popupId}`);
+            alert("링크가 복사되었습니다!");
+          }}
+          style={styles.copyButton}
+        >
+          복사
+        </button>
+      </div>
+
+      <a href={gameLink} target="_blank" rel="noopener noreferrer">
+        {gameLink}
+      </a>
+      <br />
+      <button onClick={() => setIsModalOpen(false)} style={styles.modalCloseBtn}>
+        닫기
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
 
 const styles = {
+  
+  copyContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginBottom: "15px",
+  },
+  copyInput: {
+    width: "100%",
+    padding: "8px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    fontSize: "16px",
+    textAlign: "center",
+  },
+  copyButton: {
+    padding: "8px 15px",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    borderRadius: "5px",
+    fontSize: "14px",
+  },
   container: {
     width: "350px",
     margin: "auto",
@@ -153,6 +223,37 @@ const styles = {
     borderRadius: "5px",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   },
+  /* ✅ 모달 스타일 */
+  modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  modalContent: {
+    background: "white",
+    padding: "20px",
+    width: "350px",
+    borderRadius: "10px",
+    textAlign: "center",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+  },
+  modalCloseBtn: {
+    padding: "10px 20px",
+    backgroundColor: "#dc3545",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    marginTop: "10px",
+    borderRadius: "5px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  },
 };
 
-export default HourlyDial;
+export default Creategame;

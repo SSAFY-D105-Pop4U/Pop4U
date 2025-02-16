@@ -52,7 +52,7 @@ const AppRoutes = () => {
       <Route path="/twohome" element={<TowHome />} /> 
       <Route path="/testlife" element={<TestLifeShot />} /> 
       <Route path="/creategame" element={<Creategame />} />
-      <Route path="/game" element={<Game />} />
+      <Route path="/game/Event_Game/:popupId" element={<Game />} />
       
 
       
