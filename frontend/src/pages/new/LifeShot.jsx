@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import InsertShot from "./InsertShot";
 import Frameset from "./FrameSet";
-import MakeShot from "./MakeShot";
+import MakeShot1 from "./MakeShot1";
 
 const LifeShot = () => {
     const [isNext, setIsNext] = useState(false);
@@ -39,7 +39,7 @@ const LifeShot = () => {
                 <Frameset handleFrame={handleFrame}/>
             )}
             {(frameCount>0) &&(
-                <MakeShot frameCount={frameCount}/>
+                <MakeShot1 frameCount={frameCount}/>
             )}
 
             

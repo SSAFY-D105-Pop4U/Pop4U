@@ -7,13 +7,11 @@
 }
 
 .lifeshot-frame-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* ✅ 가로 2개씩 배치 */
-    gap: 10px; /* ✅ 아이템 간 간격 */
+   display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--frame-background-color, #ffffff);  /* 기본값으로 #89B5AF 사용 */
-    padding: 10px 10px 50px;
+    padding: 5px 5px 50px;
     margin-top: 20px;
     aspect-ratio: 3/4;  /* 세로로 긴 비율 */
 }
@@ -29,4 +27,10 @@
     align-items: center;
     border-radius: 10px;
     text-align: center;
+}
+
+.lifeshot-frame-bg{
+    width: 90%;
+    aspect-ratio: 3/4;
+    background-color: rgb(76, 80, 79);
 }
