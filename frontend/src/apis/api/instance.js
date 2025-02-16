@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "/api",
+    baseURL: "http://localhost:8081/",
     withCredentials: true,
     headers: {
         "Content-Type": "application/json",
@@ -10,7 +10,7 @@ const api = axios.create({
 });
 
 export const imgapi = axios.create({
-    baseURL: "/api",
+    baseURL: "http://localhost:8081/",
     withCredentials: true,
     // headers: {
     //     "Content-Type": "multipart/form-data",

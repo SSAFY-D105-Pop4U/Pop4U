@@ -16,7 +16,7 @@ import EndingPopupList from "../pages/EndingPopupList";
 import TrendingPopupList from "../pages/TrendingPopupList";
 import ReviewLifeShot from "../pages/ReviewLifeShot";
 import Chat from "../pages/Chat";
-
+import Creategame from "../pages/Creategame"
 
 import LifeShot from "../pages/LifeShot";
 const AppRoutes = () => {
@@ -43,6 +43,9 @@ const AppRoutes = () => {
       <Route path="/chat" element={<Chat />} />
       
       <Route path="/lifeshot" element={<LifeShot />} />
+      <Route path="/creategame" element={<Creategame />} />
+
+      
     </Routes>
   );
 };

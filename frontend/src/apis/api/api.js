@@ -125,21 +125,6 @@ export const getmyreservation = async () => {
   }
 }
 
-
-{/* ✅  get :*/}
-export const getpopup = async () => {
-  try {
-    const response = await api.get(`/reservation/my`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching popups:", error);
-    throw error;
-  }
-}
-
-
-
-
 // 내예약 조회
 export const myreservation = async () => {
   try {
@@ -151,10 +136,7 @@ export const myreservation = async () => {
   }
 }
 
-
-
-
-// 리뷰작성
+// post 리뷰작성
 export const postwritereview = async (formData) => {
   try {
     // imgapi는 이미 "Content-Type": "multipart/form-data" 설정되어 있다고 가정
@@ -163,6 +145,19 @@ export const postwritereview = async (formData) => {
     return response.data;
   } catch (error) {
     console.error("Error posting review:", error);
+    throw error;
+  }
+};
+
+
+// post 게임 생성
+export const postcreategame = async () => {
+  try {
+    const response = await api.post(`/game/start/`, {
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
     throw error;
   }
 };
