@@ -1,6 +1,6 @@
 package com.d105.pop4u.global.config.kafka;
 
-import com.d105.pop4u.domain.game.GameEvent;
+import com.d105.pop4u.domain.game.dto.GameEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.common.errors.SerializationException;
 import org.apache.kafka.common.serialization.Serializer;
