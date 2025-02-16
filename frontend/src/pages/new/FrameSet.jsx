@@ -5,43 +5,49 @@ import frame3 from '../../assets/icons/shotframe3.png';
 import frame4 from '../../assets/icons/shotframe4.png';
 import '../../styles/testlife/LifeFrame.css';
 
-const Frameset = ({handleFrame}) => {
+const Frameset = ({ handleFrame }) => {
     const [shakeIndex, setShakeIndex] = useState(-1);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const [selectedFrame, setSelectedFrame] = useState(null);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setShakeIndex(0); // 첫 번째 프레임부터 애니메이션 시작
+            setShakeIndex(0);
+            setTimeout(() => setShakeIndex(1), 500);
+            setTimeout(() => setShakeIndex(2), 1000);
+            setTimeout(() => setShakeIndex(3), 1500);
+            setTimeout(() => setShakeIndex(-1), 2000);
+        }, 5000);
 
-            setTimeout(() => setShakeIndex(1), 500); // 0.5초 후 두 번째 프레임
-            setTimeout(() => setShakeIndex(2), 1000); // 1초 후 세 번째 프레임
-            setTimeout(() => setShakeIndex(3), 1500); // 1.5초 후 네 번째 프레임
-            setTimeout(() => setShakeIndex(-1), 2000); // 모든 애니메이션 종료
-        }, 5000); // 5초마다 반복 실행
-
-        return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 제거
+        return () => clearInterval(interval);
     }, []);
 
+    const handleSelectFrame = (frame) => {
+        if (isAnimating) return; // 애니메이션 중복 실행 방지
+        setIsAnimating(true);
+        setSelectedFrame(frame); // 선택된 프레임 저장
+
+        setTimeout(() => {
+            handleFrame(frame);
+        }, 500);
+    };
+
     return (
-        <div className="frames-wrapper">
+        <div className={`frames-wrapper ${isAnimating ? "exit" : ""}`}>
             <h2 className="frames-title">Choose Your Frame</h2>
 
-            <div className="frames-container" >
-                <div className={`shot-frame ${shakeIndex === 0 ? "shake" : ""}`} onClick={()=>handleFrame(1)}>
-                    <img src={frame1} alt="Frame 1"/>
-                    <p>One</p>
-                </div>
-                <div className={`shot-frame ${shakeIndex === 1 ? "shake" : ""}`} onClick={()=>handleFrame(2)}>
-                    <img src={frame2} alt="Frame 2"/>
-                    <p>Two</p>
-                </div>
-                <div className={`shot-frame ${shakeIndex === 2 ? "shake" : ""}`} onClick={()=>handleFrame(3)}>
-                    <img src={frame3} alt="Frame 3"/>
-                    <p>Three</p>
-                </div>
-                <div className={`shot-frame ${shakeIndex === 3 ? "shake" : ""}`} onClick={()=>handleFrame(4)}>
-                    <img src={frame4} alt="Frame 4"/>
-                    <p>Four</p>
-                </div>
+            <div className="frames-container">
+                {[frame1, frame2, frame3, frame4].map((img, index) => (
+                    <div
+                        key={index}
+                        className={`shot-frame ${shakeIndex === index ? "shake" : ""} 
+                                    ${selectedFrame === index + 1 ? "selected" : ""}`}
+                        onClick={() => handleSelectFrame(index + 1)}
+                    >
+                        <img src={img} alt={`Frame ${index + 1}`} />
+                        <p>Frame {index + 1}</p>
+                    </div>
+                ))}
             </div>
         </div>
     );

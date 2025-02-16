@@ -13,6 +13,13 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* ✅ 선택된 후 오른쪽으로 사라지는 애니메이션 */
+.frames-wrapper.exit {
+    transform: translateX(-100%);
+    opacity: 0;
 }
 
 .frames-title {
@@ -32,9 +39,9 @@
     width: fit-content;
 }
 
+/* ✅ 개별 `.shot-frame`에 애니메이션 적용 */
 .shot-frame {
     width: 150px;
-    height: 180px;
     color: #ffffff;
     padding: 10px;
     border-radius: 15px;
@@ -45,13 +52,17 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
-/* ✅ 흔들리는 애니메이션 (5초마다 실행되지만 0.5초 후 사라짐) */
-.shake {
-    animation: shake 0.5s ease-in-out 1; /* 0.5초 동안 한 번만 실행 */
+/* ✅ 흔들리는 애니메이션 */
+.shot-frame.shake {
+    animation: shake 0.5s ease-in-out 1;
 }
 
-.shot-frame p {
-    margin-top: 5px;
+/* ✅ 선택된 프레임 강조 */
+.shot-frame.selected {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
 }

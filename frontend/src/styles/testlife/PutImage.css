@@ -1,0 +1,62 @@
+.life-image-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ✅ 가로 스크롤 가능하도록 설정 */
+.life-image-grid {
+    display: flex;
+    flex-wrap: nowrap; /* ✅ 한 줄로 배치 */
+    gap: 10px;
+    width: 100%;
+    overflow-x: auto; /* ✅ 가로 스크롤 가능 */
+    white-space: nowrap; /* ✅ 줄 바꿈 방지 */
+    scrollbar-width: none; /* ✅ 스크롤바 숨기기 (Firefox) */
+    -ms-overflow-style: none; /* ✅ 스크롤바 숨기기 (IE/Edge) */
+    cursor: grab; /* ✅ 기본 커서를 손 모양으로 변경 */
+}
+
+/* ✅ 스크롤바 숨기기 */
+.life-image-grid::-webkit-scrollbar {
+    display: none; /* ✅ 크롬, 사파리에서 스크롤바 숨김 */
+}
+
+.life-mage-preview {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0; /* ✅ 크기 유지 (줄어들지 않게) */
+}
+
+.life-mage-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+
+/* ✅ 버튼을 화면 제일 아래 중앙에 고정 */
+.life-upload-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(15vh * 4 / 3);
+    height: 40px;
+    color: #ffffff;
+    background-color: rgb(90, 94, 93);
+    border: 1px solid rgb(189, 196, 196);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.life-upload-placeholder {
+    color: #ffffff;
+}

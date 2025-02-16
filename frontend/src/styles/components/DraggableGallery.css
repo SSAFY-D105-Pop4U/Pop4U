@@ -1,10 +1,10 @@
 .icon-draggable-container {
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 96%;
-  height: 100%;
+  width: 300px;
+  height: 466px;
   max-width: 414px;
   z-index: 10;
   display: flex;

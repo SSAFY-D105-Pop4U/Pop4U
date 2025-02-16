@@ -71,7 +71,7 @@
     /* ✅ 초기 상태: 오른쪽에서 점점 나타남 */
     clip-path: inset(0 100% 0 0);
     opacity: 0;
-    transition: clip-path 0.5s ease-out 2s, opacity 0.5s ease-out 2s;
+    transition: clip-path 0.4s ease-out 2s, opacity 0.4s ease-out 2s;
   }
 
   .life-btn {
