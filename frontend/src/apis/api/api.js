@@ -151,9 +151,11 @@ export const postwritereview = async (formData) => {
 
 
 // post 게임 생성
-export const postcreategame = async () => {
+export const postcreategame = async ({startTime,popupId}) => {
   try {
     const response = await api.post(`/game/start/`, {
+      startTime,  
+      popupId,    
     });
     return response.data;
   } catch (error) {

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { postcreategame } from "../apis/api/api.js";
+import {useNavigate, useSearchParams } from "react-router-dom";
 
 const HourlyDial = () => {
   const [selectedTime, setSelectedTime] = useState({ hours: 12, minutes: 0 });
+  const [searchParams] = useSearchParams();
+  const popupId = searchParams.get("popupId");
 
   useEffect(() => {
     const handleScroll = (e, type) => {
@@ -49,7 +52,7 @@ const HourlyDial = () => {
     console.log(startTime); // 예: "2025-02-15T14:00:00"
   
     try {
-      const data = await postcreategame({ startTime });
+      const data = await postcreategame({startTime,popupId});
       console.log("API 응답 (게임생성):", data);
     } catch (error) {
       console.error("api 호출 실패(게임생성)", error);

@@ -10,7 +10,6 @@ import ImageCarousel from "../components/ImageCarousel.jsx";
 import { AppDataContext } from "../Context.jsx"; 
 
 
-
 const Detail = () => {
   const nav = useNavigate();
   const { appData, setAppData } = useContext(AppDataContext); // ✅ useContext 사용
@@ -25,6 +24,11 @@ const Detail = () => {
     nav(`/writeReview?popupId=${popupId}`);
   };
 
+  const handlechat = () => {
+    nav(`/chat?popupId=${popupId}`)
+  };
+  
+ 
   //✅ 예약하기 페이지 이동 함수
   const appointment = () => {
     if (!detail) return;
@@ -131,7 +135,7 @@ const Detail = () => {
             <button className="apointment-button" onClick={appointment}>
               예약하기
             </button>
-            <button className="chat-button">채팅하기</button>
+            <button className="chat-button" onClick={handlechat}>채팅하기</button>
           </>
         )}
       </div>
