@@ -5,7 +5,6 @@ import "../styles/pages/game.css"
 const Game = () => {
   return (
     <div className="game-event-container">
-      <div className="game-event-header" />
       <div className="game-event-instructions">
         <div className="circle" />
         <div className="circle" />
