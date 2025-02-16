@@ -10,9 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,45 +102,6 @@ public class GameService {
                 now.isBefore(status.getEndTime());
     }
 
-    public GameClickResult processClick(String popupId, Long userId) {
-        // 팝업스토어 존재 여부 확인
-        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
-            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
-        }
-
-        if (!isGameActive(popupId)) {
-            return new GameClickResult(0, false, null);
-        }
-
-        String clickKey = CLICK_COUNT_PREFIX + popupId + ":" + userId;
-
-        return redisTemplate.execute(new SessionCallback<GameClickResult>() {
-            @Override
-            @SuppressWarnings("unchecked")
-            public GameClickResult execute(RedisOperations operations) {
-                operations.multi();
-
-                String currentClicksStr = (String) operations.opsForValue().get(clickKey);
-                int currentClicks = currentClicksStr != null ? Integer.parseInt(currentClicksStr) : 0;
-
-                if (currentClicks >= 10) {
-                    operations.discard();
-                    return new GameClickResult(currentClicks, false, null);
-                }
-
-                int newClickCount = currentClicks + 1;
-                operations.opsForValue().set(clickKey, String.valueOf(newClickCount));
-
-                operations.exec();
-
-                boolean completed = newClickCount == 10;
-                LocalDateTime completionTime = completed ? LocalDateTime.now() : null;
-
-                return new GameClickResult(newClickCount, completed, completionTime);
-            }
-        });
-    }
-
     @Transactional
     public void processGameCompletions(List<GameCompletionEvent> completions) {
         Map<String, List<GameCompletionEvent>> completionsByStore = completions.stream()
@@ -202,3 +161,44 @@ public class GameService {
         return rankings;
     }
 }
+
+
+
+//  public GameClickResult processClick(String popupId, Long userId) {
+//        // 팝업스토어 존재 여부 확인
+//        if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+//            throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
+//        }
+//
+//        if (!isGameActive(popupId)) {
+//            return new GameClickResult(0, false, null);
+//        }
+//
+//        String clickKey = CLICK_COUNT_PREFIX + popupId + ":" + userId;
+//
+//        return redisTemplate.execute(new SessionCallback<GameClickResult>() {
+//            @Override
+//            @SuppressWarnings("unchecked")
+//            public GameClickResult execute(RedisOperations operations) {
+//                operations.multi();
+//
+//                String currentClicksStr = (String) operations.opsForValue().get(clickKey);
+//                int currentClicks = currentClicksStr != null ? Integer.parseInt(currentClicksStr) : 0;
+//
+//                if (currentClicks >= 10) {
+//                    operations.discard();
+//                    return new GameClickResult(currentClicks, false, null);
+//                }
+//
+//                int newClickCount = currentClicks + 1;
+//                operations.opsForValue().set(clickKey, String.valueOf(newClickCount));
+//
+//                operations.exec();
+//
+//                boolean completed = newClickCount == 10;
+//                LocalDateTime completionTime = completed ? LocalDateTime.now() : null;
+//
+//                return new GameClickResult(newClickCount, completed, completionTime);
+//            }
+//        });
+//    }
