@@ -25,18 +25,6 @@ public class GameController {
     @Autowired
     private GameService gameService;
 
-//    // 1. 브랜드 회원이 게임 생성
-//    @PostMapping("/start")
-//    public ResponseEntity<GameInfo> startGame(@RequestBody GameStartRequest request) {
-//        try {
-//            GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
-//            return ResponseEntity.ok(gameInfo);
-//        } catch (Exception e) {
-//            log.error("게임 시작 중 오류 발생: {}", e.getMessage(), e);
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-//        }
-//    }
-
     // 1. 게임 생성 + 링크 생성 후 제공
     @PostMapping("/start/{popupId}")
     public ResponseEntity<String> createGameLink(@RequestBody GameStartRequest request) throws JsonProcessingException {
