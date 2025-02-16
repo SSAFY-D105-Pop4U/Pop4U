@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/pages/game.css"
+// import "../styles/pages/game.css"
 
 const Game = () => {
   return (
