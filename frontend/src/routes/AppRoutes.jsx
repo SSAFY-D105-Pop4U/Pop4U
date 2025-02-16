@@ -17,8 +17,11 @@ import TrendingPopupList from "../pages/TrendingPopupList";
 import ReviewLifeShot from "../pages/ReviewLifeShot";
 import Chat from "../pages/Chat";
 import Creategame from "../pages/Creategame"
-
 import LifeShot from "../pages/LifeShot";
+import Game from "../pages/Game"
+
+
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -44,6 +47,8 @@ const AppRoutes = () => {
       
       <Route path="/lifeshot" element={<LifeShot />} />
       <Route path="/creategame" element={<Creategame />} />
+      <Route path="/game" element={<Game />} />
+      
 
       
     </Routes>
