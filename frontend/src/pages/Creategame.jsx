@@ -60,7 +60,7 @@ const Creategame = () => {
       const data = await postcreategame({ startTime, popupId });
       console.log("API 응답 (게임생성):", data);
       setIsModalOpen(true); // 모달 열기
-      
+
     } catch (error) {
       console.error("API 호출 실패(게임생성)", error);
     }
