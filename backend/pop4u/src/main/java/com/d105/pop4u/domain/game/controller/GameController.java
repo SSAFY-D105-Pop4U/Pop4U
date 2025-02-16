@@ -45,7 +45,7 @@ public class GameController {
         // 게임 초기화 후 링크 생성
         GameInfo gameInfo = gameService.initializeGame(popupId, startTime);
         // 프론트엔드 게임 페이지 URL 생성
-        String gameLink = "/game/" + popupId;
+        String gameLink = "/Event_Game/" + popupId;
         return ResponseEntity.ok(gameLink);
     }
 
