@@ -38,7 +38,7 @@ const HourlyDial = () => {
     return `${year}-${month}-${day}`;
   };
 
-  // api 요청임!!!!!!!!!!!!!
+  // api 요청임✅
   const handleSubmit = async () => {
     const formattedTime = {
       date: getCurrentDate(),
