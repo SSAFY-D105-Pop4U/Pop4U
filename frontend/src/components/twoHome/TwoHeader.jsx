@@ -2,9 +2,9 @@ import React from 'react';
 import TwoHeaderUtils from './TwoHeaderUtils.jsx';
 import  { useState, useEffect } from "react";
 
-const TowHeader = () => {
+const TowHeader = ({handleMenuClick}) => {
   const [isScrolled, setIsScrolled] = useState(false);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -14,6 +14,8 @@ const TowHeader = () => {
         setIsScrolled(false);
       }
     };
+
+    
 
     window.addEventListener("scroll", handleScroll);
     
@@ -29,7 +31,7 @@ const TowHeader = () => {
             <span>Pop4U</span>
           </a>
         </h1>
-        <TwoHeaderUtils />
+        <TwoHeaderUtils handleMenuClick={handleMenuClick} />
       </div>
       
       <div className="gnb__bg"></div>

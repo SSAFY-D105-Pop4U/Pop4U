@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainVisSection = () => {
   const [isVisible, setIsVisible] = useState("");
   const [isImage, setIsImage] = useState("");
+
+  const nav = useNavigate();
+
+  const handleSendText = (type) => {
+    nav(`/areaList?area=${type}`);
+  };
 
   useEffect(() => {
     // 페이지 로드 후 애니메이션 트리거
@@ -24,28 +31,28 @@ const MainVisSection = () => {
             </li>
             <br className="mobile" />
             <li>
-              <a href="/apply/applyList.hc?occupDataTagArray=40">#서울</a>
+              <a onClick={()=>handleSendText("서울")}>#서울</a>
             </li>
             <li>
-              <a href="/apply/applyList.hc?occupDataTagArray=104">#경기/인천</a>
+              <a onClick={()=>handleSendText("경기/인천")}>#경기/인천</a>
             </li>
             <li>
-              <a href="/apply/applyList.hc?occupDataTagArray=J0001">#강원도</a>
+              <a onClick={()=>handleSendText("강원도")}>#강원도</a>
             </li>
             <li>
-              <a href="/apply/applyList.hc?occupDataTagArray=J0002">#경남/부산</a>
+              <a onClick={()=>handleSendText("경남/부산")}>#경남/부산</a>
             </li>
             <li>
-              <a href="/apply/applyList.hc?occupDataTagArray=07">#경북/대구</a>
+              <a onClick={()=>handleSendText("경북/대구")}>#경북/대구</a>
             </li>
             <li>
-              <a href="">#충청/대전</a>
+              <a onClick={()=>handleSendText("충청/대전")}>#충청/대전</a>
             </li>
             <li>
-              <a href="">#전라/광주</a>
+              <a onClick={()=>handleSendText("전라/광주")}>#전라/광주</a>
             </li>
             <li>
-              <a href="">#제주도</a>
+              <a onClick={()=>handleSendText("제주도")}>#제주도</a>
             </li>
           </ul>
         </div>

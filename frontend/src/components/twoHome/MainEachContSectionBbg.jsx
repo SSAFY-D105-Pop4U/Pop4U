@@ -1,6 +1,18 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainEachContSectionBbg = ({ popups }) => {
+
+  
+const nav = useNavigate();
+  const handleCardClick = (index) => {
+    nav(`/detail?popupId=${index}`);
+  };
+
+  const handleMoreClick = () => {
+      nav(`/trendingpopups`);
+  };
+
   const [activeIndex, setActiveIndex] = useState(1);
   const [slideWidth, setSlideWidth] = useState(0);
   const [translateX, setTranslateX] = useState(0);
@@ -64,7 +76,7 @@ const MainEachContSectionBbg = ({ popups }) => {
               Popular <br className="for_mob" />
               Pop-up Store
             </strong>
-            <a href="#" className="v__more" data-type="way">
+            <a href="" onClick={ handleMoreClick } className="v__more" data-type="way">
               VIEW MORE
             </a>
           </div>
@@ -102,6 +114,7 @@ const MainEachContSectionBbg = ({ popups }) => {
 
               return (
                 <div
+                onClick={()=>handleCardClick(items.popupId)}
                   key={items.popupId}
                   style={{ margin: `${slideMargin / 2}px` }}
                   className={slideClass}

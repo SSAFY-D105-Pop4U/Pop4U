@@ -6,7 +6,7 @@
   import {useNavigate, useSearchParams } from "react-router-dom";
   const SOCKET_URL = "https://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 주소
 
-  const ChatRoom = () => {
+  const ChatRoom = ({popName}) => {
     const [chatRoomId, setChatRoomId] = useState("1");
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
@@ -16,6 +16,9 @@
 
     const [searchParams] = useSearchParams();
     const popupId = searchParams.get("popupId");
+    const popupName = searchParams.get("popName");
+    console.log("asdfasdf",popupName);
+    
     const nav = useNavigate()
 
     const handleCreateGame = () => {
@@ -165,7 +168,7 @@
         display: "flex",
         flexDirection: "column",
         }}>
-        <Header title={"팝업 명"}/>
+        <Header title={popupName}/>
           <div className="chat-container">
     
         {/* <h2 className="chat-header">WebSocket 채팅 테스트</h2>
@@ -193,22 +196,25 @@
               {/* 해당 날짜의 메시지 목록 */}
               {groupedMessages[dateKey].map((msg, index) => (
                 <div key={index}>
-                  <div>{msg.userName || `User ${msg.userId}`}</div>
+                  {(sessionValue!=msg.userId) &&(
+                  <div>{msg.userName || `User ${msg.userId}`}</div>)}
                
+                  {(sessionValue!=msg.userId) &&(
                   <div  className="chat-message"> 
                     <span >{msg.chattingMessage}{" "}</span>
-                  </div>
+                  </div>)}
                   
+                  {(sessionValue==msg.userId) &&(
                   <div  className="chat-my"> 
-                  <span className="chat-time" style={{fontSize:"13px"}} >
-                    {convertUTCToKoreanTime(msg.chattingCreatedAt)}
-                    </span>
-                    <div  className="chat-message"> 
-                    <span >{msg.chattingMessage}{" "}</span>
-                  </div>
+                    <span className="chat-time" style={{fontSize:"13px"}} >
+                      {convertUTCToKoreanTime(msg.chattingCreatedAt)}
+                      </span>
+                      <div  className="chat-message-my"> 
+                      <span >{msg.chattingMessage}{" "}</span>
+                    </div>
+                  </div>)}
 
 
-                  </div>
                   {(sessionValue!=msg.userId) &&(
                     <span className="chat-time" style={{fontSize:"13px"}} >
                     {convertUTCToKoreanTime(msg.chattingCreatedAt)}
@@ -231,19 +237,21 @@
 
  {/* 메시지 입력창 */}
  <div className="input-group">
-          <label>메시지:</label>
+          
           <div className="input-row">
             <input
               ref={inputRef}
               type="text"
+              placeholder="메세지를 입력해주세요."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               className="chat-input"
             />
+            
+            <button className="game-button" onClick={handleCreateGame}>게임 만들기</button>
             <button onClick={sendMessage} className="chat-button">
               보내기
             </button>
-            <button className="game-button" onClick={handleCreateGame}>게임 만들기</button>
           </div>
         </div>
 

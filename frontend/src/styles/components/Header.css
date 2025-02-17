@@ -1,11 +1,22 @@
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.header1 {
+  display: block;
   padding: 20px;
+  font-weight: bold;
   position: relative;
-  width: 100%;
+  width: 90%;
+  
+  /* 가운데 정렬 */
+  margin: 0 auto; /* 좌우 마진을 auto로 설정하여 가운데 정렬 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+
+  /* 한 줄 제한 및 넘치면 ... 처리 */
+  white-space: nowrap;  /* 줄 바꿈 방지 */
+  overflow: hidden;      /* 넘치는 부분 숨김 */
+  text-overflow: ellipsis; /* 넘치는 부분 "..." 처리 */
 }
+
+
+
 
 .back-button {
   position: absolute;
