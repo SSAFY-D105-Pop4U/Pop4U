@@ -141,7 +141,7 @@ public class PopupStoreController {
     }
 
     @GetMapping("/search/ranking")
-    public ResponseEntity<List<SearchRankResponseDTO>> getSearchRanking() {
+    public ResponseEntity<SearchRankResponseDTO> getSearchRanking() {
         return ResponseEntity.ok(searchRankingService.getTopSearches());
     }
 }
