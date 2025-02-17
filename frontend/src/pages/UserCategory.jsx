@@ -40,6 +40,10 @@ const UserCategory = () => {
   // PATCH 요청 후 메인 페이지로 이동
   const handleSubmit = () => {
     const selectedIds = Array.from(selectedCategories); // ✅ 배열 유지
+<<<<<<< HEAD
+=======
+    console.log(selectedIds)
+>>>>>>> a0d179530450ab8386f9d16abaee27e775dc54ef
     api
       .patch("/category/user", selectedIds, {
         headers: {
