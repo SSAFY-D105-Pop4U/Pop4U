@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {useSearchParams } from "react-router-dom";
-
-const GamePlay = ({ count, score, setScore, postResult }) => {
+import { postresult } from "../../apis/api/api";
+const GamePlay = ({ count, score, setScore, postResult, userId, popupId }) => {
+  
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
-  const [searchParams] = useSearchParams();
-  const popupId = searchParams.get("popupId");
-
 
   // 클릭 이벤트 핸들러
   const handleClick = () => {
@@ -13,23 +10,19 @@ const GamePlay = ({ count, score, setScore, postResult }) => {
       setScore((prevScore) => prevScore + 1);
     }
   };
-
+  
     const handleResult = async () => {
       console.log(userId)
       console.log(popupId)
           try {
             console.log("로그인 요청:", loginData);
-            const response = await postResult(popupId,);
+            const response = await postresult(popupId,userId);
             console.log("10번 클릭 끝난사람 api요청")
             }
            catch (error) {
             console.error("로그인 실패:", error);
           }
         };
-
-        // popupId
-        // userId
-
 
   // 점수가 10이 되면 한 번만 `postResult` 실행
   useEffect(() => {

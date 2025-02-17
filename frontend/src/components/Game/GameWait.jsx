@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const GameWait = ({ setIsGameStarted }) => {
-  const [waitTime, setWaitTime] = useState(5); // 5초 카운트다운
+  const [waitTime, setWaitTime] = useState(3); // 5초 카운트다운
 
   useEffect(() => {
     if (waitTime <= 0) {
