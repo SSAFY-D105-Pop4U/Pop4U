@@ -2,6 +2,7 @@ package com.d105.pop4u.domain.store.controller;
 
 
 import com.d105.pop4u.domain.search.dto.SearchRankDTO;
+import com.d105.pop4u.domain.search.dto.SearchRankResponseDTO;
 import com.d105.pop4u.domain.search.service.SearchRankingService;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.service.PopupStoreService;
@@ -140,7 +141,7 @@ public class PopupStoreController {
     }
 
     @GetMapping("/search/ranking")
-    public ResponseEntity<List<SearchRankDTO>> getSearchRanking() {
+    public ResponseEntity<List<SearchRankResponseDTO>> getSearchRanking() {
         return ResponseEntity.ok(searchRankingService.getTopSearches());
     }
 }
