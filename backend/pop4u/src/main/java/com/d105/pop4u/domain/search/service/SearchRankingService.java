@@ -1,6 +1,7 @@
 package com.d105.pop4u.domain.search.service;
 
 import com.d105.pop4u.domain.search.dto.SearchRankDTO;
+import com.d105.pop4u.domain.search.dto.SearchRankResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
