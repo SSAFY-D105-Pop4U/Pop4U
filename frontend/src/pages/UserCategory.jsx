@@ -16,7 +16,7 @@ const UserCategory = () => {
       .get("/category")
       .then((response) => {
         setCategories(response.data);
-        console.log("카테고리 데이터 get요청 성공")
+        console.log("카테고리 데이터 get요청 성공공")
         console.log(categories)
       })
       .catch((error) =>
