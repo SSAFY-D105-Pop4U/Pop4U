@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { getresult } from "../../apis/api/api";
 
-const GameResult = (popupId) => {
+const GameResult = ({popupId}) => {
   const handleresult = async () => {
     console.log(popupId)
     try {

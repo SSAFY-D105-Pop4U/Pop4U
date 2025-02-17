@@ -218,6 +218,7 @@ export const postpeople = async ({popupId,userId,timestamp}) => {
 
 // get 게임 결과 요청
 export const getresult = async (popupId) => {
+  console.log(popupId)
   try {
     const response = await api.get(`/rankings/${popupId}`,)
     return response.data;
