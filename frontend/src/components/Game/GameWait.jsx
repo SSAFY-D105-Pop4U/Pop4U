@@ -18,7 +18,7 @@ const GameWait = ({ setIsGameStarted }) => {
 
   return (
     <div className="game-wait">
-      <h2>게임이 곧 시작됩니다...</h2>
+      <h2>특별 이벤트</h2>
       <p>{waitTime}초 후에 시작됩니다!</p>
     </div>
   );

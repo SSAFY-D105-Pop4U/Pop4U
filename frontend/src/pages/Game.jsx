@@ -13,7 +13,7 @@ const Game = () => {
   
   const { popupId } = useParams();
   const userId = sessionStorage.getItem("userId")
-
+  const StartTime = sessionStorage.getItem("startTime")
 
   // 10초 타이머 시작 (게임이 시작되었을 때만 실행)
   useEffect(() => {
@@ -27,6 +27,7 @@ const Game = () => {
       setIsGameOver(true); // 10초 후 게임 종료 상태 변경
     }
   }, [count, isGameStarted]);
+
 
   return (
     <div className="game-event-container">

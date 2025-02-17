@@ -11,6 +11,7 @@ const Creategame = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    
     const handleScroll = (e, type) => {
       const container = e.target;
       const itemHeight = 32;
@@ -54,6 +55,7 @@ const Creategame = () => {
     const startTime = `${formattedTime.date}T${formattedTime.hours}:${formattedTime.minutes}:00`;
 
     console.log("전송 데이터:", { startTime, popupId });
+    sessionStorage.setItem("startTime",startTime)
 
     try {
       const data = await postcreategame({ startTime, popupId });
