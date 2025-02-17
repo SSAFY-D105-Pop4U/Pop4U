@@ -5,6 +5,9 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
   const [timestamp, setTimestamp] = useState(null);
 
+
+
+
   // 클릭 이벤트 핸들러
   const handleClick = () => {
     if (score < 10) {
@@ -12,12 +15,12 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
     }
   };
   
-    const handleResult = async () => {
+    const handleResult = async (timestamp) => {
       console.log(userId)
       console.log(popupId)
       console.log(timestamp)
           try {
-            const response = await postpeople(popupId,userId,timestamp);
+            const response = await postpeople({popupId,userId,timestamp});
             console.log("10번 클릭 끝난사람 api요청")
             }
            catch (error) {
@@ -28,9 +31,9 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
 
   useEffect(() => {
     if (score === 10 && !hasPosted) {
-      const currentTime = new Date().toISOString().slice(0, 19);
-      setTimestamp(currentTime);
-      handleResult(currentTime); // timestamp를 같이 넘길 수도 있음
+      const timestamp = new Date().toISOString().slice(0, 19);
+    
+      handleResult(timestamp);
       console.log("10번 클릭 끝 API 요청");
       setHasPosted(true); // 중복 호출 방지
     }
