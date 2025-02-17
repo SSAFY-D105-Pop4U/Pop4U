@@ -1,19 +1,24 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../styles/pages/Signup.css";
 import large_logo from "../assets/images/large_logo.png";
 import { useNavigate } from "react-router-dom";
 import { postsignup } from "../apis/api/api";
+import {postlogin} from "../apis/api/api.js"
+
 
 const Signup = () => {
-    
+    const [token, setToken] = useState(localStorage.getItem("accessToken") || "");
     const [formData, setFormData] = useState({
         id: "",
         password: "",
         name: "",
         phone: "",
-        type: null // 0: 일반회원, 1: 관리자
+        type: 0 // 0: 일반회원, 1: 관리자
     });
-
+    useEffect(() => {
+        console.log("formData.type 상태:", formData.type);
+    }, [formData.type]);
+    
     const passwordCheckRef = useRef(null);
 
     const handleChange = (e) => {
@@ -25,12 +30,36 @@ const Signup = () => {
     };
 
     const handleCheckboxChange = (e) => {
-        const { value } = e.target;
+        const selectedType = Number(e.target.value);
+    
         setFormData((prev) => ({
             ...prev,
-            type: prev.type === Number(value) ? null : Number(value) // 체크하면 설정, 다시 클릭하면 해제
+            type: prev.type === selectedType ? 0 : selectedType // 기본값을 0으로 설정하여 항상 체크박스가 유지됨
         }));
     };
+
+    const handleLogin = async () => {
+        try {
+          const loginData = {
+            email: formData.id,
+            password: formData.password,
+          };
+          console.log("로그인 요청:", loginData);
+          const response = await postlogin(loginData);
+          if (response && response.data && response.data.accessToken) {
+            console.log("로그인 성공:", response);
+            // 최신 토큰을 저장
+            sessionStorage.setItem("accessToken", response.data.accessToken);
+            setToken(response.data.accessToken); // useState의 토큰도 업데이트
+            sessionStorage.setItem("userId", response.data.userId);
+            nav("/usercategory");
+
+          }
+        } catch (error) {
+          console.error("로그인 실패:", error);
+        }
+      };
+
     const nav = useNavigate()
     // 회원가입 요청
     const handleSignup = async () => {
@@ -47,7 +76,7 @@ const Signup = () => {
 
             if (response ) {
                 console.log("회원가입 성공:", response);
-                nav("/usercategory"); // 회원가입 성공 후 이동할 페이지
+                handleLogin()
             }
         } catch (error) {
             console.error("회원가입 실패:", error);
@@ -91,7 +120,6 @@ const Signup = () => {
                     value={formData.name}
                     onChange={handleChange}
                 />
-
                 <input
                     type="tel"
                     name="phone"
