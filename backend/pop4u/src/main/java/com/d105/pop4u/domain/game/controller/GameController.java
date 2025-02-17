@@ -43,12 +43,11 @@ public class GameController {
     }
 
     // 3. 게임 완료 처리 (10번 클릭 완료한 경우에만 호출)
-    @PostMapping("/complete/{popupId}")
+    @PostMapping("/complete/")
     public ResponseEntity<ClickResponse> completeGame(
-            @PathVariable String popupId,
             @RequestBody GameCompletionEvent completionEvent) {
         // Kafka로 전송
-        kafkaTemplate.send("game-completions", popupId, completionEvent);
+        kafkaTemplate.send("game-completions", completionEvent);
 
         return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
     }
