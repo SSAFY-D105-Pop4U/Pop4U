@@ -8,8 +8,8 @@ services:
     container_name: spring-backend
     ports:
       - "8081:8081"
-    environment:
-      - SPRING_PROFILES_ACTIVE=prod
+    env_file:
+      - ./.env
     networks:
       - app-network
     depends_on:
@@ -38,19 +38,21 @@ services:
     container_name: life-four-cuts
     ports:
       - "8000:8000"
+    env_file:
+      - ./.env
     networks:
       - app-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://i12d105.p.ssafy.io:8000/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   mysql:
     image: mysql:8.0
     container_name: mysql
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=newpassword
-      - MYSQL_DATABASE=pop4u
-      - MYSQL_USER=newuser
-      - MYSQL_PASSWORD=newpassword
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
@@ -71,9 +73,6 @@ services:
     container_name: mongodb
     ports:
       - "27017:27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=pop4u
-      - MONGO_INITDB_ROOT_PASSWORD=pop4u123
     volumes:
       - mongo-data:/data/db
     networks:
