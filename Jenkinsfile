@@ -25,7 +25,7 @@ pipeline {
                 }
                 withCredentials([file(credentialsId: '.env', variable: 'envFile')]) {
                     script {
-                        // 최상위 디렉토리에 .env 파일 복사
+                        // 각 디렉토리에 .env 파일 복사
                         sh "cp -f $envFile backend/pop4u/.env"
                         sh "cp -f $envFile ai-server/life-four-cuts/.env"
                     }
