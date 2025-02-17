@@ -191,9 +191,6 @@ export const postcreategame = async ({ startTime, popupId }) => {
 
 // 게임 10번 클릭시 api 전송
 export const postpeople = async ({popupId,userId,timestamp}) => {
-  console.log(userId)
-  console.log(popupId)
-  console.log(timestamp)
   try {
     const response = await api.post(`/game/complete/`, {
       popupId,
