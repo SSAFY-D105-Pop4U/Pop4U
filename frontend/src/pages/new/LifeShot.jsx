@@ -10,6 +10,7 @@ import PutImage from "./PutImge";
 import MakeShot3 from "./MakeShot3.jsx";
 import MakeShot4 from "./MakeShot4.jsx";
 import ColorPicker from "../../components/lifeShotPage/ColorPicker";
+import backBtn from '../../assets/icons/backBtn.png'
 
 import ShotIcon from "../../components/lifeShotPage/ShotIcon"; 
 
@@ -34,50 +35,32 @@ const LifeShot = () => {
     const makeShot3Ref = useRef(null);
     const makeShot4Ref = useRef(null);
 
-    // 캡처 실행 함수
     const handleCapture = async () => {
-        let captureRef = null;
-        
-        // frameCount에 따라 적절한 ref 선택
-        switch(frameCount) {
-            case 1:
-                captureRef = makeShot1Ref;
-                break;
-            case 2:
-                captureRef = makeShot2Ref;
-                break;
-            case 3:
-                captureRef = makeShot3Ref;
-                break;
-            case 4:
-                captureRef = makeShot4Ref;
-                break;
-            default:
-                return;
+        if (!captureRef.current) {
+            console.error("캡처할 요소가 없습니다.");
+            return;
         }
-
-        if (captureRef.current) {
-            try {
-                const canvas = await html2canvas(captureRef.current, {
-                    allowTaint: true,
-                    useCORS: true,
-                    backgroundColor: null,
-                    scale: 2, // 해상도를 높이기 위해 scale 추가
-                    logging: true, // 디버깅을 위한 로깅 활성화
-                });
-                
-                const image = canvas.toDataURL("image/png");
-
-                // 이미지 다운로드
-                const link = document.createElement("a");
-                link.href = image;
-                link.download = `lifeshot_frame${frameCount}.png`;
-                link.click();
-            } catch (error) {
-                console.error("캡처 중 오류 발생:", error);
-            }
+    
+        try {
+            const canvas = await html2canvas(captureRef.current, {
+                useCORS: true, // CORS 문제 해결
+                backgroundColor: "#fff", // 배경을 흰색으로 설정 (투명 배경 유지하려면 null)
+                scale: 2, // 해상도 증가
+                logging: true, // 디버깅용 로깅
+            });
+    
+            const image = canvas.toDataURL("image/png");
+    
+            // 이미지 다운로드
+            const link = document.createElement("a");
+            link.href = image;
+            link.download = `lifeshot_capture.png`;
+            link.click();
+        } catch (error) {
+            console.error("캡처 중 오류 발생:", error);
         }
     };
+    
 
     const handleImageUpload = (e) => {
         const files = Array.from(e.target.files);
@@ -144,14 +127,25 @@ const LifeShot = () => {
 
     return (
         <div style={{ backgroundColor: "black", height: "100vh", overflow: "hidden" }}>
+            <header id="header">
+                <div style={{display:'flex'}}>
+                <div className="life-back-btn" style={{animation: "fadeIn 1s ease-out forwards"}}><img src={backBtn}></img></div>
+                <div style={{ textAlign: "center", width:"100%", marginTop:"15px", marginRight:"30px",animation: "fadeIn 1s ease-out forwards"}}>
+                        <span className="frames-title" >Pop4Cut</span>
+                </div>
+                </div>
+            </header>
+               
             {(!isNext) && (
                 <InsertShot handleNext={handleNext} isAnimating={isAnimating} />
             ) }
             {isNext && (frameCount==0) && (
                  <Frameset handleFrame={handleFrame} isAnimating={isAnimating} />
             )}
+            <div ref={captureRef} style={{width:"300px", height:"466px", marginTop:"20px", margin:"0 auto"} }>
+            
             {(frameCount==1) && (
-                <div ref={makeShot1Ref}>
+                <div >
                     <MakeShot1 
                         selectedImage={selectedImages[1]} 
                         selectedColor={selectedColor}
@@ -159,7 +153,7 @@ const LifeShot = () => {
                 </div>
             )}
             {(frameCount==2) && (
-                <div ref={makeShot2Ref}>
+                <div >
                     <MakeShot2 
                         selectedImages={selectedImages[2]} 
                         selectedColor={selectedColor}
@@ -167,7 +161,7 @@ const LifeShot = () => {
                 </div>
             )}
             {(frameCount==3) && (
-                <div ref={makeShot3Ref}>
+                <div >
                     <MakeShot3 
                         selectedImages={selectedImages[3]} 
                         selectedColor={selectedColor}
@@ -175,7 +169,7 @@ const LifeShot = () => {
                 </div>
             )}
             {(frameCount==4) && (
-                <div ref={makeShot4Ref}>
+                <div >
                     <MakeShot4 
                         selectedImages={selectedImages[4]} 
                         selectedColor={selectedColor}
@@ -185,6 +179,7 @@ const LifeShot = () => {
             {(frameCount>0) && (
             <DraggableGallery selectedIcon={selectedIcon}/>
             )}
+            </div>
             {(frameCount>0) && (
                 <ShotToggleButton active={active} setActive={setActive}/>
                 

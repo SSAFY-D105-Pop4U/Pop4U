@@ -2,6 +2,7 @@
   import { Client } from "@stomp/stompjs";
   import SockJS from "sockjs-client";
   import "../styles/pages/Chat.css";
+  import Header from "../components/basic/Header";
   import {useNavigate, useSearchParams } from "react-router-dom";
   const SOCKET_URL = "https://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 주소
 
@@ -9,6 +10,7 @@
     const [chatRoomId, setChatRoomId] = useState("1");
     const [message, setMessage] = useState("");
     const [messages, setMessages] = useState([]);
+    const sessionValue = sessionStorage.getItem("userId"); // "key"는 저장된 키
     const stompClientRef = useRef(null);
     const inputRef = useRef(null);
 
@@ -158,10 +160,16 @@
     });
 
     return (
-      <div className="chat-container">
-        <h2 className="chat-header">WebSocket 채팅 테스트</h2>
-
-        {/* 채팅방 ID 입력 */}
+      <div style={{width: "100vw",   // 가로 전체
+        height: "100vh",  // 세로 전체
+        display: "flex",
+        flexDirection: "column",
+        }}>
+        <Header title={"팝업 명"}/>
+          <div className="chat-container">
+    
+        {/* <h2 className="chat-header">WebSocket 채팅 테스트</h2>
+        채팅방 ID 입력
         <div className="input-group">
           <label>채팅방 ID:</label>
           <div className="input-row">
@@ -172,10 +180,57 @@
               className="chat-input"
             />
           </div>
+        </div> */}
+
+        
+
+        {/* 채팅 내용 표시 */}
+        <div className="chat-messages">
+          {sortedDates.map((dateKey) => (
+            <div key={dateKey}>
+              {/* 날짜 헤더 */}
+              <div ><span className="chat-date">{dateKey}</span></div>
+              {/* 해당 날짜의 메시지 목록 */}
+              {groupedMessages[dateKey].map((msg, index) => (
+                <div key={index}>
+                  <div>{msg.userName || `User ${msg.userId}`}</div>
+               
+                  <div  className="chat-message"> 
+                    <span >{msg.chattingMessage}{" "}</span>
+                  </div>
+                  
+                  <div  className="chat-my"> 
+                  <span className="chat-time" style={{fontSize:"13px"}} >
+                    {convertUTCToKoreanTime(msg.chattingCreatedAt)}
+                    </span>
+                    <div  className="chat-message"> 
+                    <span >{msg.chattingMessage}{" "}</span>
+                  </div>
+
+
+                  </div>
+                  {(sessionValue!=msg.userId) &&(
+                    <span className="chat-time" style={{fontSize:"13px"}} >
+                    {convertUTCToKoreanTime(msg.chattingCreatedAt)}
+                    </span>
+                  )}
+                 
+                  
+                </div>
+
+                
+              ))}
+            </div>
+          ))}
         </div>
 
-        {/* 메시지 입력창 */}
-        <div className="input-group">
+
+       
+        
+      </div>
+
+ {/* 메시지 입력창 */}
+ <div className="input-group">
           <label>메시지:</label>
           <div className="input-row">
             <input
@@ -192,28 +247,9 @@
           </div>
         </div>
 
-        {/* 채팅 내용 표시 */}
-        <h3 className="chat-title">채팅 내용</h3>
-        <div className="chat-messages">
-          {sortedDates.map((dateKey) => (
-            <div key={dateKey}>
-              {/* 날짜 헤더 */}
-              <div className="chat-date">{dateKey}</div>
-              {/* 해당 날짜의 메시지 목록 */}
-              {groupedMessages[dateKey].map((msg, index) => (
-                <div key={index} className="chat-message">
-                  <b>{msg.userName || `User ${msg.userId}`}:</b>{" "}
-                  {msg.chattingMessage}{" "}
-                  <span className="chat-time">
-                    ({convertUTCToKoreanTime(msg.chattingCreatedAt)})
-                  </span>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        
       </div>
+
+      
     );
   };
 
