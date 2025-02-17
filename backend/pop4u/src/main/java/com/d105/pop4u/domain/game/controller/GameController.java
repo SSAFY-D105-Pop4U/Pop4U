@@ -35,42 +35,25 @@ public class GameController {
         return ResponseEntity.ok(gameLink);
     }
 
-    // 4. 게임 시작 전 카운트다운을 위한 상태 확인
+    // 2. 게임 시작 전 카운트다운을 위한 상태 확인
     @GetMapping("/status/{popupId}")
     public ResponseEntity<GameStatus> getGameStatus(@PathVariable String popupId) {
         GameStatus status = gameService.getGameStatus(popupId);
         return ResponseEntity.ok(status);
     }
 
-    // 6. 게임 완료 처리 (10번 클릭 완료한 경우에만 호출)
+    // 3. 게임 완료 처리 (10번 클릭 완료한 경우에만 호출)
     @PostMapping("/complete/{popupId}")
     public ResponseEntity<ClickResponse> completeGame(
             @PathVariable String popupId,
-            @AuthenticationPrincipal UserDetails userDetails) {
-
-//        if (userDetails == null) {
-//            return ResponseEntity.badRequest().body(new ClickResponse(false, "로그인이 필요합니다."));
-//        }
-//
-//        if (!gameService.isGameActive(popupId)) {
-//            return ResponseEntity.badRequest().body(new ClickResponse(false, "Game is not active"));
-//        }
-
-        Long userId = Long.parseLong(userDetails.getUsername());
-
-        // 완료 이벤트 Kafka로 전송
-        GameCompletionEvent completionEvent = new GameCompletionEvent(
-                popupId,
-                userId,
-                LocalDateTime.now(),
-                10  // 완료된 경우에만 호출되므로 10
-        );
+            @RequestBody GameCompletionEvent completionEvent) {
+        // Kafka로 전송
         kafkaTemplate.send("game-completions", popupId, completionEvent);
 
         return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
     }
 
-    // 7. 게임 종료 후 랭킹 조회
+    // 4. 게임 종료 후 랭킹 조회
     @GetMapping("/rankings/{popupId}")
     public ResponseEntity<List<RankingEntry>> getRankings(@PathVariable String popupId) {
         List<RankingEntry> rankings = gameService.getRankings(popupId);
