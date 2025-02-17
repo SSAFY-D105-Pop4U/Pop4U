@@ -24,9 +24,9 @@ const ReviewLifeShotCard = ({ placeInfo }) => {
   const handleOptionClick = () => {
     nav(`/writereview?popupId=${placeInfo.popupId}&reservationId=${placeInfo.reservationId}`);
   };
-  const handlelifeshot = () =>{
-    nav("/lifeshot")
-  }
+  const handlelifeshot = () => {
+    nav(`/lifeshot?popupId=${placeInfo.popupId}`);
+  };
 
 
   return (
