@@ -130,10 +130,6 @@ const Creategame = () => {
           복사
         </button>
       </div>
-
-      <a href={gameLink} target="_blank" rel="noopener noreferrer">
-        {gameLink}
-      </a>
       <br />
       <button onClick={() => setIsModalOpen(false)} style={styles.modalCloseBtn}>
         닫기
