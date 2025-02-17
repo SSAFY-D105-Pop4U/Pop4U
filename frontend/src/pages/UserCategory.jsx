@@ -16,7 +16,7 @@ const UserCategory = () => {
       .get("/category")
       .then((response) => {
         setCategories(response.data);
-        console.log("카테고리 데이터 get요청 성공")
+        console.log("카테고리 데이터 get요청 성공공")
         console.log(categories)
       })
       .catch((error) =>
@@ -40,7 +40,6 @@ const UserCategory = () => {
   // PATCH 요청 후 메인 페이지로 이동
   const handleSubmit = () => {
     const selectedIds = Array.from(selectedCategories); // ✅ 배열 유지
-
     api
       .patch("/category/user", selectedIds, {
         headers: {

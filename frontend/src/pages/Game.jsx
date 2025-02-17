@@ -1,33 +1,37 @@
-import React from "react";
-import "../styles/pages/Game.css"
-// import "../assets/images/present.png"
+import React, { useState, useEffect } from "react";
+import GameWait from "../components/Game/GameWait"; // 게임 대기 화면
+import GamePlay from "../components/Game/GamePlay"; // 게임 진행 화면
+import GameResult from "../components/Game/GameResult"; // 게임 종료 화면
+import "../styles/pages/Game.css";
 
 const Game = () => {
+  const [count, setCount] = useState(10); // 10초 카운트
+  const [isGameOver, setIsGameOver] = useState(false); // 게임 종료 여부
+  const [score, setScore] = useState(0); // 클릭 점수
+  const [isGameStarted, setIsGameStarted] = useState(false); // 게임 시작 여부
+
+  // 10초 타이머 시작 (게임이 시작되었을 때만 실행)
+  useEffect(() => {
+    if (isGameStarted && count > 0) {
+      const timer = setInterval(() => {
+        setCount((prevCount) => prevCount - 1);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    } else if (count <= 0) {
+      setIsGameOver(true); // 10초 후 게임 종료 상태 변경
+    }
+  }, [count, isGameStarted]);
+
   return (
     <div className="game-event-container">
-      <div className="game-event-instructions">
-        <div className="circle" />
-        <div className="circle" />
-        <div className="circle" />
-        <div className="divider" />
-        <div className="divider" />
-        <div className="instruction">주어진 시간 안에</div>
-        <div className="instruction">선물 상자를 가장 많이</div>
-        <div className="instruction">클릭을 하면 선물을 받아요</div>
-        <div className="step">1</div>
-        <div className="step">2</div>
-        <div className="step">3</div>
-      </div>
-
-      <div className="game-event-title">
-        <div className="event-title">특별 이벤트</div>
-        <div className="event-description">곧 있으면 깜짝 이벤트 게임이 시작됩니다</div>
-      </div>
-
-
-
-      {/* <img className="game-event-image" src={} alt="Event" /> */}
-      <div className="game-event-count">49</div>
+      {!isGameStarted ? (
+        <GameWait setIsGameStarted={setIsGameStarted} />
+      ) : !isGameOver ? (
+        <GamePlay count={count} score={score} setScore={setScore} />
+      ) : (
+        <GameResult score={score} />
+      )}
     </div>
   );
 };

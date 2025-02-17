@@ -164,6 +164,21 @@ export const postcreategame = async ({startTime,popupId}) => {
   }
 };
 
+// post 게임 10번 클릭한 사람 보내기기
+export const postResult = async () => {
+  try {
+    const response = await api.post(`/game/complete/{popupId}`, {
+         
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
+
+
+
 
 
  // 리뷰 썻는지 체킹(팝업 아이콘 가져오기로 대체체)
