@@ -25,7 +25,8 @@ const Detail = () => {
   };
 
   const handlechat = () => {
-    nav(`/chat?popupId=${popupId}`)
+    
+    nav(`/chat?popupId=${popupId}&popName=${encodeURIComponent(detail.popupName)}`);
   };
   
  
@@ -135,7 +136,7 @@ const Detail = () => {
             <button className="apointment-button" onClick={appointment}>
               예약하기
             </button>
-            <button className="chat-button" onClick={handlechat}>채팅하기</button>
+            <button className="chat-button" onClick={handlechat} >채팅하기</button>
           </>
         )}
       </div>
