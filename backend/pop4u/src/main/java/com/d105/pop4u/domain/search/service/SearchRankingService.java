@@ -64,12 +64,12 @@ public class SearchRankingService {
                 now.format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
     }
 
-    public List<SearchRankDTO> getTopSearches() {
-        // 현재 표시 중인 순위 조회 (이전 시간대의 결과)
+    public SearchRankResponseDTO getTopSearches() {
+        String updateTime = redisTemplate.opsForValue().get(LAST_UPDATE_TIME_KEY);
+
         Set<ZSetOperations.TypedTuple<String>> currentRankings =
                 redisTemplate.opsForZSet().reverseRangeWithScores(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
 
-        // 이전 순위 맵 생성
         Map<String, Integer> prevRankMap = new HashMap<>();
         Set<ZSetOperations.TypedTuple<String>> prevRankings =
                 redisTemplate.opsForZSet().reverseRangeWithScores(PREVIOUS_RANKING_KEY, 0, -1);
@@ -98,7 +98,10 @@ public class SearchRankingService {
             currentRank++;
         }
 
-        return rankings;
+        return SearchRankResponseDTO.builder()
+                .updateTime(updateTime)
+                .rankings(rankings)
+                .build();
     }
 
     private String calculateStatus(int currentRank, Integer previousRank) {
