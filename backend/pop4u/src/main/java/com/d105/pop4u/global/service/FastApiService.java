@@ -18,7 +18,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class FastApiService {
-    private final String FASTAPI_URL = "http://localhost:8000/process_image";  // FastAPI 배경제거 + 스티커 엔드포인트
+    private final String FASTAPI_URL = "http://i12d105.p.ssafy.io:8000/process_image";  // FastAPI 배경제거 + 스티커 엔드포인트
     private final S3Service s3Service;  // ✅ S3 업로드 서비스 추가
     private final RestTemplate restTemplate; // ✅ RestTemplate 의존성 주입
 
