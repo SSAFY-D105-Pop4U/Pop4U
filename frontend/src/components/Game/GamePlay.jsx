@@ -32,7 +32,7 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
       console.log("10번클릭 끝 api 요청")
       setHasPosted(true); // 중복 호출 방지
     }
-  }, [score, hasPosted, postResult]);
+  }, [score, hasPosted]);
 
   return (
     <div className="game-play">
