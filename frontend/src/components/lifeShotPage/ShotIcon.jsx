@@ -83,7 +83,7 @@ const ShotIcon = ({ popupId, selectedIcon, setSelectedIcon, onSelectEmoticon }) 
             }}
           >
             <img 
-              src={emoticon.url} 
+              src={emoticon.popupIconImg} 
               alt={`emoticon-${emoticon.id}`}
               className="emoticon-image"
               draggable={false}
