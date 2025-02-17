@@ -1,6 +1,7 @@
 package com.d105.pop4u.domain.search.service;
 
 import com.d105.pop4u.domain.search.dto.SearchRankDTO;
+import com.d105.pop4u.domain.search.dto.SearchRankResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
@@ -39,34 +40,37 @@ public class SearchRankingService {
         redisTemplate.delete(PREVIOUS_RANKING_KEY);
         redisTemplate.opsForZSet().unionAndStore(CURRENT_RANKING_KEY, Collections.emptySet(), PREVIOUS_RANKING_KEY);
 
-        // 2. 현재 집계된 카운트를 순위로 변환
-        redisTemplate.delete(CURRENT_RANKING_KEY);
-        redisTemplate.opsForZSet().unionAndStore(CURRENT_COUNT_KEY, Collections.emptySet(), CURRENT_RANKING_KEY);
+        // 2. 현재 집계된 카운트를 확인
+        Set<ZSetOperations.TypedTuple<String>> currentCounts =
+                redisTemplate.opsForZSet().reverseRangeWithScores(CURRENT_COUNT_KEY, 0, -1);
 
-        // 3. 이전 시간대 TOP 10 키워드들을 count 1로 새로운 집계에 추가
-        Set<ZSetOperations.TypedTuple<String>> top10 =
-                redisTemplate.opsForZSet().reverseRangeWithScores(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
-
-        // 4. 새로운 집계 시작을 위해 카운트 초기화
-        redisTemplate.delete(CURRENT_COUNT_KEY);
-
-        // 5. TOP 10 키워드들을 count 1로 새 집계에 추가
-        for (ZSetOperations.TypedTuple<String> tuple : top10) {
-            redisTemplate.opsForZSet().add(CURRENT_COUNT_KEY, tuple.getValue(), 1.0);
+        if (!currentCounts.isEmpty()) {
+            // 새로운 검색이 있었다면 현재 순위 업데이트
+            redisTemplate.delete(CURRENT_RANKING_KEY);
+            redisTemplate.opsForZSet().unionAndStore(CURRENT_COUNT_KEY, Collections.emptySet(), CURRENT_RANKING_KEY);
         }
 
-        // 6. 시간 업데이트
+        // 3. 새로운 집계 시작을 위해 COUNT_KEY 초기화
+        redisTemplate.delete(CURRENT_COUNT_KEY);
+
+        // 4. 현재 순위의 TOP 10을 가져와서 기본 점수(5)로 새로운 집계에 추가
+        Set<String> top10Keywords = redisTemplate.opsForZSet().reverseRange(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
+        for (String keyword : top10Keywords) {
+            redisTemplate.opsForZSet().add(CURRENT_COUNT_KEY, keyword, 1.0);  // 기본 점수 5로 설정
+        }
+
+        // 5. 시간 업데이트
         LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         redisTemplate.opsForValue().set(LAST_UPDATE_TIME_KEY,
                 now.format(DateTimeFormatter.ofPattern("MM.dd HH:mm 기준")));
     }
 
-    public List<SearchRankDTO> getTopSearches() {
-        // 현재 표시 중인 순위 조회 (이전 시간대의 결과)
+    public SearchRankResponseDTO getTopSearches() {
+        String updateTime = redisTemplate.opsForValue().get(LAST_UPDATE_TIME_KEY);
+
         Set<ZSetOperations.TypedTuple<String>> currentRankings =
                 redisTemplate.opsForZSet().reverseRangeWithScores(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
 
-        // 이전 순위 맵 생성
         Map<String, Integer> prevRankMap = new HashMap<>();
         Set<ZSetOperations.TypedTuple<String>> prevRankings =
                 redisTemplate.opsForZSet().reverseRangeWithScores(PREVIOUS_RANKING_KEY, 0, -1);
@@ -95,7 +99,10 @@ public class SearchRankingService {
             currentRank++;
         }
 
-        return rankings;
+        return SearchRankResponseDTO.builder()
+                .updateTime(updateTime)
+                .rankings(rankings)
+                .build();
     }
 
     private String calculateStatus(int currentRank, Integer previousRank) {
