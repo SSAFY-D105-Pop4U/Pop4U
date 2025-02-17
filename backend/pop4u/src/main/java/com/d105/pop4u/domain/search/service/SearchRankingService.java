@@ -53,7 +53,7 @@ public class SearchRankingService {
         // 3. 새로운 집계 시작을 위해 COUNT_KEY 초기화
         redisTemplate.delete(CURRENT_COUNT_KEY);
 
-        // 4. 현재 순위의 TOP 10을 가져와서 기본 점수(5)로 새로운 집계에 추가
+        // 4. 현재 순위의 TOP 10을 가져와서 기본 점수로 새로운 집계에 추가
         Set<String> top10Keywords = redisTemplate.opsForZSet().reverseRange(CURRENT_RANKING_KEY, 0, RANKING_SIZE - 1);
         for (String keyword : top10Keywords) {
             redisTemplate.opsForZSet().add(CURRENT_COUNT_KEY, keyword, 1.0);  // 기본 점수 5로 설정
