@@ -9,7 +9,6 @@ const Creategame = () => {
 
   // ✅ 모달 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [gameLink, setGameLink] = useState("");
 
   useEffect(() => {
     const handleScroll = (e, type) => {
