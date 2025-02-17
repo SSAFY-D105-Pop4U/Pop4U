@@ -100,9 +100,9 @@ header#header .gnb__bg { background: #FFF; box-shadow: 0px 5px 10px 0px rgba(0,0
 .header__util__wrap > div.search > a { background:url("/static/images/common/ic_search.png") center / 100% auto no-repeat; }
 .header__util__wrap > div.alarm > a { background:url("/static/images/common/ic_alarm.png") center / 100% auto no-repeat; }
 .header__util__wrap > div.alarm.on::after { background: #00AAD2; border-radius: 999px; content: ""; height: 5.5px; position: absolute; top: 0; right: 0; width: 5.5px; }
-.header__util__wrap > div.mo__burger { display:none; height:24px; position:relative; width:24px; }
+.header__util__wrap > div.mo__burger { display:block; height:24px; position:relative; width:24px; }
 .header__util__wrap > div.mo__burger > a { background:url("../../assets/icons/teb.png") center / 18px auto no-repeat; }
-.header__util__wrap > div.mo__search { display:none; height:24px; position:relative; width:24px; }
+.header__util__wrap > div.mo__search { display:block; height:24px; position:relative; width:24px; }
 .header__util__wrap > div.mo__search > a { background:url("../../assets/icons/search.png") center / 18px auto no-repeat; }
 
 .util__drop__menu { background: #F8F8F8; box-shadow: 5px 8px 20px 0px rgba(102,102,102,0.41); border-radius: 10px; display: none; overflow: hidden; position: absolute; top: calc(100% + 12px); right:-75px; width: 153px; }

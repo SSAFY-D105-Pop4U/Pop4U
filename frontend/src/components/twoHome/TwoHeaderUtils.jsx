@@ -1,15 +1,22 @@
 import React from 'react';
 import searchIcon from '../../assets/icons/teb.png';
+import { useNavigate } from "react-router-dom";
 
 const TwoHeaderUtils = () => {
+ 
+  const nav = useNavigate();
+    const handleSearchClick = () => {
+      nav(`/search`);
+    };
+  
   return (
     <div className="header__util__wrap">
-      <div className="mo__search">
-        <a href="#!">검색</a>
+      <div className="mo__search" onClick={handleSearchClick}>
+        <a >검색</a>
       </div>
 
       <div className="mo__burger">
-        <a href="#!">메뉴</a>
+        <a >메뉴</a>
       </div>
     </div>
   );

@@ -54,9 +54,10 @@ const [emoticons, setEmoticons] = useState([]);
       try {
         const response = await getreviewcheck(popupId);
         // API 응답 구조에 맞게 데이터를 처리 (예: response.data)
-        console.log(response);
+        
         
         setEmoticons(response.data);
+        console.log(emoticons);
       } catch (error) {
         console.error("이모티콘을 불러오는 중 오류 발생:", error);
       }
