@@ -43,7 +43,7 @@ public class GameController {
     }
 
     // 3. 게임 완료 처리 (10번 클릭 완료한 경우에만 호출)
-    @PostMapping("/complete/")
+    @PostMapping("/complete")
     public ResponseEntity<ClickResponse> completeGame(
             @RequestBody GameCompletionEvent completionEvent) {
         // Kafka로 전송
