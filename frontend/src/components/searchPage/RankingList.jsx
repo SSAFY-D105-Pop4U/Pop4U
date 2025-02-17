@@ -23,6 +23,7 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
         setSearchRank(response.rankings);  // 여기를 수정
         setUpdateTime(response.updateTime);
         console.log("실시간 검색어 조회완료");
+        console.log(response.rankings);
       } catch (error) {
         console.error("Failed to load popups");
       }
@@ -42,28 +43,28 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
       <div className="ranking-header">{updateTime}</div>
       <div className="ranking-grid">
         <div>
-          {searchRank.slice(0, 5).map((item) => (
-            <div
-              key={item.rank}
-              className="ranking-item"
-              onClick={() => handleSearchClick(item.keyword)}
-            >
-              <span className="ranking-name">{item.rank} {item.keyword}</span>
-              <span className="ranking-status">{getStatusIcon(item.status)}</span>
-            </div>
-          ))}
+        {(searchRank || []).slice(0, 5).map((item) => (
+  <div
+    key={item.rank}
+    className="ranking-item"
+    onClick={() => handleSearchClick(item.keyword)}
+  >
+    <span className="ranking-name">{item.rank} {item.keyword}</span>
+    <span className="ranking-status">{getStatusIcon(item.status)}</span>
+  </div>
+))}
         </div>
         <div>
-          {searchRank.slice(5).map((item) => (
-            <div
-              key={item.rank}
-              className="ranking-item"
-              onClick={() => handleSearchClick(item.keyword)}
-            >
-              <span className="ranking-name">{item.rank} {item.keyword}</span>
-              <span className="ranking-status">{getStatusIcon(item.status)}</span>
-            </div>
-          ))}
+        {(searchRank || []).slice(5).map((item) => (
+  <div
+    key={item.rank}
+    className="ranking-item"
+    onClick={() => handleSearchClick(item.keyword)}
+  >
+    <span className="ranking-name">{item.rank} {item.keyword}</span>
+    <span className="ranking-status">{getStatusIcon(item.status)}</span>
+  </div>
+))}
         </div>
       </div>
     </div>
