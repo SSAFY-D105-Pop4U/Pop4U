@@ -12,6 +12,9 @@ import MakeShot4 from "./MakeShot4.jsx";
 import ColorPicker from "../../components/lifeShotPage/ColorPicker";
 import backBtn from '../../assets/icons/backBtn.png'
 
+
+import { useLocation } from "react-router-dom";
+
 import ShotIcon from "../../components/lifeShotPage/ShotIcon"; 
 
 const LifeShot = () => {
@@ -22,6 +25,10 @@ const LifeShot = () => {
     const [selectedColor, setSelectedColor] = useState("#DDDDD");
     const [images, setImages] = useState([]);
     const [selectedIcon, setSelectedIcon] = useState("");
+    // URL 쿼리 파라미터에서 popupId 받아오기
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+    const popupId = queryParams.get("popupId");
     const [selectedImages, setSelectedImages] = useState({
         1: null,
         2: [],
@@ -195,6 +202,7 @@ const LifeShot = () => {
           <ColorPicker selectedColor={selectedColor} setSelectedColor={setSelectedColor}/>
         )}{active === "캐릭터" && (
             <ShotIcon 
+            popupId={popupId}
               selectedIcon={selectedIcon} 
               setSelectedIcon={setSelectedIcon}
               onSelectEmoticon={handleEmoticonSelect}
