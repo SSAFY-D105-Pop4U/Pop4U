@@ -1,27 +1,17 @@
 // src/apis/popupApi.js
 import { ssrExportAllKey } from "vite/module-runner";
 import api from "./instance.js";
-import {imgapi} from "./instance.js";
+import { imgapi } from "./instance.js";
 import axios from "axios";
 
-{/* ✅ post : 회원가입*/}
+{
+  /* ✅ post : 회원가입*/
+}
 export const postsignup = async (formattedData) => {
   try {
-    console.log(formattedData)
-    
-    const response = await api.post(`/user/join`,formattedData);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching popups:", error);
-    throw error;
-  }
-}
+    console.log(formattedData);
 
-{/* ✅ post : 로그인*/}
-export const postlogin = async (loginData) => {
-  try {
-    console.log(loginData)
-    const response = await api.post(`/user/login`,loginData)
+    const response = await api.post(`/user/join`, formattedData);
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
@@ -29,31 +19,51 @@ export const postlogin = async (loginData) => {
   }
 };
 
-{/* ✅ GET : 메인화면 상품 조회 */}
-export const getPopups = async () => {
-    try {
-      const response = await api.get("/popup");
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching popups:", error);
-      throw error;
-    }
+{
+  /* ✅ post : 로그인*/
 }
+export const postlogin = async (loginData) => {
+  try {
+    console.log(loginData);
+    const response = await api.post(`/user/login`, loginData);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
 
-{/* ✅ GET : 검색어 조회 */}
+{
+  /* ✅ GET : 메인화면 상품 조회 */
+}
+export const getPopups = async () => {
+  try {
+    const response = await api.get("/popup");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
+
+{
+  /* ✅ GET : 검색어 조회 */
+}
 export const getSearch = async (keyword) => {
   try {
     const response = await api.get(`popup/search`, {
-      params: { keyword } // ✅ 자동으로 `popup/search?keyword=캐릭터` 형태로 변환됨
+      params: { keyword }, // ✅ 자동으로 `popup/search?keyword=캐릭터` 형태로 변환됨
     });
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
-{/* ✅ GET : 인기 검색어 조회 */}
+{
+  /* ✅ GET : 인기 검색어 조회 */
+}
 export const getSearchRanking = async () => {
   try {
     const response = await api.get("/popup/search/ranking");
@@ -62,9 +72,11 @@ export const getSearchRanking = async () => {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
-{/* ✅ GET : 팝업 상세 정보 조회*/}
+{
+  /* ✅ GET : 팝업 상세 정보 조회*/
+}
 export const GetPopupDetail = async (popupId) => {
   try {
     const response = await api.get(`/popup/${popupId}`);
@@ -73,9 +85,11 @@ export const GetPopupDetail = async (popupId) => {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
-{/* ✅ GET : 지역별 리뷰 정보 조회*/}
+{
+  /* ✅ GET : 지역별 리뷰 정보 조회*/
+}
 export const getPopupsRegion = async (popupRegion) => {
   try {
     const response = await api.get(`/popup/region/${popupRegion}`);
@@ -84,9 +98,11 @@ export const getPopupsRegion = async (popupRegion) => {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
-{/* ✅ GET : 리뷰 정보 조회*/}
+{
+  /* ✅ GET : 리뷰 정보 조회*/
+}
 export const getReviews = async (popupId) => {
   try {
     const response = await api.get(`/review/${popupId}`);
@@ -95,16 +111,24 @@ export const getReviews = async (popupId) => {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
-{/* ✅ post : 예약하기*/}
-export const postappointment = async ({ popupId, userId, person, date, time }) => {
+{
+  /* ✅ post : 예약하기*/
+}
+export const postappointment = async ({
+  popupId,
+  userId,
+  person,
+  date,
+  time,
+}) => {
   try {
     const response = await api.post(`/reservation/${popupId}`, {
-      userId: userId,          // 사용자 ID
+      userId: userId, // 사용자 ID
       reservationPeople: person, // 예약 인원
-      reservationDate: date,  // 예약 날짜
-      reservationTime: time   // 예약 시간
+      reservationDate: date, // 예약 날짜
+      reservationTime: time, // 예약 시간
     });
     return response.data;
   } catch (error) {
@@ -113,8 +137,9 @@ export const postappointment = async ({ popupId, userId, person, date, time }) =
   }
 };
 
-
-{/* ✅ get : 내예약팝업 리스트*/}
+{
+  /* ✅ get : 내예약팝업 리스트*/
+}
 export const getmyreservation = async () => {
   try {
     const response = await api.get(`/reservation/my`);
@@ -123,7 +148,7 @@ export const getmyreservation = async () => {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
 // 내예약 조회
 export const myreservation = async () => {
@@ -134,7 +159,7 @@ export const myreservation = async () => {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
 
 // post 리뷰작성
 export const postwritereview = async (formData) => {
@@ -149,13 +174,26 @@ export const postwritereview = async (formData) => {
   }
 };
 
-
 // post 게임 생성
-export const postcreategame = async ({startTime,popupId}) => {
+export const postcreategame = async ({ startTime, popupId }) => {
   try {
     const response = await api.post(`/game/start/${popupId}`, {
-      startTime,  
-      popupId,    
+      startTime,
+      popupId,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
+
+// post 게임 10번 클릭한 사람 보내기기
+export const postresult = async ({popupId,userId}) => {
+  try {
+    const response = await api.post(`/game/complete/${popupId}`,{
+      popupId,
+      userId
     });
     return response.data;
   } catch (error) {
@@ -166,7 +204,8 @@ export const postcreategame = async ({startTime,popupId}) => {
 
 
 
- // 리뷰 썻는지 체킹(팝업 아이콘 가져오기로 대체체)
+
+// 리뷰 썻는지 체킹(팝업 아이콘 가져오기로 대체체)
 // export const getreviewcheck = async (popupId) => {
 //   try {
 //     const response = await api.get(`/four_cuts/${popupId}`);
@@ -176,8 +215,3 @@ export const postcreategame = async ({startTime,popupId}) => {
 //     throw error;
 //   }
 // }
-
-
-
-
-
