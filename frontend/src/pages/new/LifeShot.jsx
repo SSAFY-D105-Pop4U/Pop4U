@@ -10,6 +10,7 @@ import PutImage from "./PutImge";
 import MakeShot3 from "./MakeShot3.jsx";
 import MakeShot4 from "./MakeShot4.jsx";
 import ColorPicker from "../../components/lifeShotPage/ColorPicker";
+import backBtn from '../../assets/icons/backBtn.png'
 
 import ShotIcon from "../../components/lifeShotPage/ShotIcon"; 
 
@@ -144,6 +145,15 @@ const LifeShot = () => {
 
     return (
         <div style={{ backgroundColor: "black", height: "100vh", overflow: "hidden" }}>
+            <header id="header">
+                <div style={{display:'flex'}}>
+                <div className="life-back-btn" style={{animation: "fadeIn 1s ease-out forwards"}}><img src={backBtn}></img></div>
+                <div style={{ textAlign: "center", width:"100%", marginTop:"15px", marginRight:"30px",animation: "fadeIn 1s ease-out forwards"}}>
+                        <span className="frames-title" >Pop4Cut</span>
+                </div>
+                </div>
+            </header>
+               
             {(!isNext) && (
                 <InsertShot handleNext={handleNext} isAnimating={isAnimating} />
             ) }

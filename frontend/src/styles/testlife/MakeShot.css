@@ -74,7 +74,7 @@
 .lifeshot-frame-item {
     width: 100px;
     height: 100px;
-    background-color: rgb(76, 80, 79);
+    background-color: #4c504f;
     border: 1px solid rgb(189, 196, 196);
     color: white;
     display: flex;

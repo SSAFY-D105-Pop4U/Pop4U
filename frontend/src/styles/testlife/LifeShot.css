@@ -12,6 +12,12 @@
     opacity: 0; /* 서서히 사라지는 효과 추가 */
 }
 
+.life-back-btn{
+  margin: 15px;
+  width: 30px;
+  height: 30px;
+}
+
   .insert-life-bg{
     display: flex;
     flex-direction: column;
