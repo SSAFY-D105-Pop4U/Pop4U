@@ -24,7 +24,7 @@
 .chat-my {
   display: flex;
   justify-content: flex-end; /* 내부 요소를 오른쪽 정렬 */
-  align-items: end; /* 수직 정렬 (선택사항) */
+  align-items: center; /* 수직 정렬 (선택사항) */
   width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
   padding: 10px;
 }
@@ -41,12 +41,26 @@
   overflow-wrap: break-word; /* 브라우저별 줄 바꿈 지원 */
 }
 
+.chat-message-my{
+  background-color: lightgray;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin: 10px 20px 20px 5px;
+  display: inline-block; /* 내용만큼 크기 조절 */
+  max-width: 50%; /* 너무 길어지지 않도록 제한 */
+  word-wrap: break-word; /* 긴 단어 줄 바꿈 */
+  white-space: normal; /* 기본 줄 바꿈 허용 */
+  overflow-wrap: break-word; /* 브라우저별 줄 바꿈 지원 */
+}
+
 
 /* 채팅 컴포넌트 컨테이너 */
 .chat-container {
   background-color: #ffffff;
   padding: 0 1.5rem; /* p-6 => 24px */
   width: 100%;
+  max-width: 800px;
+  margin: auto;
   flex-grow: 1; /* 남은 높이 차지 */
   overflow-y: auto; /* 스크롤 가능하도록 설정 */
 }
@@ -78,20 +92,7 @@
   margin-bottom: 0.25rem;
 }
 
-/* 인풋 그룹 (flex, gap-2) */
-.input-group {
-  display: flex;
-  gap: 0.5rem; /* 8px */
-}
 
-/* 기본 인풋 스타일 */
-.input {
-  border: 1px solid #ccc;
-  padding: 0.5rem;     /* 8px */
-  border-radius: 0.25rem; /* 4px */
-  width: 100%;
-  box-sizing: border-box;
-}
 
 /* 버튼 공통 스타일 */
 .button {
@@ -141,4 +142,55 @@
   height: 5rem; /* 80px */
   overflow-y: auto;
   background-color: #f9fafb;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.input-row {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  background: #f5f5f5; /* 연한 회색 배경 */
+  padding: 12px 15px;
+  border-radius: 30px; /* 둥근 모서리 */
+  width: 100%;
+  max-width: 800px; /* 원하는 크기로 조절 */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* 살짝 그림자 효과 */
+}
+
+.chat-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #555;
+  outline: none;
+  padding: 5px;
+}
+
+.chat-button,
+.game-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.game-button {
+  color: black;
+  font-size: 18px;
+}
+.chat-button {
+  color: #9163f8; /* 보라색 (이미지처럼) */
+  font-size: 20px;
 }
