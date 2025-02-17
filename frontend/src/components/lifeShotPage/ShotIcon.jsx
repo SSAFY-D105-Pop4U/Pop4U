@@ -95,8 +95,9 @@ const [emoticons, setEmoticons] = useState([]);
                 }
             }}
         >
+            {emoticon.popupIconImg}
             <img 
-                src={emoticon.url} 
+                src={emoticon.popupIconImg} 
                 alt={`emoticon-${emoticon.id}`}
                 className="emoticon-image"
                 draggable={false}
