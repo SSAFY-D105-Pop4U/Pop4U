@@ -13,7 +13,7 @@ pipeline {
             }
         }
 
-        stage('application.yml download') {
+        stage('credentials download') {
             when {
                 expression { env.GIT_BRANCH == 'origin/back_develop' }
             }
@@ -23,6 +23,13 @@ pipeline {
                         sh 'cp -f $dbConfigFile backend/pop4u/src/main/resources/application.yml'
                     }
                 }
+                withCredentials([file(credentialsId: '.env', variable: 'envFile')]) {
+                    script {
+                        // 각 디렉토리에 .env 파일 복사
+                        sh "cp -f $envFile backend/pop4u/.env"
+                        sh "cp -f $envFile ai-server/life-four-cuts/.env"
+                    }
+                }
             }
         }
 
@@ -30,10 +37,11 @@ pipeline {
             steps {
                 script {
                     def deployBranch = ""
-                    
+
                     if (env.GIT_BRANCH == 'origin/back_develop') {
                         deployBranch = 'backend'
                         containerName = 'spring-backend'
+
                     } else if (env.GIT_BRANCH == 'origin/front_develop') {
                         deployBranch = 'frontend'
                         containerName = 'react-frontend'
@@ -43,7 +51,7 @@ pipeline {
                     echo "Current branch: ${env.GIT_BRANCH}"
                     echo "Deploy branch: ${deployBranch}"
                     echo "Current workspace: ${WORKSPACE}"
-                    
+
                     if (deployBranch == 'frontend') {
                         sshagent(['ec2-ssh-key']) {
                             sh """
@@ -71,10 +79,10 @@ pipeline {
                                 scp -o StrictHostKeyChecking=no -r ${WORKSPACE}/* ubuntu@\${EC2_HOST}:~/
                                 ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
                                     cd ~
-                                    docker-compose stop ${deployBranch} || true
-                                    docker rm -f ${containerName} || true
-                                    docker-compose build --no-cache ${deployBranch}
-                                    docker-compose up -d --build ${deployBranch}
+                                    docker-compose stop ${deployBranch} fastapi || true
+                                    docker rm -f ${containerName} life-four-cuts || true
+                                    docker-compose build --no-cache ${deployBranch} fastapi
+                                    docker-compose up -d --build ${deployBranch} fastapi
                                 '
                             """
                         }
