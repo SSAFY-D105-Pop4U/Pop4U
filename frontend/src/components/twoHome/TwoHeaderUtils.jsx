@@ -2,12 +2,15 @@ import React from 'react';
 import searchIcon from '../../assets/icons/teb.png';
 import { useNavigate } from "react-router-dom";
 
-const TwoHeaderUtils = () => {
+const TwoHeaderUtils = ({handleMenuClick}) => {
+  
  
   const nav = useNavigate();
     const handleSearchClick = () => {
       nav(`/search`);
     };
+
+    
   
   return (
     <div className="header__util__wrap">
@@ -15,7 +18,7 @@ const TwoHeaderUtils = () => {
         <a >검색</a>
       </div>
 
-      <div className="mo__burger">
+      <div className="mo__burger" onClick={handleMenuClick}>
         <a >메뉴</a>
       </div>
     </div>
