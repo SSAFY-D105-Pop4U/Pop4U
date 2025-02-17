@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { postresult } from "../../apis/api/api";
+import { postpeople } from "../../apis/api/api";
 const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
+  const [timestamp, setTimestamp] = useState(null);
 
   // 클릭 이벤트 핸들러
   const handleClick = () => {
@@ -14,25 +15,27 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
     const handleResult = async () => {
       console.log(userId)
       console.log(popupId)
+      console.log(timestamp)
           try {
-            console.log("로그인 요청:", loginData);
-            const response = await postresult(popupId,userId);
+            const response = await postpeople(popupId,userId,timestamp);
             console.log("10번 클릭 끝난사람 api요청")
             }
            catch (error) {
-            console.error("로그인 실패:", error);
+            console.error("api요청 실패:", error);
           }
         };
 
-  // 점수가 10이 되면 한 번만 `postResult` 실행
+
   useEffect(() => {
-    if (score >= 10 && !hasPosted) {
-      handleResult()
-      (score);
-      console.log("10번클릭 끝 api 요청")
+    if (score === 10 && !hasPosted) {
+      const currentTime = new Date().toISOString().slice(0, 19);
+      setTimestamp(currentTime);
+      handleResult(currentTime); // timestamp를 같이 넘길 수도 있음
+      console.log("10번 클릭 끝 API 요청");
       setHasPosted(true); // 중복 호출 방지
     }
   }, [score, hasPosted]);
+
 
   return (
     <div className="game-play">
