@@ -174,6 +174,18 @@ export const postwritereview = async (formData) => {
   }
 };
 
+ // 팝업 아이콘 가져오기
+export const getreviewcheck = async (popupId) => {
+  try {
+    const response = await api.get(`/four_cuts/${popupId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+}
+
+
 // post 게임 생성
 export const postcreategame = async ({ startTime, popupId }) => {
   try {
@@ -192,7 +204,7 @@ export const postcreategame = async ({ startTime, popupId }) => {
 // 게임 10번 클릭시 api 전송
 export const postpeople = async ({popupId,userId,timestamp}) => {
   try {
-    const response = await api.post(`/game/complete/`, {
+    const response = await api.post(`/game/complete`, {
       popupId,
       userId,
       timestamp
@@ -204,17 +216,19 @@ export const postpeople = async ({popupId,userId,timestamp}) => {
   }
 };
 
-
- // 리뷰 썻는지 체킹(팝업 아이콘 가져오기로 대체체)
-export const getreviewcheck = async (popupId) => {
+export const getresult = async (popupId) => {
   try {
-    const response = await api.get(`/four_cuts/${popupId}`);
+    const response = await api.get(`/rankings/${popupId}`,)
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
     throw error;
   }
-}
+};
+
+
+
+
 
 
 

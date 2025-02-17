@@ -3,7 +3,6 @@ import { postpeople } from "../../apis/api/api";
 const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
-  const [timestamp, setTimestamp] = useState(null);
 
 
 

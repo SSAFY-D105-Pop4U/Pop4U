@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import {getresult} from "../../apis/api/api"
 
-const GameResult = ({ score }) => {
+
+const GameResult = (score,popupId) => {
+    const handleresult = async () => {
+            try {
+              const response = await getresult(popupId);
+              console.log("결과를 달라 백엔드야")
+              }
+             catch (error) {
+              console.error("결과 요구 실패:", error);
+            }
+          };
+  useEffect(()=>{
+    handleresult()
+  },[])
+
+
   return (
     <div className="game-result">
       <h2>게임 종료!</h2>
