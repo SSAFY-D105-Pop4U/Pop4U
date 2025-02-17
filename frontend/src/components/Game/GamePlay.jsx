@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { postresult } from "../../apis/api/api";
-const GamePlay = ({ count, score, setScore, postResult, userId, popupId }) => {
+const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
 
