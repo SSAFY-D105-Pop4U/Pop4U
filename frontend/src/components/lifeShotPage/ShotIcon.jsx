@@ -95,6 +95,7 @@ const [emoticons, setEmoticons] = useState([]);
                 }
             }}
         >
+            {emoticon.popupIconImg}
             <img 
                 src={emoticon.popupIconImg} 
                 alt={`emoticon-${emoticon.id}`}
