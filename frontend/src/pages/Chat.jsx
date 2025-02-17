@@ -199,7 +199,16 @@
                     <span >{msg.chattingMessage}{" "}</span>
                   </div>
                   
-                  
+                  <div  className="chat-my"> 
+                  <span className="chat-time" style={{fontSize:"13px"}} >
+                    {convertUTCToKoreanTime(msg.chattingCreatedAt)}
+                    </span>
+                    <div  className="chat-message"> 
+                    <span >{msg.chattingMessage}{" "}</span>
+                  </div>
+
+
+                  </div>
                   {(sessionValue!=msg.userId) &&(
                     <span className="chat-time" style={{fontSize:"13px"}} >
                     {convertUTCToKoreanTime(msg.chattingCreatedAt)}
