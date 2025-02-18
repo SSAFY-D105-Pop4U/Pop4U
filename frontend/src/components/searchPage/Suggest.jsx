@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../apis/api/instance'; 
+import api from '../../apis/api/instance';
 import '../../styles/components/Suggest.css';
 
 const Suggest = () => {
@@ -11,15 +11,14 @@ const Suggest = () => {
     api.get("/category/user/recommendation")
       .then(response => {
         const data = response.data;
-        // 각 추천 팝업스토어 데이터에서 첫번째 이미지, 팝업스토어 이름, popupId 추출
         const newCards = data.map(item => ({
           popupId: item.popupId,
-          image: (item.popupImages && item.popupImages.length > 0) 
-                    ? item.popupImages[0] 
-                    : 'https://via.placeholder.com/300',
+          image: (item.popupImages && item.popupImages.length > 0)
+                    ? item.popupImages[0]
+                    : 'https://via.placeholder.com/300', // 대체 이미지
           title: item.popupName,
+          subtitle: item.popupName  // 혹은 다른 설명 문자열 사용
         }));
-        // 최대 6개만 표시
         setCards(newCards.slice(0, 6));
       })
       .catch(error => {
@@ -28,7 +27,6 @@ const Suggest = () => {
   }, []);
 
   const handleCardClick = (popupId) => {
-    // 상세페이지로 이동: query parameter 형식으로 전달
     navigate(`/detail?popupId=${popupId}`);
   };
 
