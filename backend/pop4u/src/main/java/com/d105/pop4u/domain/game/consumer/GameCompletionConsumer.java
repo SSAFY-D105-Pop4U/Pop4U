@@ -23,15 +23,16 @@ public class GameCompletionConsumer {
             containerFactory = "gameCompletionListenerContainerFactory"
     )
     public void handleGameCompletion(List<ConsumerRecord<String, GameCompletionEvent>> records) {
-        log.info("Received {} game completion events", records.size());
+        try {
+            log.info("Received {} completion events", records.size());
+            List<GameCompletionEvent> completions = records.stream()
+                    .map(ConsumerRecord::value)
+                    .collect(Collectors.toList());
 
-        List<GameCompletionEvent> completions = records.stream()
-                .map(ConsumerRecord::value)
-                .collect(Collectors.toList());
-
-        // 배치로 처리
-        gameService.processGameCompletions(completions);
-
-        log.info("Processed {} game completion events", completions.size());
+            gameService.processGameCompletions(completions);
+            log.info("Successfully processed completion events");
+        } catch (Exception e) {
+            log.error("Error processing completion events: ", e);
+        }
     }
 }
