@@ -49,37 +49,14 @@ const LifeShot = () => {
         }
     
         try {
-            const originalCanvas = await html2canvas(captureRef.current, {
+            const canvas = await html2canvas(captureRef.current, {
                 useCORS: true, // CORS 문제 해결
                 backgroundColor: "#fff", // 배경을 흰색으로 설정 (투명 배경 유지하려면 null)
                 scale: 2, // 해상도 증가
                 logging: true, // 디버깅용 로깅
             });
-            // 2. 원하는 가로 확장 비율 설정 (예: 1.05배)
-            const scaleX = 1.1;
-            const newWidth = originalCanvas.width * scaleX;
-            const newHeight = originalCanvas.height;
-
-            // 3. 오프스크린 캔버스 생성 후 그리기
-            const newCanvas = document.createElement("canvas");
-            newCanvas.width = newWidth;
-            newCanvas.height = newHeight;
-            const ctx = newCanvas.getContext("2d");
-
-            // drawImage를 사용하여 원본 이미지를 가로로 확대해서 그리기
-            ctx.drawImage(
-                originalCanvas,  // 원본 캔버스
-                0,
-                0,
-                originalCanvas.width,
-                originalCanvas.height,
-                0,
-                0,
-                newWidth,
-                newHeight
-            );
     
-            const image = newCanvas.toDataURL("image/png");
+            const image = canvas.toDataURL("image/png");
     
             // 이미지 다운로드
             const link = document.createElement("a");
@@ -172,7 +149,7 @@ const LifeShot = () => {
             {isNext && (frameCount==0) && (
                  <Frameset handleFrame={handleFrame} isAnimating={isAnimating} />
             )}
-            <div ref={captureRef} style={{width:"300px", height:"466px", margin: "45px auto 0"} }>
+            <div ref={captureRef} style={{width:"330px", height:"466px", margin: "45px auto 0"} }>
             
             {(frameCount==1) && (
                 <div >
