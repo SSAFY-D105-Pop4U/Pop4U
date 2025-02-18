@@ -35,7 +35,7 @@ const LifeShot = () => {
           allowTaint: true,
           useCORS: true,
           backgroundColor: null,
-          scale: 2, // 해상도를 높이기 위해 scale 추가
+          scale: window.devicePixelRatio,
           logging: true, // 디버깅을 위한 로깅 활성화
         });
         const image = canvas.toDataURL("image/png");
