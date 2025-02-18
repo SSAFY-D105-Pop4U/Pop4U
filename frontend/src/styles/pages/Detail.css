@@ -63,6 +63,15 @@
  
 }
 
+.detial-title1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
 .detial-title {
     color: black;
     font-weight: bold;
