@@ -99,5 +99,11 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
 
+    public String getUserNicknameById(Long userId) {
+        return userRepository.findById(userId)
+                .map(User::getUserNickname) // User는 사용자 엔티티 클래스
+                .orElse("Unknown User"); // 사용자 정보가 없을 경우 기본값
+    }
+
 
 }

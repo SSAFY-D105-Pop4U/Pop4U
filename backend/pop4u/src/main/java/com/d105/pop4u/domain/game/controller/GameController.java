@@ -46,8 +46,15 @@ public class GameController {
     @PostMapping("/complete")
     public ResponseEntity<ClickResponse> completeGame(
             @RequestBody GameCompletionEvent completionEvent) {
-        // Kafka로 전송
-        kafkaTemplate.send("game-completions", completionEvent);
+//        // Kafka로 전송
+//        kafkaTemplate.send("game-completions", completionEvent);
+        // 여기서 popupId를 두 번째 파라미터로 전달해야 하는데 누락됨
+//        kafkaTemplate.send("game-completions", completionEvent);  // 문제 지점
+        // 올바른 방식:
+         kafkaTemplate.send("game-completions", completionEvent.getPopupId(), completionEvent);
+
+        log.info("Game completion event sent for popupId: {}, userId: {}",
+                completionEvent.getPopupId(), completionEvent.getUserId());  // 로깅 추가
 
         return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
     }
