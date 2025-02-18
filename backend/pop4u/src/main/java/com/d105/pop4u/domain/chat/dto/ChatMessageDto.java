@@ -14,7 +14,7 @@ public class ChatMessageDto {
     private String chattingId;         // MongoDB의 ObjectId (문자열)
     private Long chatRoomId;           // 채팅방 ID
     private Long userId;             // 발신자 ID
-    private String userName;         // 발신자 이름 (추가)
+    private String userNickName;         // 발신자 이름 (추가)
     private String chattingMessage;  // 채팅 내용
     private LocalDateTime chattingCreatedAt;  // 채팅 생성 시간
 
@@ -24,7 +24,7 @@ public class ChatMessageDto {
                 .chattingId(message.getChattingId())
                 .chatRoomId(message.getChatRoomId())
                 .userId(message.getUserId())
-                .userName(message.getUserName())  // 추가된 필드
+                .userNickName(message.getUserNickName())  // 추가된 필드
                 .chattingMessage(message.getChattingMessage())
                 .chattingCreatedAt(message.getChattingCreatedAt())
                 .build();
