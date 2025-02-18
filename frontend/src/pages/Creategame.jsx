@@ -54,10 +54,11 @@ const Creategame = () => {
         onChange={(e) => setSelectedTime(e.target.value)}
         style={styles.timeInput}
       />
-
-      <p>
+    <br>
+    </br>
+      {/* <p>
         선택한 시간: <strong>{selectedTime}</strong>
-      </p>
+      </p> */}
 
       <button onClick={handleSubmit} style={styles.button}>게임 만들기</button>
 

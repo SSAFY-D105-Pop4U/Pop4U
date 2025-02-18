@@ -50,27 +50,12 @@ const GameWait = ({ setIsGameStarted }) => {
     <div className="game-wait-container">
       <div className="comment">특별 이벤트</div>
       <div className="time">{waitTime}초 후에 시작됩니다!</div>
-      
-{/* <div className="rotating-circle-countdown">
-        <svg viewBox="0 0 100 100">
-          <circle cx="50" cy="50" r="45" className="background-circle"></circle>
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            className="progress-circle"
-            style={{ strokeDashoffset: 283 - (283 / 10) * waitTime }}
-          ></circle>
-        </svg>
-        <span className="count-text">{waitTime}</span>
-      </div> */}
-
       <div className="container">
         <img src={present} alt="img" className="present" />
       </div>
 
       <div className="instructions">
-        {["주어진 시간 안에", "선물 상자를 가장 많이", "클릭을 하면 선물을 받아요"].map(
+        {["주어진 시간 안에", "선물 상자를 가장 빨리", "클릭을 하면 선물을 받아요"].map(
           (text, index) => (
             <div key={index} className="instruction-item">
               <div className={`circle ${activeIndexes.includes(index) ? "active" : ""}`}>
