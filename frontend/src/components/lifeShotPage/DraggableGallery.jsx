@@ -12,7 +12,7 @@ const DraggableGallery = ({ selectedIcon }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    if (selectedIcon && selectedIcon.url) {
+    if (selectedIcon && selectedIcon.popupIconImg) {
       const canvas = canvasRef.current;
       const rect = canvas.getBoundingClientRect();
       
@@ -256,7 +256,7 @@ const DraggableGallery = ({ selectedIcon }) => {
                     }}
                 >
                     <img
-                        src={image.url}
+                        src={image.popupIconImg}
                         alt={image.title}
                         className="icon-gallery-image"
                         draggable={false}
