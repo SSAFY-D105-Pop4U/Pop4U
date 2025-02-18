@@ -57,7 +57,7 @@
      padding: 5px 5px 50px;
      gap: 10px; /* ✅ 요소 간 간격 추가 */
      margin-top: 20px;
-     /* aspect-ratio: 3/4;  세로로 긴 비율 */
+     aspect-ratio: 3/4;  /* 세로로 긴 비율 */
  }
 
 .lifeshot-frame-container3 {
@@ -95,7 +95,7 @@
 
 .lifeshot-frame-bg4{
     width: 100%;
-    aspect-ratio: 2.8/4;
+    height: 150px; /* 디자인에 맞게 조정 */
     background-color: rgb(76, 80, 79);
 }
 
