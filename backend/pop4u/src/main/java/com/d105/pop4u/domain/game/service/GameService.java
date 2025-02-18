@@ -134,7 +134,7 @@ public class GameService {
         // 팝업스토어 존재 여부 확인
         if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
             throw new IllegalArgumentException("존재하지 않는 팝업스토어입니다.");
-        }
+        } 
 
         String rankingKey = RANKINGS_PREFIX + popupId;
         Set<ZSetOperations.TypedTuple<String>> rankingSet;
