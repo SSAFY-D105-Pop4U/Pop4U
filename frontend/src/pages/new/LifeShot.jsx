@@ -52,7 +52,9 @@ const LifeShot = () => {
             const canvas = await html2canvas(captureRef.current, {
                 useCORS: true, // CORS 문제 해결
                 backgroundColor: "#fff", // 배경을 흰색으로 설정 (투명 배경 유지하려면 null)
-                scale: window.devicePixelRatio,
+                scale: 2, // 해상도 증가
+                width: captureRef.current.offsetWidth,
+                height: captureRef.current.offsetHeight,
                 logging: true, // 디버깅용 로깅
             });
     
