@@ -212,7 +212,7 @@
 
 .back {
     position: absolute; /* 절대 위치 설정 */
-    top: 10px; /* 이미지 상단에서 10px 위치 */
+    top: 22px; /* 이미지 상단에서 10px 위치 */
     left: 10px; /* 이미지 왼쪽에서 10px 위치 */
     width: 30px; /* 버튼 크기 */
     height: 30px;
