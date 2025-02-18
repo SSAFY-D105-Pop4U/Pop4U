@@ -53,8 +53,6 @@ const LifeShot = () => {
                 useCORS: true, // CORS 문제 해결
                 backgroundColor: "#fff", // 배경을 흰색으로 설정 (투명 배경 유지하려면 null)
                 scale: 2, // 해상도 증가
-                width: captureRef.current.offsetWidth,
-                height: captureRef.current.offsetHeight,
                 logging: true, // 디버깅용 로깅
             });
     
@@ -151,7 +149,7 @@ const LifeShot = () => {
             {isNext && (frameCount==0) && (
                  <Frameset handleFrame={handleFrame} isAnimating={isAnimating} />
             )}
-            <div ref={captureRef} style={{width:"300px", height:"466px", marginTop:"45px", margin:"0 auto"} }>
+            <div ref={captureRef} style={{width:"300px", height:"466px", margin: "45px auto 0"} }>
             
             {(frameCount==1) && (
                 <div >
