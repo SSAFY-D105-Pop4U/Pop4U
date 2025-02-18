@@ -55,7 +55,7 @@ const GameWait = ({ setIsGameStarted }) => {
       </div>
 
       <div className="instructions">
-        {["주어진 시간 안에", "선물 상자를 가장 빨리", "클릭을 하면 선물을 받아요"].map(
+        {["주어진 시간 안에", "선물 상자를 가장 빨리", "10회 클릭을 하면 선물을 받아요"].map(
           (text, index) => (
             <div key={index} className="instruction-item">
               <div className={`circle ${activeIndexes.includes(index) ? "active" : ""}`}>

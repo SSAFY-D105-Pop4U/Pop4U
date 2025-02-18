@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { getresult } from "../../apis/api/api";
 import { useNavigate } from "react-router-dom";
+import present from "../../assets/images/present.png";
 
 const GameResult = ({popupId}) => {
   const nav = useNavigate();
@@ -24,6 +25,8 @@ const GameResult = ({popupId}) => {
     console.log("팝업아이디" ,popupId)
     handleresult();
   }, []);
+
+
 
   return (
     <div className="game-result">
