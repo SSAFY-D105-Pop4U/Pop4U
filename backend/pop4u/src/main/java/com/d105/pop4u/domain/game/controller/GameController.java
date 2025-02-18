@@ -61,11 +61,15 @@ public class GameController {
 //         kafkaTemplate.send("game-completions", completionEvent.getPopupId(), completionEvent);
 
         try {
+            log.info("Received completion event request: {}", completionEvent);  // 요청 로그
+
             // Kafka로 전송
             kafkaTemplate.send("game-completions",
                     completionEvent.getPopupId(),
-                    completionEvent);
-            log.info("Sent completion event to Kafka");  // 로그 추가
+                    completionEvent).get();  // .get()을 추가하여 전송 완료 대기
+
+            log.info("Successfully sent event to Kafka for popupId: {}",
+                    completionEvent.getPopupId());
 
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
         } catch (Exception e) {
