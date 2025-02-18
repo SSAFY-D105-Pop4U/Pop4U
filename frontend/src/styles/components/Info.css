@@ -66,4 +66,21 @@
   margin-bottom: 15px;
   margin-right: 10px;
   margin-left: 10px;
+  letter-spacing: 1px;
+  line-height: 1.6; 
 }
+
+.detail-date1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+
