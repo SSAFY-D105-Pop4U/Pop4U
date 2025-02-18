@@ -16,10 +16,10 @@ const Suggest = () => {
           popupId: item.popupId,
           image: (item.popupImages && item.popupImages.length > 0) 
                     ? item.popupImages[0] 
-                    : 'https://via.placeholder.com/300', // 이미지가 없으면 대체 이미지 사용
+                    : 'https://via.placeholder.com/300',
           title: item.popupName,
         }));
-        // 최대 6개만 추출
+        // 최대 6개만 표시
         setCards(newCards.slice(0, 6));
       })
       .catch(error => {
@@ -28,8 +28,8 @@ const Suggest = () => {
   }, []);
 
   const handleCardClick = (popupId) => {
-    // 상세페이지로 이동 (예: /popup/{popupId})
-    navigate(`/popup/${popupId}`);
+    // 상세페이지로 이동: query parameter 형식으로 전달
+    navigate(`/detail?popupId=${popupId}`);
   };
 
   return (
