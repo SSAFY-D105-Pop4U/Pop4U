@@ -107,7 +107,7 @@
 }
 
 .tab.active {
-    color: #6631E5;
+    color: #000000;
     font-weight: 600;
 }
 
@@ -118,7 +118,7 @@
     left: 0;
     width: 50%;
     height: 2px;
-    background-color: #6631E5;
+    background-color: #002C5F;
     transition: left 0.3s ease-in-out; 
 }
 
@@ -171,7 +171,7 @@
     height: 40px;
     background: white;
     border-radius: 10px;
-    border: 1px solid #986CFF;
+    border: 1px solid #002C5F;
     font-size: 14px;
     font-weight: 500;
     color: black;
@@ -325,7 +325,7 @@
     width: 45%;
     height: 40px;
     color: #fefefe;
-    background: #986CFF;
+    background: #002C5F;
     border-radius: 10px;
 
 }

@@ -25,7 +25,7 @@ const ReviewLifeShotCard = ({ placeInfo }) => {
     nav(`/writereview?popupId=${placeInfo.popupId}&reservationId=${placeInfo.reservationId}`);
   };
   const handlelifeshot = () => {
-    nav(`/lifeshot?popupId=${placeInfo.popupId}`);
+    nav(`/testlife?popupId=${placeInfo.popupId}`);
   };
 
 
