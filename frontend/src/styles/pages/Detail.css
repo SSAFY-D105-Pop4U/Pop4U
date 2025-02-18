@@ -262,7 +262,7 @@
     margin-top: 12vh;
   }
 
-  .right-section {
+  .detail-right-section {
     position: fixed;
     left: calc(50% + 10px);
     top: 0;

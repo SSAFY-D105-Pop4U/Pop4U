@@ -27,7 +27,7 @@ const PersonSelector = ({ selectedPerson, setSelectedPerson }) => {
   } = Drag();
 
   return (
-    <div className="person-selector-container">
+    <div className="person-selector-container" style={{width:"100%"}}>
       <div
         className="person-selector"
         ref={scrollRef}

@@ -100,7 +100,6 @@ const Detail = () => {
       </header>
 
       </div>
-      
       <div className="left-section">
         {/* 이미지 섹션 */}
         {detail?.popupImages?.length > 0 ? (
@@ -117,8 +116,10 @@ const Detail = () => {
           </div>
         )}
       </div>
+      
+      
 
-      <div className="right-section">
+      <div className="detail-right-section">
         {/* view와 name을 right-section 안으로 이동 */}
         
 
@@ -174,6 +175,8 @@ const Detail = () => {
 
 
       </div>
+
+      
 
       {/* 버튼 영역 */}
       <div className="mobile-detail-button">
