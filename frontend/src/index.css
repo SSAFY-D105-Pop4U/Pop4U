@@ -81,7 +81,8 @@ div {
   -webkit-tap-highlight-color: transparent; /* 터치 하이라이트 제거 */
   box-shadow: none; /* 포커스 그림자 제거 */
   box-sizing: border-box;
-  font-family: "Noto Sans KR", sans-serif;
+  /* font-family: "Noto Sans KR", sans-serif; */
+  font-family: 'Paperlogy', sans-serif;
 }
 
 /* 포커스 제거 기본 스타일 */
