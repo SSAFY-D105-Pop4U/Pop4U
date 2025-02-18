@@ -237,6 +237,8 @@
 
  {/* 메시지 입력창 */}
  <div className="input-group">
+
+          
           
           <div className="input-row">
             <input
