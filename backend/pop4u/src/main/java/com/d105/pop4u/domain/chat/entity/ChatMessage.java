@@ -20,7 +20,7 @@ public class ChatMessage {
 
     private Long chatRoomId;         // 채팅방 ID
     private Long userId;             // 발신자 ID
-    private String userName;         // 발신자 이름 (추가)
+    private String userNickName;         // 발신자 이름 (추가)
     private String chattingMessage;  // 채팅 메시지
     private LocalDateTime chattingCreatedAt = LocalDateTime.now();
 
@@ -29,7 +29,7 @@ public class ChatMessage {
         return ChatMessage.builder()
                 .chatRoomId(dto.getChatRoomId())
                 .userId(dto.getUserId())
-                .userName(dto.getUserName())  // DTO에서 받은 userName 값 사용
+                .userNickName(dto.getUserNickName())  // DTO에서 받은 userName 값 사용
                 .chattingMessage(dto.getChattingMessage())
                 .chattingCreatedAt(LocalDateTime.now())
                 .build();
