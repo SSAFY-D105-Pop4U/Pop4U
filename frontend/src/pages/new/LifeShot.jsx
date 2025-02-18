@@ -149,7 +149,7 @@ const LifeShot = () => {
             {isNext && (frameCount==0) && (
                  <Frameset handleFrame={handleFrame} isAnimating={isAnimating} />
             )}
-            <div ref={captureRef} style={{width:"330px", height:"466px", margin: "45px auto 0"} }>
+            <div ref={captureRef} style={{width:"300px", height:"466px"} }>
             
             {(frameCount==1) && (
                 <div >
