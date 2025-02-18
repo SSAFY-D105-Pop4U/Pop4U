@@ -43,8 +43,8 @@ public class ChatController {
      @MessageMapping("/chat/{chatRoomId}")
      @SendTo("/topic/chat/{chatRoomId}")
      public ChatMessageDto sendMessage(@Payload ChatMessageDto chatMessageDto, Principal principal) {
-         // 기본적으로 principal.getName()을 사용해 사용자 이름을 설정
-         chatMessageDto.setUserName(principal.getName());
+//         // 기본적으로 principal.getName()을 사용해 사용자 이름을 설정
+//         chatMessageDto.setUserName(principal.getName());
 
          // 만약 사용자 ID가 필요하면, Principal을 Authentication으로 캐스팅하여 도메인 User 객체에서 가져옵니다.
          if (principal instanceof Authentication) {
@@ -53,6 +53,7 @@ public class ChatController {
              if (principalObj instanceof User) {
                  User user = (User) principalObj;
                  chatMessageDto.setUserId(user.getUserId());
+                 chatMessageDto.setUserNickName(user.getUserNickname());
              } else {
                  // 만약 principal 객체가 도메인 User가 아니라면, 필요시 추가로 UserRepository 등을 사용해 도메인 User 객체를 조회할 수 있습니다.
              }

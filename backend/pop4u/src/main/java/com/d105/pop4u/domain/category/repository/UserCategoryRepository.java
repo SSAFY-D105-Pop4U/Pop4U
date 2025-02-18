@@ -11,4 +11,5 @@ public interface UserCategoryRepository extends JpaRepository<UserCategory, Long
 
     // 특정 회원의 기존 매핑 삭제
     void deleteByUser_UserId(Long userId);
+
 }
