@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const Info = ({ detail }) => {
   if (!detail) return <p>Loading...</p>; // ✅ detail이 null일 때 로딩 표시
 
-  const [isOnClick, setIsOnClick] = useState(false);
+  const [isOnClick, setIsOnClick] = useState(true);
   const handleOnClick = () => {
     setIsOnClick(!isOnClick);
   };
