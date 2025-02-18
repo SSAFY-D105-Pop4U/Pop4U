@@ -30,6 +30,9 @@ dependencies {
 //	developmentOnly 'org.springframework.boot:spring-boot-devtools' // 서버 실행 속도 증가를 위해 제거
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-hibernate5:2.13.0'
+	implementation 'javax.persistence:javax.persistence-api:2.2'
+
 
 	// 나용성
     implementation 'org.springframework.boot:spring-boot-starter'

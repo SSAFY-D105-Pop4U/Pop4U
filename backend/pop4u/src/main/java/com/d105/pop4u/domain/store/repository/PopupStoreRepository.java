@@ -44,4 +44,13 @@ public interface PopupStoreRepository extends JpaRepository<PopupStore, Long> {
             "LOWER(p.popupRegion) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(c.categoryName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<PopupStore> searchByKeywordIncludingCategories(@Param("keyword") String keyword);
+
+    // 관심 카테고리에 해당하는 팝업 조회
+    // 사용자의 관심 카테고리 ID 리스트에 해당하는 팝업 조회
+    @Query("SELECT DISTINCT ps FROM PopupStore ps JOIN ps.popupCategories pc WHERE pc.category.categoryId IN :categoryIds")
+    List<PopupStore> findByCategoryIds(@Param("categoryIds") List<Long> categoryIds);
+
+    // 랜덤 추천 팝업 조회 (DB에 따라 RAND() 함수가 다를 수 있으므로 환경에 맞게 조정)
+    @Query(value = "SELECT * FROM popup_store ORDER BY RAND() LIMIT :limit", nativeQuery = true)
+    List<PopupStore> findRandomPopups(@Param("limit") int limit);
 }
