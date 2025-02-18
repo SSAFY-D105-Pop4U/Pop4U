@@ -49,7 +49,7 @@ const LifeShot = () => {
         }
     
         try {
-            const canvas = await html2canvas(captureRef.current, {
+            const originalCanvas = await html2canvas(captureRef.current, {
                 useCORS: true, // CORS 문제 해결
                 backgroundColor: "#fff", // 배경을 흰색으로 설정 (투명 배경 유지하려면 null)
                 scale: 2, // 해상도 증가
