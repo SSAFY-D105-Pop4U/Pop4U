@@ -9,6 +9,10 @@ public class GameCompletionEvent {
     private Long userId;
     private LocalDateTime completionTime;
 
+    // 기본 생성자 추가
+    public GameCompletionEvent() {
+    }
+
     public GameCompletionEvent(String popupId, Long userId,
                                LocalDateTime completionTime) {
         this.popupId = popupId;
