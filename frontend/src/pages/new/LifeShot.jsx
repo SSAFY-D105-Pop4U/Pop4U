@@ -48,6 +48,12 @@ const LifeShot = () => {
             return;
         }
     
+        // 기존 transform 저장
+        const originalTransform = captureRef.current.style.transform;
+
+        // 가로 비율만 1.05배 확대 (예시)
+        captureRef.current.style.transform = "scaleX(1.1)";
+
         try {
             const canvas = await html2canvas(captureRef.current, {
                 useCORS: true, // CORS 문제 해결
@@ -65,7 +71,10 @@ const LifeShot = () => {
             link.click();
         } catch (error) {
             console.error("캡처 중 오류 발생:", error);
-        }
+        } finally {
+            // 원래 transform 복원
+            captureRef.current.style.transform = originalTransform;
+          }
     };
     
 
