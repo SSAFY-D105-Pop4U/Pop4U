@@ -107,17 +107,21 @@ public class GameService {
 
     @Transactional
     public void processGameCompletions(List<GameCompletionEvent> completions) {
+        log.info("Processing {} game completion events", completions.size());
+
         Map<String, List<GameCompletionEvent>> completionsByStore = completions.stream()
                 .collect(Collectors.groupingBy(GameCompletionEvent::getPopupId));
 
         completionsByStore.forEach((popupId, storeCompletions) -> {
-            // 팝업스토어 존재 여부 확인
-            if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
-                log.error("존재하지 않는 팝업스토어입니다: {}", popupId);
-                return;
-            }
+//            // 팝업스토어 존재 여부 확인
+//            if (!popupStoreRepository.existsById(Long.parseLong(popupId))) {
+//                log.error("존재하지 않는 팝업스토어입니다: {}", popupId);
+//                return;
+//            }
 
             String rankingKey = RANKINGS_PREFIX + popupId;
+            log.info("Processing rankings for popupId: {} with {} completions",
+                    popupId, storeCompletions.size());
 
             storeCompletions.forEach(completion -> {
                 double score = completion.getCompletionTime().toEpochSecond(ZoneOffset.UTC);
@@ -126,6 +130,8 @@ public class GameService {
                         completion.getUserId().toString(),
                         score
                 );
+                log.info("Added ranking for userId: {} with score: {}, success: {}",
+                        completion.getUserId(), score);
             });
         });
     }
