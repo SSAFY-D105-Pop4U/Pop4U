@@ -5,6 +5,8 @@ import GameResult from "../components/Game/GameResult"; // 게임 종료 화면
 import {useParams } from "react-router-dom";
 import "../styles/pages/Game.css";
 
+
+
 const Game = () => {
   const [count, setCount] = useState(10); // 10초 카운트
   const [isGameOver, setIsGameOver] = useState(false); // 게임 종료 여부
@@ -31,6 +33,7 @@ const Game = () => {
 
   return (
     <div className="game-event-container">
+
       {!isGameStarted ? (
         <GameWait setIsGameStarted={setIsGameStarted} />
       ) : !isGameOver ? (
