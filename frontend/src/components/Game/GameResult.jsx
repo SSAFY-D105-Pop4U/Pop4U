@@ -30,7 +30,7 @@ const GameResult = ({ popupId }) => {
   return (
     <div className="game-result">
       <div className="scoreresult">
-        <div class="animate__animated animate__fadeInDown animate__slow large-text">
+        <div className="animate__animated animate__fadeInDown animate__slow large-text">
           참여자 중 11 등이에요
         </div>
       </div>
