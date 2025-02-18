@@ -29,10 +29,16 @@ public class GameController {
     // 1. 게임 생성 + 링크 생성 후 제공
     @PostMapping("/start/{popupId}")
     public ResponseEntity<String> createGameLink(@RequestBody GameStartRequest request) throws JsonProcessingException {
+
+        log.info("Game start request received for popupId: {}, startTime: {}",
+                request.getPopupId(), request.getStartTime());  // 로그 추가
+
         // 게임 초기화 후 링크 생성
         GameInfo gameInfo = gameService.initializeGame(request.getPopupId(), request.getStartTime());
         // 프론트엔드 게임 페이지 URL 생성
         String gameLink = "/Event_Game/" + gameInfo.getPopupId();
+
+        log.info("Game initialized with link: {}", gameLink);  // 로그 추가
         return ResponseEntity.ok(gameLink);
     }
 
@@ -55,20 +61,17 @@ public class GameController {
 //         kafkaTemplate.send("game-completions", completionEvent.getPopupId(), completionEvent);
 
         try {
-            log.info("Received completion event: {}", completionEvent);  // 로깅 추가
-
             // Kafka로 전송
             kafkaTemplate.send("game-completions",
-                            completionEvent.getPopupId(),
-                            completionEvent)
-                    .get();  // 전송 완료 대기
+                    completionEvent.getPopupId(),
+                    completionEvent);
+            log.info("Sent completion event to Kafka");  // 로그 추가
 
-            log.info("Successfully sent to Kafka");
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
         } catch (Exception e) {
-            log.error("Error processing game completion: ", e);
+            log.error("Failed to send completion event to Kafka", e);  // 에러 로그
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ClickResponse(false, "Error processing game completion", false));
+                    .body(new ClickResponse(false, e.getMessage(), false));
         }
     }
 
