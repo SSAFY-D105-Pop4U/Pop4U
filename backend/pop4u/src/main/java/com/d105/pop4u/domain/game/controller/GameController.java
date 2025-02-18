@@ -61,6 +61,7 @@ public class GameController {
 //         kafkaTemplate.send("game-completions", completionEvent.getPopupId(), completionEvent);
 
         try {
+<<<<<<< HEAD
             log.info("Received game completion request for popupId: {}, userId: {}",
                     completionEvent.getPopupId(), completionEvent.getUserId());
 
@@ -68,6 +69,19 @@ public class GameController {
             kafkaTemplate.send("game-completion",   // "game-completions" 대신 "game-completion" 사용
                     completionEvent.getPopupId(),
                     completionEvent).get();  // 전송 완료 대기
+=======
+            // 받은 데이터 로깅
+            log.info("Received game completion request - popupId: {}, userId: {}, completionTime: {}",
+                    completionEvent.getPopupId(),
+                    completionEvent.getUserId(),
+                    completionEvent.getCompletionTime());
+
+            // Kafka 전송
+            kafkaTemplate.send("game-completion",
+                    completionEvent.getPopupId(),
+                    completionEvent).get();
+            log.info("Successfully sent to Kafka topic game-completion");
+>>>>>>> feat/BE/kafka
 
             log.info("Successfully sent to Kafka");
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
