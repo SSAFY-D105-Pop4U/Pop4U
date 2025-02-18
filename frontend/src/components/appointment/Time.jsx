@@ -68,7 +68,7 @@ const Time = ({ selectedTime, setSelectedTime }) => {
   };
 
   return (
-    <div>
+    <div style={{width:"100%"}}>
       <div
         className="time-selector"
         ref={scrollRef}

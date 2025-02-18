@@ -8,6 +8,7 @@ import NextButton from "../components/NextButton";
 // import Recheck from "../components/appointment/Recheck";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AppDataContext } from "../Context.jsx";
+import "./Appointment.css";
 
 const Appointment = () => {
   const nav = useNavigate();
@@ -31,16 +32,34 @@ const Appointment = () => {
     <div style={{ width: "100%", maxWidth: "960px", margin: "0 auto" }}>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
-        <>
-          <Calendar setResultDate={setSelectedDate} />{" "}
+      <div className="appointment-container">
+      <div className="appointment-section appointment-left-section">
+          <Calendar setResultDate={selectedDate} />
+        </div>
+        <div className="appointment-section appointment-right-section">
+         
+          <div className="desktop-appoint-name" style={{color:"white", marginBottom:"18px", fontSize:"22px", fontWeight:"bold", lineHeight:"30px"}}>{popupName}</div>
+          <h2 className="appoint-title">
+          인원
+          </h2>
           <PersonSelector
             selectedPerson={selectedPerson}
             setSelectedPerson={setSelectedPerson}
           />
+          <h2 className="appoint-title">
+          시간
+          </h2>
           <Time selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-          <NextButton onClick={()=>nav("/recheck")}>다음</NextButton>
-        </>
-  
+          <div className="desktop-appoint-but" onClick={()=>nav("/recheck")}>
+            다음
+          </div>
+          <div className="mobile-appoint-but">
+            <NextButton onClick={()=>nav("/recheck")}>다음</NextButton>
+          </div>
+          
+        </div>
+        
+      </div>
     </div>
   );
 };
