@@ -197,7 +197,7 @@
               {groupedMessages[dateKey].map((msg, index) => (
                 <div key={index}>
                   {(sessionValue!=msg.userId) &&(
-                  <div>{msg.userName || `User ${msg.userId}`}</div>)}
+                  <div>{msg.userNickName || `User ${msg.userId}`}</div>)}
                
                   {(sessionValue!=msg.userId) &&(
                   <div  className="chat-message"> 
