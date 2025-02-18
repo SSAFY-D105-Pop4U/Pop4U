@@ -26,11 +26,12 @@
   padding: 0px !important;
 } */
 
-
 .name{
   color: rgb(0, 0, 0);
-  font-size: 30px !important;
+  font-size: 20px !important;
   font-weight: 700;
+  margin: 5% 10% 0% 10%;
+  
   word-wrap: break-word;
 }
 
@@ -59,4 +60,10 @@
   display: flex;
   gap: 5px;
   margin: 0px 0px 20px;
+}
+.detail-date{
+  display: flex;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
