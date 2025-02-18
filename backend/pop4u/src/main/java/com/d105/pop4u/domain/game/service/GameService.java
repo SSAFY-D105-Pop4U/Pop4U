@@ -133,8 +133,12 @@ public class GameService {
         }
 
         String rankingKey = RANKINGS_PREFIX + popupId;
-        Set<ZSetOperations.TypedTuple<String>> rankingSet =
-                redisTemplate.opsForZSet().rangeWithScores(rankingKey, 0, 4);
+        Set<ZSetOperations.TypedTuple<String>> rankingSet;
+        try {
+            rankingSet = redisTemplate.opsForZSet().rangeWithScores(rankingKey, 0, 4);
+        } catch (Exception e) {
+            throw new RuntimeException("랭킹 조회 중 오류가 발생했습니다.", e);
+        }
 
         if (rankingSet == null || rankingSet.isEmpty()) {
             return new ArrayList<>();
