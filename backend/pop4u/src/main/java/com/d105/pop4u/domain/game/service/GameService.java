@@ -5,6 +5,7 @@ import com.d105.pop4u.domain.game.dto.GameCompletionEvent;
 import com.d105.pop4u.domain.game.dto.GameInfo;
 import com.d105.pop4u.domain.game.dto.GameStatus;
 import com.d105.pop4u.domain.game.dto.RankingEntry;
+import com.d105.pop4u.domain.user.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,9 @@ public class GameService {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private UserService userService; // 사용자 서비스 추가
 
     public GameInfo initializeGame(String popupId, LocalDateTime startTime) throws JsonProcessingException {
         // 팝업스토어 존재 여부 확인
@@ -148,18 +152,15 @@ public class GameService {
         int rank = 1;
 
         for (ZSetOperations.TypedTuple<String> tuple : rankingSet) {
-            RankingEntry entry = new RankingEntry();
-            entry.setUserId(Long.parseLong(tuple.getValue()));
-            entry.setCompletionTime(
-                    LocalDateTime.ofEpochSecond(
-                            tuple.getScore().longValue(),
-                            0,
-                            ZoneOffset.UTC
-                    )
-            );
+            Long userId = Long.parseLong(tuple.getValue());
+            LocalDateTime completionTime = LocalDateTime.ofEpochSecond(tuple.getScore().longValue(), 0, ZoneOffset.UTC);
+
+            RankingEntry entry = new RankingEntry(userId, completionTime);
+            entry.setNickname(userService.getUserNicknameById(userId)); // 사용자 닉네임 설정
             entry.setRank(rank++);
             rankings.add(entry);
         }
+
 
         return rankings;
     }
