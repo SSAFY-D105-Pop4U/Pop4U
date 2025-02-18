@@ -4,9 +4,17 @@
   margin-bottom: 40px;
   margin-left: 20px;
   font-size: 22px;
+  display: flex;
+  margin-right: 200px;
   line-height: 1.4;
+  justify-content: center; /* 텍스트 가로 중앙 정렬 */
+  align-items: center; /* 텍스트 세로 중앙 정렬 */
 }
 
+.recheck-text-contain{
+  justify-content: center;  /* 가로 중앙 정렬 */
+  align-items: center; 
+}
 .recheck-container {
   width: 90%;
   max-width: 400px;

@@ -4,34 +4,27 @@
 
 .person-selector {
   display: flex;
-  align-items: center;
-  padding: 20px 0 12px 20px;
-  width: 100%;
+    gap: 10px;
+    padding: 10px 20px 40px;
+    border-radius: 8px;
   overflow-x: scroll; /* 자동으로 스크롤바가 나타날 때만 */
   scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
 }
 
 .person-circle {
-  width: 45px;
-  height: 45px;
-  border: 2px solid #d3d5d6;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  cursor: pointer;
-  color: #000;
-  background-color: #fff;
-  transition: all 0.3s ease;
-}
-
-.person-circle:hover {
-  border-color: #9b72ff;
+  padding: 15px;
+    border: none;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    flex-shrink: 0; /* 버튼 크기가 줄어들지 않도록 설정 */
 }
 
 .person-circle.person-selected {
-  background-color: #9b72ff;
+  background-color: #79a1d0;
   color: #fff;
-  border-color: #9b72ff;
+  border-color: #79a1d0;
 }

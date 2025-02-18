@@ -77,13 +77,15 @@ const Calendar = ({ setResultDate }) => {
   return (
     <div className="calendar-container">
       <div className="calendar-header">
+
+      <button className="nav-btn" onClick={handlePrevMonth}>
+            {"<"}
+          </button>
         <span className="month-title">
           {currentYear}년 {currentMonth + 1}월
         </span>
         <div>
-          <button className="nav-btn" onClick={handlePrevMonth}>
-            {"<"}
-          </button>
+          
           <button className="nav-btn" onClick={handleNextMonth}>
             {">"}
           </button>

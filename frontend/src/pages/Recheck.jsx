@@ -31,11 +31,14 @@ const Recheck = () => {
     <div>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={false} />
+      <div className="recheck-text-contain">
+        <h3 className="recheck-text">
+          예약 정보를 다시 한 번<br />
+          확인해주세요.
+        </h3>
 
-      <h3 className="recheck-text">
-        예약 정보를 다시 한 번<br />
-        확인해주세요.
-      </h3>
+      </div>
+     
 
       <div className="recheck-container">
         <div className="recheck-item">
