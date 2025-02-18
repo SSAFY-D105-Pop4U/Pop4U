@@ -26,11 +26,12 @@
   padding: 0px !important;
 } */
 
-
 .name{
   color: rgb(0, 0, 0);
-  font-size: 30px !important;
+  font-size: 20px !important;
   font-weight: 700;
+  margin: 5% 10% 0% 10%;
+  
   word-wrap: break-word;
 }
 
@@ -60,3 +61,26 @@
   gap: 5px;
   margin: 0px 0px 20px;
 }
+.detail-date{
+  display: flex;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  letter-spacing: 1px;
+  line-height: 1.6; 
+}
+
+.detail-date1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 2줄까지만 표시 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  margin-left: 10px;
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+
