@@ -1,53 +1,54 @@
-import '../../styles/components/Suggest.css'
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../../apis/api/instance'; 
+import '../../styles/components/Suggest.css';
 
 const Suggest = () => {
+  const [cards, setCards] = useState([]);
+  const navigate = useNavigate();
 
-  
-  
+  useEffect(() => {
+    api.get("/category/user/recommendation")
+      .then(response => {
+        const data = response.data;
+        // 각 추천 팝업스토어 데이터에서 첫번째 이미지, 팝업스토어 이름, popupId 추출
+        const newCards = data.map(item => ({
+          popupId: item.popupId,
+          image: (item.popupImages && item.popupImages.length > 0) 
+                    ? item.popupImages[0] 
+                    : 'https://via.placeholder.com/300',
+          title: item.popupName,
+        }));
+        // 최대 6개만 표시
+        setCards(newCards.slice(0, 6));
+      })
+      .catch(error => {
+        console.error("Error fetching recommended popup stores:", error);
+      });
+  }, []);
 
-    const cards = [
-        {
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/8f644dc4%2C1d3f%2C4e41%2C99ca%2C8db7a556b288",
-          title: "웨이브메이크 x 브링그린",
-          subtitle: "오징어게임2 팝업스토어 n 성수",
-        },
-        {
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/dedcb81f%2Cbd13%2C44b7%2Cbc6f%2C2e26943bbd98",
-          title: "웨이브메이크 x 브링그린",
-          subtitle: "오징어게임2 팝업스토어 n 성수",
-        },
-        {
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/dedcb81f%2Cbd13%2C44b7%2Cbc6f%2C2e26943bbd98",
-          title: "웨이브메이크 x 브링그린",
-          subtitle: "오징어게임2 팝업스토어 n 성수",
-        },
-        {
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/dedcb81f%2Cbd13%2C44b7%2Cbc6f%2C2e26943bbd98",
-          title: "웨이브메이크 x 브링그린",
-          subtitle: "오징어게임2 팝업스토어 n 성수",
-        },
-      ];
-    return (
-        <div>
- <div className="suggest-card-grid">
- 
-          
+  const handleCardClick = (popupId) => {
+    // 상세페이지로 이동: query parameter 형식으로 전달
+    navigate(`/detail?popupId=${popupId}`);
+  };
+
+  return (
+    <div className="suggest-card-grid">
       {cards.map((card, index) => (
-        
-         <div className="suggest-card"key={index}>
-            
-         <img src={card.image} alt={card.title} className="card-image" />
-         <div className="suggest-card-overlay">
-           <h3 className="suggest-card-title">{card.title}</h3>
-           <p className="suggest-card-subtitle">{card.subtitle}</p>
-         </div>
-       </div>
+        <div 
+          className="suggest-card" 
+          key={index}
+          onClick={() => handleCardClick(card.popupId)}
+          style={{ cursor: 'pointer' }}
+        >
+          <img src={card.image} alt={card.title} className="card-image" />
+          <div className="suggest-card-overlay">
+            <h3 className="suggest-card-title">{card.title}</h3>
+          </div>
+        </div>
       ))}
     </div>
-        </div>
-    )
+  );
+};
 
-}
-
-export default Suggest
-
+export default Suggest;

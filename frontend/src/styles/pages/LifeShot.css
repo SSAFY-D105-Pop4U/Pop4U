@@ -50,9 +50,7 @@
 }
 
 .tab-container {
-  margin-top: auto;  /* 하단에 고정 */
   background: white;
-  border-top: 1px solid #eee;
 }
 
 .tab-header {
@@ -87,11 +85,6 @@
   background-color: #000;
 }
 
-.tab-content {
-  padding: 20px;
-  height: 200px;  /* 탭 내용의 높이 조절 */
-  overflow-y: auto;
-}
 
 .tab-panel {
   display: flex;

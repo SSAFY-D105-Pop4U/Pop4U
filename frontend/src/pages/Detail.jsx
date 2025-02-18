@@ -87,58 +87,110 @@ const Detail = () => {
 
   return (
     <div className="container1">
-      <Header title="팝업 상세" />
-
-      {/* ✅ 캐러셀 컴포넌트에 detail.popupImages 전달 */}
-      {detail?.popupImages?.length > 0 ? (
-        <div className="image-container">
-          <ImageCarousel images={detail.popupImages} />
-        </div>
-      ) : (
-        <div className="image-container">
-          <img
-            src="https://via.placeholder.com/414x414"
-            alt="event"
-            className="image"
-          />
-        </div>
-      )}
-
-      <div className="view">
-        <img src={eye} alt="eye" className="eye" />
-        <div>{detail?.popupViewCount ?? 0}</div>
+      <div className="detail-header">
+      <header id="header" className="wbg">
+      <div className="inner__new">
+        <h1>
+        
+          <a href="/main/main.hc" className="h__logo">
+            <span>Pop4U</span>
+          </a>
+        </h1>
       </div>
+      </header>
 
-      {/* 탭 네비게이션 */}
-      <div className="tab-container">
-        {tabList.map((tab, index) => (
-          <div
-            key={index}
-            className={`tab ${activeIndex === index ? "active" : ""}`}
-            onClick={() => setActiveIndex(index)}
-          >
-            {tab.name}
+      </div>
+      
+      <div className="left-section">
+        {/* 이미지 섹션 */}
+        {detail?.popupImages?.length > 0 ? (
+          <div className="image-container">
+            <ImageCarousel images={detail.popupImages} />
           </div>
-        ))}
-        <div
-          className="tab-slider"
-          style={{ left: `${activeIndex * 50}%` }}
-        ></div>
+        ) : (
+          <div className="image-container">
+            <img
+              src="https://via.placeholder.com/414x414"
+              alt="event"
+              className="image"
+            />
+          </div>
+        )}
       </div>
 
-      {/* ✅ 선택된 탭의 컨텐츠 표시 */}
-      <div className="tab-content">{tabList[activeIndex].component}</div>
+      <div className="right-section">
+        {/* view와 name을 right-section 안으로 이동 */}
+        
 
-      {/* ✅ 버튼 영역 */}
-      <div className="button-wrapper">
+        <div className="name">{(detail||[]).popupName}</div>
+
+        <div className="view">
+          <img src={eye} alt="eye" className="eye" />
+          <div>{detail?.popupViewCount ?? 0}</div>
+        </div>
+
+        {/* 탭 네비게이션 */}
+        <div className="tab-container">
+          {tabList.map((tab, index) => (
+            <div
+              key={index}
+              className={`tab ${activeIndex === index ? "active" : ""}`}
+              onClick={() => setActiveIndex(index)}
+            >
+              {tab.name}
+            </div>
+          ))}
+          <div
+            className="tab-slider"
+            style={{ left: `${activeIndex * 50}%` }}
+          ></div>
+        </div>
+
+        {/* 탭 컨텐츠 */}
+        <div className="tab-content">
+          {tabList[activeIndex].component}
+        </div>
+
+        <div className="desktop-detail-button" style={{  justifyContent: "space-between", gap: "10px", width: "100%" }}>
+          {activeIndex === 1 ? null : (
+          <>
+      <button 
+        style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }} 
+        className="apointment-button" 
+        onClick={appointment}
+      >
+        예약하기
+      </button>
+      <button 
+        style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }} 
+        className="detail-chat-button" 
+        onClick={handlechat}
+      >
+        채팅하기
+      </button>
+    </>
+  )}
+</div>
+
+
+      </div>
+
+      {/* 버튼 영역 */}
+      <div className="mobile-detail-button">
+
+        <div style={{display: "flex"}}>
         {activeIndex === 1 ? null : (
           <>
-            <button className="apointment-button" onClick={appointment}>
+            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}  className="apointment-button" onClick={appointment}>
               예약하기
             </button>
-            <button className="chat-button" onClick={handlechat} >채팅하기</button>
+            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}  className="detail-chat-button" onClick={handlechat}>
+              채팅하기
+            </button>
           </>
         )}
+        </div>
+        
       </div>
     </div>
   );
