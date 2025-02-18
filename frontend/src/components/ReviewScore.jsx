@@ -17,7 +17,7 @@ const ReviewScore = ({ reviewRatings }) => {
 
   return (
     <div>
-      <div className="score">
+      <div className="rating_score">
         <img src={fullstar} alt="fullstar" className="star" />
         <div className="average">{average}</div>
         <div className="total">/5 </div>
