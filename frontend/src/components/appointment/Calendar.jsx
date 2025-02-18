@@ -9,7 +9,7 @@ const Calendar = ({ setResultDate }) => {
 
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(today.getDate());
 
   const { setAppData } = useContext(AppDataContext); // useContext 사용
 
