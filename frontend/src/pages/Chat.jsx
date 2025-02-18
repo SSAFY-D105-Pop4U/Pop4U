@@ -127,7 +127,7 @@ const ChatRoom = () => {
 
   return (
     <div className="chat-room-container">
-      <Header title={popupName} className="chat_header" />
+      <Header title={popupName}  />
 
       {/* 📌 채팅 메시지 영역 (스크롤 가능) */}
       <div className="chat-container" ref={chatContainerRef}>
