@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect} from "react";
 import '../../styles/components/ShotIcon.css'
-import api from "../../apis/api/instance";
+
 import { getreviewcheck } from "../../apis/api/api.js";
 
 const ShotIcon = ({ popupId, selectedIcon, setSelectedIcon, onSelectEmoticon }) => {
@@ -8,6 +8,7 @@ const ShotIcon = ({ popupId, selectedIcon, setSelectedIcon, onSelectEmoticon }) 
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
+    const [emoticons, setEmoticons] = useState([]);
 
     // 드래그 시작
     const handleMouseDown = (e) => {
@@ -44,29 +45,48 @@ const ShotIcon = ({ popupId, selectedIcon, setSelectedIcon, onSelectEmoticon }) 
         scrollRef.current.scrollLeft = scrollLeft - walk;
     };
 
+    useEffect(() => {
+        const fetchPopups = async () => {
+          try {
+            const data = await getreviewcheck(popupId);
+            setEmoticons(data);
+            console.log("팝업 아이콘 조회" ,data);
+            console.log(emoticons);
+          } catch (error) {
+            console.error("Failed to load popups");
+          }
+        };
+    
+        fetchPopups();
+      }, []);
     
 
-const [emoticons, setEmoticons] = useState([]);
-
-  // 컴포넌트 마운트 시 백엔드에서 이모티콘 목록을 불러옵니다.
-  useEffect(() => {
-    const fetchIcons = async () => {
-      try {
-        const response = await getreviewcheck(popupId);
-        // API 응답 구조에 맞게 데이터를 처리 (예: response.data)
-        
-        
-        setEmoticons(response.data);
-        console.log(emoticons);
-      } catch (error) {
-        console.error("이모티콘을 불러오는 중 오류 발생:", error);
-      }
-    };
-
-    if (popupId) {
-      fetchIcons();
-    }
-  }, [popupId]);
+    // const emoticons = [
+    //     {
+    //         id: 1,
+    //         popupIconImg: "https://pop4u.s3.amazonaws.com/icons/11/20250217_150021.png",  // P 아이콘
+    //     },
+    //     {
+    //         id: 2,
+    //         popupIconImg: "https://pop4u.s3.amazonaws.com/icons/11/20250217_150021.png",  // 손 흔드는 이모티콘
+    //     },
+    //     {
+    //         id: 3,
+    //         popupIconImg: "https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d",  // 양손 든 이모티콘
+    //     },
+    //     {
+    //         id: 4,
+    //         popupIconImg: "https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d",  // 놀란 이모티콘
+    //     },
+    //     {
+    //         id: 5,
+    //         popupIconImg: "https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d",  // 하트 든 이모티콘
+    //     },
+    //     {
+    //         id: 6,
+    //         popupIconImg: "https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d",  // 웃는 이모티콘
+    //     }
+    // ];
     
     return (
         <div>
@@ -81,37 +101,24 @@ const [emoticons, setEmoticons] = useState([]);
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleMouseUp}
             >
-                {Array.isArray(emoticons) ? (
-    emoticons.map((emoticon) => (
-        <div
-            key={emoticon.id}
-            className={`emoticon-item ${selectedIcon?.id === emoticon.id ? "selected" : ""}`}
-            onClick={() => {
-                console.log("clicked", emoticon);
-                setSelectedIcon(emoticon);
-                if (onSelectEmoticon) {
-                    onSelectEmoticon(emoticon);
-                } else {
-                    console.warn("onSelectEmoticon이 정의되지 않았습니다.");
-                }
-            }}
-        >
-            {emoticon.popupIconImg}
-            <img 
-                src={emoticon.popupIconImg} 
-                alt={`emoticon-${emoticon.id}`}
-                className="emoticon-image"
-                draggable={false}
-                onError={(e) => console.error("Image failed to load:", e.target.src)}
-            />
-        </div>
-    ))
-) : (
-    <p>이모티콘 데이터를 불러오는 중...</p>
-)}
-
-
-
+                {emoticons.map((emoticon) => (
+                    <div
+                        key={emoticon.id}
+                        className={`emoticon-item ${selectedIcon?.id === emoticon.id ? "selected" : ""}`}
+                        onClick={() => {
+                            console.log("clicked");
+                            setSelectedIcon(emoticon);
+                            onSelectEmoticon(emoticon);
+                        }}
+                    >
+                        <img 
+                            src={emoticon.popupIconImg} 
+                            alt={`emoticon-${emoticon.id}`}
+                            className="emoticon-image"
+                            draggable={false}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
     )
