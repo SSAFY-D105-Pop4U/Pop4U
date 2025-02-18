@@ -52,7 +52,7 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   return (
     <div className="game-play">
       <div className="game-event-instructions">
-        <div className="instruction">10초 동안 최대한 클릭하세요!</div>
+        <div className="play_instruction">10초 동안 최대한 클릭하세요!</div>
       </div>
 
       {/* 🕒 남은 시간 (MM:SS 형식으로 표시) */}
@@ -77,7 +77,7 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
       {clickEffects.map((effect) => (
         <div
           key={effect.id}
-          className="click-effect"
+          className="rippleEffect"
           style={{ top: effect.y, left: effect.x }}
         />
       ))}

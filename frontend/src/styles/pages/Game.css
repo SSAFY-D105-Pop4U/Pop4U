@@ -1,5 +1,5 @@
 .game-event-container {
-  background-color: #ebebad; /* 연한 베이지색 */
+  background-color: #7E71FC; /* 연한 베이지색 */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -9,6 +9,8 @@
 }
 
 .present {
+  display: flex;
+  justify-content: center;
   width: 250px;
   height: 250px;
   user-select: none; /* 텍스트/이미지 선택 방지 */
@@ -18,16 +20,23 @@
 }
 
 .comment {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  /* text-align: center; */
   margin-top: 0px;
   margin-bottom: 20px;
-  font-size: 15px;
-  /* padding-top: 170px; */
+  font-size: 22px;
+  margin-left: 0px;
+  font-weight: bold;
+  color: hsl(0, 0%, 100%);
 }
 
 .time {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
 }
 
 .container {
@@ -43,20 +52,23 @@
   flex-direction: column; /* 세로 정렬 */
   align-items: flex-start; /* 왼쪽 정렬 (필요하면 center) */
   margin-top: 50px;
+ 
 }
 
 .instruction-item {
   display: flex;
   align-items: center; /* 원과 텍스트를 수직 중앙 정렬 */
-  gap: 20px; /* 원과 텍스트 사이 간격 */
+  gap: 15px; /* 원과 텍스트 사이 간격 */
   margin-bottom: 15px;
+  color: white;
+  
 }
 /* 🎯 원 (1,2,3) */
 .circle {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #e5e5e5;
+  background-color: #bebebe;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,30 +80,44 @@
 }
 
 /* 🎯 순차적으로 반짝이는 애니메이션 */
-.circle.active {
+/* .circle.active {
   background-color: #fdcb58;
-  /* box-shadow: 0 0 10px #fdcb58; */
-}
-/* 텍스트 스타일 */
+ 
+} */
+
 p {
-  font-size: 14px;
-  color: black;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.0s ease-in-out;
 }
 
 
 
-/*  gameplay 파트 */
+/* ⭐⭐ gameplay 부분⭐⭐ */
 
 .game-play{
-margin-bottom: 220px;
-
-
+margin-bottom: 120px;
+color: hsl(0, 0%, 100%);
 }
+
+
 .play_instruction{
 text-align: center;
 margin-top: 0px;
 margin-bottom: 20px;
 font-size: 20px;
+font-weight: bold;
 }
 
 .play_timer{
@@ -106,8 +132,17 @@ font-size: 20px;
   align-items: center; /* ✅ 세로 중앙 */
   width: 100%; /* ✅ 부모 크기에 맞춰 정렬 */
   height: 50px; /* ✅ 원하는 크기 조절 가능 */
-  font-size: 50px;
+  font-size: 80px;
   font-weight: bold;
+  padding-top: 100px;
+}
+.game-event-count{
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: bold;
+  margin-right: 15px;
 }
 
 
@@ -129,7 +164,7 @@ font-size: 20px;
   100% { transform: rotate(0deg); }
 }
 
-/* ✅ 클릭 시 애니메이션 효과 적용 */
+/*  클릭 시 애니메이션 효과 적용 */
 .present.clicked {
   animation: wiggle 0.3s ease-in-out, flash 0.3s ease-in-out;
 }
@@ -169,4 +204,92 @@ font-size: 20px;
   animation: touchPop 0.5s ease-out;
   transform: translate(-50%, -50%);
   pointer-events: none;
+}
+@keyframes rippleEffect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.ripple {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 150, 255, 0.5);
+  border-radius: 50%;
+  animation: rippleEffect 0.6s ease-out;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+
+
+/* ⭐⭐게임 결과부분⭐⭐ */
+.game-result{
+  margin-bottom:20px;
+}
+.openpresent{
+  width: 250px;
+  /* height: 50px; */
+  user-select: none; /* 텍스트/이미지 선택 방지 */
+  pointer-events: auto; /* 클릭 이벤트 정상 처리 */
+  touch-action: manipulation; /* 모바일 터치 이벤트 최적화 */
+  -webkit-user-drag: none; /* ✅ Safari에서 드래그 방지 */
+  margin-right: 10px;
+}
+
+.scoreresult{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  font-weight:bold;
+  margin-bottom: 50px;
+}
+.complete{
+  
+  display: flex;
+  justify-content: center;
+}
+
+.button-style {
+  background-color: hsl(0, 0%, 100%); /* 녹색 버튼 */
+  color: #6631E5; /* 글자색 흰색 */
+  font-size: 16px;
+  padding: 12px 70px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 호버(마우스 올릴 때) 효과 */
+.button-style:hover {
+  background-color: #5c3da5;
+  transform: scale(1.05);
+}
+
+/* 클릭 시 효과 */
+.button-style:active {
+  background-color: #4163d4;
+  transform: scale(0.98);
+}
+.complete{
+  padding-top: 80px;
+}
+
+.large-text {
+  font-size: 23px;
+  font-weight:bold;
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 20px;
 }
