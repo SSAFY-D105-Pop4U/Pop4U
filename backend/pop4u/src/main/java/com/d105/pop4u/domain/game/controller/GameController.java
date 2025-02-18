@@ -61,19 +61,18 @@ public class GameController {
 //         kafkaTemplate.send("game-completions", completionEvent.getPopupId(), completionEvent);
 
         try {
-            log.info("Received completion event request: {}", completionEvent);  // 요청 로그
+            log.info("Received game completion request for popupId: {}, userId: {}",
+                    completionEvent.getPopupId(), completionEvent.getUserId());
 
             // Kafka로 전송
-            kafkaTemplate.send("game-completions",
+            kafkaTemplate.send("game-completion",   // "game-completions" 대신 "game-completion" 사용
                     completionEvent.getPopupId(),
-                    completionEvent).get();  // .get()을 추가하여 전송 완료 대기
+                    completionEvent).get();  // 전송 완료 대기
 
-            log.info("Successfully sent event to Kafka for popupId: {}",
-                    completionEvent.getPopupId());
-
+            log.info("Successfully sent to Kafka");
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
         } catch (Exception e) {
-            log.error("Failed to send completion event to Kafka", e);  // 에러 로그
+            log.error("Failed to send to Kafka: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ClickResponse(false, e.getMessage(), false));
         }

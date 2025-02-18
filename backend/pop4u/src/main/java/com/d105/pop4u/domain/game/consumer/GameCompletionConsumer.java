@@ -18,7 +18,7 @@ public class GameCompletionConsumer {
     private GameService gameService;
 
     @KafkaListener(
-            topics = "game-completions",
+            topics = "game-completion",
             groupId = "game-completion-group",
             containerFactory = "gameCompletionListenerContainerFactory"
     )
