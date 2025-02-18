@@ -24,19 +24,23 @@ public class GameCompletionConsumer {
     )
     public void handleGameCompletion(List<ConsumerRecord<String, GameCompletionEvent>> records) {
         try {
-            log.info("Consumer received {} completion events", records.size());
-            for (ConsumerRecord<String, GameCompletionEvent> record : records) {
-                log.info("Processing event for popupId: {}", record.key());
-            }
+            log.info("Consumer received messages - count: {}", records.size());
+
+            // 각 레코드 내용 출력
+            records.forEach(record -> {
+                log.info("Consumer received message - Key: {}, Value: {}",
+                        record.key(), record.value());
+            });
 
             List<GameCompletionEvent> completions = records.stream()
                     .map(ConsumerRecord::value)
                     .collect(Collectors.toList());
 
             gameService.processGameCompletions(completions);
-            log.info("Successfully processed all completion events");
+            log.info("Consumer finished processing messages");
         } catch (Exception e) {
-            log.error("Error processing completion events: ", e);
+            log.error("Consumer error processing messages: ", e);
+            e.printStackTrace();  // 스택 트레이스 출력
         }
     }
 }
