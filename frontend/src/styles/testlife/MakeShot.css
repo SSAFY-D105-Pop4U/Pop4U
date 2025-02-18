@@ -92,9 +92,9 @@
     background-color: rgb(76, 80, 79);
 }
 
-.lifeshot-frame-bg4 {
-    width: 100%;        /* 부모 너비 140px의 100% = 140px */
-    height: 200px;      /* 140 * (4/2.8) ≒ 200px */
+.lifeshot-frame-bg4{
+    width: 100%;
+    aspect-ratio: 2.8/4;
     background-color: rgb(76, 80, 79);
 }
 
