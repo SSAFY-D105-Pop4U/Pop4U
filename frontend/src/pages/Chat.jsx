@@ -28,13 +28,13 @@
     // 채팅방 ID가 바뀔 때마다 기존 메시지 초기화
     useEffect(() => {
       setMessages([]);
-    }, [chatRoomId]);
+    }, [popupId]);
 
     // 기존 채팅 기록 fetch (채팅방 변경 시마다 호출)
     useEffect(() => {
-      if (!chatRoomId) return;
+      if (!popupId) return;
 
-      fetch(`https://i12d105.p.ssafy.io/api/chat/${chatRoomId}`, {
+      fetch(`https://i12d105.p.ssafy.io/api/chat/${popupId}`, {
         headers: {
           // sessionStorage에 저장된 토큰 사용 (instance.js와 동일한 방식)
           Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
@@ -50,11 +50,11 @@
           setMessages(chatHistory);
         })
         .catch((error) => console.error("채팅 기록 요청 오류:", error));
-    }, [chatRoomId]);
+    }, [popupId]);
 
     // WebSocket 연결 및 메시지 구독
     useEffect(() => {
-      if (!chatRoomId) return;
+      if (!popupId) return;
 
       const token = sessionStorage.getItem("accessToken");
       if (!token) {
@@ -74,7 +74,7 @@
         onConnect: () => {
           console.log("[STOMP] 연결 성공!");
           // 채팅방 구독
-          stompClient.subscribe(`/topic/chat/${chatRoomId}`, (response) => {
+          stompClient.subscribe(`/topic/chat/${popupId}`, (response) => {
             const receivedMessage = JSON.parse(response.body);
             setMessages((prevMessages) => [...prevMessages, receivedMessage]);
           });
@@ -93,7 +93,7 @@
           stompClientRef.current.deactivate();
         }
       };
-    }, [chatRoomId]);
+    }, [popupId]);
 
     // 메시지 전송
     const sendMessage = () => {
@@ -107,12 +107,12 @@
       // 프론트엔드에서는 userId나 userName 정보를 전송하지 않아도,
       // 백엔드에서 토큰을 이용해 Principal을 채워줍니다.
       const chatMessage = {
-        chatRoomId: parseInt(chatRoomId, 10),
+        chatRoomId: parseInt(popupId, 10),
         chattingMessage: message,
       };
 
       stompClientRef.current.publish({
-        destination: `/app/chat/${chatRoomId}`,
+        destination: `/app/chat/${popupId}`,
         body: JSON.stringify(chatMessage),
       });
 
