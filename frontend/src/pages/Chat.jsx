@@ -5,6 +5,8 @@ import "../styles/pages/Chat.css";
 import Header from "../components/basic/Header";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import send from "../assets/icons/send.png"
+import present_button from "../assets/images/present.png"
+
 
 const SOCKET_URL = "https://i12d105.p.ssafy.io/ws/chat"; // 백엔드 WebSocket 주소
 
@@ -246,7 +248,7 @@ const ChatRoom = ({ popName }) => {
             className="chat-input"
           />
           <button className="game-button" onClick={handleCreateGame}>
-            게임 만들기
+          <img src={present_button} alt="present_button" className="present_button" />
           </button>
           <button onClick={sendMessage} className="send_button">
             <img src={send} alt="send" />

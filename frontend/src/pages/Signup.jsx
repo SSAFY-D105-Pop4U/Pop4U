@@ -6,6 +6,7 @@ import { postsignup } from "../apis/api/api";
 import {postlogin} from "../apis/api/api.js"
 
 
+
 const Signup = () => {
     const [token, setToken] = useState(localStorage.getItem("accessToken") || "");
     const [formData, setFormData] = useState({

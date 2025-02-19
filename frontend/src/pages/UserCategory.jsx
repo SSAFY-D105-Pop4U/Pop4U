@@ -57,7 +57,7 @@ const UserCategory = () => {
 
   return (
     <div className="user-category">
-      <Header title="카테고리" />
+      {/* <Header title="카테고리" /> */}
       <div className="categories-container">
         {categories && categories.length > 0 ? (
           categories.map((category) => {
