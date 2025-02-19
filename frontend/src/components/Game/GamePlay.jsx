@@ -40,8 +40,8 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
     }
   };
 
-   const handlepeople = async () => {
-      console.log(popupId);
+  // 10번 클릭해서 백엔드에게 api 요청
+   const handlepeople = async (timestamp) => {
       try {
         const response = await postpeople({popupId,userId,timestamp});
         console.log("10번 눌려서 백엔드에게 전송합니다");
@@ -53,6 +53,7 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   useEffect(() => {
     if (score === 10 && !hasPosted) {
       const timestamp = new Date().toISOString().slice(0, 19);
+      console.log(timestamp)
       handlepeople()
       console.log("10번 클릭 끝 API 요청");
       setHasPosted(true); // 중복 호출 방지
