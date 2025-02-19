@@ -27,7 +27,7 @@ import Game from "../pages/Game"
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Login />} />             
+      <Route path="/login" element={<Login />} />             
       <Route path="/home" element={<Home />} />
       <Route path="/sociallogin" element={<SocialLogin />} />
       <Route path="/signup" element={<Signup />} />

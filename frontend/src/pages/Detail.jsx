@@ -228,7 +228,7 @@ const Detail = () => {
               Pop4U 서비스를 이용할 수 있습니다.
            
             <br />
-            <button onClick={() => handleLogin} style={styles.copyButton}>
+            <button onClick={handleLogin} style={styles.copyButton}>
               로그인 
             </button>
             <button onClick={() => setIsModalOpen(false)} style={styles.modalCloseBtn}>
@@ -301,14 +301,13 @@ const styles = {
   modalCloseBtn: {
     padding: "10px 20px",
     backgroundColor: "#ffffff",
-    color: "white",
-    border: "none",
+    color: "#002C5F",  // 중복된 color 제거
+    border: "2px solid #002C5F",
     cursor: "pointer",
     marginTop: "10px",
     borderRadius: "5px",
-    color :"#002C5F",
-    border : "2px solid #002C5F",
   },
+
   copyContainer: {
     display: "flex",
     alignItems: "center",
