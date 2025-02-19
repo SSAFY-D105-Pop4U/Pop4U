@@ -8,6 +8,9 @@ import { GetPopupDetail, getReviews } from "../apis/api/api.js";
 import eye from "../assets/icons/eye.png";
 import ImageCarousel from "../components/ImageCarousel.jsx";
 import { AppDataContext } from "../Context.jsx"; 
+import UseAuth from '../hooks/UseAuth.js'
+import ModalIsLogin from "../components/ModalIsLogin.jsx";
+import { color } from "chart.js/helpers";
 
 
 const Detail = () => {
@@ -19,12 +22,27 @@ const Detail = () => {
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId"); // "popupId"의 값만 추출
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 로그인 확인
+  const isLoggedIn = UseAuth();
+  console.log(isLoggedIn);
+  
+
   //✅ 후기 작성페이지로 이동 함수
   const handleWriteReview = () => {
     nav(`/writeReview?popupId=${popupId}`);
   };
 
+  const handleLogin = () => {
+    nav(`/login`);
+  };
+
   const handlechat = () => {
+    if(!isLoggedIn){
+      setIsModalOpen(true)
+      return;
+    }
     
     nav(`/chat?popupId=${popupId}&popName=${encodeURIComponent(detail.popupName)}`);
   };
@@ -33,6 +51,10 @@ const Detail = () => {
   //✅ 예약하기 페이지 이동 함수
   const appointment = () => {
     if (!detail) return;
+    if(!isLoggedIn){
+      setIsModalOpen(true)
+      return;
+    }
     nav(
       `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(
         detail.popupName
@@ -195,8 +217,127 @@ const Detail = () => {
         </div>
         
       </div>
+
+      {isModalOpen  &&(<div style={styles.modalOverlay}>
+          <div style={styles.modalContent}>
+            <h2 style={{fontWeight:"bold", fontSize:"20px"}}>로그인이 필요해요.</h2>
+
+            {/* ✅ URL을 복사할 수 있도록 버튼 추가 */}
+            <br />
+              회원이 아니라면 가입후,<br/>
+              Pop4U 서비스를 이용할 수 있습니다.
+           
+            <br />
+            <button onClick={() => handleLogin} style={styles.copyButton}>
+              로그인 
+            </button>
+            <button onClick={() => setIsModalOpen(false)} style={styles.modalCloseBtn}>
+              닫기
+            </button>
+          </div>
+        </div>)}
+
+      
+
+      
     </div>
   );
 };
+
+
+const styles = {
+  container: {
+    width: "350px",
+    margin: "auto",
+    textAlign: "center",
+    fontFamily: "Arial, sans-serif",
+    padding: "20px",
+    backgroundColor: "#fff",
+    borderRadius: "10px",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  },
+  /* ✅ 직접 입력하는 시간 입력창 스타일 */
+  timeInput: {
+    fontSize: "18px",
+    padding: "8px",
+    margin: "10px 0",
+    textAlign: "center",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    width: "150px",
+  },
+  button: {
+    padding: "10px 20px",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+    marginTop: "10px",
+    borderRadius: "5px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+  },
+  /* ✅ 모달 스타일 */
+  modalOverlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1000,
+  },
+  modalContent: {
+    background: "white",
+    padding: "20px",
+    width: "350px",
+    borderRadius: "10px",
+    textAlign: "center",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+  },
+  modalCloseBtn: {
+    padding: "10px 20px",
+    backgroundColor: "#ffffff",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    marginTop: "10px",
+    borderRadius: "5px",
+    color :"#002C5F",
+    border : "2px solid #002C5F",
+  },
+  copyContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginBottom: "15px",
+  },
+  copyInput: {
+    width: "100%",
+    padding: "8px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    fontSize: "16px",
+    textAlign: "center",
+  },
+  copyButton: {
+    padding: "10px 20px",
+    backgroundColor: "#002C5F",
+    color: "white",
+    border: "none",
+    cursor: "pointer",
+    marginTop: "10px",
+    borderRadius: "5px",
+    margin: "10px",
+  },
+
+  
+};
+
+
+
 
 export default Detail;
