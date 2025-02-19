@@ -1,5 +1,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
 
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+@import url('//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css');
+
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GmarketSansMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'godoMaum';
+
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/godoMaum.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'JalnanGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* DoHyeon – Regular only */
 @font-face {
   font-family: 'DoHyeon';
@@ -144,11 +215,21 @@ div {
   -webkit-tap-highlight-color: transparent; /* 터치 하이라이트 제거 */
   box-shadow: none; /* 포커스 그림자 제거 */
   box-sizing: border-box;
-  /* font-family: "Noto Sans KR", sans-serif; */
   font-family: 'Paperlogy', sans-serif;
   font-family: 'Jua', sans-serif;
   font-family: 'DoHyeon', sans-serif;
   font-family: 'Jamsil', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'NanumSquareRound', sans-serif;
+  font-family: 'NanumSquareNeo-Variable', sans-serif;
+  font-family: 'Pretendard-Regular', sans-serif;
+  font-family: 'GmarketSansMedium', sans-serif;
+  font-family: 'Godo', sans-serif;
+  font-family: 'godoMaum', sans-serif;
+  font-family: 'yg-jalnan', sans-serif;
+  font-family: 'JalnanGothic', sans-serif;
+  font-family: 'Iropke Batang', sans-serif;
+  font-family: 'S-CoreDream-3Light', sans-serif;
 }
 
 /* 포커스 제거 기본 스타일 */

@@ -4,62 +4,78 @@ import { useEffect, useState } from "react";
 import { getSearch } from "../../apis/api/api.js";
 import { useNavigate } from "react-router-dom";
 
-const SearchList = ({searchQuery}) => {
-  const [searchData, setsearchData] = useState([]);
-
+const SearchList = ({ searchQuery }) => {
+  const [searchData, setSearchData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
-  const handleCardClick = (index) => {
-    nav(`/detail?popupId=${index}`);
+
+  const handleCardClick = (popupId) => {
+    nav(`/detail?popupId=${popupId}`);
   };
-  
-  const handleOnClick = (query) => {
-    console.log(query);
-    
-    handleCardClick
-  }; 
     
   useEffect(() => {
-    console.log("searchQuery 값:", searchQuery);
-  
+    // 검색어가 비어있으면 API 호출하지 않음
+    if (!searchQuery?.trim()) {
+      setSearchData([]);
+      return;
+    }
+
+    setIsLoading(true);
     const fetchPopups = async () => {
       try {
         const data = await getSearch(searchQuery);
-        setsearchData(data);
+        setSearchData(data);
       } catch (error) {
-        console.error("Failed to load popups");
+        console.error("Failed to load popups:", error);
+        setSearchData([]); // 에러 시 데이터 초기화
+      } finally {
+        setIsLoading(false);
       }
     };
   
-    // 🔹 5초 후에 fetchPopups 실행
     const timeoutId = setTimeout(() => {
       fetchPopups();
-    }, 500); // 5초 (5000ms)
+    }, 500);
   
-    // 🔹 컴포넌트가 언마운트되거나 `searchQuery`가 변경되면 기존 타이머를 취소
     return () => clearTimeout(timeoutId);
   }, [searchQuery]);
 
-    return (
-        
-        <div className="search-results">
-          {searchData.map((result, index) => (
-            <div onClick={()=>handleCardClick(result.popupId)}>
-               
-            <div className="result-item" key={index}>
-              <img src={result.popupImages[0]} alt={result.popupName} className="result-image" />
-              <div className="result-info">
-                <h3 className="result-title">{result.popupName}</h3>
-                <p className="result-time">{result.popupOperationTime}</p>
-              </div>
+  if (isLoading) {
+    return <div className="search-results">검색 중...</div>;
+  }
+
+  // 검색 결과가 없을 때
+  if (searchData.length === 0 && searchQuery?.trim()) {
+    return <div className="search-results">검색 결과가 없습니다.</div>;
+  }
+
+  return (
+    <div className="search-results">
+      {searchData.map((result) => (
+        <div 
+          key={result.popupId}
+          className="result-wrapper"
+          onClick={() => handleCardClick(result.popupId)}
+        >
+          <div className="result-item">
+            <img 
+              src={result.popupImages[0]} 
+              alt={result.popupName} 
+              className="result-image"
+              onError={(e) => {
+                e.target.src = '/fallback-image.png'; // 이미지 로드 실패시 대체 이미지
+              }}
+            />
+            <div className="result-info">
+              <h3 className="result-title">{result.popupName}</h3>
+              <p className="result-time">{result.popupOperationTime}</p>
             </div>
-            <Divider height="2  px" top="10px" bottom="10px" />
-            </div>
-          ))}
+          </div>
+          <Divider height="2px" top="10px" bottom="10px" />
         </div>
-       
-    )
+      ))}
+    </div>
+  );
+};
 
-}
-
-export default SearchList
-
+export default SearchList;

@@ -1,17 +1,17 @@
 .search-header {
-  position: sticky; /* 스크롤 시 고정 */
-  top: 0; /* 상단에 고정 */
-  z-index: 1000; /* 다른 요소보다 위에 표시되도록 */
-  background-color: white; /* 헤더 배경색 */
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); /* 살짝 그림자 추가 */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  border-bottom: 1px solid #f3f4f6;
   width: 100%;
-  padding-left: 25px;
+  padding: 0.75rem 1rem;
 }
 
 .search-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.75rem;
   width: 100%;
   padding-left: 8px;
 }
@@ -22,9 +22,15 @@
   width: 95%;
   margin: 10px 2.5%;
   padding: 8px 16px;
-  background-color: #ffffff;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
   border-radius: 9999px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px -2px 4px rgba(0, 0, 0, 0.05); /* 위, 아래 그림자 추가 */
+  transition: all 0.2s;
+}
+
+.search-bar:focus-within {
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.1);
 }
 
 .search-icon {
@@ -35,7 +41,7 @@
   max-width: 20px;
   max-height: 20px;
   color: #9ca3af;
-  margin-right: 8px; /* 아이콘과 입력 필드 사이에 간격 추가 */
+  margin-right: 8px;
 }
 
 .search-input {
