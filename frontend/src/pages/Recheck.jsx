@@ -9,13 +9,16 @@ import { postappointment } from "../apis/api/api.js";
 
 const Recheck = () => {
   const { appData, setAppData } = useContext(AppDataContext);
+  const userId = sessionStorage.getItem("userId")
+
+
   const nav = useNavigate(); 
 
   const appointment = async () => {
     try {
       const data = await postappointment({
         popupId: appData.popupId, 
-        userId: appData.userId,
+        userId: userId,
         person: appData.selectedPerson,
         date: appData.selectedDate,
         time: appData.selectedTime?.toString() || "시간 미선택", 

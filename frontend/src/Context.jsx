@@ -10,7 +10,7 @@ export const AppDataProvider = ({ children }) => {
   // 2) Context의 기본 상태 정의 (userId를 storedUserId로 초기화)
   const [appData, setAppData] = useState({
     Token: null,
-    userId: storedUserId || null, // 세션 스토리지 값 혹은 null
+    userId: storedUserId || null,
     isAuthenticated: false,
     selectedDate: null,
     selectedTime: null,

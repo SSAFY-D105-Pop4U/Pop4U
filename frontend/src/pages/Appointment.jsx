@@ -35,7 +35,7 @@ const Appointment = () => {
       <div className="appointment-container">
       <div className="appointment-section appointment-left-section">
         <div></div>
-          <Calendar setResultDate={selectedDate} />
+          <Calendar setResultDate={setSelectedDate} />
         </div>
         <div className="appointment-section appointment-right-section">
          
