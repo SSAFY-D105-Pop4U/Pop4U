@@ -21,13 +21,13 @@
 }
 
 .result-info {
-  width: 60%; /* 텍스트 영역 더 넓게 */
-  padding: 16px 24px; /* 패딩 증가 */
+  width: 60%;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   z-index: 2;
-}
+ }
 
 .result-image-container {
   position: absolute;
@@ -42,10 +42,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.75; /* 투명도 더 높임 */
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 20%, rgba(0, 0, 0, 0.8) 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.2) 20%, rgba(0, 0, 0, 0.8) 100%);
-}
+  opacity: 0.75;
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.6) 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.6) 100%);
+ }
 
 .result-title {
   font-size: 15px;
@@ -65,7 +65,7 @@
   .result-info {
     width: 100%;
     padding: 16px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 60%, rgba(255, 255, 255, 0.4) 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 60%, rgba(255, 255, 255, 0.2) 100%);
   }
 
   .result-title {
