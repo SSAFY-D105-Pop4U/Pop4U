@@ -48,7 +48,7 @@ const Login = () => {
         //     userId: response.data.userId,
         //     Token: response.data.accessToken
         // }));
-        nav("/home"); // 로그인 성공 후 이동
+        nav("/twohome"); // 로그인 성공 후 이동
       }
     } catch (error) {
       console.error("로그인 실패:", error);
