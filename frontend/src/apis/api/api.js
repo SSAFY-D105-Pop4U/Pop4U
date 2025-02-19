@@ -47,6 +47,19 @@ export const getPopups = async () => {
 };
 
 {
+  /* ✅ GET : 메인화면 상품 전체 조회 */
+}
+export const getAllPopups = async () => {
+  try {
+    const response = await api.get("/popup",{params: { fetchAll: true },});
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
+
+{
   /* ✅ GET : 검색어 조회 */
 }
 export const getSearch = async (keyword) => {
