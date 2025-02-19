@@ -54,7 +54,7 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
     if (score === 10 && !hasPosted) {
       const timestamp = new Date().toISOString().slice(0, 19);
       console.log(timestamp)
-      handlepeople()
+      handlepeople(timestamp)
       console.log("10번 클릭 끝 API 요청");
       setHasPosted(true); // 중복 호출 방지
     }

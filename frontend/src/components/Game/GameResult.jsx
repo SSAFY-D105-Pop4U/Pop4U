@@ -15,8 +15,8 @@ const GameResult = ({ popupId }) => {
   const handleresult = async () => {
     console.log(popupId);
     try {
-      const response = await postpeople(popupId);
-      console.log("결과를 달라 백엔드야");
+      const response = await getresult(popupId);
+      
     } catch (error) {
       console.error("결과 요구 실패:", error);
     }
