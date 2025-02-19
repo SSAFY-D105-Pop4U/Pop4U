@@ -70,7 +70,6 @@ const SearchList = ({ searchQuery }) => {
               />
             </div>
           </div>
-          <Divider height="2px" top="10px" bottom="10px" />
         </div>
       ))}
     </div>
