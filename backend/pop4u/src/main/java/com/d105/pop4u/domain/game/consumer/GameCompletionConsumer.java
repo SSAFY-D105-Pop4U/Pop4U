@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,28 +20,16 @@ public class GameCompletionConsumer {
 
     @KafkaListener(
             topics = "game-completion",
-            groupId = "game-completion-group",
-            containerFactory = "gameCompletionListenerContainerFactory"
+            groupId = "game-completion-group"
     )
-    public void handleGameCompletion(List<ConsumerRecord<String, GameCompletionEvent>> records) {
+    public void handleGameCompletion(ConsumerRecord<String, GameCompletionEvent> record) {
+        log.info("Raw Kafka message received: {}", record);
         try {
-            log.info("Consumer received messages - count: {}", records.size());
-
-            // 각 레코드 내용 출력
-            records.forEach(record -> {
-                log.info("Consumer received message - Key: {}, Value: {}",
-                        record.key(), record.value());
-            });
-
-            List<GameCompletionEvent> completions = records.stream()
-                    .map(ConsumerRecord::value)
-                    .collect(Collectors.toList());
-
-            gameService.processGameCompletions(completions);
-            log.info("Consumer finished processing messages");
+            GameCompletionEvent event = record.value();
+            gameService.processGameCompletions(Collections.singletonList(event));
+            log.info("Successfully processed game completion event");
         } catch (Exception e) {
-            log.error("Consumer error processing messages: ", e);
-            e.printStackTrace();  // 스택 트레이스 출력
+            log.error("Error processing game completion: ", e);
         }
     }
 }
