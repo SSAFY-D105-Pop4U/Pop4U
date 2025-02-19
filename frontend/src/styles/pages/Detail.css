@@ -265,6 +265,9 @@
   }
 
   .detail-right-section {
+    position: absolute;
+    overflow-y: auto; /* ✅ 세로 스크롤 허용 */
+  max-height: 90vh; /* ✅ 너무 길어지지 않도록 제한 */
     position: fixed;
     left: calc(50% + 10px);
     top: 0;
