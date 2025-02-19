@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../../styles/components/Swipe.css";
 import ReservationCard from "./ReservationCard";
 import { myreservation } from "../../apis/api/api.js";
+import CouponCard from "../coupon/CouponCard.jsx";
 
-const Swipe = () => {
+const Swipe = ({type}) => {
   // API 데이터를 저장할 상태로 변경
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -165,7 +166,9 @@ const Swipe = () => {
             }}
           >
             {/* ReservationCard에 각 카드의 데이터를 prop으로 전달 */}
-            <ReservationCard reservation={card} />
+            {(type=="쿠폰")&&(<CouponCard reservation={card} />)}
+            {(type=="예약")&&(<ReservationCard reservation={card} />)}
+            
           </div>
         );
       })}

@@ -60,7 +60,7 @@ const nav = useNavigate();
   const handleMove = (e) => {
     if (!dragging) return;
     const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
-    const deltaX = (clientX - startX)*3;
+    const deltaX = (clientX - startX)*2;
     setTranslateX(currentX + deltaX);
   };
 

@@ -214,7 +214,6 @@
 
 .back {
     position: absolute; /* 절대 위치 설정 */
-    top: 10px; /* 이미지 상단에서 10px 위치 */
     left: 10px; /* 이미지 왼쪽에서 10px 위치 */
     width: 30px; /* 버튼 크기 */
     height: 30px;
@@ -266,6 +265,9 @@
   }
 
   .detail-right-section {
+    position: absolute;
+    overflow-y: auto; /* ✅ 세로 스크롤 허용 */
+  max-height: 90vh; /* ✅ 너무 길어지지 않도록 제한 */
     position: fixed;
     left: calc(50% + 10px);
     top: 0;
