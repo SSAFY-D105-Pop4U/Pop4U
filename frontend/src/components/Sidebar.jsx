@@ -21,7 +21,10 @@ const Sidebar = ({ isOpen, onClose }) => {
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
   const isLogind = UseAuth();
+  console.log(isLogind);
+  
   useEffect(() => {
+    
     setIsLoggedIn(isLogind); // ✅ 상태 변경은 useEffect에서 처리
   }, [isLogind]);;
   
