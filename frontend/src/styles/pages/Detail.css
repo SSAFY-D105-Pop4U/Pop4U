@@ -228,9 +228,10 @@
 
   .mobile-detail-button{
     width: 100%;
-    
     position: fixed;
     bottom: 0;
+    margin-bottom: 3px;
+    background-color: white;
   }
 @media screen and (min-width: 768px) {
   .container1 {

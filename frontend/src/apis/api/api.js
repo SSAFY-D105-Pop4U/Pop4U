@@ -204,14 +204,17 @@ export const postcreategame = async ({ startTime, popupId }) => {
 // 게임 10번 클릭시 api 전송
 export const postpeople = async ({popupId, userId, timestamp}) => {
   try {
+    console.log("게임 완료 API 호출 - 데이터:", {popupId, userId, timestamp});
+    
     const response = await api.post(`/game/complete`, {
       popupId,
       userId,
-      completionTime: timestamp 
+      completionTime: timestamp  
     });
+    console.log("게임 완료 API 응답:", response.data);
     return response.data;
   } catch (error) {
-    console.error("api요청 실패:", error);
+    console.error("게임 완료 API 호출 실패:", error);
     throw error;
   }
 };
