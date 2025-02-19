@@ -87,7 +87,7 @@ public class GameController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ClickResponse(false, e.getMessage(), false));
         }
-    }
+    } 
 
     // 4. 게임 종료 후 랭킹 조회
     @GetMapping("/rankings/{popupId}")
