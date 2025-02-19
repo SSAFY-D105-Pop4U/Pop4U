@@ -1,0 +1,125 @@
+.coupon-card-container {
+    width: 300px; /* 뷰포트 너비의 90% */
+    height: 65vh; /* 뷰포트 높이의 80% */
+    max-width: 300px; /* 카드의 최대 크기 제한 */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px #f1e09794;
+    overflow: hidden;
+    font-family: "Arial", sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .coupon-FREE-PASS{
+    font-size: 48px;
+  }
+
+  .coupon-btn{
+    font-size: 20px;
+    border: 1px dashed #898989; 
+    padding: 10px;  
+    background-color: #F1E197;
+    margin-top: auto;
+  }
+  
+  .coupon-card-header {
+    position: relative;
+    width: 100%;
+    height: 35vh;
+    max-height: 500px;
+    background-color: #f9f9f9;
+    flex: 0.2; /* 전체 높이의 20% 차지 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2vh; /* 반응형 글자 크기 */
+    font-weight: bold;
+  }
+  
+  .coupon-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .coupon-card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
+    z-index: 1;
+  }
+  
+  .coupon-card-content {
+    flex: 0.4; /* 전체 높이의 40% 차지 */
+    padding: 0 2vh 2vh 2vh;
+    text-align: left;
+    font-size: 2vh;
+  }
+  
+  .coupon-card-content h2 {
+    font-size: 2.5vh;
+    font-weight: bold;
+    line-height: 1.4;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 17px;
+    padding: 0;
+  }
+  
+  .coupon-card-content p {
+    font-size: 10px;
+    color: #AFAFAF;
+    margin: 0.5vh 0;
+  }
+  
+  .coupon-card-details {
+    display: grid;
+    flex-wrap: wrap;
+    gap: 1.5vh;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 2vh;
+  }
+  
+  .coupon-card-details div {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .coupon-card-details strong {
+    display: block;
+    font-size: 14px;
+    color: #AFAFAF;
+    text-align: left;
+    margin-bottom: 1vh;
+  }
+  
+  .coupon-card-details .detail-value {
+    display: block;
+    font-size: 22px;
+    color: #333333;
+    text-align: left;
+  }
+  
+  .coupon-card-details .detail-value1 {
+    display: block;
+    font-size: 15px;
+    color: #333333;
+    text-align: left;
+  }
+  
+  .coupon-card-footer {
+    flex: 0.1; /* 전체 높이의 10% 차지 */
+    font-size: 0.5vh;
+    color: #888888;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    text-align: center;
+    padding: 1vh;
+  }
+  

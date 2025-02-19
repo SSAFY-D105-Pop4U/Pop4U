@@ -5,11 +5,19 @@ import PopupList from "../components/listPage/PopupList";
 import "../styles/pages/AreaList.css";
 import { getAllPopups } from "../apis/api/api";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const NewPopupList = () => {
+  const nav = useNavigate();
   const [popups, setPopups] = useState([]);
   const [loading, setLoading] = useState(true); // ✅ 로딩 상태 추가
   const [selectedSort, setSelectedSort] = useState("정렬"); // 정렬기준
+
+  const handlePopupClick = (id) => {
+    console.log("팝업 ID:", id);
+    nav(`/detail?popupId=${id}`);
+  };
 
   // selectedSort 값이 변경될 때마다 정렬 수행
   useEffect(() => {
@@ -67,7 +75,7 @@ const NewPopupList = () => {
         <p>로딩 중...</p>
       ) : popups.length > 0 ? (
         popups.map((popup, index) => (
-          <div key={index}>
+          <div key={index} onClick={()=>handlePopupClick(popup.popupId)}>
             <PopupList 
               image={popup.popupImages[0]} 
               title={popup.popupName} 
