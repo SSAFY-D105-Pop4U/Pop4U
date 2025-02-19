@@ -8,14 +8,14 @@ import NextButton from "../components/NextButton";
 // import Recheck from "../components/appointment/Recheck";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AppDataContext } from "../Context.jsx";
-import "./Appointment.css";
+import "../styles/pages/Appointment.css"
 
 const Appointment = () => {
   const nav = useNavigate();
   const { appData, setAppData } = useContext(AppDataContext);
   const [selectedDate, setSelectedDate] = useState(""); 
-  const [selectedPerson, setSelectedPerson] = useState(0);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedPerson, setSelectedPerson] = useState(1);
+  const [selectedTime, setSelectedTime] = useState('01:00');
   const [showAppointmentDetails, setShowAppointmentDetails] = useState(true);
 
   const [searchParams] = useSearchParams();
@@ -34,6 +34,7 @@ const Appointment = () => {
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
       <div className="appointment-container">
       <div className="appointment-section appointment-left-section">
+        <div></div>
           <Calendar setResultDate={selectedDate} />
         </div>
         <div className="appointment-section appointment-right-section">

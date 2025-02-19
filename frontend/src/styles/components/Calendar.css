@@ -2,6 +2,7 @@
     width: 100%;
     margin: auto;
     min-width: 226px;
+    max-width: 900px;
     border-radius: 8px;
     background-color: #F8FAFB;
     font-family: Arial, sans-serif;
@@ -74,13 +75,13 @@
   
   
   .day.open:hover {
-    background-color: #9b72ff;
+    background-color: #79a1d0;
     color: white;
     cursor: pointer;
   }
   
   .day.selected {
-    background-color: #9b72ff !important; /* 선택된 날짜 색상 */
+    background-color: #79a1d0 !important; /* 선택된 날짜 색상 */
     color: white !important;
     font-weight: bold;
   }
