@@ -205,7 +205,6 @@ export const postcreategame = async ({ startTime, popupId }) => {
 export const postpeople = async ({popupId, userId, timestamp}) => {
   try {
     console.log("게임 완료 API 호출 - 데이터:", {popupId, userId, timestamp});
-    
     const response = await api.post(`/game/complete`, {
       popupId,
       userId,

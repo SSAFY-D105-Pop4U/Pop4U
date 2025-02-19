@@ -15,7 +15,7 @@ const Game = () => {
   
   const { popupId } = useParams();
   const userId = sessionStorage.getItem("userId")
-  const StartTime = sessionStorage.getItem("startTime")
+  const StartTime = sessionStorage.getItem("star tTime")
 
   // 10초 타이머 시작 (게임이 시작되었을 때만 실행)
   useEffect(() => {
