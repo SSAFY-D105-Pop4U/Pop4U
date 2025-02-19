@@ -64,37 +64,16 @@
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
-  .result-wrapper {
-    height: 120px; /* 높이를 좀 더 늘림 */
-  }
-
-  .result-content {
-    display: flex;
-    justify-content: space-between;
-  }
-
   .result-info {
-    width: 60%;
-    padding: 12px;
-    position: relative;
-    background-color: white;
-  }
-
-  .result-image-container {
-    position: relative;
-    width: 35%;
-    height: 100%;
-    margin-right: 12px;
+    width: 65%;
+    padding: 16px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
   }
 
   .result-title {
     font-size: 14px;
     max-width: 100%;
-  }
-
-  .result-image {
-    mask-image: none;
-    -webkit-mask-image: none;
-    opacity: 1;
   }
 }
