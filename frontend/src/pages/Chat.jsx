@@ -17,7 +17,8 @@ const ChatRoom = ({ popName }) => {
   const sessionValue = sessionStorage.getItem("userId"); // "key"는 저장된 키
   const stompClientRef = useRef(null);
   const inputRef = useRef(null);
-  const chatMessagesRef = useRef(null); // 채팅 메시지 영역 ref
+  const chatContainerRef = useRef(null); // 스크롤 컨테이너 ref
+  const bottomRef = useRef(null);
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId");
   const popupName = searchParams.get("popName");
@@ -29,10 +30,15 @@ const ChatRoom = ({ popName }) => {
     nav(`/creategame?popupId=${popupId}`);
   };
 
-  // 메시지가 변경될 때마다 스크롤을 맨 아래로 이동
+  // 메시지가 변경될 때마다 하단 마커로 스크롤 이동
   useEffect(() => {
-    if (chatMessagesRef.current) {
-      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  // 메시지가 변경될 때마다 스크롤을 맨 아래로 이동 (chat-container)
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages]);
   // 채팅방 ID가 바뀔 때마다 기존 메시지 초기화
@@ -171,18 +177,10 @@ const ChatRoom = ({ popName }) => {
   });
   
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
       <Header title={popupName} />
-      <div className="chat-container">
-        {/* 채팅 내용 표시 */}
-        <div className="chat-messages" ref={chatMessagesRef}>
+      <div className="chat-container" ref={chatContainerRef}>
+        <div className="chat-messages">
           {sortedDates.map((dateKey) => (
             <div key={dateKey}>
               <div>
@@ -190,28 +188,25 @@ const ChatRoom = ({ popName }) => {
               </div>
               {groupedMessages[dateKey].map((msg, index) => (
                 <div key={index}>
-                  {sessionValue != msg.userId && (
+                  {sessionValue !== msg.userId && (
                     <div>{msg.userNickName || `User ${msg.userId}`}</div>
                   )}
-
-                  {sessionValue != msg.userId && (
+                  {sessionValue !== msg.userId && (
                     <div className="chat-message">
-                      <span>{msg.chattingMessage} </span>
+                      <span>{msg.chattingMessage}</span>
                     </div>
                   )}
-
-                  {sessionValue == msg.userId && (
+                  {sessionValue === msg.userId && (
                     <div className="chat-my">
                       <span className="chat-time" style={{ fontSize: "13px" }}>
                         {convertUTCToKoreanTime(msg.chattingCreatedAt)}
                       </span>
                       <div className="chat-message-my">
-                        <span>{msg.chattingMessage} </span>
+                        <span>{msg.chattingMessage}</span>
                       </div>
                     </div>
                   )}
-
-                  {sessionValue != msg.userId && (
+                  {sessionValue !== msg.userId && (
                     <span className="chat-time" style={{ fontSize: "13px" }}>
                       {convertUTCToKoreanTime(msg.chattingCreatedAt)}
                     </span>
@@ -220,10 +215,10 @@ const ChatRoom = ({ popName }) => {
               ))}
             </div>
           ))}
+          <div ref={bottomRef} />
         </div>
       </div>
 
-      {/* 메시지 입력창 */}
       <div className="input-group">
         <div className="input-row">
           <input
