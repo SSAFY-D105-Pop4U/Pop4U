@@ -71,10 +71,10 @@
 .login-button {
   width: 254px;
   height: 42px;
-  background: #dbccff;
+  background: #79a1d0;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  color: black;
+  color: rgb(255, 255, 255);
   font-size: 15px;
   font-family: "Noto Sans", sans-serif;
   font-weight: 300;
@@ -84,7 +84,7 @@
 }
 
 .login-button:hover {
-  background: #7d43a1;
+  background:#5581b4;
 }
 
 /* 아이디 기억하기 & 비밀번호 찾기 */
