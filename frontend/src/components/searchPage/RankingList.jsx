@@ -2,6 +2,9 @@ import '../../styles/components/RankingList.css';
 import { useEffect, useState } from "react";
 
 import { getSearchRanking } from "../../apis/api/api.js";
+import searchUp from "../../assets/icons/search-up.png"
+import searchDown from "../../assets/icons/search-down.png"
+import searcNeutral from '../../assets/icons/search-neutral.png'
 
 
 
@@ -50,7 +53,10 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
     onClick={() => handleSearchClick(item.keyword)}
   >
     <span className="ranking-name">{item.rank} {item.keyword}</span>
-    <span className="ranking-status">{getStatusIcon(item.status)}</span>
+    {((item.status)=="up")&&(<span className="ranking-status"><img src= {searchUp}/> </span>)}
+    {((item.status)=="down")&&(<span className="ranking-status"><img src= {searchDown}/> </span>)}
+    {((item.status)=="neutral")&&(<span className="ranking-status"><img src= {searcNeutral}/> </span>)}
+    
   </div>
 ))}
         </div>

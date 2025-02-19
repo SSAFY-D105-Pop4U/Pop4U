@@ -38,7 +38,7 @@
   
 .ranking-status {
     color: #0000007b;
-    font-size: clamp(10px, 1.5vw, 14px); /* 최소 10px, 최대 14px */
+    width: clamp(10px, 1.5vw, 14px); /* 최소 10px, 최대 14px */
 }
   
 /* 추가적으로 작은 화면일 때 크기 조정 */
