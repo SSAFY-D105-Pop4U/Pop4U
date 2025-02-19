@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
+import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
@@ -35,6 +36,18 @@ public class KafkaConfig {
         // 배치 처리 설정
         configProps.put(ProducerConfig.BATCH_SIZE_CONFIG, "16384");
         configProps.put(ProducerConfig.LINGER_MS_CONFIG, "1");
+
+        // 추가해야 할 중요 설정들
+        configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
+        configProps.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        configProps.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 300000);
+        configProps.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 45000);
+        configProps.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 3000);
+        configProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "500");
+
+        configProps.put(ProducerConfig.RETRIES_CONFIG, 3);
+        configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
+
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
@@ -90,6 +103,11 @@ public class KafkaConfig {
         // 병렬 처리를 위한 설정
         factory.setConcurrency(3);  // 컨슈머 스레드 수
         factory.setBatchListener(true);
+
+        // 추가할 설정
+        factory.getContainerProperties().setPollTimeout(3000);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.BATCH);
+
         return factory;
     }
 }
