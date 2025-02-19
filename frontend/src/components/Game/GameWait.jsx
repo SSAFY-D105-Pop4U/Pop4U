@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import present from "../../assets/images/present.png";
 import "animate.css"; // Animate.css 가져오기
+import {getstarttime} from "../../apis/api/api.js"
 
-const GameWait = ({ setIsGameStarted }) => {
+const GameWait = ({ setIsGameStarted,popupId }) => {
   const storedStartTime = sessionStorage.getItem("startTime");
   const gameStartTime = new Date(storedStartTime);
   const startBeforeTime = new Date(gameStartTime.getTime() - 10 * 1000);
@@ -11,6 +12,21 @@ const GameWait = ({ setIsGameStarted }) => {
     Math.max(Math.floor((startBeforeTime - new Date()) / 1000), 0)
   );
   const [activeIndexes, setActiveIndexes] = useState([]); // 활성화된 문구 index 배열
+
+  //시작 시간 요청 함수
+  const handlestarttime = async() => {
+    
+    try{
+      const data = await getstarttime({popupId});
+      console.log(popupId)
+    }catch (error){
+      console.log("요청 실패")
+    }
+  }
+  
+  useEffect(()=>{
+    handlestarttime()
+  },[])
 
   useEffect(() => {
     if (waitTime <= 0) {
@@ -32,7 +48,6 @@ const GameWait = ({ setIsGameStarted }) => {
         return newTime;
       });
     }, 1000);
-
     return () => clearInterval(timer);
   }, [waitTime, setIsGameStarted, startBeforeTime]);
 
@@ -48,6 +63,8 @@ const GameWait = ({ setIsGameStarted }) => {
       });
     }, 700); // 페이지 진입 후 1초 뒤에 실행
   }, []);
+
+
 
   return (
     <div className="game-wait-container">

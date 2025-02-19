@@ -185,7 +185,6 @@ const ChatRoom = ({ popName }) => {
       <Header title={popupName} />
       <div className="chat-container">
         {/* 채팅 내용 표시 */}
-        {/* ↓↓↓ 추가: 여기에 ref 달기 */}
         <div className="chat-messages" ref={chatMessagesRef}>
           {sortedDates.map((dateKey) => (
             <div key={dateKey}>

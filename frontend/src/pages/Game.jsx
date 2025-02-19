@@ -35,7 +35,7 @@ const Game = () => {
     <div className="game-event-container">
 
       {!isGameStarted ? (
-        <GameWait setIsGameStarted={setIsGameStarted} />
+        <GameWait setIsGameStarted={setIsGameStarted} popupId={popupId}/>
       ) : !isGameOver ? (
         <GamePlay count={count} score={score} setScore={setScore} userId={userId} popupId={popupId} />
       ) : (

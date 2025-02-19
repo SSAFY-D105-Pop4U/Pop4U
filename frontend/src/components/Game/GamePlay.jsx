@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { postpeople } from "../../apis/api/api";
-import present from "../../assets/images/present.png";
+import present from "../../assets/images/present.png"; 
+
 
 const GamePlay = ({ count, score, setScore, userId, popupId }) => {
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
@@ -49,6 +50,9 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
       }
     };
 
+    // /game/status/popupId
+
+    
   useEffect(() => {
     if (score === 10 && !hasPosted) {
       const timestamp = new Date().toISOString().slice(0, 19);

@@ -5,11 +5,7 @@ import { useSearchParams } from "react-router-dom";
 const Creategame = () => {
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId");
-
-  // ✅ 시간 입력 상태
   const [selectedTime, setSelectedTime] = useState("12:00");
-
-  // ✅ 모달 상태
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getCurrentDate = () => {
@@ -41,6 +37,9 @@ const Creategame = () => {
       console.error("API 호출 실패(게임생성)", error);
     }
   };
+
+
+  
 
   return (
     <div style={styles.container}>

@@ -214,6 +214,18 @@ export const postcreategame = async ({ startTime, popupId }) => {
   }
 };
 
+// 게임 생성 시간 조회
+export const getstarttime = async (popupId) => {
+  try {
+    const response = await api.get(`/game/status/${popupId}`)
+    console.log("시간 조회 api 완료");
+    console.log(response)
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
 
 // 게임 10번 클릭시 api 전송
 export const postpeople = async ({popupId, userId, timestamp}) => {
@@ -234,7 +246,6 @@ export const postpeople = async ({popupId, userId, timestamp}) => {
 
 // get 게임 결과 요청
 export const getresult = async (popupId) => {
-  
   try {
     const response = await api.get(`/game/rankings/${popupId}`)
     console.log("결과를 주라 백엔드");
