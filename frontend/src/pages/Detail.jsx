@@ -118,8 +118,12 @@ const Detail = () => {
 
   return (
     <div className="container1">
-
-<BackButton />
+      
+      <header id="header" >
+      <div className="inner__new">
+            <BackButton/>
+      </div>
+      </header>
       
       
       <div className="detail-header">
@@ -209,19 +213,16 @@ const Detail = () => {
 
 
       </div>
-
-      
-
       {/* 버튼 영역 */}
       <div className="mobile-detail-button">
 
         <div style={{display: "flex"}}>
         {activeIndex === 1 ? null : (
           <>
-            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}  className="apointment-button" onClick={appointment}>
+            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", margin:"10px" }}  className="apointment-button" onClick={appointment}>
               예약하기
             </button>
-            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}  className="detail-chat-button" onClick={handlechat}>
+            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center",margin:"10px" }}  className="detail-chat-button" onClick={handlechat}>
               채팅하기
             </button>
           </>
