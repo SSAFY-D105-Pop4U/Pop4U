@@ -206,6 +206,7 @@ export const postcreategame = async ({ startTime, popupId }) => {
       startTime,
       popupId,
     });
+    console.log("게임생성 api 요청성공")
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
