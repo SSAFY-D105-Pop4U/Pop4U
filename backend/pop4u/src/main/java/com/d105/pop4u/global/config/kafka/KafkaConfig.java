@@ -33,21 +33,8 @@ public class KafkaConfig {
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         configProps.put(ProducerConfig.ACKS_CONFIG, "all");
-        // 배치 처리 설정
-        configProps.put(ProducerConfig.BATCH_SIZE_CONFIG, "16384");
-        configProps.put(ProducerConfig.LINGER_MS_CONFIG, "1");
-
-        // 추가해야 할 중요 설정들
-        configProps.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        configProps.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        configProps.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 300000);
-        configProps.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 45000);
-        configProps.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 3000);
-        configProps.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "500");
-
         configProps.put(ProducerConfig.RETRIES_CONFIG, 3);
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, true);
-
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
@@ -61,10 +48,12 @@ public class KafkaConfig {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "game-completion-group");
-        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
-        config.put(ErrorHandlingDeserializer.KEY_DESERIALIZER_CLASS, StringDeserializer.class);
-        config.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class.getName());
+        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+        config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+        config.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 300000);
+        config.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 45000);
+        config.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 3000);
         config.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 
         return new DefaultKafkaConsumerFactory<>(
