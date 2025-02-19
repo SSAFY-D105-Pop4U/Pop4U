@@ -57,21 +57,19 @@ const SearchList = ({ searchQuery }) => {
           className="result-wrapper"
           onClick={() => handleCardClick(result.popupId)}
         >
-          <div className="result-item">
-            <img 
-              src={result.popupImages[0]} 
-              alt={result.popupName} 
-              className="result-image"
-              onError={(e) => {
-                e.target.src = '/fallback-image.png'; // 이미지 로드 실패시 대체 이미지
-              }}
-            />
+          <div className="result-content">
             <div className="result-info">
               <h3 className="result-title">{result.popupName}</h3>
-              <p className="result-time">{result.popupOperationTime}</p>
+              <p className="result-time">{result.popupStartDate}~{result.popupEndDate}</p>
+            </div>
+            <div className="result-image-container">
+              <img 
+                src={result.popupImages[0]} 
+                alt={result.popupName} 
+                className="result-image"
+              />
             </div>
           </div>
-          <Divider height="2px" top="10px" bottom="10px" />
         </div>
       ))}
     </div>
