@@ -17,7 +17,7 @@ const ChatRoom = ({ popName }) => {
   const sessionValue = sessionStorage.getItem("userId"); // "key"는 저장된 키
   const stompClientRef = useRef(null);
   const inputRef = useRef(null);
-
+  const chatMessagesRef = useRef(null); // 채팅 메시지 영역 ref
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId");
   const popupName = searchParams.get("popName");
@@ -29,6 +29,12 @@ const ChatRoom = ({ popName }) => {
     nav(`/creategame?popupId=${popupId}`);
   };
 
+  // 메시지가 변경될 때마다 스크롤을 맨 아래로 이동
+  useEffect(() => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  }, [messages]);
   // 채팅방 ID가 바뀔 때마다 기존 메시지 초기화
   useEffect(() => {
     setMessages([]);
@@ -163,44 +169,25 @@ const ChatRoom = ({ popName }) => {
   const sortedDates = Object.keys(groupedMessages).sort((a, b) => {
     return new Date(a) - new Date(b);
   });
-
-
-
   
   return (
     <div
       style={{
-        width: "100vw", // 가로 전체
-        height: "100vh", // 세로 전체
+        width: "100vw",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
       }}
     >
       <Header title={popupName} />
       <div className="chat-container">
-        {/* <h2 className="chat-header">WebSocket 채팅 테스트</h2>
-        채팅방 ID 입력
-        <div className="input-group">
-          <label>채팅방 ID:</label>
-          <div className="input-row">
-            <input
-              type="text"
-              value={chatRoomId}
-              onChange={(e) => setChatRoomId(e.target.value)}
-              className="chat-input"
-            />
-          </div>
-        </div> */}
-
         {/* 채팅 내용 표시 */}
-        <div className="chat-messages">
+        <div className="chat-messages" ref={chatMessagesRef}>
           {sortedDates.map((dateKey) => (
             <div key={dateKey}>
-              {/* 날짜 헤더 */}
               <div>
                 <span className="chat-date">{dateKey}</span>
               </div>
-              {/* 해당 날짜의 메시지 목록 */}
               {groupedMessages[dateKey].map((msg, index) => (
                 <div key={index}>
                   {sessionValue != msg.userId && (
@@ -248,7 +235,7 @@ const ChatRoom = ({ popName }) => {
             className="chat-input"
           />
           <button className="game-button" onClick={handleCreateGame}>
-          <img src={present_button} alt="present_button" className="present_button" />
+            <img src={present_button} alt="present_button" className="present_button" />
           </button>
           <button onClick={sendMessage} className="send_button">
             <img src={send} alt="send" />
