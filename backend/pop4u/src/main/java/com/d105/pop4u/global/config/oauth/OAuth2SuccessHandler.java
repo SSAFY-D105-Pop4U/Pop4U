@@ -48,9 +48,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 //        String targetUrl = getTargetUrl(accessToken);
 
         Long userId = tokenProvider.getUserId(accessToken);
+        String userNickname = tokenProvider.getUserNickname(accessToken);
 
         // 토큰 정보를 세션에 임시 저장
-        request.getSession().setAttribute("tokens", new TokenResponse(accessToken, refreshToken, userId));
+        request.getSession().setAttribute("tokens", new TokenResponse(accessToken, refreshToken, userId, userNickname));
 
 
         // Access Token을 HTTP Only 쿠키에 저장

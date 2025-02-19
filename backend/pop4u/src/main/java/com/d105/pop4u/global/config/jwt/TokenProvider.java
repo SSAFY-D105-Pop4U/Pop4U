@@ -88,4 +88,9 @@ public class TokenProvider {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    public String getUserNickname(String token) {
+        Claims claims = getClaims(token);
+        return claims.get("nickname", String.class);
+    }
 }
