@@ -12,6 +12,10 @@
   font-size: 14px;
 }
 
+.filter-checkbox{
+  -webkit-appearance:checkbox
+}
+
 .button-group {
   display: flex;
   gap: 8px;

@@ -12,6 +12,10 @@
     overflow: hidden;
 }
 
+.signup-check{
+    -webkit-appearance: checkbox;
+}
+
 /* 회원가입 박스 */
 .signup-box {
     width: 303px;
@@ -70,6 +74,7 @@
     color: white;
 }
 .checkbox{
+    margin: 10px;
     display: flex;
     gap: 60px;
 }

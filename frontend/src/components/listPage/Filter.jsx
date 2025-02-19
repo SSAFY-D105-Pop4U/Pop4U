@@ -63,7 +63,7 @@ const Filter = ({selectedSort,setSelectedSort}) => {
   return (
     <div className="filter-wrapper">
       <label className="reservation-checkbox">
-        <input type="checkbox" />
+        <input className="filter-checkbox" type="checkbox" />
         <span>예약가능</span>
       </label>
       
