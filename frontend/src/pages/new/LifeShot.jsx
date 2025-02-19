@@ -11,6 +11,8 @@ import MakeShot3 from "./MakeShot3.jsx";
 import MakeShot4 from "./MakeShot4.jsx";
 import ColorPicker from "../../components/lifeShotPage/ColorPicker";
 import backBtn from '../../assets/icons/backBtn.png'
+import { useNavigate } from "react-router-dom"
+
 
 
 import { useLocation } from "react-router-dom";
@@ -35,6 +37,13 @@ const LifeShot = () => {
         3: [],
         4: []
     });
+
+
+    // 뒤로가기
+    const nav = useNavigate()
+    const handelback = () =>{
+        nav(-1)
+    }
 
     const captureRef = useRef(null);
     const makeShot1Ref = useRef(null);
@@ -136,7 +145,7 @@ const LifeShot = () => {
         <div style={{ backgroundColor: "black", height: "100vh", overflow: "hidden" }}>
             <header id="header">
                 <div style={{display:'flex'}}>
-                <div className="life-back-btn" style={{animation: "fadeIn 1s ease-out forwards"}}><img src={backBtn}></img></div>
+                <div className="life-back-btn" onClick={handelback} style={{animation: "fadeIn 1s ease-out forwards"}}><img src={backBtn}></img></div>
                 <div style={{ textAlign: "center", width:"100%", marginTop:"15px", marginRight:"30px",animation: "fadeIn 1s ease-out forwards"}}>
                         <span className="frames-title" >Pop4Cut</span>
                 </div>
