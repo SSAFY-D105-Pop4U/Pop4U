@@ -27,8 +27,13 @@ const MainVisSection = () => {
 
   const handleDownBtn = () => {
     if (sectionRef.current) {
+      // 상단바로 사용할 요소 선택 (예: id="header")
+      const headerEl = document.getElementById("header");
+      const headerHeight = headerEl ? headerEl.offsetHeight : 0;
+      
       const sectionBottom =
-        sectionRef.current.offsetTop + sectionRef.current.offsetHeight;
+        sectionRef.current.offsetTop + sectionRef.current.offsetHeight - headerHeight;
+
       window.scrollTo({
         top: sectionBottom,
         behavior: "smooth",
@@ -37,14 +42,17 @@ const MainVisSection = () => {
   };
 
   return (
-    <div ref={sectionRef} className={`main__vis section ${isVisible ? "animate" : ""}`}>
+    <div
+      ref={sectionRef}
+      className={`main__vis section ${isVisible ? "animate" : ""}`}
+    >
       <div className="main__cont__wrap">
         <div className="inner__new">
           <strong id="mainSlog">Popup Store for You</strong>
           <p id="subSlog">당신을 위한 팝업스토어</p>
           <ul className="tag__list addTagList">
             <li className="em">
-              {/* href="#"와 onClick preventDefault로 링크 클릭시 아무 동작도 하지 않게 함 */}
+              {/* 기본 링크 동작 방지 */}
               <a href="#" onClick={(e) => e.preventDefault()}>
                 어디로 가볼까요?
               </a>
