@@ -21,8 +21,8 @@
 }
 
 .result-info {
-  width: 55%; /* 텍스트 영역 살짝 줄임 */
-  padding: 16px 12px 16px 24px; /* 오른쪽 패딩 줄임 */
+  width: 50%; /* 텍스트 영역을 절반으로 */
+  padding: 16px 8px 16px 24px; /* 오른쪽 패딩 더 줄임 */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,7 +36,16 @@
   width: 45%;
   height: 100%;
   overflow: hidden;
-  margin-left: auto; /* 오른쪽 정렬 보장 */
+  margin-left: 5px; /* 왼쪽에 약간의 여백 추가 */
+}
+
+.result-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  max-width: 95%; /* 텍스트가 이미지 영역을 침범하지 않도록 제한 */
 }
 
 .result-image {
@@ -47,14 +56,6 @@
   mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 1%, rgba(0, 0, 0, 0.85) 5%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 1%, rgba(0, 0, 0, 0.85) 5%);
  }
-
-.result-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: #1f2937;
-  margin-bottom: 6px;
-  line-height: 1.4; /* 줄간격 추가 */
-}
 
 .result-time {
   font-size: 13px;
