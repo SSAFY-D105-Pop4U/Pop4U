@@ -51,9 +51,9 @@ public class KafkaConfig {
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         config.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        config.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 300000);
-        config.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 45000);
-        config.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 3000);
+        config.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, 90000); // 90초로 증가
+        config.put(ConsumerConfig.HEARTBEAT_INTERVAL_MS_CONFIG, 10000); // 10초로 증가
+        config.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 600000); // 10분으로 증가
         config.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
 
         return new DefaultKafkaConsumerFactory<>(
@@ -62,26 +62,6 @@ public class KafkaConfig {
                 new JsonDeserializer<>(GameCompletionEvent.class, false)
         );
     }
-
-//    @Bean
-//    public ConsumerFactory<String, GameCompletionEvent> gameCompletionConsumerFactory() {
-//        Map<String, Object> config = new HashMap<>();
-//        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-//        config.put(ConsumerConfig.GROUP_ID_CONFIG, "game-completion-group");
-//        config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-//        config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-//        config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-//        // 동시성 처리를 위한 설정
-//        config.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "500");
-//        // JsonDeserializer 신뢰할 수 있는 패키지 설정
-//        config.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-//
-//        return new DefaultKafkaConsumerFactory<>(
-//                config,
-//                new StringDeserializer(),
-//                new JsonDeserializer<>(GameCompletionEvent.class, false)
-//        );
-//    }
 
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, GameCompletionEvent>

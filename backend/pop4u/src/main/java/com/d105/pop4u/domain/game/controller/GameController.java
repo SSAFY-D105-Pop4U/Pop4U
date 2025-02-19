@@ -59,17 +59,20 @@ public class GameController {
                     completionEvent.getUserId(),
                     completionEvent.getCompletionTime());
 
-            // Kafka로 전송
+            // Kafka로 비동기 전송
             kafkaTemplate.send("game-completion",
-                    completionEvent.getPopupId(),
-                    completionEvent).get();  // 비동기 전송 완료 대기
-            log.info("Kafka로 전송 완료: {}", completionEvent);
+                            completionEvent.getPopupId(),
+                            completionEvent)
+                    .getClass(
+                            success -> log.info("Kafka 메시지 전송 성공: {}", success.getRecordMetadata()),
+                            failure -> log.error("Kafka 메시지 전송 실패: ", failure)
+                    );
 
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
         } catch (Exception e) {
             log.error("게임 완료 처리 실패: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ClickResponse(false, e.getMessage(), false));
+                    .body(new ClickResponse(false, "메시지 전송 실패: " + e.getMessage(), false));
         }
     }
 
