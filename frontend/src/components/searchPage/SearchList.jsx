@@ -57,18 +57,18 @@ const SearchList = ({ searchQuery }) => {
           className="result-wrapper"
           onClick={() => handleCardClick(result.popupId)}
         >
-          <div className="result-content">
+          <div className="result-image-container">
+            <img 
+              src={result.popupImages[0]} 
+              alt={result.popupName} 
+              className="result-image"
+            />
             <div className="result-info">
               <h3 className="result-title">{result.popupName}</h3>
-              <p className="result-time">{result.popupStartDate}~{result.popupEndDate}</p>
             </div>
-            <div className="result-image-container">
-              <img 
-                src={result.popupImages[0]} 
-                alt={result.popupName} 
-                className="result-image"
-              />
-            </div>
+          </div>
+          <div className="result-content">
+            <p className="result-time">{result.popupOperationTime}</p>
           </div>
         </div>
       ))}
