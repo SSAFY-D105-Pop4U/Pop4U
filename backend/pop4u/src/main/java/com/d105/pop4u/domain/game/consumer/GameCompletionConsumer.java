@@ -26,8 +26,13 @@ public class GameCompletionConsumer {
         log.info("Raw Kafka messages received: {}", records.size());
         try {
             List<GameCompletionEvent> events = records.stream()
-                    .map(ConsumerRecord::value)
+                    .map(record -> {
+                        log.debug("Processing record: {}", record);  // 디버깅을 위한 로그
+                        return record.value();
+                    })
                     .collect(Collectors.toList());
+
+            log.info("Processed events: {}", events);  // 변환된 이벤트 로깅
             gameService.processGameCompletions(events);
             log.info("Successfully processed game completion events");
         } catch (Exception e) {
