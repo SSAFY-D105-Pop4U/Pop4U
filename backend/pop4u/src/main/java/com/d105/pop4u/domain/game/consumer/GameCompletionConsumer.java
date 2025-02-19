@@ -22,16 +22,17 @@ public class GameCompletionConsumer {
             topics = "game-completion",
             groupId = "game-completion-group"
     )
-    public void handleGameCompletion(List<ConsumerRecord<String, GameCompletionEvent>> records) {
-        log.info("Raw Kafka messages received: {}", records.size());
+    public void handleGameCompletion(ConsumerRecord<String, GameCompletionEvent> record) {
+        log.info("Consumer - 메시지 수신: {}", record);
         try {
-            List<GameCompletionEvent> events = records.stream()
-                    .map(ConsumerRecord::value)
-                    .collect(Collectors.toList());
-            gameService.processGameCompletions(events);
-            log.info("Successfully processed game completion events");
+            GameCompletionEvent event = record.value();
+            log.info("Consumer - 게임 완료 이벤트 처리 시작: {}", event);
+
+            gameService.processGameCompletions(Collections.singletonList(event));
+
+            log.info("Consumer - 게임 완료 이벤트 처리 성공");
         } catch (Exception e) {
-            log.error("Error processing game completions: ", e);
+            log.error("Consumer - 게임 완료 이벤트 처리 실패: ", e);
         }
     }
 }
