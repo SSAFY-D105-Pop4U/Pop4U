@@ -26,14 +26,14 @@
   justify-content: flex-end; /* 내부 요소를 오른쪽 정렬 */
   align-items: center; /* 수직 정렬 (선택사항) */
   width: 100%; /* 부모 컨테이너의 전체 너비 사용 */
-  padding: 10px;
+  padding: 5px;
 }
 
 .chat-message {
   background-color: lightgray;
   border-radius: 20px;
   padding: 10px 15px;
-  margin: 10px 5px 20px 20px;
+  margin: 10px 10px 10px 10px;
   display: inline-block; /* 내용만큼 크기 조절 */
   max-width: 50%; /* 너무 길어지지 않도록 제한 */
   word-wrap: break-word; /* 긴 단어 줄 바꿈 */
@@ -42,15 +42,18 @@
 }
 
 .chat-message-my{
-  background-color: lightgray;
+  background-color:	#7796CB;
+  color: white;
   border-radius: 20px;
   padding: 10px 15px;
-  margin: 10px 20px 20px 5px;
+  /* margin: 10px 20px 20px 5px; */
+  margin-left: 5px;
   display: inline-block; /* 내용만큼 크기 조절 */
   max-width: 50%; /* 너무 길어지지 않도록 제한 */
   word-wrap: break-word; /* 긴 단어 줄 바꿈 */
   white-space: normal; /* 기본 줄 바꿈 허용 */
   overflow-wrap: break-word; /* 브라우저별 줄 바꿈 지원 */
+  line-height: 20px;
 }
 
 

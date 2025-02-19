@@ -50,7 +50,7 @@ useEffect(() => {
         break;
       case "인기순":
         sortedPopups.sort((a, b) => b.popupMaximumPeople - a.popupMaximumPeople);
-        break;
+        break; 
       default:
         break;
     }

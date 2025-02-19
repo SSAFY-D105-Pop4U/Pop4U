@@ -17,8 +17,7 @@ const ChatRoom = ({ popName }) => {
   const sessionValue = sessionStorage.getItem("userId"); // "key"는 저장된 키
   const stompClientRef = useRef(null);
   const inputRef = useRef(null);
-  const chatContainerRef = useRef(null); // 스크롤 컨테이너 ref
-  const bottomRef = useRef(null);
+
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId");
   const popupName = searchParams.get("popName");
@@ -30,17 +29,6 @@ const ChatRoom = ({ popName }) => {
     nav(`/creategame?popupId=${popupId}`);
   };
 
-  // 메시지가 변경될 때마다 하단 마커로 스크롤 이동
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  // 메시지가 변경될 때마다 스크롤을 맨 아래로 이동 (chat-container)
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
-  }, [messages]);
   // 채팅방 ID가 바뀔 때마다 기존 메시지 초기화
   useEffect(() => {
     setMessages([]);
@@ -175,38 +163,55 @@ const ChatRoom = ({ popName }) => {
   const sortedDates = Object.keys(groupedMessages).sort((a, b) => {
     return new Date(a) - new Date(b);
   });
+
+
+
   
   return (
-    <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        width: "100vw", // 가로 전체
+        height: "100vh", // 세로 전체
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Header title={popupName} />
-      <div className="chat-container" ref={chatContainerRef}>
+      <div className="chat-container">
+
+        {/* 채팅 내용 표시 */}
         <div className="chat-messages">
           {sortedDates.map((dateKey) => (
             <div key={dateKey}>
+              {/* 날짜 헤더 */}
               <div>
                 <span className="chat-date">{dateKey}</span>
               </div>
+              {/* 해당 날짜의 메시지 목록 */}
               {groupedMessages[dateKey].map((msg, index) => (
                 <div key={index}>
-                  {sessionValue !== msg.userId && (
+                  {sessionValue != msg.userId && (
                     <div>{msg.userNickName || `User ${msg.userId}`}</div>
                   )}
-                  {sessionValue !== msg.userId && (
+
+                  {sessionValue != msg.userId && (
                     <div className="chat-message">
-                      <span>{msg.chattingMessage}</span>
+                      <span>{msg.chattingMessage} </span>
                     </div>
                   )}
-                  {sessionValue === msg.userId && (
+
+                  {sessionValue == msg.userId && (
                     <div className="chat-my">
                       <span className="chat-time" style={{ fontSize: "13px" }}>
                         {convertUTCToKoreanTime(msg.chattingCreatedAt)}
                       </span>
                       <div className="chat-message-my">
-                        <span>{msg.chattingMessage}</span>
+                        <span>{msg.chattingMessage} </span>
                       </div>
                     </div>
                   )}
-                  {sessionValue !== msg.userId && (
+
+                  {sessionValue != msg.userId && (
                     <span className="chat-time" style={{ fontSize: "13px" }}>
                       {convertUTCToKoreanTime(msg.chattingCreatedAt)}
                     </span>
@@ -215,20 +220,21 @@ const ChatRoom = ({ popName }) => {
               ))}
             </div>
           ))}
-          <div ref={bottomRef} />
         </div>
       </div>
 
+      {/* 메시지 입력창 */}
       <div className="input-group">
         <div className="input-row">
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="메세지를 입력해주세요."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="chat-input"
-          />
+        <input
+  ref={inputRef}
+  type="text"
+  placeholder="메세지를 입력해주세요."
+  value={message}
+  onChange={(e) => setMessage(e.target.value)}
+  onKeyDown={(e) => e.key === "Enter" && sendMessage()} // 엔터 키 감지
+  className="chat-input"
+/>
           <button className="game-button" onClick={handleCreateGame}>
             <img src={present_button} alt="present_button" className="present_button" />
           </button>

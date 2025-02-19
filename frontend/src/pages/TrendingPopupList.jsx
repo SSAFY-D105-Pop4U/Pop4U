@@ -10,7 +10,6 @@ const TrendingPopupList = () => {
         "https://d8nffddmkwqeq.cloudfront.net/store/e70ff60a%2Cf631%2C482e%2Cb5bf%2Cfa2e4ac0948d",
       title: "핑구 팝업스토어 in 잠실",
     },
-    // ... 더미 데이터
   ];
 
   return (
