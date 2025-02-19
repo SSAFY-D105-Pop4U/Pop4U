@@ -107,15 +107,16 @@ public class GameService {
 
     @Transactional
     public void processGameCompletions(List<GameCompletionEvent> completions) {
-        log.info("Service processing game completions - count: {}", completions.size());
+        log.info("Service - 게임 완료 처리 시작 - events: {}", completions);
 
         Map<String, List<GameCompletionEvent>> completionsByStore = completions.stream()
                 .collect(Collectors.groupingBy(GameCompletionEvent::getPopupId));
 
+        log.info("Service - Store별 게임 완료 그룹핑: {}", completionsByStore);
+
         completionsByStore.forEach((popupId, storeCompletions) -> {
             String rankingKey = RANKINGS_PREFIX + popupId;
-            log.info("Adding rankings for popupId: {} with {} completions",
-                    popupId, storeCompletions.size());
+            log.info("Service - Redis 랭킹 저장 시작 - key: {}", rankingKey);
 
             storeCompletions.forEach(completion -> {
                 double score = completion.getCompletionTime().toEpochSecond(ZoneOffset.UTC);
@@ -124,8 +125,8 @@ public class GameService {
                         completion.getUserId().toString(),
                         score
                 );
-                log.info("Redis save result - popupId: {}, userId: {}, score: {}, success: {}",
-                        popupId, completion.getUserId(), score, success);
+                log.info("Service - Redis 저장 결과 - key: {}, value: {}, score: {}, success: {}",
+                        rankingKey, completion.getUserId(), score, success);
             });
         });
     }

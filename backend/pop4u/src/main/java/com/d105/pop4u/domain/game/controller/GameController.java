@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -54,16 +55,17 @@ public class GameController {
     public ResponseEntity<ClickResponse> completeGame(
             @RequestBody GameCompletionEvent completionEvent) {
         try {
-            log.info("게임 완료 요청 받음 - popupId: {}, userId: {}, completionTime: {}",
-                    completionEvent.getPopupId(),
-                    completionEvent.getUserId(),
-                    completionEvent.getCompletionTime());
+            log.info("게임 완료 요청 시작 - event: {}", completionEvent);
 
             // Kafka로 전송
-            kafkaTemplate.send("game-completion",
+            SendResult<String, GameCompletionEvent> result = kafkaTemplate.send("game-completion",
                     completionEvent.getPopupId(),
-                    completionEvent).get();  // 비동기 전송 완료 대기
-            log.info("Kafka로 전송 완료: {}", completionEvent);
+                    completionEvent).get();
+
+            log.info("Kafka 메시지 전송 성공 - topic: {}, partition: {}, offset: {}",
+                    result.getRecordMetadata().topic(),
+                    result.getRecordMetadata().partition(),
+                    result.getRecordMetadata().offset());
 
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
         } catch (Exception e) {
@@ -71,7 +73,7 @@ public class GameController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ClickResponse(false, e.getMessage(), false));
         }
-    } 
+    }
 
     // 4. 게임 종료 후 랭킹 조회
     @GetMapping("/rankings/{popupId}")

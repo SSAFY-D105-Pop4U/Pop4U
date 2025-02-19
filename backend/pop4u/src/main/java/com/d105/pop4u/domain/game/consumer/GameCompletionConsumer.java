@@ -22,21 +22,17 @@ public class GameCompletionConsumer {
             topics = "game-completion",
             groupId = "game-completion-group"
     )
-    public void handleGameCompletion(List<ConsumerRecord<String, GameCompletionEvent>> records) {
-        log.info("Raw Kafka messages received: {}", records.size());
+    public void handleGameCompletion(ConsumerRecord<String, GameCompletionEvent> record) {
+        log.info("Consumer - 메시지 수신: {}", record);
         try {
-            List<GameCompletionEvent> events = records.stream()
-                    .map(record -> {
-                        log.debug("Processing record: {}", record);  // 디버깅을 위한 로그
-                        return record.value();
-                    })
-                    .collect(Collectors.toList());
+            GameCompletionEvent event = record.value();
+            log.info("Consumer - 게임 완료 이벤트 처리 시작: {}", event);
 
-            log.info("Processed events: {}", events);  // 변환된 이벤트 로깅
-            gameService.processGameCompletions(events);
-            log.info("Successfully processed game completion events");
+            gameService.processGameCompletions(Collections.singletonList(event));
+
+            log.info("Consumer - 게임 완료 이벤트 처리 성공");
         } catch (Exception e) {
-            log.error("Error processing game completions: ", e);
+            log.error("Consumer - 게임 완료 이벤트 처리 실패: ", e);
         }
     }
 }
