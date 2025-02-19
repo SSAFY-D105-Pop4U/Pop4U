@@ -76,11 +76,11 @@ const Sidebar = ({ isOpen, onClose }) => {
                   인생네컷 제작
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/profile">
                   <img src={penToSquare} alt="내 정보 수정" /> 내 정보 수정
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/reservation">
                   <img src={calendarDays} alt="예약 내역 확인" />

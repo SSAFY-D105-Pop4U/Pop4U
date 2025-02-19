@@ -28,7 +28,7 @@ const ReviewItem = ({ reviews }) => {
               </div>
             </div>
           </div>
-          <div className="comment">{review.reviewContent}</div>
+          <div className="review_comment">{review.reviewContent}</div>
           {review.reviewImg && <img src={review.reviewImg} alt="리뷰 이미지" className="review-img" />}
           <div style={{ width: "100%", height: "1px", border: "1px #EFEFF0 solid", margin: "10px 0" }} />
         </div>
