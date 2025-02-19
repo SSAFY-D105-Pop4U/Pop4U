@@ -57,7 +57,7 @@ const [isScrolled, setIsScrolled] = useState(false);
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
         {(isScrolled)&&(
-          <button class="btn__to__top" onClick={scrollToTop} >
+          <button className="btn__to__top" onClick={scrollToTop} >
 	    위로
 	    </button>
         )}

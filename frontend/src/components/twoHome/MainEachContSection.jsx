@@ -140,7 +140,7 @@ const nav = useNavigate();
                     </div>
 
                     <div className="working__cont__btm">
-                      <p>{item.popupOperationTime}</p>
+                      <p style={{color:"black"}}>{item.popupOperationTime}</p>
                     </div>
                   </div>
                 </div>
