@@ -58,6 +58,14 @@ const Detail = () => {
     nav(
       `/appointment?popupId=${popupId}&popupName=${encodeURIComponent(
         detail.popupName
+      )}&startDate=${encodeURIComponent(
+        detail.popupStartDate
+      )}&endDate=${encodeURIComponent(
+        detail.popupEndDate
+      )}&popupTime=${encodeURIComponent(
+        detail.popupOperationTime
+      )}&peopleCount=${encodeURIComponent(
+        detail.popupMaximumPeople
       )}`
     );
   };

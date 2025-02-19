@@ -17,7 +17,7 @@ const Time = ({ selectedTime, setSelectedTime }) => {
     handleTouchEnd,
   } = Drag();
 
-  const time = "1:00 AM - 10:00 PM";
+  const time = "10:00 AM - 6:00 PM";
 
   const convertTo24Hour = (timeStr) => {
     const [time, meridian] = timeStr.split(" ");

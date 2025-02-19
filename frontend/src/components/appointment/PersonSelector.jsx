@@ -3,8 +3,11 @@ import "../../styles/components/PersonSelector.css";
 import Drag from "../../hooks/Drag";
 import { AppDataContext } from "../../Context.jsx"; // useContext 추가
 
-const PersonSelector = ({ selectedPerson, setSelectedPerson }) => {
+const PersonSelector = ({ selectedPerson, setSelectedPerson, maxPeople}) => {
   const { setAppData } = useContext(AppDataContext); // Context 사용
+
+  console.log(parseInt(maxPeople, 10));
+  
 
   const handleSelect = (number) => {
     setSelectedPerson(number); // 선택된 번호 업데이트
@@ -39,15 +42,15 @@ const PersonSelector = ({ selectedPerson, setSelectedPerson }) => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        {[1, 2, 3, 4, 5, 6, 7].map((num) => (
-          <div
-            key={num}
-            className={`person-circle ${selectedPerson === num ? "person-selected" : ""}`}
-            onClick={() => handleSelect(num)}
-          >
-            {num}명
-          </div>
-        ))}
+        {[...Array(parseInt(maxPeople, 10)).keys()].map((num) => (
+  <div
+    key={num + 1}
+    className={`person-circle ${selectedPerson === num + 1 ? "person-selected" : ""}`}
+    onClick={() => handleSelect(num + 1)}
+  >
+    {num + 1}명
+  </div>
+))}
       </div>
     </div>
   );
