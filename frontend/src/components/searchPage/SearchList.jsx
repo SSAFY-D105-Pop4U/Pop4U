@@ -63,12 +63,10 @@ const SearchList = ({ searchQuery }) => {
               alt={result.popupName} 
               className="result-image"
             />
-            <div className="result-info">
+            <div className="result-info-overlay">
               <h3 className="result-title">{result.popupName}</h3>
+              <p className="result-time">{result.popupOperationTime}</p>
             </div>
-          </div>
-          <div className="result-content">
-            <p className="result-time">{result.popupOperationTime}</p>
           </div>
         </div>
       ))}

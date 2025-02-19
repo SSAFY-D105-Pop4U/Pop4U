@@ -3,16 +3,17 @@
   width: 86%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
 .result-wrapper {
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .result-wrapper:hover {
@@ -23,7 +24,7 @@
 .result-image-container {
   position: relative;
   width: 100%;
-  padding-bottom: 66%; /* 3:2 비율 */
+  padding-bottom: 140%; /* 더 긴 세로 비율 */
   overflow: hidden;
 }
 
@@ -34,34 +35,36 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.9;
 }
 
-.result-info {
+.result-info-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 48px 16px 16px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
-  color: white;
-}
-
-.result-content {
-  padding: 16px;
+  padding: 120px 20px 20px; /* 그라데이션 영역 확장 */
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.95) 30%,
+    rgba(255, 255, 255, 0.8) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
 }
 
 .result-title {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   line-height: 1.4;
+  letter-spacing: -0.01em;
 }
 
 .result-time {
-  font-size: 14px;
-  color: #6b7280;
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.5;
 }
 
 /* 모바일 대응 */
@@ -70,9 +73,6 @@
     grid-template-columns: 1fr;
     margin: 12px 5%;
     width: 90%;
-  }
-
-  .result-wrapper {
-    margin-bottom: 16px;
+    gap: 20px;
   }
 }
