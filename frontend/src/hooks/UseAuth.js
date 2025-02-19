@@ -11,6 +11,7 @@ const useAuth = () => {
       setIsLoggedIn(true);
     }
   }, []);
+  
 
   return isLoggedIn;
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/components/Sidebar.css";
 import { Link } from "react-router-dom";
 import basicProfile from "../assets/images/basicProfile.png";
@@ -12,13 +12,21 @@ import calendarDays from "../assets/icons/calendar-days-solid.svg";
 import camera from "../assets/icons/camera-solid.svg";
 import ticket from "../assets/icons/ticket-solid.svg";
 import next from "../assets/icons/next.svg";
+import UseAuth from '../hooks/UseAuth.js'
 
 const Sidebar = ({ isOpen, onClose }) => {
+  console.log("사이드바",UseAuth());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
-
+  const isLogind = UseAuth();
+  useEffect(() => {
+    setIsLoggedIn(isLogind); // ✅ 상태 변경은 useEffect에서 처리
+  }, [isLogind]);;
+  
+  
+ 
   if (!isOpen) return null;
 
   const handleClose = () => {
