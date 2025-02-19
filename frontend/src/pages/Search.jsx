@@ -4,6 +4,7 @@ import SearchBar from "../components/searchPage/SearchBar";
 import Suggest from "../components/searchPage/Suggest";
 import SearchList from "../components/searchPage/SearchList";
 import Divider from "../components/basic/Divider";
+import '../styles/pages/Search.css'
 
 
 const Search = () => {
@@ -20,9 +21,9 @@ const Search = () => {
     </div>
     {!searchQuery ? (
     <div>
-    <h3>인기 검색어</h3>
+    <h3 className="search-title-h3">인기 검색어</h3>
     <RankingList setOnClickSearch={setSearchQuery} onClickSearch={searchQuery}/>
-    <h3>내 관심기반 추천해요</h3>
+    <h3 className="search-title-h3">내 관심기반 추천해요</h3>
     <Suggest/>
     </div>
     ):(<div> 
