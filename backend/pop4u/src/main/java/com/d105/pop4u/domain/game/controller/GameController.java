@@ -53,37 +53,21 @@ public class GameController {
     @PostMapping("/complete")
     public ResponseEntity<ClickResponse> completeGame(
             @RequestBody GameCompletionEvent completionEvent) {
-//      // Kafka로 전송
-//        kafkaTemplate.send("game-completions", completionEvent);
-        // 여기서 popupId를 두 번째 파라미터로 전달해야 하는데 누락됨
-//        kafkaTemplate.send("game-completions", completionEvent);  // 문제 지점
-        // 올바른 방식:
-//         kafkaTemplate.send("game-completions", completionEvent.getPopupId(), completionEvent);
-
         try {
-            log.info("Received game completion request for popupId: {}, userId: {}",
-                    completionEvent.getPopupId(), completionEvent.getUserId());
-
-            // Kafka로 전송
-            kafkaTemplate.send("game-completion",   // "game-completions" 대신 "game-completion" 사용
-                    completionEvent.getPopupId(),
-                    completionEvent).get();  // 전송 완료 대기
-            // 받은 데이터 로깅
-            log.info("Received game completion request - popupId: {}, userId: {}, completionTime: {}",
+            log.info("게임 완료 요청 받음 - popupId: {}, userId: {}, completionTime: {}",
                     completionEvent.getPopupId(),
                     completionEvent.getUserId(),
                     completionEvent.getCompletionTime());
 
-            // Kafka 전송
+            // Kafka로 전송
             kafkaTemplate.send("game-completion",
                     completionEvent.getPopupId(),
-                    completionEvent).get();
-            log.info("Successfully sent to Kafka topic game-completion");
+                    completionEvent).get();  // 비동기 전송 완료 대기
+            log.info("Kafka로 전송 완료: {}", completionEvent);
 
-            log.info("Successfully sent to Kafka");
             return ResponseEntity.ok(new ClickResponse(true, "Game completed successfully", true));
         } catch (Exception e) {
-            log.error("Failed to send to Kafka: ", e);
+            log.error("게임 완료 처리 실패: ", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ClickResponse(false, e.getMessage(), false));
         }
