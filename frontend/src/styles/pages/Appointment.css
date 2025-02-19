@@ -11,10 +11,13 @@
   margin-left: 10px;
   font-weight: bold;
   color: black;
+
 }
 
 .desktop-appoint-name{
   display: none;
+  
+  margin-top: 20px;
 }
 
 /* 모바일에서 Calendar가 위에 오도록 order 설정 */

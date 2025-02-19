@@ -257,7 +257,7 @@
     top: 0; /* 상단으로 변경 */
     transform: translateX(-100%); /* Y축 transform 제거 */
     width: 50%;
-    max-width: 550px;
+    /* max-width: 550px; */
     padding-top: 20px; /* 상단 여백 추가 */
     margin-top: 12vh;
   }

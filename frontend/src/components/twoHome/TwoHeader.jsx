@@ -27,7 +27,7 @@ const TowHeader = ({handleMenuClick}) => {
     <header id="header" className={isScrolled ? "wbg" : ""}>
       <div className="inner__new">
         <h1>
-          <a href="/main/main.hc" className="h__logo">
+          <a href="/" className="h__logo">
             <span>Pop4U</span>
           </a>
         </h1>
