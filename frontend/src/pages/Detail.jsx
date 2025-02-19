@@ -11,6 +11,7 @@ import { AppDataContext } from "../Context.jsx";
 import UseAuth from '../hooks/UseAuth.js'
 import ModalIsLogin from "../components/ModalIsLogin.jsx";
 import { color } from "chart.js/helpers";
+import BackButton from "../components/BackButton";
 
 
 const Detail = () => {
@@ -117,6 +118,14 @@ const Detail = () => {
 
   return (
     <div className="container1">
+      
+      <header id="header" >
+      <div className="inner__new">
+            <BackButton/>
+      </div>
+      </header>
+      
+      
       <div className="detail-header">
       <header id="header" className="wbg">
       <div className="inner__new">
@@ -204,19 +213,16 @@ const Detail = () => {
 
 
       </div>
-
-      
-
       {/* 버튼 영역 */}
       <div className="mobile-detail-button">
 
         <div style={{display: "flex"}}>
         {activeIndex === 1 ? null : (
           <>
-            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}  className="apointment-button" onClick={appointment}>
+            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", margin:"10px" }}  className="apointment-button" onClick={appointment}>
               예약하기
             </button>
-            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}  className="detail-chat-button" onClick={handlechat}>
+            <button style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center",margin:"10px" }}  className="detail-chat-button" onClick={handlechat}>
               채팅하기
             </button>
           </>

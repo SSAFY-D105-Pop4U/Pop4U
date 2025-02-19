@@ -16,20 +16,52 @@ import Sidebar from "../components/Sidebar";
 
 
 const TwoHome = () => {
-
+const [isScrolled, setIsScrolled] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // 부드러운 스크롤 효과 추가
+    });
+  };
 
   const handleMenuClick = () => {
     setIsSidebarOpen(true);
-    console.log(isSidebarOpen);
     
   };
+
+  useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > 50) {
+          // 스크롤이 50px 이상이면 `wbg` 클래스 추가
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      };
+  
+      
+  
+      window.addEventListener("scroll", handleScroll);
+      
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
 
   return (
     <div className='wrap' id='wrap'>
       <TwoHeader handleMenuClick={handleMenuClick}/>
       <ContWrap/>   
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+        {(isScrolled)&&(
+          <button class="btn__to__top" onClick={scrollToTop} >
+	    위로
+	    </button>
+        )}
+      
 
     </div>
   );

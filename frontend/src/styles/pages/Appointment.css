@@ -42,7 +42,6 @@
   background-color: #7796CB;
   display: flex;
   color: white;
-  margin-top: 40px;
   align-items: center;  /* 세로 중앙 정렬 */
   justify-content: center;  /* 가로 중앙 정렬 */
   text-align: center; /* 텍스트 중앙 정렬 */

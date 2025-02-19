@@ -268,7 +268,7 @@ button.share.w { filter: brightness(0) saturate(100%) invert(94%) sepia(0%) satu
 button.acc { background: url("/static/images/common/arrow_sel_thin.png") center / 100% auto no-repeat; height: 16px; text-indent: -20000px; width: 16px; }
 button.share { background: url("/static/images/common/ic_share.png") center / 100% auto no-repeat; height: inherit; text-indent: -20000px; width: inherit; }
 
-.btn__to__top { background: url("/static/images/common/btn_top.png") center / 100% auto no-repeat; bottom: 20px; height: 60px; margin: 0; position: fixed; transition:none; text-indent: -20000px; right: 20px; width: 60px; z-index:10; }
+.btn__to__top { background: url("https://talent.hyundai.com/static/images/common/btn_top.png") center / 100% auto no-repeat; bottom: 20px; height: 60px; margin: 0; position: fixed; transition:none; text-indent: -20000px; right: 20px; width: 60px; z-index:10; }
 .btn__to__top.up { background-image: url("/static/images/common/btn_top_on.png") }
 @media (hover: hover) and (pointer: fine){
 	.btn__to__top:hover { background-image: url("/static/images/common/btn_top_on.png") }

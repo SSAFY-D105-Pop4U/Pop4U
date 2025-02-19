@@ -11,7 +11,7 @@
   
   .progress-bar-filled {
     width: 100%; /* 채워진 부분의 길이를 조정 */
-    background-color: #002C5F; /* 보라색 */
+    background-color: #79a1d0; /* 보라색 */
     border-radius: 5px ;
     
   }
