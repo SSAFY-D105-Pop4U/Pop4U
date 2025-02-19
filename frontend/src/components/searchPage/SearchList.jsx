@@ -60,7 +60,7 @@ const SearchList = ({ searchQuery }) => {
           <div className="result-content">
             <div className="result-info">
               <h3 className="result-title">{result.popupName}</h3>
-              <p className="result-time">{result.popupOperationTime}</p>
+              <p className="result-time">{result.popupStartDate}~{result.popupEndDate}</p>
             </div>
             <div className="result-image-container">
               <img 
