@@ -14,7 +14,7 @@ import ticket from "../assets/icons/ticket-solid.svg";
 import next from "../assets/icons/next.svg";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = "김정모";
@@ -54,7 +54,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <img src={next} alt="next" className="next-icon" />
               </Link>
             ) : (
-              <Link to="/sociallogin" className="profile-link">
+              <Link to="/login" className="profile-link">
                 <div className="profile-text">
                   <span>P4U에</span>
                   <span className="login-text">로그인</span>
