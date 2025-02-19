@@ -311,15 +311,7 @@ const styles = {
     textAlign: "center",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   },
-  modalCloseBtn: {
-    padding: "10px 20px",
-    backgroundColor: "#ffffff",
-    color: "#002C5F",  // 중복된 color 제거
-    border: "2px solid #002C5F",
-    cursor: "pointer",
-    marginTop: "10px",
-    borderRadius: "5px",
-  },
+
 
   copyContainer: {
     display: "flex",
@@ -344,6 +336,15 @@ const styles = {
     marginTop: "10px",
     borderRadius: "5px",
     margin: "10px",
+  },
+  modalCloseBtn: {
+    padding: "10px 20px",
+    backgroundColor: "#ffffff",
+    color: "#002C5F", 
+    border: "2px solid #002C5F",
+    cursor: "pointer",
+    marginTop: "10px",
+    borderRadius: "5px",
   },
 
   
