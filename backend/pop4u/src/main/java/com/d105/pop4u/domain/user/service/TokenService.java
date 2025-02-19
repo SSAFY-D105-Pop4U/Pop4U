@@ -44,7 +44,7 @@ public class TokenService {
         String refreshToken = refreshTokenService.createRefreshToken(user.getUserId());
 
         // 사용자 ID를 포함한 토큰 응답 생성
-        return new TokenResponse(accessToken, refreshToken, user.getUserId()); // 사용자 ID 포함
+        return new TokenResponse(accessToken, refreshToken, user.getUserId(), user.getUserNickname()); // 사용자 ID 포함
 
 
 //        // 액세스 토큰과 리프레시 토큰 생성
