@@ -91,7 +91,8 @@ const Signup = () => {
                     type="text"
                     name="id"
                     placeholder="아이디 입력해 주세요."
-                    className="input-field"
+                    className="login-input-field"
+            style={{padding:"10px",fontSize:"13px"}}
                     value={formData.id}
                     onChange={handleChange}
                 />
@@ -100,7 +101,8 @@ const Signup = () => {
                     type="password"
                     name="password"
                     placeholder="비밀번호를 입력해 주세요."
-                    className="input-field"
+                    className="login-input-field"
+            style={{padding:"10px",fontSize:"13px"}}
                     value={formData.password}
                     onChange={handleChange}
                 />
@@ -109,7 +111,8 @@ const Signup = () => {
                     type="password"
                     name="passwordCheck"
                     placeholder="비밀번호를 재입력 해주세요."
-                    className="input-field"
+                    className="login-input-field"
+            style={{padding:"10px",fontSize:"13px"}}
                     ref={passwordCheckRef}
                 />
 
@@ -117,7 +120,8 @@ const Signup = () => {
                     type="text"
                     name="name"
                     placeholder="이름을 입력해 주세요."
-                    className="input-field"
+                    className="login-input-field"
+            style={{padding:"10px",fontSize:"13px"}}
                     value={formData.name}
                     onChange={handleChange}
                 />
@@ -125,7 +129,8 @@ const Signup = () => {
                     type="tel"
                     name="phone"
                     placeholder="전화번호를 입력해 주세요."
-                    className="input-field"
+                    className="login-input-field"
+            style={{padding:"10px",fontSize:"13px"}}
                     value={formData.phone}
                     onChange={handleChange}
                 />
@@ -133,6 +138,7 @@ const Signup = () => {
                 <div className="checkbox">
                     <div className="user">
                         <input 
+                            className="signup-check"
                             type="checkbox" 
                             id="user" 
                             value={0} 
@@ -143,6 +149,7 @@ const Signup = () => {
                     </div>
                     <div className="manager">
                         <input 
+                            className="signup-check"
                             type="checkbox" 
                             id="manager" 
                             value={1} 

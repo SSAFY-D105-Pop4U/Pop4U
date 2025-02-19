@@ -63,20 +63,24 @@ const Login = () => {
 
         <div className="input-box">
           <input
+          className="login-input-field"
+            style={{padding:"10px",fontSize:"13px"}}
             type="text"
             name="userid"
             placeholder="아이디를 입력해 주세요."
-            className="input-field"
+            
             value={login.userid}
             onChange={handleChange}
           />
         </div>
         <div className="input-box">
+          
           <input
+            style={{padding:"10px",fontSize:"13px"}}
             type="password"
             name="password"
             placeholder="비밀번호를 입력해 주세요."
-            className="input-field"
+            className="login-input-field"
             value={login.password}
             onChange={handleChange}
           />
