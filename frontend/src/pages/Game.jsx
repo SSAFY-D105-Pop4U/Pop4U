@@ -6,7 +6,7 @@ import {useParams } from "react-router-dom";
 import "../styles/pages/Game.css";
 
 const Game = () => {
-  const [count, setCount] = useState(10); // 게임 진행시간 
+  const [count, setCount] = useState(5); // 게임 진행시간 
   const [isGameOver, setIsGameOver] = useState(false); // 게임 종료 여부
   const [score, setScore] = useState(0); // 클릭 점수
   const [isGameStarted, setIsGameStarted] = useState(false); // 게임 시작 여부

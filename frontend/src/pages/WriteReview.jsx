@@ -99,13 +99,10 @@ const WriteReview = () => {
     }
   };
 
-
-
-
   //후기 작성다하고나서 완료 나왔을때 확인 버튼임임
   const handleConfirm = () => {
     setShowCompleteModal(false);
-    navigate("/detail");
+    navigate("/reviewlifeshot");
   };
 
   return (
