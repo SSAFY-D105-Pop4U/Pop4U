@@ -29,9 +29,9 @@ const ContWrap = () => {
     <div id='contWrap'>
         <div className='main__wrap'>
             <MainVisSection />
-            <MainEachContSection popups={popups.byStartDate} title1={"New"} title2={"Pop-up Store"} ex1={"새로운 팝업스토어에서의 특별한 경험이 궁금하다면,"} ex2={"4 U가 전하는 최신 팝업스토어 소식을 만나보세요!"}/>
+            <MainEachContSection popups={popups.byStartDate} title1={"New"} title2={"Pop-up Store"} ex1={"새로운 팝업스토어에서의 특별한 경험이 궁금하다면,"} ex2={"Pop4U가 전하는 최신 팝업스토어 소식을 만나보세요!"}/>
             <MainEachContSectionBbg popups={popups.byViewCount}/>
-            <MainEachContSection popups={popups.byEndDate} title1={"Deadline"} title2={"Pop-up Store"} ex1={"곧 종료되는 팝업스토어를 놓치고 싶지 않다면,"} ex2={"팝 4 U가 전하는 마감 임박 팝업스토어 리스트를 확인해보세요!"}/>
+            <MainEachContSection popups={popups.byEndDate} title1={"Deadline"} title2={"Pop-up Store"} ex1={"곧 종료되는 팝업스토어를 놓치고 싶지 않다면,"} ex2={"Pop4U가 전하는 마감 임박 팝업스토어 리스트를 확인해보세요!"}/>
             
         </div>
 

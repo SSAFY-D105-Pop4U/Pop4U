@@ -150,7 +150,7 @@ const Swipe = ({type, setPopupId}) => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {cards.map((card, index) => {
+      {cards.slice().reverse().map((card, index) => {
         const isActive = index === currentIndex;
         const isNext = index === currentIndex + 1;
         const isPrevious = index === currentIndex - 1;
