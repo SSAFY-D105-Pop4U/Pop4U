@@ -17,7 +17,7 @@ import UseAuth from '../hooks/UseAuth.js'
 const Sidebar = ({ isOpen, onClose }) => {
   console.log("사이드바",UseAuth());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState((sessionStorage.getItem('userId'))==1);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = sessionStorage.getItem("userNickname");
   const isLogind = UseAuth();
