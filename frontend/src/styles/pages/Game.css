@@ -312,10 +312,10 @@ font-weight: bold;
 
 .result_button {
   /* border: 1px solid rgb(91, 91, 91); */
-  padding: 5px 15px;
+  padding: 2px 12px;
   border-radius: 20px;
-  background-color: white;
-  box-shadow: 0 0 2px black;
+  background-color: rgb(179, 179, 179);
+  box-shadow: 0 0 1px black;
   color: black;
   cursor: pointer;
   margin-left: 230px;

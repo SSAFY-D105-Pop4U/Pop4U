@@ -16,28 +16,17 @@ const GameResult = ({ popupId, userId }) => {
 
   // 게임 결과 API 요청
   const handleresult = async () => {
-    console.log("🆔 팝업아이디:", popupId);
+    console.log("팝업아이디:", popupId);
     try {
       const response = await getresult(popupId);
-      console.log("📢 API 응답:", response);
-
       if (response?.data?.length > 0) {
         setTopRanks(response.data.slice(0, 5)); // 🔥 처음부터 5명만 가져오기
 
-        console.log("🔍 전체 랭킹 데이터:", response.data);
-        console.log("🆔 현재 유저 ID:", userId, "(타입:", typeof userId, ")");
-
-        const myRankData = response.data.find(player => String(player.userId) === String(userId));
-
-        console.log("🏆 찾은 내 랭킹 데이터:", myRankData);
-
+        const myRankData = response.data.find(player => player.userId === userId);
         if (myRankData) {
-          console.log("🔥 내 등수 설정:", myRankData.rank);
-          setRank(myRankData.rank);
-        } else {
-          console.warn("⚠ 내 등수를 찾지 못했습니다.");
+          setRank(myRankData.rank); // 🔥 내 등수 설정
         }
-      } else { 
+      } else {
         console.error("API 응답에 데이터가 없습니다.");
       }
     } catch (error) {
@@ -48,11 +37,6 @@ const GameResult = ({ popupId, userId }) => {
   useEffect(() => {
     handleresult();
   }, []);
-
-  // 🔄 `rank` 값 변경 감지
-  useEffect(() => {
-    console.log("🔄 업데이트된 rank 값:", rank);
-  }, [rank]);
 
   return (
     <div className="game-result">
@@ -72,6 +56,8 @@ const GameResult = ({ popupId, userId }) => {
       <div className="container">
         <img src={openpresent} alt="openpresent" className="openpresent" />
       </div>
+
+
 
       {/* 모달창 */}
       {isModalOpen && (

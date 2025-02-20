@@ -30,11 +30,11 @@ const GameWait = ({ setIsGameStarted, popupId }) => {
     handlestarttime();
   }, []);
 
-  useEffect(() => {
-    if (storedStartTime) {
-      console.log("업데이트된 storedStartTime:", storedStartTime);
-    }
-  }, [storedStartTime]);
+  // useEffect(() => {
+  //   if (storedStartTime) {
+  //     console.log("업데이트된 storedStartTime:", storedStartTime);
+  //   }
+  // }, [storedStartTime]);
 
   useEffect(() => {
     if (startBeforeTime === null) return;
