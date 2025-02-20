@@ -102,7 +102,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 </Link>
               </li>
               <li>
-                <Link to="/coupons">
+                <Link>
                   <img src={ticket} alt="쿠폰함" />
                   쿠폰함
                 </Link>
@@ -153,13 +153,13 @@ const Sidebar = ({ isOpen, onClose }) => {
               </Link>
             </li>
             <li>
-              <Link to="/terms">
+              <Link>
                 <img src={file} alt="이용약관" />
                 이용약관
               </Link>
             </li>
             <li>
-              <Link to="/company">
+              <Link>
                 <img src={officeSolid} alt="회사정보" />
                 회사정보
               </Link>
