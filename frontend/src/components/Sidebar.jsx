@@ -53,13 +53,12 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         <div className="profile-section">
           <div className="profile-icon">
-            <img src={basicProfile} alt="프로필" />
           </div>
           <div className="profile-info">
             {isLoggedIn ? (
               <Link to="/mypage" className="profile-link">
                 <div className="profile-text">
-                  <span>{userName}님</span>
+                  <span className="login-text">{userName}</span>님
                   <span>반갑습니다!</span>
                 </div>
                 <img src={next} alt="next" className="next-icon" />
