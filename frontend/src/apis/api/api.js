@@ -253,8 +253,8 @@ export const postpeople = async ({popupId, userId, timestamp}) => {
       userId,
       completionTime: timestamp
     });
-    console.log("게임 완료 API 응답:", response.data);
-    return response.data;
+    console.log("게임 완료 API 응답:", response);
+    return response;
   } catch (error) {
     console.error("게임 완료 API 호출 실패:", error);
     throw error;
