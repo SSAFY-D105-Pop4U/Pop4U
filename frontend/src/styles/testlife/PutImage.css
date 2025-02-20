@@ -40,7 +40,7 @@
 
 /* ✅ 버튼을 화면 제일 아래 중앙에 고정 */
 .life-upload-button {
-    position: absolute;
+    position: fixed; /* ✅ 화면 하단 고정 */
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
@@ -55,7 +55,9 @@
     align-items: center;
     border-radius: 10px;
     cursor: pointer;
+    z-index: 1000; /* ✅ 다른 요소 위에 표시 */
 }
+
 
 .life-upload-placeholder {
     color: #ffffff;
