@@ -17,6 +17,10 @@ const ReservationCard = ({reservation} ) => {
           src={reservation.popupImage}
           alt="예약 이미지"
           className="reservation-card-image"
+          tabIndex="-1"
+  draggable="false"
+  onMouseDown={(e) => e.preventDefault()}
+  onFocus={(e) => e.preventDefault()}
         />
       </div>
       <div className="reservation-card-content">
