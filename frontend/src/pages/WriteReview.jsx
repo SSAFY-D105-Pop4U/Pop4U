@@ -189,14 +189,7 @@ const WriteReview = () => {
             </p>
             <div className="modal-buttons">
               <NextButton onClick={handleConfirm}>확인</NextButton>
-              <button
-                className="manage-button"
-                onClick={() => {
-                  /* 인생네컷 관리 페이지로 이동 */
-                }}
-              >
-                인생네컷 만들러 가기
-              </button>
+              
             </div>
           </div>
         </div>

@@ -39,7 +39,7 @@ const Appointment = () => {
  
 
   return (
-    <div style={{ width: "100%", maxWidth: "960px", margin: "0 auto" }}>
+    <div style={{ width: "100%", margin: "0 auto" }}>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
       <div className="appointment-container">
