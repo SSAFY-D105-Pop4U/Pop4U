@@ -326,12 +326,26 @@ font-weight: bold;
 .ranking-list {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* 각 항목 간격 */
+  width: 250px;
+  gap: 10px; 
 }
 
 .ranking-item {
   padding: 10px;
   background-color: #f5f5f5;
-  border-radius: 5px;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2);  */
+  /* border-radius: 5px; */
   text-align: center;
+}
+
+.modal-content {
+  width: 300px; /* 원하는 너비 설정 */
+  max-width: 90%; /* 화면 크기에 따라 최대 너비 조절 */
+  height: auto; /* 내용에 따라 자동 조절 */
+  max-height: 80vh; /* 화면 높이에 따라 최대 높이 제한 */
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* 내용이 많으면 스크롤 */
 }

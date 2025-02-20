@@ -1,4 +1,3 @@
-import busanIcon from "../../assets/icons/busan.png";
 import "../../styles/components/HomeArea.css";
 import { useNavigate } from "react-router-dom";
 

@@ -3,6 +3,11 @@ import { getresult } from "../../apis/api/api";
 import { useNavigate } from "react-router-dom";
 import openpresent from "../../assets/images/openpresent.png";
 import "animate.css";
+import medal1 from "../../assets/icons/medal1.png"
+import medal2 from "../../assets/icons/medal2.png"
+import medal3 from "../../assets/icons/medal3.png"
+
+
 
 const GameResult = ({ popupId, userId }) => {
   const nav = useNavigate();
@@ -41,6 +46,13 @@ const GameResult = ({ popupId, userId }) => {
     handleresult();
   }, []);
 
+  const getMedalImage = (rank) => {
+    if (rank === 1) return medal1;
+    if (rank === 2) return medal2;
+    if (rank === 3) return medal3;
+    return null; // 4등 이상은 이미지 없음
+  };
+
   return (
     <div className="game-result">
       {/* 결과보기 버튼 */}
@@ -53,7 +65,7 @@ const GameResult = ({ popupId, userId }) => {
       {/* 🔥 내 랭킹 표시 */}
       <div className="scoreresult">
         <div className="animate__animated animate__fadeInDown animate__slow large-text">
-          {rank !== null ? `내 랭킹: ${rank}등` : "등수 계산 중..."}
+          {rank !== null ? `내 랭킹 ${rank}등` : "등수 계산 중..."}
         </div>
       </div>
 
@@ -66,15 +78,25 @@ const GameResult = ({ popupId, userId }) => {
         <div className="modal-overlay">
           <div className="modal-content animate__animated animate__fadeIn">
             <div className="ranking-list">
-              {topRanks.map((player, index) => (
-                <div
-                  key={index}
-                  className="ranking-item animate__animated animate__fadeIn"
-                  style={{ animationDelay: `${index * 0.2}s` }} // 0.2초씩 딜레이 추가
-                >
-                  <strong>{player.rank}등</strong> {player.nickname}
-                </div>
-              ))}
+            {topRanks.map((player, index) => (
+
+  
+  <div className="ranking-list">
+    {topRanks.map((player, index) => (
+      <div key={index} className="ranking-item">
+        {/* 1~3등은 이미지, 4등 이상은 숫자로 표시 */}
+        {getMedalImage(player.rank) ? (
+          <img src={getMedalImage(player.rank)} alt={`${player.rank}등`} className="rank-icon" />
+        ) : (
+          <strong className="rank-number">{player.rank}등</strong> // 4등 이상은 숫자로 표시
+        )}
+        
+        <span className="nickname">{player.nickname}</span> {/* 모든 등수에 닉네임 표시 */}
+      </div>
+    ))}
+  </div>
+))}
+
             </div>
             <button
               className="close-button"
