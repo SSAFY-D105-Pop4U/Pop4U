@@ -25,6 +25,9 @@ public class TokenResponse {
     private Integer userCoupon;
     private Integer userUncheckedAlarm;
 
+    public TokenResponse(String accessToken, String refreshToken, Long userId, String userNickname) {
+    }
+
     // 액세스 토큰을 Bearer 형식으로 반환하는 메서드
     public String getAccessToken() {
         return accessToken;
