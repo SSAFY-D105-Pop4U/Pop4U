@@ -61,9 +61,9 @@ const Appointment = () => {
           <h2 className="appoint-title">
           시간
           </h2>
-          <div style={{marginBottom:"80px"}}>
+          
           <Time selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-          </div>
+         
           
           <div className="desktop-appoint-but" onClick={()=>nav("/recheck")}>
             다음
