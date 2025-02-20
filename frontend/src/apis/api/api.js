@@ -251,7 +251,7 @@ export const postpeople = async ({popupId, userId, timestamp}) => {
     const response = await api.post(`/game/complete`, {
       popupId,
       userId,
-      completionTime: timestamp  
+      completionTime: timestamp
     });
     console.log("게임 완료 API 응답:", response.data);
     return response.data;
