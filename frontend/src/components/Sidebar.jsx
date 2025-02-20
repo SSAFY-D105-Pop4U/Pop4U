@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const userName = "김정모";
+  const userName = sessionStorage.getItem("userNickname");
   const isLogind = UseAuth();
   console.log(isLogind);
   
@@ -28,7 +28,11 @@ const Sidebar = ({ isOpen, onClose }) => {
     setIsLoggedIn(isLogind); // ✅ 상태 변경은 useEffect에서 처리
   }, [isLogind]);;
   
-  
+  // 로그아웃
+  const handleLogOut = () => {
+    sessionStorage.clear();
+    setIsLoggedIn(false);
+  };
  
   if (!isOpen) return null;
 
@@ -165,7 +169,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         {isLoggedIn && (
           <div className="logout-section">
-            <button className="logout-button">로그아웃</button>
+            <button className="logout-button" onClick={handleLogOut}>로그아웃</button>
           </div>
         )}
       </div>

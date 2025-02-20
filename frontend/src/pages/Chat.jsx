@@ -23,6 +23,7 @@ const ChatRoom = ({ popName }) => {
   const [searchParams] = useSearchParams();
   const popupId = searchParams.get("popupId");
   const popupName = searchParams.get("popName");
+  const userStatus = sessionStorage.getItem('userStatus')
 
   const nav = useNavigate();
 
@@ -235,13 +236,14 @@ const ChatRoom = ({ popName }) => {
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             className="chat-input"
           />
-          <button className="game-button" onClick={handleCreateGame}>
+          {(userStatus=="1")&&(<button className="game-button" onClick={handleCreateGame}>
             <img
               src={present_button}
               alt="present_button"
               className="present_button"
             />
-          </button>
+          </button>)}
+          
           <button onClick={sendMessage} className="send_button">
             <img src={send} alt="send" />
           </button>
