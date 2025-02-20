@@ -52,6 +52,8 @@ const Login = () => {
 
         sessionStorage.setItem("userNickname", response.data.userNickname);
 
+        sessionStorage.setItem("userStatus", response.data.userStatus);
+
         // // Context에도 반영
         // setAppData((prev) => ({
         //     ...prev,
