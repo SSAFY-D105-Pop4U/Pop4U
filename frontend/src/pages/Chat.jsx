@@ -174,24 +174,18 @@ const ChatRoom = ({ popName }) => {
     (a, b) => new Date(a) - new Date(b)
   );
 
-  const formatMessage = (message) => {
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return message.split(urlRegex).map((part, index) =>
-      part.match(urlRegex) ? (
-        <a
-          key={index}
-          href={part}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="chat-link"
-        >
-          {part}
-        </a>
-      ) : (
-        part
-      )
-    );
-  };
+ const formatMessage = (message) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return message.split(urlRegex).map((part, index) =>
+    part.match(urlRegex) ? (
+      <a key={index} href={part} rel="noopener noreferrer" className="chat-link">
+        {part}
+      </a>
+    ) : (
+      part
+    )
+  );
+};
 
 
   return (

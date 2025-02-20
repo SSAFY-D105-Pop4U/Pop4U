@@ -4,11 +4,14 @@ import Swipe from "../components/reservation/Swipe";
 import "../styles/pages/Reservation.css";
 
 import { deleteReservation } from "../apis/api/api.js";
+import BackToHomeButton from "../components/BackTohomeButton.jsx";
 
 const Reservation = () => {
   const [popupId, setPopupId] = useState(0);
   const [initialTime, setInitialTime] = useState("");
 
+
+  
   // 시간을 원하는 형식으로 변환하는 함수
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -48,7 +51,10 @@ const Reservation = () => {
 
   return (
     <div>
-      <Header title={"내 예약"} />
+      <div className="header">
+      <BackToHomeButton />
+      <h2 className="header1">내예약</h2>
+    </div>
       <div className="card-container">
         <Swipe type={"예약"} setPopupId={setPopupId} />
         <div className="update-time">{initialTime}</div>
