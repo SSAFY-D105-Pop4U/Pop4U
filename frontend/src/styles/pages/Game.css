@@ -332,11 +332,12 @@ font-weight: bold;
 
 .myranking {
   /* padding: 10px; */
-  background-color: #f5f5f5;
+  background-color:#e6eef8;
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.2);  */
   /* border-radius: 5px; */
   text-align: center;
   padding: 10px;
+  
 }
 
 .modal-content {
