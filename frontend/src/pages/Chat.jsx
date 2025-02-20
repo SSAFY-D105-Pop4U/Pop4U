@@ -236,7 +236,9 @@ const ChatRoom = ({ popName }) => {
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             className="chat-input"
           />
-          {(userStatus=="1")&&(<button className="game-button" onClick={handleCreateGame}>
+          {
+          // (userStatus=="1")&&
+          (<button className="game-button" onClick={handleCreateGame}>
             <img
               src={present_button}
               alt="present_button"

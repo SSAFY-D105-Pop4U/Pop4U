@@ -16,17 +16,19 @@ const GameResult = ({ popupId, userId }) => {
 
   // 게임 결과 API 요청
   const handleresult = async () => {
-    console.log("팝업아이디:", popupId);
+    // console.log("팝업아이디:", popupId);
     try {
       const response = await getresult(popupId);
       if (response?.data?.length > 0) {
         setTopRanks(response.data.slice(0, 5)); // 🔥 처음부터 5명만 가져오기
 
         // 🔥 userId와 일치하는 데이터를 찾아서 setRank() 실행
-        const myRankData = response.data.find(player => String(player.userId) === String(userId));
+        const myRankData = response.data.find(
+          (player) => String(player.userId) === String(userId)
+        );
         if (myRankData) {
           setRank(myRankData.rank); // 🔥 내 등수 설정
-          console.log("setRank 완료됌")
+          console.log("setRank 완료됌");
         }
       } else {
         console.error("API 응답에 데이터가 없습니다.");
@@ -59,21 +61,25 @@ const GameResult = ({ popupId, userId }) => {
         <img src={openpresent} alt="openpresent" className="openpresent" />
       </div>
 
-
-
       {/* 모달창 */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content animate__animated animate__fadeIn">
-            <h2>게임 결과</h2>
-            <ul>
+            <div className="ranking-list">
               {topRanks.map((player, index) => (
-                <li key={index}>
-                 <strong>{player.rank}등</strong> {player.nickname}
-                </li>
+                <div
+                  key={index}
+                  className="ranking-item animate__animated animate__fadeIn"
+                  style={{ animationDelay: `${index * 0.2}s` }} // 0.2초씩 딜레이 추가
+                >
+                  <strong>{player.rank}등</strong> {player.nickname}
+                </div>
               ))}
-            </ul>
-            <button className="close-button" onClick={() => setIsModalOpen(false)}>
+            </div>
+            <button
+              className="close-button"
+              onClick={() => setIsModalOpen(false)}
+            >
               닫기
             </button>
           </div>
