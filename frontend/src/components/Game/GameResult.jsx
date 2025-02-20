@@ -70,8 +70,9 @@ const GameResult = ({ popupId, userId }) => {
         <div
           key={index}
           className="myranking animate__animated animate__fadeIn"
-          style={{ animationDelay: `${index * 0.2}s` }}
-        >
+          style={{ animationDelay: `${index * 0.2}s`,
+          color: player.rank === 1 ? "gold" : player.rank === 2 ? "silver" : player.rank === 3 ? "brown" : "black", // 🔥 등수별 색상 지정 }}
+        }}  >
           <strong>
             {player.rank}등 {/* 🔥 1등이면 크라운 추가 */}
           </strong>
