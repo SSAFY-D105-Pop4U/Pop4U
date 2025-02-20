@@ -11,6 +11,7 @@ import '../styles/newHome/style_main.css'
 import '../styles/newHome/style.css'
 import '../styles/newHome/swiper-bundle.min.css'
 import { useEffect, useState } from "react";
+import Footer from "../components/Footer"; // Footer 분리 컴포넌트
 
 import Sidebar from "../components/Sidebar";
 
@@ -62,7 +63,7 @@ const [isScrolled, setIsScrolled] = useState(false);
 	    </button>
         )}
       
-
+        <Footer/>
     </div>
   );
 };
