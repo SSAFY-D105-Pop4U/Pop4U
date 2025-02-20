@@ -69,7 +69,7 @@ const GameResult = ({ popupId, userId }) => {
       {topRanks.map((player, index) => (
         <div
           key={index}
-          className="ranking-item animate__animated animate__fadeIn"
+          className="myranking animate__animated animate__fadeIn"
           style={{ animationDelay: `${index * 0.2}s` }}
         >
           <strong>
