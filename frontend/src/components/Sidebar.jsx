@@ -12,28 +12,27 @@ import calendarDays from "../assets/icons/calendar-days-solid.svg";
 import camera from "../assets/icons/camera-solid.svg";
 import ticket from "../assets/icons/ticket-solid.svg";
 import next from "../assets/icons/next.svg";
-import UseAuth from '../hooks/UseAuth.js'
+import UseAuth from "../hooks/UseAuth.js";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  console.log("사이드바",UseAuth());
+  console.log("사이드바", UseAuth());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = sessionStorage.getItem("userNickname");
   const isLogind = UseAuth();
   console.log(isLogind);
-  
+
   useEffect(() => {
-    
     setIsLoggedIn(isLogind); // ✅ 상태 변경은 useEffect에서 처리
-  }, [isLogind]);;
-  
+  }, [isLogind]);
+
   // 로그아웃
   const handleLogOut = () => {
     sessionStorage.clear();
     setIsLoggedIn(false);
   };
- 
+
   if (!isOpen) return null;
 
   const handleClose = () => {
@@ -56,17 +55,15 @@ const Sidebar = ({ isOpen, onClose }) => {
         </div>
 
         <div className="profile-section">
-          <div className="profile-icon">
-          </div>
+          <div className="profile-icon"></div>
           <div className="profile-info">
             {isLoggedIn ? (
-              <Link to="/mypage" className="profile-link">
+              <div>
                 <div className="profile-text">
                   <span className="login-text">{userName}</span>님
                   <span>반갑습니다!</span>
                 </div>
-                <img src={next} alt="next" className="next-icon" />
-              </Link>
+              </div>
             ) : (
               <Link to="/login" className="profile-link">
                 <div className="profile-text">
@@ -169,7 +166,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
         {isLoggedIn && (
           <div className="logout-section">
-            <button className="logout-button" onClick={handleLogOut}>로그아웃</button>
+            <button className="logout-button" onClick={handleLogOut}>
+              로그아웃
+            </button>
           </div>
         )}
       </div>

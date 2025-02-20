@@ -1,11 +1,10 @@
 import backIcon from "../../assets/icons/back.svg";
 import "../../styles/components/Header.css";
-import BackToHomeButton from "../../components/BackTohomeButton";
-
+import BackButton from "../../components/BackButton";
 const Header = ({ title }) => {
   return (
     <div className="header">
-      <BackToHomeButton />
+      <BackButton />
       <h2 className="header1">{title}</h2>
     </div>
   );

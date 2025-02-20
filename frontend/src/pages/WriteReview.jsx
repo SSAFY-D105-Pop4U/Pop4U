@@ -9,6 +9,7 @@ import { postwritereview } from "../apis/api/api";
 import { useContext } from "react";
 import { AppDataContext } from "../Context.jsx"; 
 import { useLocation } from "react-router-dom";
+import BackToHomeButton from "../components/BackTohomeButton.jsx";
 
 const WriteReview = () => {
   const navigate = useNavigate();
@@ -23,14 +24,12 @@ const WriteReview = () => {
   const searchParams = new URLSearchParams(location.search);
   const popupId = searchParams.get("popupId");
   const reservationId = searchParams.get("reservationId");
+  const userId = sessionStorage.getItem("userId")
 
-  const userId = appData.userId
   useEffect(()=>{
-    console.log(popupId)
-    console.log(reservationId)
-    console.log(appData)
-    console.log(appData.userId)
+    console.log(userId)
   },[])
+
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
   };
@@ -106,9 +105,15 @@ const WriteReview = () => {
   };
 
   return (
-    <div className="write-review-container">
-      <Header title="리뷰 작성" />
+    <>
+      <div className="header">
+      <BackToHomeButton />
+      <h2 className="header1">리뷰 작성</h2>
+    </div>
 
+    <div className="write-review-container">
+
+    
       <div className="rating-section">
         <p className="section-title">별점을 선택해주세요</p>
         <div className="stars">
@@ -197,7 +202,9 @@ const WriteReview = () => {
         </div>
       )}
     </div>
+    </>
   );
+  
 };
 
 export default WriteReview;
