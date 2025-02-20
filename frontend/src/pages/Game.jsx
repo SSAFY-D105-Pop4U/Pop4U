@@ -36,7 +36,7 @@ const Game = () => {
       ) : !isGameOver ? (
         <GamePlay count={count} score={score} setScore={setScore} userId={userId} popupId={popupId} />
       ) : (
-        <GameResult popupId={popupId} />
+        <GameResult popupId={popupId} userId={userId} />
       )}
     </div>
   );
