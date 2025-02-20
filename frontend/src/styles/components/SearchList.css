@@ -10,6 +10,7 @@
   height: 100px;
   overflow: hidden;
   margin: 12px 0;
+  animation: fadeIn 0.5s ease forwards;
 }
 
 .result-content {
@@ -27,7 +28,6 @@
   flex-direction: column;
   justify-content: center;
   z-index: 2;
-  transition: width 0.3s ease;
 }
 
 .result-image-container {
@@ -54,8 +54,7 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.85;
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 1%, rgba(0, 0, 0, 0.85) 5%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 1%, rgba(0, 0, 0, 0.85) 5%);
+  animation: spreadMask 0.8s ease forwards;
 }
 
 .result-time {
@@ -63,27 +62,37 @@
   color: #4b5563;
 }
 
+@keyframes spreadMask {
+  0% {
+    mask-image: linear-gradient(to right, transparent 0%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 100%);
+  }
+  100% {
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 1%, rgba(0, 0, 0, 0.85) 5%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.1) 1%, rgba(0, 0, 0, 0.85) 5%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 모바일 대응 */
 @media (max-width: 768px) {
   .result-info {
-    width: 95%;
+    width: 100%;
     padding: 16px;
-    background-color: rgba(255, 255, 255, 0.9);
-    transition: width 0.3s ease;
-  }
-
-  .result-wrapper:hover .result-info {
-    width: 55%;
   }
 
   .result-title {
     font-size: 14px;
     max-width: 85%;
-  }
-
-  .result-image-container {
-    width: 45%;
-    position: absolute;
-    right: 0;
   }
 }
