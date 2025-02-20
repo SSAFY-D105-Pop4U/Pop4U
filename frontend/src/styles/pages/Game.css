@@ -51,7 +51,7 @@
   display: flex;
   flex-direction: column; /* 세로 정렬 */
   align-items: flex-start; /* 왼쪽 정렬 (필요하면 center) */
-  margin-top: 50px;
+  margin-top: 45px;
  
 }
 

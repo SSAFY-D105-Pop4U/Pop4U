@@ -82,8 +82,8 @@ const GamePlay = ({ count, score, setScore, userId, popupId }) => {
         />
       </button>
       <div className="score">
-  {score >= 10 ? "집계중..." : score}
-</div>
+      {score}
+      </div>
 
       {/* ✅ 클릭한 위치에 터치 이펙트 추가 */}
       {clickEffects.map((effect) => (
