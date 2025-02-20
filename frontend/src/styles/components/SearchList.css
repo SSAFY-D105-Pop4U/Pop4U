@@ -27,6 +27,7 @@
   flex-direction: column;
   justify-content: center;
   z-index: 2;
+  transition: width 0.3s ease;
 }
 
 .result-image-container {
@@ -65,15 +66,28 @@
 /* 모바일 대응 */
 @media (max-width: 768px) {
   .result-info {
-    width: 65%;
+    width: 95%;
     padding: 16px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     backdrop-filter: blur(4px);
   }
 
+  .result-wrapper:hover .result-info {
+    width: 55%;
+  }
+
   .result-title {
     font-size: 14px;
     max-width: 100%;
+  }
+
+  .result-image-container {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .result-wrapper:hover .result-image-container {
+    opacity: 1;
   }
 }
