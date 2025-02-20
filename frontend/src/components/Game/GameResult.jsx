@@ -3,7 +3,7 @@ import { getresult } from "../../apis/api/api";
 import { useNavigate } from "react-router-dom";
 import openpresent from "../../assets/images/openpresent.png";
 import "animate.css";
-
+import crown from "../../assets/icons/crown.png"
 const GameResult = ({ popupId, userId }) => {
   const nav = useNavigate();
   const [rank, setRank] = useState(null); // 🔥 내 등수 상태 추가
@@ -64,26 +64,28 @@ const GameResult = ({ popupId, userId }) => {
       {/* 모달창 */}
       {isModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content animate__animated animate__fadeIn">
-            <div className="ranking-list">
-              {topRanks.map((player, index) => (
-                <div
-                  key={index}
-                  className="ranking-item animate__animated animate__fadeIn"
-                  style={{ animationDelay: `${index * 0.2}s` }} // 0.2초씩 딜레이 추가
-                >
-                  <strong>{player.rank}등</strong> {player.nickname}
-                </div>
-              ))}
-            </div>
-            <button
-              className="close-button"
-              onClick={() => setIsModalOpen(false)}
-            >
-              닫기
-            </button>
-          </div>
+  <div className="modal-content animate__animated animate__fadeIn">
+    <div className="ranking-list">
+      {topRanks.map((player, index) => (
+        <div
+          key={index}
+          className="ranking-item animate__animated animate__fadeIn"
+          style={{ animationDelay: `${index * 0.2}s` }}
+        >
+          <strong>
+            {player.rank}등
+            {player.rank === 1 && <span className="crown"> 👑</span>} {/* 🔥 1등이면 크라운 추가 */}
+          </strong>
+          {player.nickname}
         </div>
+      ))}
+    </div>
+    <button className="close-button" onClick={() => setIsModalOpen(false)}>
+      닫기
+    </button>
+  </div>
+</div>
+
       )}
 
       <div className="complete">

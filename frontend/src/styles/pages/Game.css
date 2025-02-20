@@ -349,3 +349,10 @@ font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow-y: auto; /* 내용이 많으면 스크롤 */
 }
+
+.crown {
+  display: flex;
+  font-size: 20px; /* 크라운 아이콘 크기 조절 */
+  margin-left: 0px; /* 등수와 크라운 사이 여백 추가 */
+  
+}
