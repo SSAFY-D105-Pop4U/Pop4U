@@ -266,7 +266,7 @@ export const getresult = async (popupId) => {
   try {
     const response = await api.get(`/game/rankings/${popupId}`)
     console.log("결과를 주라 백엔드");
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching popups:", error);
     throw error;
