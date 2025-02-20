@@ -27,6 +27,7 @@ const GameResult = ({ popupId }) => {
     handleresult();
   }, []);
 
+  
   return (
     <div className="game-result">
       <div className="scoreresult">

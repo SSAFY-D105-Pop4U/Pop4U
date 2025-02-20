@@ -264,7 +264,7 @@ font-weight: bold;
   background-color: hsl(0, 0%, 100%); /* 녹색 버튼 */
   color: #6631E5; /* 글자색 흰색 */
   font-size: 16px;
-  padding: 12px 70px;
+  padding: 12px 150px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -293,3 +293,22 @@ font-weight: bold;
   color: hsl(0, 0%, 100%);
   margin-bottom: 20px;
 }
+
+.result-button-container{
+  display: flex;
+  justify-content: center;
+  /* margin-bottom: 30px; */
+  padding-bottom: 30px;
+}
+
+.result_button{
+  background: white;
+  padding: 10px 10px 10px 10px;
+  border-radius: 20px;
+  text-align: center;
+  /* width: 120px;
+  height: 20px; */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+}
+ 

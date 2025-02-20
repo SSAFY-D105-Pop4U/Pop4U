@@ -89,8 +89,11 @@ const nav = useNavigate();
               
             </a>
             <div className="main__each__desc sub2">
+              <p>
               {ex1}
               <br /> {ex2}
+              </p>
+              
             </div>
           </div>
         </div>
