@@ -174,6 +174,21 @@ export const myreservation = async () => {
   }
 };
 
+// 내예약 삭제
+export const deleteReservation = async (popupId) => {
+  try {
+    console.log(popupId);
+    
+    const response = await imgapi.delete(`/reservation/${popupId}`);
+    console.log(response);
+    return response.data;
+    
+  } catch (error) {
+    console.error("Error fetching popups:", error);
+    throw error;
+  }
+};
+
 // post 리뷰작성
 export const postwritereview = async (formData) => {
   try {
@@ -186,6 +201,8 @@ export const postwritereview = async (formData) => {
     throw error;
   }
 };
+
+
 
  // 팝업 아이콘 가져오기
 export const getreviewcheck = async (popupId) => {
