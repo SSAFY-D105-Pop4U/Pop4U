@@ -1,6 +1,6 @@
 .reservation-card-container {
   width: 300px; /* 뷰포트 너비의 90% */
-  height: 70vh; /* 뷰포트 높이의 80% */
+  height: 60vh; /* 뷰포트 높이의 80% */
   max-width: 300px; /* 카드의 최대 크기 제한 */
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
