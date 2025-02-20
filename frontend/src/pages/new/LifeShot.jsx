@@ -58,7 +58,7 @@ const LifeShot = () => {
       const canvas = await html2canvas(captureRef.current, {
         useCORS: true, // CORS 문제 해결
         backgroundColor: "#fff", // 배경을 흰색으로 설정 (투명 배경 유지하려면 null)
-        proxy: "https://li2d105.p.ssafy.io/",
+        proxy: "https://pop4u.s3.amazonaws.com/",
         scale: 2, // 해상도 증가
         logging: true, // 디버깅용 로깅
       });
@@ -140,7 +140,7 @@ const LifeShot = () => {
 
   return (
     <div
-      style={{ backgroundColor: "black", height: "100vh", overflow: "hidden" }}
+      style={{ backgroundColor: "black", minHeight:"100vh", overflow: "hidden" }}
     >
       <header id="header">
         <div style={{ display: "flex" }}>
@@ -217,6 +217,9 @@ const LifeShot = () => {
       {frameCount > 0 && (
         <ShotToggleButton active={active} setActive={setActive} />
       )}
+      <div style={{marginBottom:"70px"}}>
+
+      
       {frameCount > 0 && active == "사진" && (
         <PutImage
           images={images}
@@ -251,11 +254,14 @@ const LifeShot = () => {
           <div className="life-upload-placeholder">사진 넣기</div>
         </label>
       )}
+
+</div>
       {frameCount > 0 && active == "캐릭터" && (
         <button onClick={handleCapture} className="life-upload-button">
           저장하기
         </button>
       )}
+      
     </div>
   );
 };
