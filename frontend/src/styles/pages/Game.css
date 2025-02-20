@@ -1,6 +1,5 @@
-/* 🎯 전체 컨테이너 */
 .game-event-container {
-  background-color: #7E71FC;
+  background-color: #7E71FC; /* 연한 베이지색 */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -9,130 +8,180 @@
   justify-content: center;
 }
 
-/* 🎁 선물 박스 */
 .present {
   display: flex;
   justify-content: center;
-  width: 20vw;
-  height: 20vh;
-  max-width: 250px;
-  max-height: 250px;
-  user-select: none;
-  pointer-events: auto;
-  touch-action: manipulation;
-  -webkit-user-drag: none;
+  width: 250px;
+  height: 250px;
+  user-select: none; /* 텍스트/이미지 선택 방지 */
+  pointer-events: auto; /* 클릭 이벤트 정상 처리 */
+  touch-action: manipulation; /* 모바일 터치 이벤트 최적화 */
+  -webkit-user-drag: none; /* ✅ Safari에서 드래그 방지 */
 }
 
-/* 📝 설명 텍스트 */
 .comment {
-  text-align: center;
-  font-size: 2vh;
+  display: flex;
+  justify-content: center;
+  /* text-align: center; */
+  margin-top: 0px;
+  margin-bottom: 20px;
+  font-size: 22px;
+  margin-left: 0px;
   font-weight: bold;
-  color: white;
-  margin-bottom: 2vh;
+  color: hsl(0, 0%, 100%);
 }
 
-/* ⏳ 타이머 */
 .time {
   text-align: center;
-  margin-bottom: 5vh;
-  font-size: 2.5vh;
+  margin-bottom: 50px;
+  font-size: 22px;
   font-weight: bold;
   color: white;
 }
 
-/* 📌 컨테이너 */
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
 }
 
-/* 🎯 게임 플레이 안내 */
+/* 📌 원 + 텍스트를 감싸는 컨테이너 */
+/* 🎯 부모 컨테이너 */
 .instructions {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 5vh;
+  flex-direction: column; /* 세로 정렬 */
+  align-items: flex-start; /* 왼쪽 정렬 (필요하면 center) */
+  margin-top: 50px;
+ 
 }
 
 .instruction-item {
   display: flex;
-  align-items: center;
-  gap: 2vh;
-  margin-bottom: 1.5vh;
+  align-items: center; /* 원과 텍스트를 수직 중앙 정렬 */
+  gap: 15px; /* 원과 텍스트 사이 간격 */
+  margin-bottom: 15px;
   color: white;
-  font-size: 1.8vh;
+  
 }
-
-/* 🔵 숫자 원 */
+/* 🎯 원 (1,2,3) */
 .circle {
-  width: 5vh;
-  height: 5vh;
-  max-width: 40px;
-  max-height: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #bebebe;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  color: white;
-  font-size: 1.5vh;
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+  z-index: 1;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* 🎮 게임 플레이 */
-.game-play {
-  margin-bottom: 10vh;
-  color: white;
-}
+/* 🎯 순차적으로 반짝이는 애니메이션 */
+/* .circle.active {
+  background-color: #fdcb58;
+ 
+} */
 
-/* 📢 플레이 설명 */
-.play_instruction {
-  text-align: center;
-  font-size: 2vh;
+p {
+  font-size: 15px;
+  color: #ffffff;
   font-weight: bold;
-  margin-bottom: 2vh;
 }
 
-/* ⏳ 타이머 */
-.play_timer {
-  font-size: 2.5vh;
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.0s ease-in-out;
+}
+
+
+
+/* ⭐⭐ gameplay 부분⭐⭐ */
+
+.game-play{
+margin-bottom: 120px;
+color: hsl(0, 0%, 100%);
+}
+
+
+.play_instruction{
+text-align: center;
+margin-top: 0px;
+margin-bottom: 20px;
+font-size: 20px;
+font-weight: bold;
+}
+
+.play_timer{
+  font-size: 20px;
   text-align: center;
-  margin-bottom: 3vh;
+  margin-bottom: 30px;
 }
 
-/* 🏆 점수 */
 .score {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 10vh;
-  font-size: 6vh;
+  justify-content: center; /* ✅ 가로 중앙 */
+  align-items: center; /* ✅ 세로 중앙 */
+  width: 100%; /* ✅ 부모 크기에 맞춰 정렬 */
+  height: 50px; /* ✅ 원하는 크기 조절 가능 */
+  font-size: 80px;
   font-weight: bold;
+  padding-top: 100px;
 }
-
-/* 🎯 게임 이벤트 카운트 */
-.game-event-count {
-  margin-bottom: 5vh;
+.game-event-count{
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
-  font-size: 4vh;
+  font-size: 40px;
   font-weight: bold;
+  margin-right: 15px;
 }
 
-/* ⭐ 클릭 애니메이션 */
+
+/* 🎯 클릭 애니메이션 - 흔들림 */
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* 🎯 클릭 애니메이션 - 작은 흔들림 */
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/*  클릭 시 애니메이션 효과 적용 */
 .present.clicked {
   animation: wiggle 0.3s ease-in-out, flash 0.3s ease-in-out;
 }
 
-/* 🔵 클릭 효과 */
+
+
+/* 🎯 클릭 이펙트 (원형 번쩍임) */
+@keyframes clickEffect {
+  0% { transform: scale(0); opacity: 0.8; }
+  50% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
 .click-effect {
   position: absolute;
-  width: 5vh;
-  height: 5vh;
+  width: 50px;
+  height: 50px;
   background-color: #b84be399;
   border-radius: 50%;
   animation: clickEffect 0.5s ease-out;
@@ -140,123 +189,181 @@
   pointer-events: none;
 }
 
-/* ⭐⭐ 게임 결과 ⭐⭐ */
-.game-result {
-  margin-bottom: 2vh;
+@keyframes touchPop {
+  0% { transform: scale(0.5); opacity: 1; box-shadow: 0 0 10px rgba(255, 255, 0, 0.8); }
+  50% { transform: scale(1.3); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 0; }
 }
 
-/* 🎁 오픈된 선물 */
-.openpresent {
-  width: 20vh;
-  max-width: 250px;
-  user-select: none;
-  pointer-events: auto;
-  touch-action: manipulation;
-  -webkit-user-drag: none;
+.touch-pop {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 165, 0, 0.5);
+  border-radius: 50%;
+  animation: touchPop 0.5s ease-out;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+@keyframes rippleEffect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
-/* 📊 점수 결과 */
-.scoreresult {
+.ripple {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0, 150, 255, 0.5);
+  border-radius: 50%;
+  animation: rippleEffect 0.6s ease-out;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+
+
+/* ⭐⭐게임 결과부분⭐⭐ */
+.game-result{
+  margin-bottom:20px;
+}
+.openpresent{
+  width: 250px;
+  /* height: 50px; */
+  user-select: none; /* 텍스트/이미지 선택 방지 */
+  pointer-events: auto; /* 클릭 이벤트 정상 처리 */
+  touch-action: manipulation; /* 모바일 터치 이벤트 최적화 */
+  -webkit-user-drag: none; /* ✅ Safari에서 드래그 방지 */
+  margin-right: 10px;
+}
+
+.scoreresult{
   display: flex;
   justify-content: center;
-  font-size: 2vh;
-  font-weight: bold;
-  margin-bottom: 5vh;
+  font-size: 20px;
+  font-weight:bold;
+  margin-bottom: 50px;
 }
-
-/* ✅ 완료 버튼 */
-.complete {
+.complete{
+  
   display: flex;
   justify-content: center;
-  padding-top: 8vh;
 }
 
-/* 🟢 버튼 스타일 */
 .button-style {
-  background-color: white;
-  color: #6631E5;
-  font-size: 2vh;
-  padding: 2vh 8vw;
+  background-color: hsl(0, 0%, 100%); /* 녹색 버튼 */
+  color: #6631E5; /* 글자색 흰색 */
+  font-size: 16px;
+  padding: 12px 150px;
   border: none;
-  border-radius: 1vh;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* 🎯 반응형 크기 조절 */
-.result-button-container {
+/* 호버(마우스 올릴 때) 효과 */
+.button-style:hover {
+  background-color: #5c3da5;
+  transform: scale(1.05);
+}
+
+/* 클릭 시 효과 */
+.button-style:active {
+  background-color: #4163d4;
+  transform: scale(0.98);
+}
+.complete{
+  padding-top: 80px;
+}
+
+.large-text {
+  font-size: 23px;
+  font-weight:bold;
+  color: hwb(0 100% 0%);
+  margin-bottom: 20px;
+}
+
+.result-button-container{
   display: flex;
-  padding-bottom: 3vh;
+  /* justify-content: center; */
+  /* margin-bottom: 30px; */
+  padding-bottom: 30px;
 }
 
 .result_button {
-  padding: 1vh 4vw;
-  border-radius: 2vh;
+  border: 2px solid transparent; /* 기본적으로 테두리 없음 */
+  outline: none;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: border 0.3s ease; /* 부드러운 애니메이션 */
+}
+
+.result_button {
+  /* border: 1px solid rgb(91, 91, 91); */
+  padding: 2px 12px;
+  border-radius: 20px;
   background-color: #D9D9D9;
   box-shadow: 0 0 1px black;
+  color: black;
   cursor: pointer;
-  margin-left: 5vw;
+  margin-left: 230px;
 }
 
-/* ⭐ 반응형 조정 */
-@media (max-width: 768px) {
-  .present {
-    width: 30vw;
-    height: 30vh;
-  }
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 10px; 
+}
+
+.myranking {
+  /* padding: 10px; */
+  background-color:#e6eef8;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2);  */
+  /* border-radius: 5px; */
+  text-align: center;
+  padding: 10px;
   
-  .comment, .time, .play_instruction {
-    font-size: 3vh;
-  }
-
-  .circle {
-    width: 6vh;
-    height: 6vh;
-    font-size: 2vh;
-  }
-
-  .score {
-    font-size: 7vh;
-  }
-
-  .game-event-count {
-    font-size: 5vh;
-  }
-
-  .button-style {
-    font-size: 3vh;
-    padding: 3vh 10vw;
-  }
 }
 
-/* ✅ 모바일 (최대 480px) */
-@media (max-width: 480px) {
-  .present {
-    width: 35vw;
-    height: 35vh;
-  }
+.modal-content {
+  width: 300px; /* 원하는 너비 설정 */
+  max-width: 90%; /* 화면 크기에 따라 최대 너비 조절 */
+  height: auto; /* 내용에 따라 자동 조절 */
+  max-height: 80vh; /* 화면 높이에 따라 최대 높이 제한 */
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* 내용이 많으면 스크롤 */
+}
 
-  .comment, .time, .play_instruction {
-    font-size: 4vh;
-  }
+.crown {
+  /* display: flex; */
+  font-size: 20px; /* 크라운 아이콘 크기 조절 */
+  margin-right: 35px;
+  margin-left: 0px; /* 등수와 크라운 사이 여백 추가 */
+  
+}
 
-  .circle {
-    width: 8vh;
-    height: 8vh;
-    font-size: 2.5vh;
-  }
-
-  .score {
-    font-size: 8vh;
-  }
-
-  .game-event-count {
-    font-size: 6vh;
-  }
-
-  .button-style {
-    font-size: 4vh;
-    padding: 3vh 12vw;
-  }
+.ranking-item {
+  display: flex;
+  justify-content: space-between; /* 양쪽 끝으로 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  width: 100%; /* 부모 컨테이너 너비 설정 */
+  padding: 10px;
 }
