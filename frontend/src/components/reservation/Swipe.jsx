@@ -18,10 +18,10 @@ const Swipe = ({type, setPopupId}) => {
   const fetchReservations = async () => {
     try {
       const response = await myreservation();
-      console.log("📌 API 내예약 호출 결과:", response);
+      // console.log("📌 API 내예약 호출 결과:", response);
       if (response) {
         setCards(response);
-        console.log("저장완료")
+        // console.log("저장완료")
       }
     } catch (error) {
       setCards([]);
@@ -34,7 +34,7 @@ const Swipe = ({type, setPopupId}) => {
   useEffect(() => {
     if (cards.length > 0) {
       setPopupId(cards[currentIndex]?.popupId || 0);
-      console.log("🔄 현재 popupId:", cards[currentIndex]?.popupId);
+      // console.log("🔄 현재 popupId:", cards[currentIndex]?.popupId);
     }
   }, [currentIndex, cards, setPopupId]); 
 
@@ -48,7 +48,7 @@ const Swipe = ({type, setPopupId}) => {
   }, []); // []: 마운트 시 한 번만 실행
 
   useEffect(() => {
-    console.log(cards.length); // 데이터가 업데이트될 때 확인 가능
+    // console.log(cards.length); 
   }, []);
 
   

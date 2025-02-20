@@ -28,7 +28,7 @@ const GameResult = ({ popupId, userId }) => {
         );
         if (myRankData) {
           setRank(myRankData.rank); // 🔥 내 등수 설정
-          console.log("setRank 완료됌");
+          // console.log("setRank 완료됌");
         }
       } else {
         console.error("API 응답에 데이터가 없습니다.");
@@ -73,8 +73,7 @@ const GameResult = ({ popupId, userId }) => {
           style={{ animationDelay: `${index * 0.2}s` }}
         >
           <strong>
-            {player.rank}등
-            {player.rank === 1 && <span className="crown"> 👑</span>} {/* 🔥 1등이면 크라운 추가 */}
+            {player.rank}등 {/* 🔥 1등이면 크라운 추가 */}
           </strong>
           {player.nickname}
         </div>

@@ -15,13 +15,13 @@ import next from "../assets/icons/next.svg";
 import UseAuth from "../hooks/UseAuth.js";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  console.log("사이드바", UseAuth());
+  // console.log("사이드바", UseAuth());
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const userName = sessionStorage.getItem("userNickname");
   const isLogind = UseAuth();
-  console.log(isLogind);
+  // console.log(isLogind);
 
   useEffect(() => {
     setIsLoggedIn(isLogind); // ✅ 상태 변경은 useEffect에서 처리

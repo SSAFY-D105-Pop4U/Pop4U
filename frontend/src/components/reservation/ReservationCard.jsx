@@ -3,7 +3,7 @@ import '../../styles/components/ReservationCard.css';
 
 
 const ReservationCard = ({reservation} ) => {
-  console.log(reservation)
+  // console.log(reservation)
   if (!reservation) return null;
   
   useEffect(()=>{

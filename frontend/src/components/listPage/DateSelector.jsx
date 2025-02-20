@@ -33,7 +33,7 @@ const DateSelector = ({selectedDate, setSelectedDate}) => {
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
-    console.log(date);
+    // console.log(date);
   };
 
   const handleDragStart = (e) => {

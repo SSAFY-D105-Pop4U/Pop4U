@@ -15,7 +15,7 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
   const [updateTime, setUpdateTime] = useState("");
 
   const handleSearchClick = (col) => {
-    console.log(col);
+    // console.log(col);
     setOnClickSearch(col);
   };
   
@@ -25,8 +25,8 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
         const response = await getSearchRanking();
         setSearchRank(response.rankings);  // 여기를 수정
         setUpdateTime(response.updateTime);
-        console.log("실시간 검색어 조회완료");
-        console.log(response.rankings);
+        // console.log("실시간 검색어 조회완료");
+        // console.log(response.rankings);
       } catch (error) {
         console.error("Failed to load popups");
       }

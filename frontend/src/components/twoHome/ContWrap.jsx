@@ -14,8 +14,8 @@ const ContWrap = () => {
         try {
           const data = await getPopups();
           setPopups(data);
-          console.log("팝업 리스트트 조회완료");
-          console.log(data);
+          // console.log("팝업 리스트트 조회완료")
+          // console.log(data);
           
         } catch (error) {
           console.error("Failed to load popups");

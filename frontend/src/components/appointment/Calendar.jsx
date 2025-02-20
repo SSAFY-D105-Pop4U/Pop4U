@@ -14,7 +14,7 @@ const Calendar = ({ setResultDate, popupStartDay, popupEndDay }) => {
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
   const [selectedDate, setSelectedDate] = useState(today.getDate());
 
-  console.log("시간",endyear,endmonth,endday);
+  // console.log("시간",endyear,endmonth,endday);
   
 
   const { setAppData } = useContext(AppDataContext); // useContext 사용

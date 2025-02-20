@@ -27,7 +27,7 @@ const Detail = () => {
 
   // 로그인 확인
   const isLoggedIn = UseAuth();
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
   
 
   //✅ 후기 작성페이지로 이동 함수
@@ -86,7 +86,7 @@ const Detail = () => {
     try {
       const data = await GetPopupDetail(popupId);
       setDetail(data);
-      console.log("📌 API 응답 (팝업상세):", data);
+      // console.log("📌 API 응답 (팝업상세):", data);
 
       // ✅ useContext에 popup 정보 저장
       setAppData((prev) => ({
@@ -104,7 +104,7 @@ const Detail = () => {
     try {
       const data = await getReviews(popupId);
       setReviews(data);
-      console.log("📌 API 응답 (리뷰정보):", data);
+      // console.log("📌 API 응답 (리뷰정보):", data);
     } catch (error) {
       console.error("❌ Failed to load reviews", error);
     }
@@ -113,7 +113,7 @@ const Detail = () => {
   useEffect(() => {
     popupdetail();
     ReviewData();
-    console.log("Context 데이터 현황:", appData);
+    // console.log("Context 데이터 현황:", appData);
   }, []); // ✅ popupId 변경될 때마다 API 호출
 
   return (
