@@ -177,7 +177,7 @@ export const myreservation = async () => {
 // 내예약 삭제
 export const deleteReservation = async (popupId) => {
   try {
-    const response = await api.delete(`/reservation/${popupId}`);
+    const response = await imgapi.delete(`/reservation/${popupId}`);
     console.log(response);
     return response.data;
     
