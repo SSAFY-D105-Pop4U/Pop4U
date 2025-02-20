@@ -43,8 +43,20 @@ public class TokenService {
         String accessToken = tokenProvider.generateToken(user, Duration.ofHours(480));
         String refreshToken = refreshTokenService.createRefreshToken(user.getUserId());
 
-        // 사용자 ID를 포함한 토큰 응답 생성
-        return new TokenResponse(accessToken, refreshToken, user.getUserId(), user.getUserNickname()); // 사용자 ID 포함
+        // 모든 필요한 사용자 정보를 포함한 응답 생성
+        return TokenResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .userId(user.getUserId())
+                .userStatus(user.getUserStatus())
+                .userName(user.getUserName())
+                .userNickname(user.getUserNickname())
+                .userEmail(user.getUserEmail())
+                .userTelephone(user.getUserTelephone())
+                .userImg(user.getUserImg())
+                .userCoupon(user.getUserCoupon())
+                .userUncheckedAlarm(user.getUserUncheckedAlarm())
+                .build();
 
 
 //        // 액세스 토큰과 리프레시 토큰 생성
