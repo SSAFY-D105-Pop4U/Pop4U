@@ -1,9 +1,6 @@
 .search-results {
   margin: 16px 7%;
   width: 86%;
-  background-color: #f5f5f5;
-  padding: 12px 0;
-  border-radius: 8px;
 }
 
 .result-wrapper {
@@ -12,14 +9,21 @@
   position: relative;
   height: 100px;
   overflow: hidden;
-  margin: 0 12px 12px;
-  background-color: white;
-  border-radius: 6px;
+  margin: 12px 0;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.5s ease forwards;
 }
 
-.result-wrapper:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .result-content {
@@ -28,6 +32,7 @@
   height: 100%;
   position: relative;
   background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .result-info {

@@ -51,10 +51,11 @@ const SearchList = ({ searchQuery }) => {
 
   return (
     <div className="search-results">
-      {searchData.map((result) => (
+      {searchData.map((result, index) => (
         <div 
           key={result.popupId}
           className="result-wrapper"
+          style={{ animationDelay: `${index * 0.1}s` }}
           onClick={() => handleCardClick(result.popupId)}
         >
           <div className="result-content">
