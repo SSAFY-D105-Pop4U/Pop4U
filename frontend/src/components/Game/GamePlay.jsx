@@ -3,7 +3,7 @@ import { postpeople } from "../../apis/api/api";
 import present from "../../assets/images/present.png"; 
 
 
-const GamePlay = ({ count, score, setScore, userId, popupId }) => {
+const GamePlay = ({ count, score, setScore, userId, popupId }) => {    
   const [hasPosted, setHasPosted] = useState(false); // 결과 전송 여부
   const [isClicked, setIsClicked] = useState(false); // ✅ 클릭 애니메이션 상태
   const [clickEffects, setClickEffects] = useState([]); // ✅ 터치 이펙트 저장 배열

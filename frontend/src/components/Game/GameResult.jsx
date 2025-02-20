@@ -11,12 +11,12 @@ const GameResult = ({ popupId }) => {
     nav(`/detail?popupId=${popupId}`);
   };
 
-  // 결과 api요청
+  // 게임 결과 api요청
   const handleresult = async () => {
     console.log(popupId);
     try {
       const response = await getresult(popupId);
-      
+      console.log(response)
     } catch (error) {
       console.error("결과 요구 실패:", error);
     }
