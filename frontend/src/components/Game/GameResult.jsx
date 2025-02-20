@@ -72,12 +72,10 @@ const GameResult = ({ popupId, userId }) => {
           className="myranking animate__animated animate__fadeIn"
           style={{ animationDelay: `${index * 0.2}s` }}
         >
-          <strong>
-            {player.rank}등
-          </strong>
-          <strong>
-          {player.nickname}
-          </strong>
+      <div className="ranking-item">
+        <strong>{player.rank}등</strong>
+        <strong>{player.nickname}</strong>
+      </div>
         </div>
       ))}
     </div>
