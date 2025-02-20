@@ -22,6 +22,7 @@ import Creategame from "../pages/Creategame"
 import LifeShot from "../pages/LifeShot";
 import Game from "../pages/Game"
 import Coupons from "../pages/Coupons"
+import Support from "../pages/Support";
 
 
 
@@ -55,6 +56,7 @@ const AppRoutes = () => {
       <Route path="/creategame" element={<Creategame />} />
       <Route path="/game/Event_Game/:popupId" element={<Game />} />
       <Route path="/coupons" element={<Coupons />} />
+      <Route path="/support" element={<Support />} />
       
 
       
