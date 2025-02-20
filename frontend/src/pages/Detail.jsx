@@ -11,7 +11,7 @@ import { AppDataContext } from "../Context.jsx";
 import UseAuth from '../hooks/UseAuth.js'
 import ModalIsLogin from "../components/ModalIsLogin.jsx";
 import { color } from "chart.js/helpers";
-import BackButton from "../components/BackButton";
+import BackToHomeButton from "../components/BackTohomeButton.jsx";
 
 
 const Detail = () => {
@@ -121,7 +121,7 @@ const Detail = () => {
       
       <header id="header" >
       <div className="inner__new">
-            <BackButton/>
+            <BackToHomeButton/>
       </div>
       </header>
       

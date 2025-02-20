@@ -95,9 +95,10 @@ const Login = () => {
             className="login-input-field"
             value={login.password}
             onChange={handleChange}
+            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
           />
         </div>
-        <button className="login-button" onClick={handleLogin}>
+        <button className="login-button" onClick={handleLogin} ke>
           로그인
         </button>
 
