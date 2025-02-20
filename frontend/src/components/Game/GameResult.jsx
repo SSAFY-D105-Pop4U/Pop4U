@@ -22,9 +22,11 @@ const GameResult = ({ popupId, userId }) => {
       if (response?.data?.length > 0) {
         setTopRanks(response.data.slice(0, 5)); // 🔥 처음부터 5명만 가져오기
 
-        const myRankData = response.data.find(player => player.userId === userId);
+        // 🔥 userId와 일치하는 데이터를 찾아서 setRank() 실행
+        const myRankData = response.data.find(player => String(player.userId) === String(userId));
         if (myRankData) {
           setRank(myRankData.rank); // 🔥 내 등수 설정
+          console.log("setRank 완료됌")
         }
       } else {
         console.error("API 응답에 데이터가 없습니다.");
@@ -33,7 +35,6 @@ const GameResult = ({ popupId, userId }) => {
       console.error("결과 요청 실패:", error);
     }
   };
-
   useEffect(() => {
     handleresult();
   }, []);
@@ -47,10 +48,11 @@ const GameResult = ({ popupId, userId }) => {
         </button>
       </div>
 
+      {/* 🔥 내 랭킹 표시 */}
       <div className="scoreresult">
         <div className="animate__animated animate__fadeInDown animate__slow large-text">
-          참여자 중 {rank !== null ? `${rank}등` : "등수 계산 중... "}이에요
-        </div> 
+          {rank !== null ? `내 랭킹: ${rank}등` : "등수 계산 중..."}
+        </div>
       </div>
 
       <div className="container">
