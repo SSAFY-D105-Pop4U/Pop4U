@@ -290,7 +290,7 @@ font-weight: bold;
 .large-text {
   font-size: 23px;
   font-weight:bold;
-  color: hsl(0, 0%, 100%);
+  color: hwb(0 100% 0%);
   margin-bottom: 20px;
 }
 
@@ -311,11 +311,12 @@ font-weight: bold;
 }
 
 .result_button {
-  border: 1px solid rgb(91, 91, 91); /* 검은색 테두리 추가 */
-  padding: 10px 20px;
+  /* border: 1px solid rgb(91, 91, 91); */
+  padding: 2px 12px;
   border-radius: 20px;
-  background-color: white;
-  box-shadow: 0 0 5px black; /* 부드러운 외곽선 */
+  background-color: rgb(179, 179, 179);
+  box-shadow: 0 0 1px black;
   color: black;
   cursor: pointer;
+  margin-left: 230px;
 }
