@@ -48,7 +48,7 @@ const UserCategory = () => {
         },
       })
       .then((response) => {
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) =>
         console.error("관심 카테고리 업데이트 실패:", error)

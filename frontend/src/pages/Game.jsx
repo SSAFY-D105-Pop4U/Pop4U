@@ -5,8 +5,6 @@ import GameResult from "../components/Game/GameResult"; // 게임 종료 화면
 import {useParams } from "react-router-dom";
 import "../styles/pages/Game.css";
 
-
-
 const Game = () => {
   const [count, setCount] = useState(10); // 게임 진행시간 
   const [isGameOver, setIsGameOver] = useState(false); // 게임 종료 여부
@@ -15,7 +13,6 @@ const Game = () => {
   
   const { popupId } = useParams();
   const userId = sessionStorage.getItem("userId")
-  const StartTime = sessionStorage.getItem("star tTime")
 
   // 10초 타이머 시작 (게임이 시작되었을 때만 실행)
   useEffect(() => {

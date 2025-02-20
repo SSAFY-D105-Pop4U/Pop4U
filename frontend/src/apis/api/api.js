@@ -219,7 +219,7 @@ export const getstarttime = async (popupId) => {
   try {
     const response = await api.get(`/game/status/${popupId}`)
     console.log("시간 조회 api 완료");
-    console.log(response)
+    console.log("게임시작시간: " , response.data)
     return response.data;
   } catch (error) {
     console.error("Error fetching popups:", error);
