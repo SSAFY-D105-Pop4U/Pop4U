@@ -68,7 +68,9 @@ const RankingList = ({onClickSearch, setOnClickSearch}) => {
     onClick={() => handleSearchClick(item.keyword)}
   >
     <span className="ranking-name">{item.rank} {item.keyword}</span>
-    <span className="ranking-status">{getStatusIcon(item.status)}</span>
+    {((item.status)=="up")&&(<span className="ranking-status"><img src= {searchUp}/> </span>)}
+    {((item.status)=="down")&&(<span className="ranking-status"><img src= {searchDown}/> </span>)}
+    {((item.status)=="neutral")&&(<span className="ranking-status"><img src= {searcNeutral}/> </span>)}
   </div>
 ))}
         </div>
