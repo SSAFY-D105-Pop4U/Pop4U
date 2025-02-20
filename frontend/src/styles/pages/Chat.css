@@ -226,3 +226,13 @@
   overflow-y: auto;   
   /* padding, margin 등은 취향에 맞게 */
 }
+
+.chat-link {
+  color: #007bff; /* 파란색 링크 */
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.chat-link:hover {
+  color: #0056b3;
+}

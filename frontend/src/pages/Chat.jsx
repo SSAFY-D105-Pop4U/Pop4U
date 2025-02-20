@@ -174,6 +174,26 @@ const ChatRoom = ({ popName }) => {
     (a, b) => new Date(a) - new Date(b)
   );
 
+  const formatMessage = (message) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return message.split(urlRegex).map((part, index) =>
+      part.match(urlRegex) ? (
+        <a
+          key={index}
+          href={part}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="chat-link"
+        >
+          {part}
+        </a>
+      ) : (
+        part
+      )
+    );
+  };
+
+
   return (
     <div
       style={{
@@ -199,7 +219,8 @@ const ChatRoom = ({ popName }) => {
                   )}
                   {sessionValue != msg.userId && (
                     <div className="chat-message">
-                      <span>{msg.chattingMessage} </span>
+                      {formatMessage(msg.chattingMessage)}
+                      {/* <span>{msg.chattingMessage} </span> */}
                     </div>
                   )}
                   {sessionValue == msg.userId && (
@@ -208,7 +229,8 @@ const ChatRoom = ({ popName }) => {
                         {convertUTCToKoreanTime(msg.chattingCreatedAt)}
                       </span>
                       <div className="chat-message-my">
-                        <span>{msg.chattingMessage} </span>
+                      {formatMessage(msg.chattingMessage)}
+                        {/* <span>{msg.chattingMessage} </span> */}
                       </div>
                     </div>
                   )}
@@ -236,9 +258,7 @@ const ChatRoom = ({ popName }) => {
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             className="chat-input"
           />
-          {
-          // (userStatus=="1")&&
-          (<button className="game-button" onClick={handleCreateGame}>
+          {(userStatus=="1")&&(<button className="game-button" onClick={handleCreateGame}>
             <img
               src={present_button}
               alt="present_button"
