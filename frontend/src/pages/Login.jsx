@@ -48,6 +48,10 @@ const Login = () => {
 
         sessionStorage.setItem("userId", response.data.userId);
 
+        sessionStorage.setItem("accessToken", response.data.accessToken);
+
+        sessionStorage.setItem("userNickname", response.data.userNickname);
+
         // // Context에도 반영
         // setAppData((prev) => ({
         //     ...prev,

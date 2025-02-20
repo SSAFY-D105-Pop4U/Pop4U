@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const userName = "김정모";
+  const userName = sessionStorage.getItem("userNickname");
   const isLogind = UseAuth();
   console.log(isLogind);
   
