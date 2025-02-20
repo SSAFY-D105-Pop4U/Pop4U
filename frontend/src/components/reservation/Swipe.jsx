@@ -4,7 +4,7 @@ import ReservationCard from "./ReservationCard";
 import { myreservation } from "../../apis/api/api.js";
 import CouponCard from "../coupon/CouponCard.jsx";
 
-const Swipe = ({type}) => {
+const Swipe = ({type, setPopupId}) => {
   // API 데이터를 저장할 상태로 변경
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +29,13 @@ const Swipe = ({type}) => {
       setLoading(false); // 로딩 완료
     }
   };
+
+  useEffect(() => {
+    if (cards.length > 0) {
+      setPopupId(cards[currentIndex]?.popupId || 0);
+      console.log("🔄 현재 popupId:", cards[currentIndex]?.popupId);
+    }
+  }, [currentIndex, cards, setPopupId]); 
 
   useEffect(() => {
     fetchReservations();
@@ -169,6 +176,7 @@ const Swipe = ({type}) => {
             {(type=="쿠폰")&&(<CouponCard reservation={card} />)}
             {(type=="예약")&&(<ReservationCard reservation={card} />)}
             
+            
           </div>
         );
       })}
@@ -191,6 +199,8 @@ const Swipe = ({type}) => {
         </>
       )}
       {renderDots()}
+
+      
     </div>
   );
 };

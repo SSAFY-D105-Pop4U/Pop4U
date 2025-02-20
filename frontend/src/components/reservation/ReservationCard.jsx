@@ -24,7 +24,7 @@ const ReservationCard = ({reservation} ) => {
           {/* 예약 제목이 있다면 표시 */}
           {reservation.popupName ? reservation.popupName : "<예약 제목>"}
         </h2>
-        <p>{reservation.location ? reservation.location : "예약 위치"}</p>
+        <p>{reservation.reviewWritten ? "리뷰 작성 완료" : "리뷰 작성 안함"}</p>
         <div className="reservation-card-details">
           <div>
             <strong>예약일</strong>
@@ -40,13 +40,10 @@ const ReservationCard = ({reservation} ) => {
           </div>
           <div>
             <strong>대기 번호</strong>
-            <strong className="detail-value">{reservation.queue}</strong>
+            <strong className="detail-value">{reservation.reservationId}</strong>
           </div>
         </div>
-        <div className="reservation-card-footer">
-          <p>순서: {reservation.position}</p>
-          <p>예상 대기 시간: {reservation.waitingTime}</p>
-        </div>
+        
       </div>
     </div>
   );

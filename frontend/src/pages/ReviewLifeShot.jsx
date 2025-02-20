@@ -17,9 +17,10 @@ const ReviewLifeShot = () => {
   const MyReservation = async () => {
     try {
       const data = await getmyreservation(); 
-      setPopups(data);                      
+      setPopups(Array.isArray(data) ? data : (Array.isArray(data.popups) ? data.popups : []));                    
       console.log("팝업 리스트 조회 완료:", data);
     } catch (error) {
+      setPopups([]);
       console.error("Failed to load popups", error);
     }
   };
