@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const ReviewChart = ({ reviewRatings }) => {
-  console.log("넘어온 reviewRatings:", reviewRatings); // ✅ 데이터 확인
+  // console.log("넘어온 reviewRatings:", reviewRatings); 
 
   const [chartData, setChartData] = useState({
     labels: ['5', '4', '3', '2', '1'],
@@ -31,7 +31,7 @@ const ReviewChart = ({ reviewRatings }) => {
         }
       });
 
-      console.log("계산된 counts 배열:", counts); // ✅ counts 배열 확인
+      // console.log("계산된 counts 배열:", counts); 
 
       setChartData(prevData => ({
         labels: prevData.labels,
@@ -46,7 +46,7 @@ const ReviewChart = ({ reviewRatings }) => {
   }, [reviewRatings]);
 
   useEffect(() => {
-    console.log("차트 데이터가 변경됨:", chartData); // ✅ chartData 변경 확인
+    // console.log("차트 데이터가 변경됨:", chartData); // ✅ chartData 변경 확인
   }, [chartData]);
 
   const options = {

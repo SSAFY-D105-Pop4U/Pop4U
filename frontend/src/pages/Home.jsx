@@ -23,11 +23,11 @@ const Home = () => {
 
   useEffect(() => {
     const fetchPopups = async () => {
-      console.log("⭐usecontext데이터⭐", appData)
+      // console.log("⭐usecontext데이터⭐", appData)
       try {
         const data = await getPopups();
         setPopups(data);
-        console.log("팝업 리스트트 조회완료");
+        // console.log("팝업 리스트트 조회완료");
       } catch (error) {
         console.error("Failed to load popups");
       }

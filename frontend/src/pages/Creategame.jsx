@@ -27,7 +27,7 @@ const Creategame = () => {
 
     const startTime = `${formattedTime.date}T${formattedTime.time}:00`;
 
-    console.log("전송 데이터:", { startTime, popupId });
+    // console.log("전송 데이터:", { startTime, popupId });
     sessionStorage.setItem("startTime", startTime);
 
     try {

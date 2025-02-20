@@ -110,7 +110,7 @@ const ShotIcon = ({ popupId, selectedIcon, setSelectedIcon, onSelectEmoticon }) 
                         key={emoticon.id}
                         className={`emoticon-item ${selectedIcon?.id === emoticon.id ? "selected" : ""}`}
                         onClick={() => {
-                            console.log("clicked");
+                            // console.log("clicked");
                             setSelectedIcon(emoticon);
                             onSelectEmoticon(emoticon);
                         }}

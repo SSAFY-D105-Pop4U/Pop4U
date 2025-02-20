@@ -13,7 +13,7 @@ const GameWait = ({ setIsGameStarted, popupId }) => {
   const handlestarttime = async () => {
     try {
       const data = await getstarttime(popupId);
-      console.log("게임 시작 시간:", data.startTime); // ✅ 응답 구조 확인
+      // console.log("게임 시작 시간:", data.startTime); // ✅ 응답 구조 확인
 
       if (data?.startTime) {
         setStoredStartTime(data.startTime);
@@ -22,7 +22,7 @@ const GameWait = ({ setIsGameStarted, popupId }) => {
         console.error("startTime 값이 없습니다.");
       }
     } catch (error) {
-      console.log("요청 실패", error);
+      // console.log("요청 실패", error);
     }
   };
 

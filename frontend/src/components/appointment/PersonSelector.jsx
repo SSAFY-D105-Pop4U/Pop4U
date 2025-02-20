@@ -6,7 +6,7 @@ import { AppDataContext } from "../../Context.jsx"; // useContext 추가
 const PersonSelector = ({ selectedPerson, setSelectedPerson, maxPeople}) => {
   const { setAppData } = useContext(AppDataContext); // Context 사용
 
-  console.log(parseInt(maxPeople, 10));
+  // console.log(parseInt(maxPeople, 10));
   
 
   const handleSelect = (number) => {

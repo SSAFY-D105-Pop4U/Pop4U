@@ -3,11 +3,11 @@ import '../../styles/components/CouponCard.css';
 
 
 const CouponCard = ({reservation} ) => {
-  console.log(reservation)
+  // console.log(reservation)
   if (!reservation) return null;
   
   useEffect(()=>{
-    console.log("예약내역")
+    // console.log("예약내역")
   },[])
 
   return (

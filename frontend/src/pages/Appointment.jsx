@@ -28,7 +28,7 @@ const Appointment = () => {
   // const [userId, setUserId] = useState(1); //샘플 userId
   const [userId, setUserId] = useState(appData.userId); // appData에서 사용자 ID 가져오기
 
-  console.log(popupOperationTime);
+  // console.log(popupOperationTime);
 
   
   

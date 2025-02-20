@@ -36,11 +36,11 @@ const Login = () => {
         email: login.userid,
         password: login.password,
       };
-      console.log("로그인 요청:", loginData);
+      // console.log("로그인 요청:", loginData);
       const response = await postlogin(loginData);
 
       if (response && response.data && response.data.accessToken) {
-        console.log("로그인 성공:", response);
+        // console.log("로그인 성공:", response);
 
         // 최신 토큰을 저장
         sessionStorage.setItem("accessToken", response.data.accessToken);
