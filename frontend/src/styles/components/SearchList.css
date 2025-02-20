@@ -59,7 +59,7 @@
 
 .result-time {
   font-size: 13px;
-  color: #4b5563; /* 색상 진하게 */
+  color: #4b5563;
 }
 
 /* 모바일 대응 */
@@ -71,6 +71,6 @@
 
   .result-title {
     font-size: 14px;
-    max-width: 85%; /* 텍스트 너비 제한 */
+    max-width: 85%;
   }
 }
