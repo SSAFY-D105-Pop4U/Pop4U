@@ -5,6 +5,7 @@ import ReviewLifeShotCard from "../components/ReviewLifeShotCard";
 import "../styles/pages/ReviewLifeShot.css";
 import Divider from "../components/basic/Divider";
 import { getmyreservation } from "../apis/api/api";
+import BackToHomeButton from "../components/BackTohomeButton"
 
 const ReviewLifeShot = () => {
   const nav = useNavigate();
@@ -32,7 +33,10 @@ const ReviewLifeShot = () => {
   return (
     <div>
       <div className="review-life-header">
-        <Header title={title} />
+      <div className="header">
+      <BackToHomeButton />
+      <h2 className="header1">{title}</h2>
+    </div>
       </div>
 
       {popups.map((popup, index) => (
