@@ -19,8 +19,6 @@ const GameResult = ({ popupId, userId }) => {
     console.log("팝업아이디:", popupId);
     try {
       const response = await getresult(popupId);
-      console.log("API 응답:", response);
-
       if (response?.data?.length > 0) {
         setTopRanks(response.data.slice(0, 5)); // 🔥 처음부터 5명만 가져오기
 
