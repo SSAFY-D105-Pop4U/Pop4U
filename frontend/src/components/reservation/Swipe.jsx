@@ -4,7 +4,7 @@ import ReservationCard from "./ReservationCard";
 import { myreservation } from "../../apis/api/api.js";
 import CouponCard from "../coupon/CouponCard.jsx";
 
-const Swipe = ({type, setPopupId}) => {
+const Swipe = ({type, setPopupId, setIsReview}) => {
   // API 데이터를 저장할 상태로 변경
   const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,6 +37,15 @@ const Swipe = ({type, setPopupId}) => {
       // console.log("🔄 현재 popupId:", cards[currentIndex]?.popupId);
     }
   }, [currentIndex, cards, setPopupId]); 
+
+  useEffect(() => {
+    if (cards.length > 0) {
+      setIsReview(cards[currentIndex]?.reviewWritten || false);
+      // console.log("🔄 현재 popupId:", cards[currentIndex]?.reviewWritten);
+    }
+  }, [currentIndex, cards, setIsReview]); 
+
+  
 
   useEffect(() => {
     fetchReservations();
@@ -154,7 +163,7 @@ const Swipe = ({type, setPopupId}) => {
       {cards.length === 0 ? (
   <p className="no-reservations">예약된 내역이 없습니다.</p>
 ) : (
-  cards.slice().reverse().map((card, index) => {
+  cards.map((card, index) => {
     const isActive = index === currentIndex;
     const isNext = index === currentIndex + 1;
     const isPrevious = index === currentIndex - 1;
