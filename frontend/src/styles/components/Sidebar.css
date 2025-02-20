@@ -195,7 +195,8 @@
 }
 
 .menu-section ul li a:hover {
-  color: #6b4eff;
+  color: #002c5f;
+  font-weight: bold;
 }
 
 .logout-section {
@@ -212,7 +213,7 @@
   padding: 15px 0;
   border: none;
   background: none;
-  color: #6b4eff;
+  color: #002c5f;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
