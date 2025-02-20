@@ -46,7 +46,7 @@ const ReviewLifeShotCard = ({ placeInfo }) => {
           // 리뷰작성 잘했다
           <button className="review-option-button">
             <div className="option-box">
-              <div className="option-text">
+              <div className="option-text-finsh">
                 <h3>리뷰작성 완료</h3>
               </div>
             </div>
@@ -56,7 +56,7 @@ const ReviewLifeShotCard = ({ placeInfo }) => {
           <button className="review-option-button" onClick={handleOptionClick}>
             <div className="option-box">
               <div className="option-text">
-                <h3>리뷰작성 해라</h3>
+                <h3>리뷰 작성하러 가기</h3>
               </div>
             </div>
           </button>
@@ -64,15 +64,19 @@ const ReviewLifeShotCard = ({ placeInfo }) => {
       </div>
 
        {/* 인생네컷 */}
-      <div className="review-options">
+       {(placeInfo.reviewWritten) &&(
+        <div className="review-options">
         <button className="review-option-button" onClick={handlelifeshot}>
           <div className="option-box">
             <div className="option-text">
-              <h3>인생네컷 만들어라</h3>
+              <h3>인생네컷 제작하러 가기</h3>
             </div>
           </div>
         </button>
       </div>
+
+       )}
+      
     </div>
   );
 };
