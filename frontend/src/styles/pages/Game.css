@@ -1,12 +1,14 @@
 .game-event-container {
-  background-color: #7E71FC; /* 연한 베이지색 */
   width: 100vw;
-  height: 100vh;
+  height: calc(var(--vh) * 100); /* 🔥 동적으로 높이 설정 */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #f5f5f5;
 }
+
 
 .present {
   display: flex;
@@ -336,7 +338,7 @@ font-weight: bold;
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.2);  */
   /* border-radius: 5px; */
   text-align: center;
-  padding: 10px;
+  padding: 5px;
   
 }
 
