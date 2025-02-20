@@ -24,6 +24,7 @@ const Swipe = ({type, setPopupId}) => {
         console.log("저장완료")
       }
     } catch (error) {
+      setCards([]);
       console.error("❌ Failed to load reservations", error);
     } finally {
       setLoading(false); // 로딩 완료
@@ -150,36 +151,37 @@ const Swipe = ({type, setPopupId}) => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      {cards.slice().reverse().map((card, index) => {
-        const isActive = index === currentIndex;
-        const isNext = index === currentIndex + 1;
-        const isPrevious = index === currentIndex - 1;
+      {cards.length === 0 ? (
+  <p className="no-reservations">예약된 내역이 없습니다.</p>
+) : (
+  cards.slice().reverse().map((card, index) => {
+    const isActive = index === currentIndex;
+    const isNext = index === currentIndex + 1;
+    const isPrevious = index === currentIndex - 1;
 
-        return (
-          <div
-            key={card.reservationId}
-            className={`slider-card ${isActive ? "slider-active" : ""} ${isNext ? "slider-next" : ""} ${isPrevious ? "slider-previous" : ""}`}
-            style={{
-              transform: isActive
-                ? "translateX(0%) scale(1)"
-                : isNext
-                ? "translateX(100%) scale(0.9)"
-                : isPrevious
-                ? "translateX(-100%) scale(0.9)"
-                : index < currentIndex
-                ? "translateX(-200%) scale(0.8)"
-                : "translateX(200%) scale(0.8)",
-              opacity: isActive || isNext || isPrevious ? 1 : 0,
-            }}
-          >
-            {/* ReservationCard에 각 카드의 데이터를 prop으로 전달 */}
-            {(type=="쿠폰")&&(<CouponCard reservation={card} />)}
-            {(type=="예약")&&(<ReservationCard reservation={card} />)}
-            
-            
-          </div>
-        );
-      })}
+    return (
+      <div
+        key={card.reservationId}
+        className={`slider-card ${isActive ? "slider-active" : ""} ${isNext ? "slider-next" : ""} ${isPrevious ? "slider-previous" : ""}`}
+        style={{
+          transform: isActive
+            ? "translateX(0%) scale(1)"
+            : isNext
+            ? "translateX(100%) scale(0.9)"
+            : isPrevious
+            ? "translateX(-100%) scale(0.9)"
+            : index < currentIndex
+            ? "translateX(-200%) scale(0.8)"
+            : "translateX(200%) scale(0.8)",
+          opacity: isActive || isNext || isPrevious ? 1 : 0,
+        }}
+      >
+        {(type === "쿠폰") && (<CouponCard reservation={card} />)}
+        {(type === "예약") && (<ReservationCard reservation={card} />)}
+      </div>
+    );
+  })
+)}
       {isWebVersion && (
         <>
           <button
