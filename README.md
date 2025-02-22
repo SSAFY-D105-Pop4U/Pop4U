@@ -13,6 +13,9 @@
 ##### 2주차
 ![alt text](/readme_file/업무분담표_2주차.png)
 
+## 시스템 아키텍처
+![alt text](/readme_file/시스템아키텍처.png)
+
 
 ## ⚒️ 기능 소개
 
