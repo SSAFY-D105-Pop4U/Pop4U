@@ -20,17 +20,18 @@
 
 ## 👨‍👩‍👧‍👦 팀원 소개
 
-### Android
+### Frontend
 
-| [김동욱](https://github.com/) | [이상혁](https://github.com/hyuksanglee)|[김윤지](https://github.com/) |
+### 💻 Frontend
+
+| 김동욱 | 이상혁 | 김윤지 |
 |:---------:|:---------:|:---------:|
-|  ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4)
+| [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/greenerrry" height=200 width=200> <br/> @greenerrry](https://github.com/greenerrry) |
 
-### Backend
-|[나용성(팀장)](https://github.com/omgomg333) | [김정모](https://github.com/) | [정민규](https://github.com/) 
+### 🗃️ Backend
+| 나용성(팀장) | 김정모 | 정민규
 |:--------:|:---------:|:---------:|
-| ![](https://avatars.githubusercontent.com/u/133757508?v=4)  | ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4) |
-
+| [<img src="https://avatars.githubusercontent.com/omgomg333" height=200 width=200> <br/> @omgomg333](https://github.com/omgomg333) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/Chungmingyu" height=200 width=200> <br/> @Chungmingyu](https://github.com/Chungmingyu) |
 
 ## 📚 기술 스택
 
