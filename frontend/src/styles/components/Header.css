@@ -1,24 +1,43 @@
-.header {
-  display: flex;
-  align-items: center; /* 세로 가운데 정렬 */
-  justify-content: space-between; /* 가로로 양 끝에 배치 */
-  padding: 3vw; /* 패딩 추가 */
-  height: 60px;
-}
-
-.back-icon {
-  width: auto; /* 아이콘 크기 조정 */
-  height: 3.5vw; /* 아이콘 크기 조정 */
-  max-height: 30px; /* 아이콘 크기 조정 */
-}
-
 .header1 {
-  position: absolute; /* 부모(.header)를 기준으로 정렬 */
-  left: 50%; /* 화면 중앙으로 이동 */
-  transform: translateX(-50%); /* 가운데 정렬 */
-  margin: 0;
+  display: block;
+  padding: 20px;
+  font-weight: bold;
+  position: relative;
+  width: 90%;
+  /* background-color:	#7796CB ; */
+  
+  /* 가운데 정렬 */
+  margin: 0 auto; /* 좌우 마진을 auto로 설정하여 가운데 정렬 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+
+  /* 한 줄 제한 및 넘치면 ... 처리 */
+  white-space: nowrap;  /* 줄 바꿈 방지 */
+  overflow: hidden;      /* 넘치는 부분 숨김 */
+  text-overflow: ellipsis; /* 넘치는 부분 "..." 처리 */
+}
+
+
+
+
+.back-button {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
   padding: 0;
-  font-size: clamp(8px, 3.5vw, 30px); /* 반응형 크기 조정 */
-  text-align: center;
-  white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.back-button img {
+  width: 24px;
+  height: 24px;
+}
+
+.header-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: bold;
+  white-space: nowrap;
 }

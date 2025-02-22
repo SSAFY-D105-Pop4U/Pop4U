@@ -38,7 +38,8 @@
 }
 
 .date-selector-item.selected {
-  background-color: #eae4ff;
+  background-color: #79a1d0;
+  color: #ffffff;
 }
 
 .date-selector-date {

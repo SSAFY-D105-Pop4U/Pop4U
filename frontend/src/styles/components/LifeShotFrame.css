@@ -1,0 +1,62 @@
+.lifeshot-frame {
+  width: 96%;
+  max-width: 414px;
+  margin: 0 auto;
+}
+
+.frame-container {
+  background-color: var(--frame-background-color, #89B5AF);  /* 기본값으로 #89B5AF 사용 */
+  padding: 10px 10px 50px;
+  aspect-ratio: 3/4;  /* 세로로 긴 비율 */
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* 2x2 그리드 */
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  height: 100%;
+  padding: 10px;
+}
+
+.photo-slot { 
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white; /* 흰색 배경 추가 */
+  border-radius: 4px; /* 모서리 둥글게 */
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  position: relative; /* 포지션 추가 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px; /* 모서리 둥글게 */
+  overflow: hidden; /* 이미지가 영역을 벗어나지 않도록 */
+}
+
+.photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지 비율 유지하면서 영역 채우기 */
+  position: absolute; /* 절대 위치로 설정 */
+  top: 0;
+  left: 0;
+}
+
+.photo-slot.drag-over {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 2px dashed #999;
+}
+
+/* 빈 placeholder 스타일 */
+.photo-placeholder:empty {
+  background-color: #f0f0f0;
+  border: 2px dashed #ddd;
+}
+

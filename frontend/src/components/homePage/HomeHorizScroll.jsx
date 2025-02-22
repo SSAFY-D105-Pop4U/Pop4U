@@ -2,13 +2,13 @@ import { useRef, useState, useEffect } from "react";
 import popup1Image from "../../assets/images/popup1.png";
 import "../../styles/components/HomeHorizScroll.css";
 import { useNavigate } from "react-router-dom";
+
+
 import Drag from "../../hooks/Drag";
 
 const HomeHorizScroll = ({ popups }) => {
+
   const nav = useNavigate();
-
-  console.log(popups);
-
   const handleCardClick = (index) => {
     nav(`/detail?popupId=${index}`);
   };

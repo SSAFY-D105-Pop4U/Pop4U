@@ -10,6 +10,11 @@
     border-radius: 40px;
     position: relative;
     overflow: hidden;
+    
+}
+
+.signup-check{
+    -webkit-appearance: checkbox;
 }
 
 /* 회원가입 박스 */
@@ -41,6 +46,7 @@
     font-size: 12px;
     padding: 10px;
     margin-bottom: 15px;
+    color: black;
     outline: none;
 }
 
@@ -53,11 +59,12 @@
 .signup-button {
     width: 100%;
     height: 42px;
-    background: #DBCCFF;
+    background: #002c5f;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.3);
     color: black;
     font-size: 15px;
+    color: white;
     text-align: centerㅍ;
     cursor: pointer;
     transition: background 0.3s;
@@ -67,4 +74,24 @@
 .signup-button:hover {
     background: #7d43a1;
     color: white;
+}
+.checkbox{
+    margin: 10px;
+    display: flex;
+    gap: 60px;
+}
+.user{
+    display:flex;
+    gap: 5px;
+}
+.manager{
+    display:flex;
+    gap: 5px;
+}
+
+#user{
+    margin-top: 3px;
+}
+#manager{
+    margin-top: 3px;
 }

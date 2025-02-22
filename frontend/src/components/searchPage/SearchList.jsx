@@ -1,39 +1,80 @@
 import '../../styles/components/SearchList.css'
-import Divider from '../public/Divider'
-const SearchList = () => {
-    const searchResults = [
-        {
-          title: "2025 아이파크몰 키보드 페스티벌",
-          time: "11:00 ~ 20:00",
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/46798713%2C0c53%2C4b22%2Ca60d%2C447074851f7f", // Replace with actual image URLs
-        },
-        {
-          title: "캡틴 아메리카 : 브레이브 뉴 월드asdfasdfsaf",
-          time: "11:00 ~ 20:00",
-          image: "https://d8nffddmkwqeq.cloudfront.net/store/46798713%2C0c53%2C4b22%2Ca60d%2C447074851f7f",
-        },
-      ];
-    return (
-        <div>
-        <div className="search-results">
-          {searchResults.map((result, index) => (
-            <div>
-               
-            <div className="result-item" key={index}>
-              <img src={result.image} alt={result.title} className="result-image" />
-              <div className="result-info">
-                <h3 className="result-title">{result.title}</h3>
-                <p className="result-time">{result.time}</p>
-              </div>
+import Divider from '../basic/Divider'
+import { useEffect, useState } from "react";
+import { getSearch } from "../../apis/api/api.js";
+import { useNavigate } from "react-router-dom";
+
+const SearchList = ({ searchQuery }) => {
+  const [searchData, setSearchData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const nav = useNavigate();
+
+  const handleCardClick = (popupId) => {
+    nav(`/detail?popupId=${popupId}`);
+  };
+    
+  useEffect(() => {
+    // 검색어가 비어있으면 API 호출하지 않음
+    if (!searchQuery?.trim()) {
+      setSearchData([]);
+      return;
+    }
+
+    setIsLoading(true);
+    const fetchPopups = async () => {
+      try {
+        const data = await getSearch(searchQuery);
+        setSearchData(data);
+      } catch (error) {
+        console.error("Failed to load popups:", error);
+        setSearchData([]); // 에러 시 데이터 초기화
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  
+    const timeoutId = setTimeout(() => {
+      fetchPopups();
+    }, 500);
+  
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
+
+  if (isLoading) {
+    return <div className="search-results">검색 중...</div>;
+  }
+
+  // 검색 결과가 없을 때
+  if (searchData.length === 0 && searchQuery?.trim()) {
+    return <div className="search-results">검색 결과가 없습니다.</div>;
+  }
+
+  return (
+    <div className="search-results">
+      {searchData.map((result, index) => (
+        <div 
+          key={result.popupId}
+          className="result-wrapper"
+          style={{ animationDelay: `${index * 0.1}s` }}
+          onClick={() => handleCardClick(result.popupId)}
+        >
+          <div className="result-content">
+            <div className="result-info">
+              <h3 className="result-title">{result.popupName}</h3>
+              <p className="result-time">{result.popupStartDate}~{result.popupEndDate}</p>
             </div>
-            <Divider height="2  px" top="10px" bottom="10px" />
+            <div className="result-image-container">
+              <img 
+                src={result.popupImages[0]} 
+                alt={result.popupName} 
+                className="result-image"
+              />
             </div>
-          ))}
+          </div>
         </div>
-        </div>
-    )
+      ))}
+    </div>
+  );
+};
 
-}
-
-export default SearchList
-
+export default SearchList;

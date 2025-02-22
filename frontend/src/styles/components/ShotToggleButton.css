@@ -1,0 +1,42 @@
+.toggle-container {
+    display: flex;
+    padding-top: 20px;
+    position: relative;
+    margin: 10px 2%;
+    width: auto;
+    color: white;
+    background: #000000;
+    border-radius: 30px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .toggle-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(246, 245, 245);
+    z-index: 1;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .toggle-btn.active {
+    color: rgb(255, 255, 255); /* 선택된 버튼 텍스트 색상 */
+  }
+  
+  .toggle-background {
+    position: absolute;
+    width: 33.33%;
+    height: 10%;
+    background: #d1d1d1;
+    border-radius: 30px;
+    transition: transform 0.3s ease-in-out;
+    z-index: 0;
+    bottom: 0;
+  }
+  

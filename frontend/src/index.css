@@ -1,7 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
-
 body {
-  font-family: "Noto Sans KR", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,7 +13,7 @@ div {
   -webkit-tap-highlight-color: transparent; /* 터치 하이라이트 제거 */
   box-shadow: none; /* 포커스 그림자 제거 */
   box-sizing: border-box;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: "Pretendard", sans-serif !important;
 }
 
 /* 포커스 제거 기본 스타일 */
@@ -40,3 +37,4 @@ textarea {
   margin: 0;
   padding: 0;
 }
+

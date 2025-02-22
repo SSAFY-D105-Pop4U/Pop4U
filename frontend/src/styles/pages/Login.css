@@ -53,15 +53,16 @@
   /* margin-bottom: 15px; */
 }
 
-.input-field {
+.login-input-field {
   width: 100%;
   height: 42px;
+  margin-bottom: 10px;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   font-size: 11px;
   font-family: "Noto Sans", sans-serif;
   font-weight: 300;
-  color: #d9d9d9;
+  color: #000000;
   margin-left: 10;
   padding: 0;
   /* text-align: center; */
@@ -69,22 +70,23 @@
 
 /* 로그인 버튼 */
 .login-button {
-  width: 254px;
+  width: 100%;
   height: 42px;
-  background: #dbccff;
+  background: #002c5f;
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  color: black;
+  color: rgb(255, 255, 255);
   font-size: 15px;
+  
   font-family: "Noto Sans", sans-serif;
-  font-weight: 300;
+  font-weight: bold;
   text-align: center;
   margin-top: 10px;
   cursor: pointer;
 }
 
 .login-button:hover {
-  background: #7d43a1;
+  background:#5581b4;
 }
 
 /* 아이디 기억하기 & 비밀번호 찾기 */
