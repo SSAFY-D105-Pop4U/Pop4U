@@ -8,10 +8,6 @@
 
 </div>
 
-## 서비스 설명
-🗣 팝업스토어 방문자들이 가장 궁금해하는 실시간 대기 시간과 한정판 재고 현황을 빠르게 확인할 수 있는 플랫폼<br/>
-🗣 브랜드와 방문자를 연결하고 팝업스토어 경험을 디지털화하는 통합 플랫폼
-
 ## ✨ 프로젝트 소개
 
 - 대기 시간 실시간 공유 및 입장 예약 가능해요.
@@ -35,7 +31,7 @@
 | ![](https://avatars.githubusercontent.com/u/133757508?v=4)  | ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4) |
 
 
-## 기술 스택
+## 📚 기술 스택
 
 ### Frontend
 
@@ -64,7 +60,7 @@
 
 <br/>
 
-## 시스템 아키텍처
+## 🔨 시스템 아키텍처
 ![alt text](/readme_file/시스템아키텍처.png)
 
 
