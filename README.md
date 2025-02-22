@@ -24,14 +24,17 @@
 
 ### 💻 Frontend
 
-| 김동욱 | 이상혁 | 김윤지 |
+| <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김동욱</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">이상혁</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김윤지</div> |
 |:---------:|:---------:|:---------:|
 | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/greenerrry" height=200 width=200> <br/> @greenerrry](https://github.com/greenerrry) |
 
 ### 🗃️ Backend
-| 나용성(팀장) | 김정모 | 정민규
+| <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">나용성(팀장)</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김정모</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">정민규</div> |
 |:--------:|:---------:|:---------:|
 | [<img src="https://avatars.githubusercontent.com/omgomg333" height=200 width=200> <br/> @omgomg333](https://github.com/omgomg333) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/Chungmingyu" height=200 width=200> <br/> @Chungmingyu](https://github.com/Chungmingyu) |
+
+
+
 
 ## 📚 기술 스택
 
