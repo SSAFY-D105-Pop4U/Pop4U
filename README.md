@@ -1,17 +1,38 @@
-## 기능 명세서
-![alt text](/readme_file/기능명세서_1.png)
-![alt text](/readme_file/기능명세서_2.png)
+<div align="center">
 
-상세 내역 : https://florentine-orchestra-549.notion.site/1734e33243408152bc02ef1a8bafbeed?pvs=4
+# Pop4U 
+
+> **당신을 위한 팝업스토어**
+
+<img src="./readme_file/로고.png" width="30%" height="30%" />
+
+</div>
+
+## 서비스 설명
+🗣 팝업스토어 방문자들이 가장 궁금해하는 실시간 대기 시간과 한정판 재고 현황을 빠르게 확인할 수 있는 플랫폼<br/>
+🗣 브랜드와 방문자를 연결하고 팝업스토어 경험을 디지털화하는 통합 플랫폼
+
+## ✨ 프로젝트 소개
+
+- 대기 시간 실시간 공유 및 입장 예약 가능해요.
+- 기다리는 동안 위한 미니게임 즐길 수 있어요.
+- 미니게임을 통해 프리패스권을 획득할 수 있어요.
+- 리뷰를 작성하면 팝업스토어 아이콘과 함께 인생네컷을 찍을 수 있어요.
+🗣 팝업스토어 방문자들이 가장 궁금해하는 실시간 대기 시간과 한정판 재고 현황을 빠르게 확인할 수 있는 플랫폼
 
 
-    
-## 업무 분담표
-##### 1주차
-![alt text](/readme_file/업무분담표_1주차.png)
+## 👨‍👩‍👧‍👦 팀원 소개
 
-##### 2주차
-![alt text](/readme_file/업무분담표_2주차.png)
+### Android
+
+| [김동욱](https://github.com/) | [이상혁](https://github.com/hyuksanglee)|[김윤지](https://github.com/) |
+|:---------:|:---------:|:---------:|
+|  ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4)
+
+### Backend
+|[나용성(팀장)](https://github.com/omgomg333) | [김정모](https://github.com/) | [정민규](https://github.com/) 
+|:--------:|:---------:|:---------:|
+| ![](https://avatars.githubusercontent.com/u/133757508?v=4)  | ![](https://avatars.githubusercontent.com/u/141925249?v=4) | ![](https://avatars.githubusercontent.com/u/141925249?v=4) |
 
 
 ## 기술 스택
@@ -83,3 +104,24 @@
 |모바일|데스크탑|
 |:---:|:---:|
 | <img src="/readme_file/gif_file/인생네컷_모바일.gif" width=200 height=400/> | <img src="/readme_file/gif_file/인생네컷_데스크탑.gif" width=800 height=400/>
+
+
+## 기능 명세서
+![alt text](/readme_file/기능명세서_1.png)
+![alt text](/readme_file/기능명세서_2.png)
+
+상세 내역 : https://florentine-orchestra-549.notion.site/1734e33243408152bc02ef1a8bafbeed?pvs=4
+
+
+    
+## 업무 분담표
+##### 1주차
+![alt text](/readme_file/업무분담표_1주차.png)
+
+##### 2주차
+![alt text](/readme_file/업무분담표_2주차.png)
+
+## 📑 산출물
+|API명세서|디자인|요구사항정의서|ERD|시퀀스다이어그램|
+|:---:|:---:|:---:|:---:|:---:|
+|[📒API명세서](https://www.notion.so/API-1734e33243408101a864d05f1b5b561c?pvs=4)|[🎨디자인](https://www.figma.com/design/7HCVQXL1kvtf20FxEJ3bKu/pop4U-%ED%94%BC%EA%B7%B8%EB%A7%88?node-id=0-1&p=f&t=nOpZQAzrINfi5gXk-0)|[🧾요구사항정의서](https://www.notion.so/1734e33243408152bc02ef1a8bafbeed?pvs=4)|[⚙ERD](https://www.erdcloud.com/d/AN2oyCaGr9Lx8zf4C)|[🕐흐름도](https://www.figma.com/board/1sexUS41EobeTiVfMIHbOK/pop4U-%ED%9D%90%EB%A6%84%EB%8F%84?t=nOpZQAzrINfi5gXk-0)|
