@@ -26,7 +26,8 @@
 
 | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김동욱</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">이상혁</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김윤지</div> |
 |:---------:|:---------:|:---------:|
-| [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/greenerrry" height=200 width=200> <br/> @greenerrry](https://github.com/greenerrry) |
+| [<img src="https://avatars.githubusercontent.com/okukay" height=200 width=200> <br/> @okukay](https://github.com/okukay) 
+| [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/greenerrry" height=200 width=200> <br/> @greenerrry](https://github.com/greenerrry) |
 
 ### 🗃️ Backend
 | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">나용성(팀장)</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김정모</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">정민규</div> |
@@ -40,7 +41,8 @@
 
 ### Frontend
 
-![JavaScript](https://img.shields.io/badge/JavaScript-3178C6?style=flat-square&logo=javascript&logoColor=white) 
+![JavaScript](https://img.shields.io/badge/JavaScript-3178C6?style=flat-square&logo=javascript&logoColor=white)
+![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white) 
 ![Vite](https://img.shields.io/badge/Vitet-3178C6?style=flat-square&logo=vite&logoColor=white) 
 ![FCM](https://img.shields.io/badge/FCM-DD2C00?style=flat-square&logo=firebase&logoColor=white) 
