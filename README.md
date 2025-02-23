@@ -31,7 +31,7 @@
 ### 🗃️ Backend
 | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">나용성(팀장)</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김정모</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">정민규</div> |
 |:--------:|:---------:|:---------:|
-| [<img src="https://avatars.githubusercontent.com/omgomg333" height=200 width=200> <br/> @omgomg333](https://github.com/omgomg333) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) | [<img src="https://avatars.githubusercontent.com/Chungmingyu" height=200 width=200> <br/> @Chungmingyu](https://github.com/Chungmingyu) |
+| [<img src="https://avatars.githubusercontent.com/omgomg333" height=200 width=200> <br/> @omgomg333](https://github.com/omgomg333) | [<img src="https://avatars.githubusercontent.com/mo-jeong" height=200 width=200> <br/> @mo-jeong](https://github.com/mo-jeong) | [<img src="https://avatars.githubusercontent.com/Chungmingyu" height=200 width=200> <br/> @Chungmingyu](https://github.com/Chungmingyu) |
 
 
 
