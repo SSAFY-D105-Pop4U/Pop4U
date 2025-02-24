@@ -1,6 +1,7 @@
 package com.d105.pop4u.global.config.jwt;
 
 import com.d105.pop4u.domain.user.entity.User;
+import com.d105.pop4u.domain.user.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -24,6 +26,7 @@ import java.util.Set;
 public class TokenProvider {
 
     private final JwtProperties jwtProperties;
+    private final UserRepository userRepository;
 
     public String generateToken(User user, Duration expiredAt) {
 //        log.info("jwtSecret", jwtProperties.getSecretKey());
@@ -35,15 +38,18 @@ public class TokenProvider {
     private String makeToken(Date expiry, User user) {
         Date now = new Date();
 
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setIssuer(jwtProperties.getIssuer())
                 .setIssuedAt(now)
                 .setExpiration(expiry)
-                .setSubject(user.getUserEmail())
-                .claim("id", user.getUserId())
+                .setSubject(user.getUserEmail()) // `sub`에 이메일 저장
+                .claim("id", user.getUserId()) // `id` 클레임 저장
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
                 .compact();
+
+        System.out.println("Generated Token: " + token);
+        return token;
     }
 
     public boolean validToken(String token) {
@@ -61,10 +67,14 @@ public class TokenProvider {
 
     public Authentication getAuthentication(String token) {
         Claims claims = getClaims(token);
+        System.out.println("Extracted claims: " + claims);
+        String userEmail = claims.getSubject();
+        // 이메일로 DB에서 사용자 조회
+        User user = userRepository.findByUserEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + userEmail));
         Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject
-                (), "", authorities), token, authorities);
+        return new UsernamePasswordAuthenticationToken(user, token, authorities);
     }
 
     public Long getUserId(String token) {
@@ -77,5 +87,10 @@ public class TokenProvider {
                 .setSigningKey(jwtProperties.getSecretKey())
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    public String getUserNickname(String token) {
+        Claims claims = getClaims(token);
+        return claims.get("nickname", String.class);
     }
 }

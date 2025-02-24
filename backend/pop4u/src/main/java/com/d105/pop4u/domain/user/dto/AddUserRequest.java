@@ -10,4 +10,6 @@ public class AddUserRequest {
     private String userPassword;
     private String userName;
     private String userTelephone;
+    private Integer userStatus;
+
 }

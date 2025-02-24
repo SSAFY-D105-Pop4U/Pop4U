@@ -5,6 +5,8 @@ import com.d105.pop4u.domain.category.entity.Category;
 import com.d105.pop4u.domain.category.repository.CategoryRepository;
 import com.d105.pop4u.domain.category.entity.PopupCategory;
 import com.d105.pop4u.domain.category.repository.PopupCategoryRepository;
+import com.d105.pop4u.domain.chat.service.ChatRoomService;
+import com.d105.pop4u.domain.search.service.SearchRankingService;
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.store.entity.PopupStoreImg;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -31,33 +34,34 @@ public class PopupStoreService {
     private final PopupCategoryRepository popupCategoryRepository;
     private final PopupStoreImgRepository popupStoreImgRepository;
     private final S3Service s3Service;
-    private final String UPLOAD_DIR = System.getProperty("user.home") + "/uploads/popup/";
-
+    private final ChatRoomService chatRoomService;
+    private final SearchRankingService searchRankingService;
     // ===============================
     // 조회 메서드들
     // ===============================
-    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores(boolean fetchAll) {
         Map<String, List<PopupStoreDTO>> result = new HashMap<>();
 
-        // 전체 목록
-        result.put("all", popupStoreRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+        if (fetchAll) {
+            // 전체 목록
+            result.put("all", popupStoreRepository.findAll().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
 
-        // 시작일 기준 정렬
-        result.put("byStartDate", popupStoreRepository.findAllByOrderByPopupStartDateDesc().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+        } else {
+            // Top 10 목록
+            result.put("byStartDate", popupStoreRepository.findTop10ByOrderByPopupStartDateDesc().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
 
-        // 종료일 기준 정렬
-        result.put("byEndDate", popupStoreRepository.findAllByOrderByPopupEndDateDesc().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+            result.put("byEndDate", popupStoreRepository.findTop10ByOrderByPopupEndDateDesc().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
 
-        // 조회수 기준 정렬
-        result.put("byViewCount", popupStoreRepository.findAllByOrderByPopupViewCountDesc().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList()));
+            result.put("byViewCount", popupStoreRepository.findTop10ByOrderByPopupViewCountDesc().stream()
+                    .map(this::convertToDTO)
+                    .collect(Collectors.toList()));
+        }
 
         return result;
     }
@@ -82,7 +86,7 @@ public class PopupStoreService {
     }
 
     public List<PopupStoreDTO> getPopupStoresByUser(Long userId) {
-        return popupStoreRepository.findByUserId(userId).stream()
+        return popupStoreRepository.findByUser_UserId(userId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -94,6 +98,9 @@ public class PopupStoreService {
     public PopupStoreDTO createPopupStore(PopupStoreDTO dto, List<MultipartFile> images) throws IOException {
         // 1. 팝업스토어 저장
         PopupStore popupStore = popupStoreRepository.save(dto.toEntity());
+
+        // 채팅방 자동 생성 (팝업스토어당 1개)
+        chatRoomService.createChatRoomForPopup(popupStore);
 
         // 2. 이미지 업로드
         if (images != null && !images.isEmpty()) {
@@ -117,6 +124,7 @@ public class PopupStoreService {
         if (dto.getCategoryIds() != null) {
             handleCategories(popupStore, dto.getCategoryIds());
         }
+
 
         return getPopupStoreById(popupStore.getPopupId());
     }
@@ -162,6 +170,7 @@ public class PopupStoreService {
     public void deletePopupStore(Long popupId) {
         PopupStore popupStore = findPopupStore(popupId);
         deleteAllImages(popupStore);
+        chatRoomService.deleteChatRoomByPopup(popupStore); // ✅ 채팅방 자동 삭제
         popupStoreRepository.delete(popupStore);
     }
 
@@ -243,6 +252,23 @@ public class PopupStoreService {
             }
         }
         popupStoreImgRepository.deleteByPopupStore(store);
+    }
+
+    public List<PopupStoreDTO> searchPopupStores(String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        // 검색어 카운트 증가
+        searchRankingService.incrementSearchCount(keyword.trim().toLowerCase());
+
+        // 검색어 전체를 하나의 키워드로 사용
+        keyword = keyword.trim().toLowerCase();
+
+        return popupStoreRepository.searchByKeywordIncludingCategories(keyword)
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 }
 

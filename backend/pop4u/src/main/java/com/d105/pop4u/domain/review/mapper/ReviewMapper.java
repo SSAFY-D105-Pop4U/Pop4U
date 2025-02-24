@@ -25,7 +25,8 @@ public class ReviewMapper {
                 review.getReviewContent(),
                 review.getReviewRating(),
                 review.getReviewImg(),
-                review.getReviewCreatedAt().toLocalDate()
+                review.getReviewCreatedAt().toLocalDate(),
+                review.getUser().getUserNickname() // 추가된 닉네임
         );
     }
 

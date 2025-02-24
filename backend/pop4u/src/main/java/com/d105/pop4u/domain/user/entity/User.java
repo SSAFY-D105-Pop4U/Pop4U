@@ -110,5 +110,8 @@ public class User implements UserDetails {
         this.userRefreshToken = refreshtoken;
         return this;
     }
-    
+
+    public String getUserName() {
+        return userName;
+    }
 }

@@ -1,5 +1,6 @@
 package com.d105.pop4u.domain.review.entity;
 
+import com.d105.pop4u.domain.reservation.entity.Reservation;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.user.entity.User;
 import jakarta.persistence.*;
@@ -31,6 +32,10 @@ public class Review {
     @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩 설정
     @JoinColumn(name = "popup_id", nullable = false) // 외래 키 설정
     private PopupStore popupId; // 팝업 엔티티
+
+    @ManyToOne(fetch = FetchType.LAZY) // 지연 로딩 설정
+    @JoinColumn(name = "reservation_id", nullable = false) // 외래 키 설정
+    private Reservation reservationId; // 예약 엔티티
 
     @Column(name = "review_content", nullable = false)
     private String reviewContent; // 리뷰 내용

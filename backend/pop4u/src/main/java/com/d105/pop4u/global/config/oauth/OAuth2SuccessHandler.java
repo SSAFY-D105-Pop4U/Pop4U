@@ -24,9 +24,11 @@ import java.time.Duration;
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     public static final String REFRESH_TOKEN_COOKIE_NAME = "refresh_token";
+    public static final String ACCESS_TOKEN_COOKIE_NAME = "access_token";  // 추가
     public static final Duration REFRESH_TOKEN_DURATION = Duration.ofDays(14);
     public static final Duration ACCESS_TOKEN_DURATION = Duration.ofDays(1);
-    public static final String REDIRECT_PATH = "/user/login";
+//    public static final String REDIRECT_PATH = "/user/login";
+    public static final String REDIRECT_PATH = "https://i12d105.p.ssafy.io:5173/";  // 프론트엔드 성공 페이지 URL
 
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
@@ -43,15 +45,39 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         addRefreshTokenToCookie(request, response, refreshToken);
 
         String accessToken = tokenProvider.generateToken(user, ACCESS_TOKEN_DURATION);
-        String targetUrl = getTargetUrl(accessToken);
+//        String targetUrl = getTargetUrl(accessToken);
+
+        Long userId = tokenProvider.getUserId(accessToken);
+        String userNickname = tokenProvider.getUserNickname(accessToken);
 
         // 토큰 정보를 세션에 임시 저장
-        request.getSession().setAttribute("tokens", new TokenResponse(accessToken, refreshToken));
+        request.getSession().setAttribute("tokens", new TokenResponse(accessToken, refreshToken, userId, userNickname));
+
+
+        // Access Token을 HTTP Only 쿠키에 저장
+        addAccessTokenToCookie(response, accessToken);
+
+        // Authorization 헤더에도 Access Token 추가
+        response.setHeader("Authorization", "Bearer " + accessToken);
+
+        // 응답 헤더 설정 (CORS 관련)
+        response.setHeader("Access-Control-Allow-Origin", "https://i12d105.p.ssafy.io:5173/");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Expose-Headers", "Authorization");
+
 
         clearAuthenticationAttributes(request, response);
 
-        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+//        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+        // 프론트엔드의 성공 페이지로 리다이렉트
+        getRedirectStrategy().sendRedirect(request, response, REDIRECT_PATH);
     }
+
+    private void addAccessTokenToCookie(HttpServletResponse response, String accessToken) {
+        int cookieMaxAge = (int) ACCESS_TOKEN_DURATION.toSeconds();
+        CookieUtil.addCookie(response, ACCESS_TOKEN_COOKIE_NAME, accessToken, cookieMaxAge);
+    }
+
 
     private void saveRefreshToken(Long userId, String newRefreshToken) {
         User user = userRepository.findByUserId(userId)
