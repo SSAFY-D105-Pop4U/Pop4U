@@ -54,7 +54,9 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=MongoDB&logoColor=white)
 ![Kafka](https://img.shields.io/badge/Apache%20Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white)
 ![Redis](https://img.shields.io/badge/redis-FF4438?style=flat-square&logo=redis&logoColor=white)
-![Rembg](https://img.shields.io/badge/rembg-FF4438?style=flat-square&logo=rembg&logoColor=white)
+[![Python](https://img.shields.io/badge/Python-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![rembg](https://img.shields.io/badge/rembg-brightgreen?style=flat-square&logo=python&logoColor=white)](https://github.com/danielgatis/rembg)
 
 ### DevOps
 
