@@ -72,7 +72,7 @@ const HomeHorizScroll = () => {
   ];
 
   const handleCardClick = (index) => {
-    console.log(`Card ${index + 1} clicked!`);
+    // console.log(`Card ${index + 1} clicked!`);
     // 여기에 원하는 액션 추가 (예: 모달 열기, 상세 페이지 이동)
   };
 

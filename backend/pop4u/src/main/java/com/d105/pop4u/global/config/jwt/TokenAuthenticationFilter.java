@@ -25,15 +25,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader(HEADER_AUTHORIZATION);
         String token = getAccessToken(authorizationHeader);
 
-        if (token != null) {
-            System.out.println("Received token: " + token); // 로그 추가
-            if (tokenProvider.validToken(token)) {
-                Authentication authentication = tokenProvider.getAuthentication(token);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                System.out.println("Authentication set for token: " + token); // 로그 추가
-            } else {
-                System.out.println("Invalid token: " + token); // 로그 추가
-            }
+        if (tokenProvider.validToken(token)) {
+            Authentication authentication = tokenProvider.getAuthentication(token);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
     }

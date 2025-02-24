@@ -26,11 +26,11 @@
 
 @keyframes slideIn {
   from {
-    transform: translateX(100%);
+    transform: translateX(-100%);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateX(-100%);
     opacity: 1;
   }
 }
@@ -73,31 +73,12 @@
   }
 }
 
-.menu-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  position: relative;
-  padding-top: 10px;
-}
-
-.close-btn {
-  position: absolute;
-  left: 0;
-  top: 0;
-  border: none;
-  background: none;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0;
-}
-
 .profile-section {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 15px 0;
+  padding: 40px 0px 0px;
+  margin-top: -40px;
 }
 
 .profile-icon img {
@@ -119,8 +100,12 @@
 .profile-text {
   display: flex;
   gap: 4px;
-  margin-left: 10px;
-  font-size: 13px;
+  margin-left: px;
+  font-size: 16px;
+}
+
+.profile-text span {
+  margin-right: 5px;
 }
 
 .next-icon {
@@ -135,7 +120,28 @@
 }
 
 .login-text {
-  color: #6b4eff;
+  color: #7796CB;
+  font-weight: bold;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  padding-top: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
 }
 
 .arrow {
@@ -143,15 +149,16 @@
 }
 
 .menu-section {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 15px;
   background: white;
   border-radius: 15px;
-  padding: 20px;
+  padding: 15px;
 }
 
 .menu-section h3 {
   margin: 0;
-  padding: 0 0 15px 0;
+  padding: 0 0 10px 0;
   font-size: 16px;
 }
 
@@ -165,9 +172,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 0;
+  padding: 8px 0;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .menu-section li img {
@@ -180,7 +187,7 @@
   align-items: center;
   text-decoration: none;
   color: inherit;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .menu-section ul li a img {
@@ -188,11 +195,8 @@
 }
 
 .menu-section ul li a:hover {
-  color: #6b4eff;
-}
-
-.profile-text span {
-  margin-right: 5px;
+  color: #002c5f;
+  font-weight: bold;
 }
 
 .logout-section {
@@ -202,7 +206,6 @@
   right: 0;
   padding: 20px;
   text-align: center;
-  background: white;
 }
 
 .logout-button {
@@ -210,7 +213,7 @@
   padding: 15px 0;
   border: none;
   background: none;
-  color: #6b4eff;
+  color: #002c5f;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;

@@ -22,7 +22,6 @@ const Review = ({ reviews }) => {
         <ReviewChart reviewRatings={reviewRatings}/>
       </div>
       <div>
-        {/* 구분선 */}
         <div
           style={{ width: "100%", height: "100%", border: "1px #EFEFF0 solid", marginBottom:"10px"}}
         ></div>

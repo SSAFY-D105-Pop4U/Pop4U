@@ -8,15 +8,30 @@ import WriteReview from "../pages/WriteReview";
 import AreaList from "../pages/AreaList";
 import Search from "../pages/Search";
 import Appointment from "../pages/Appointment";
-import Reservation from "../pages/reservation";
+import Reservation from "../pages/Reservation";
 import UserCategory from "../pages/UserCategory";
+import Recheck from "../pages/Recheck";
+import NewPopupList from "../pages/NewPopupList";
+import EndingPopupList from "../pages/EndingPopupList";
+import TrendingPopupList from "../pages/TrendingPopupList";
+import ReviewLifeShot from "../pages/ReviewLifeShot";
+import Chat from "../pages/Chat";
+import TowHome from "../pages/TowHome"; 
+import TestLifeShot from "../pages/new/LifeShot"
+import Creategame from "../pages/Creategame"
+import LifeShot from "../pages/LifeShot";
+import Game from "../pages/Game"
+import Coupons from "../pages/Coupons"
+import Support from "../pages/Support";
+
+
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<TowHome/>} />             
       <Route path="/login" element={<Login />} />
-      <Route path="/sociallogin" element={<SocialLogin />} />
+      {/* <Route path="/sociallogin" element={<SocialLogin />} /> */}
       <Route path="/signup" element={<Signup />} />
       <Route path="/detail" element={<Detail />} />
       <Route path="/writereview" element={<WriteReview />} />
@@ -25,6 +40,26 @@ const AppRoutes = () => {
       <Route path="/appointment" element={<Appointment />} />
       <Route path="/reservation" element={<Reservation />} />
       <Route path="/usercategory" element={<UserCategory />} />
+
+      <Route path="/newpopups" element={<NewPopupList />} />
+      <Route path="/endingpopups" element={<EndingPopupList />} />
+      <Route path="/trendingpopups" element={<TrendingPopupList />} />
+      
+      <Route path="/recheck" element={<Recheck />} />
+      <Route path="/reviewlifeshot" element={<ReviewLifeShot />} />
+      <Route path="/chat" element={<Chat />} />
+      
+      <Route path="/lifeshot" element={<LifeShot />} />
+
+      <Route path="/twohome" element={<TowHome />} /> 
+      <Route path="/testlife" element={<TestLifeShot />} /> 
+      <Route path="/creategame" element={<Creategame />} />
+      <Route path="/game/Event_Game/:popupId" element={<Game />} />
+      <Route path="/coupons" element={<Coupons />} />
+      <Route path="/support" element={<Support />} />
+      
+
+      
     </Routes>
   );
 };

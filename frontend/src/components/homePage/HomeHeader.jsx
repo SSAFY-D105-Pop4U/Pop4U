@@ -1,7 +1,7 @@
 import logo from "../../assets/icons/smallLogo.png";
-import search from "../../assets/icons/search.png";
-import notice from "../../assets/icons/notice.png";
-import menu from "../../assets/icons/menu.png";
+import search from "../../assets/icons/search.svg";
+import notice from "../../assets/icons/notice.svg";
+import menu from "../../assets/icons/menu.svg";
 import { useNavigate } from "react-router-dom";
 
 const HomeHeader = ({ onMenuClick }) => {

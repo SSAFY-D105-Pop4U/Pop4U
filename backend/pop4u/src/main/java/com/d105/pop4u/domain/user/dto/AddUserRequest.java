@@ -10,6 +10,9 @@ public class AddUserRequest {
     private String userPassword;
     private String userName;
     private String userTelephone;
+<<<<<<< HEAD
     private Integer userStatus;
 
+=======
+>>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
 }

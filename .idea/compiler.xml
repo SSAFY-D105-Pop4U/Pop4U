@@ -10,6 +10,5 @@
         <module name="pop4u.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="23" />
   </component>
 </project>

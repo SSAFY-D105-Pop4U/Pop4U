@@ -14,9 +14,9 @@ const ReviewItem = ({ reviews }) => {
       {reviews.map((review) => (
         <div key={review.reviewId} className="review-item">
           <div className="profile">
-            <img src={basicProfile} alt="프로필" className="profile-img" />
+            {/* <img src={basicProfile} alt="프로필" className="profile-img" /> */}
             <div className="info">
-              <div className="username">{review.userName || "익명"}</div>
+              <div className="username">{review.userNickname || "익명"}</div>
               <div className="rating_day">
                 
                 <div className="rating">
@@ -28,7 +28,7 @@ const ReviewItem = ({ reviews }) => {
               </div>
             </div>
           </div>
-          <div className="comment">{review.reviewContent}</div>
+          <div className="review_comment">{review.reviewContent}</div>
           {review.reviewImg && <img src={review.reviewImg} alt="리뷰 이미지" className="review-img" />}
           <div style={{ width: "100%", height: "1px", border: "1px #EFEFF0 solid", margin: "10px 0" }} />
         </div>

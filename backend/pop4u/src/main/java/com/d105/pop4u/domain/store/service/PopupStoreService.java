@@ -5,8 +5,11 @@ import com.d105.pop4u.domain.category.entity.Category;
 import com.d105.pop4u.domain.category.repository.CategoryRepository;
 import com.d105.pop4u.domain.category.entity.PopupCategory;
 import com.d105.pop4u.domain.category.repository.PopupCategoryRepository;
+<<<<<<< HEAD
 import com.d105.pop4u.domain.chat.service.ChatRoomService;
 import com.d105.pop4u.domain.search.service.SearchRankingService;
+=======
+>>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
 import com.d105.pop4u.domain.store.dto.PopupStoreDTO;
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import com.d105.pop4u.domain.store.entity.PopupStoreImg;
@@ -34,34 +37,38 @@ public class PopupStoreService {
     private final PopupCategoryRepository popupCategoryRepository;
     private final PopupStoreImgRepository popupStoreImgRepository;
     private final S3Service s3Service;
+<<<<<<< HEAD
     private final ChatRoomService chatRoomService;
     private final SearchRankingService searchRankingService;
+=======
+    private final String UPLOAD_DIR = System.getProperty("user.home") + "/uploads/popup/";
+
+>>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
     // ===============================
     // 조회 메서드들
     // ===============================
-    public Map<String, List<PopupStoreDTO>> getAllPopupStores(boolean fetchAll) {
+    public Map<String, List<PopupStoreDTO>> getAllPopupStores() {
         Map<String, List<PopupStoreDTO>> result = new HashMap<>();
 
-        if (fetchAll) {
-            // 전체 목록
-            result.put("all", popupStoreRepository.findAll().stream()
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList()));
+        // 전체 목록
+        result.put("all", popupStoreRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
 
-        } else {
-            // Top 10 목록
-            result.put("byStartDate", popupStoreRepository.findTop10ByOrderByPopupStartDateDesc().stream()
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList()));
+        // 시작일 기준 정렬
+        result.put("byStartDate", popupStoreRepository.findAllByOrderByPopupStartDateDesc().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
 
-            result.put("byEndDate", popupStoreRepository.findTop10ByOrderByPopupEndDateDesc().stream()
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList()));
+        // 종료일 기준 정렬
+        result.put("byEndDate", popupStoreRepository.findAllByOrderByPopupEndDateDesc().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
 
-            result.put("byViewCount", popupStoreRepository.findTop10ByOrderByPopupViewCountDesc().stream()
-                    .map(this::convertToDTO)
-                    .collect(Collectors.toList()));
-        }
+        // 조회수 기준 정렬
+        result.put("byViewCount", popupStoreRepository.findAllByOrderByPopupViewCountDesc().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList()));
 
         return result;
     }
@@ -86,7 +93,7 @@ public class PopupStoreService {
     }
 
     public List<PopupStoreDTO> getPopupStoresByUser(Long userId) {
-        return popupStoreRepository.findByUser_UserId(userId).stream()
+        return popupStoreRepository.findByUserId(userId).stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -98,9 +105,6 @@ public class PopupStoreService {
     public PopupStoreDTO createPopupStore(PopupStoreDTO dto, List<MultipartFile> images) throws IOException {
         // 1. 팝업스토어 저장
         PopupStore popupStore = popupStoreRepository.save(dto.toEntity());
-
-        // 채팅방 자동 생성 (팝업스토어당 1개)
-        chatRoomService.createChatRoomForPopup(popupStore);
 
         // 2. 이미지 업로드
         if (images != null && !images.isEmpty()) {
@@ -124,7 +128,6 @@ public class PopupStoreService {
         if (dto.getCategoryIds() != null) {
             handleCategories(popupStore, dto.getCategoryIds());
         }
-
 
         return getPopupStoreById(popupStore.getPopupId());
     }
@@ -170,7 +173,6 @@ public class PopupStoreService {
     public void deletePopupStore(Long popupId) {
         PopupStore popupStore = findPopupStore(popupId);
         deleteAllImages(popupStore);
-        chatRoomService.deleteChatRoomByPopup(popupStore); // ✅ 채팅방 자동 삭제
         popupStoreRepository.delete(popupStore);
     }
 

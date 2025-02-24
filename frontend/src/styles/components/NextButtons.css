@@ -8,9 +8,10 @@
 
 .next-button {
   width: 100%;
+  max-width: 850px;
   padding: 15px 30px;
-  background-color: #e0d7fa; /* 연한 보라색 */
-  color: #000; /* 검정색 텍스트 */
+  background-color: #79a1d0; /* 연한 보라색 */
+  color: white; /* 검정색 텍스트 */
   font-size: 16px;
   font-weight: 500;
   border: none;
@@ -21,7 +22,7 @@
 }
 
 .next-button:hover {
-  background-color: #d0c0f0; /* 더 진한 보라색 */
+  background-color: #002C5F; /* 더 진한 보라색 */
 }
 
 .next-button:active {
@@ -29,7 +30,7 @@
 }
 
 .next-button.disabled {
-  background-color: #d3d3d3; /* 비활성화 상태 배경색 */
+  background-color: #002C5F; /* 비활성화 상태 배경색 */
   cursor: not-allowed;
 }
 

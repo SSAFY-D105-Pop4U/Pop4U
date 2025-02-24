@@ -3,8 +3,11 @@ package com.d105.pop4u.domain.store.repository;
 
 import com.d105.pop4u.domain.store.entity.PopupStore;
 import org.springframework.data.jpa.repository.JpaRepository;
+<<<<<<< HEAD
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+=======
+>>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,9 +16,10 @@ import java.util.Optional;
 @Repository
 public interface PopupStoreRepository extends JpaRepository<PopupStore, Long> {
     List<PopupStore> findByPopupRegion(String popupRegion);
-     List<PopupStore> findByUser_UserId(Long userId); // 유저 연결 시 코드
-//    List<PopupStore> findByUserId(Long userId); // 유저 조회 메서드 수정
+    // List<PopupStore> findByUser_UserId(Long userId); // 유저 연결 시 코드
+    List<PopupStore> findByUserId(Long userId); // 유저 조회 메서드 수정
     Optional<PopupStore> findByPopupId(Long popupId);
+<<<<<<< HEAD
     List<PopupStore> findTop10ByOrderByPopupStartDateDesc();
     List<PopupStore> findTop10ByOrderByPopupEndDateDesc();
     List<PopupStore> findTop10ByOrderByPopupViewCountDesc();
@@ -53,4 +57,9 @@ public interface PopupStoreRepository extends JpaRepository<PopupStore, Long> {
     // 랜덤 추천 팝업 조회 (DB에 따라 RAND() 함수가 다를 수 있으므로 환경에 맞게 조정)
     @Query(value = "SELECT * FROM popup_store ORDER BY RAND() LIMIT :limit", nativeQuery = true)
     List<PopupStore> findRandomPopups(@Param("limit") int limit);
+=======
+    List<PopupStore> findAllByOrderByPopupStartDateDesc();
+    List<PopupStore> findAllByOrderByPopupEndDateDesc();
+    List<PopupStore> findAllByOrderByPopupViewCountDesc();
+>>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
 }

@@ -1,0 +1,50 @@
+.recheck-text {
+  text-align: left;
+  margin-top: 120px;
+  margin-bottom: 40px;
+  margin-left: 20px;
+  font-size: 22px;
+  display: flex;
+  margin-right: 200px;
+  line-height: 1.4;
+  justify-content: center; /* 텍스트 가로 중앙 정렬 */
+  align-items: center; /* 텍스트 세로 중앙 정렬 */
+}
+
+.recheck-text-contain{
+  justify-content: center;  /* 가로 중앙 정렬 */
+  align-items: center; 
+}
+.recheck-container {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.recheck-item {
+  display: flex;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
+}
+
+.recheck-item:last-child {
+  border-bottom: none;
+}
+
+.recheck-label {
+  font-weight: bold;
+  color: #555;
+  width: 20%;
+}
+
+.recheck-value {
+  color: #333;
+  text-align: right;
+}

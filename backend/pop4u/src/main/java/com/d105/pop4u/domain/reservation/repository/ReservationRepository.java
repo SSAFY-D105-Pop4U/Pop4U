@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+<<<<<<< HEAD
     // User 엔티티의 userId를 기준으로 예약 조회
     List<Reservation> findByUser_UserId(Long userId);
 
@@ -38,4 +39,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             "AND r.user.userId = :userId")
     List<ReservationDTO> findReservationsWithPopupInfo(@Param("userId") Long userId);
 
+=======
+    List<Reservation> findByUserId(Long userId); // ✅ 유저 ID로 예약 조회
+    List<Reservation> findByPopupStore(PopupStore popupStore); // ✅ 특정 팝업의 예약 조회
+    Optional<Reservation> findByPopupStore_PopupIdAndUserId(Long popupId, Long userId); // ✅ 특정 팝업의 특정 유저 예약 조회
+>>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
 }

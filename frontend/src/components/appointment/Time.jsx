@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import "../../styles/components/Time.css";
 import Drag from "../../hooks/Drag";
+import { AppDataContext } from "../../Context.jsx"; // useContext 추가
 
 const Time = ({ selectedTime, setSelectedTime }) => {
+  const { setAppData } = useContext(AppDataContext); // Context 사용
 
-     const {
-        scrollRef,
-        handleMouseDown,
-        handleMouseMove,
-        handleMouseUp,
-        handleMouseLeave,
-        handleTouchStart,
-        handleTouchMove,
-        handleTouchEnd,
-      } =Drag();
+  const {
+    scrollRef,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+    handleMouseLeave,
+    handleTouchStart,
+    handleTouchMove,
+    handleTouchEnd,
+  } = Drag();
 
-  const time = "1:00 AM - 10:00 PM";
+  const time = "10:00 AM - 6:00 PM";
 
-  // 시간을 24시간 형식으로 변환하는 함수
   const convertTo24Hour = (timeStr) => {
     const [time, meridian] = timeStr.split(" ");
     let [hour, minute] = time.split(":").map(Number);
@@ -32,7 +33,6 @@ const Time = ({ selectedTime, setSelectedTime }) => {
     return { hour, minute };
   };
 
-  // 시작 시간부터 종료 시간까지의 시간 슬롯 생성 함수
   const generateHourlySlots = (startTime, endTime) => {
     const slots = [];
     let currentTime = new Date();
@@ -44,9 +44,7 @@ const Time = ({ selectedTime, setSelectedTime }) => {
     while (currentTime <= endTimeObj) {
       const hours = currentTime.getHours();
       const minutes = currentTime.getMinutes();
-      const meridian = hours >= 12 ? "PM" : "AM";
-      const formattedHour = hours % 12 === 0 ? 12 : hours % 12;
-      const formattedTime = `${formattedHour}:${minutes.toString().padStart(2, "0")} ${meridian}`;
+      const formattedTime = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
       slots.push(formattedTime);
       currentTime.setHours(currentTime.getHours() + 1);
     }
@@ -54,37 +52,42 @@ const Time = ({ selectedTime, setSelectedTime }) => {
     return slots;
   };
 
-  // 시작 시간과 종료 시간 파싱
   const [startTime, endTime] = time.split(" - ");
   const start = convertTo24Hour(startTime);
   const end = convertTo24Hour(endTime);
 
-  // 시간 슬롯 생성
   const times = generateHourlySlots(start, end);
-  
-  
-  
+
+  const handleTimeSelect = (time) => {
+    setSelectedTime(time);
+
+    setAppData((prev) => ({
+      ...prev,
+      selectedTime: time, // Context에 24시간 형식(HH:MM)으로 저장
+    }));
+  };
+
   return (
-    <div>
-      <div className="time-selector"  ref={scrollRef}
+    <div style={{width:"100%"}}>
+      <div
+        className="time-selector"
+        ref={scrollRef}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}>
+        onTouchEnd={handleTouchEnd}
+      >
         {times.map((time) => (
-            
           <button
             key={time}
             className={`time-button ${selectedTime === time ? "selected" : ""}`}
-            onClick={() => setSelectedTime(time)}
+            onClick={() => handleTimeSelect(time)}
           >
-            
             {time}
           </button>
-          
         ))}
       </div>
     </div>

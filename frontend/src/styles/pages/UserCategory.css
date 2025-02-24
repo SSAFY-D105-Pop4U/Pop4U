@@ -32,8 +32,19 @@
   background-color: white;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   margin: 0;
+}
+
+.category-item.selected {
+  background-color: #ede8ff;
+  border-color: #6b4eff;
+  color: #6b4eff;
+}
+
+.category-item:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(107, 78, 255, 0.1);
 }
 
 .button-container {

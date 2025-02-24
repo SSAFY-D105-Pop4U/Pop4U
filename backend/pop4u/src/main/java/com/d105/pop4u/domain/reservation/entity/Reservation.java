@@ -1,7 +1,6 @@
 package com.d105.pop4u.domain.reservation.entity;
 
 import com.d105.pop4u.domain.store.entity.PopupStore;
-import com.d105.pop4u.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -25,12 +24,8 @@ public class Reservation {
     @Column(name = "reservation_id", nullable = false)
     private Long reservationId;
 
-//    @Column(name = "user_id", nullable = false)
-//    private Long userId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false) // 브랜드 유저와 연결
-    private User user;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
     @ManyToOne
     @JoinColumn(name = "popup_id", nullable = false)

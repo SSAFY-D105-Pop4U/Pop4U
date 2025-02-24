@@ -1,0 +1,68 @@
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px) rotate(-2deg); }
+    40% { transform: translateX(5px) rotate(2deg); }
+    60% { transform: translateX(-5px) rotate(-2deg); }
+    80% { transform: translateX(5px) rotate(2deg); }
+    100% { transform: translateX(0); }
+}
+
+.frames-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* ✅ 선택된 후 오른쪽으로 사라지는 애니메이션 */
+.frames-wrapper.exit {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.frames-title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.frames-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+/* ✅ 개별 `.shot-frame`에 애니메이션 적용 */
+.shot-frame {
+    width: 150px;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: rgb(76, 80, 79);
+    border: 1px solid rgb(189, 196, 196);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+/* ✅ 흔들리는 애니메이션 */
+.shot-frame.shake {
+    animation: shake 0.5s ease-in-out 1;
+}
+
+/* ✅ 선택된 프레임 강조 */
+.shot-frame.selected {
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
+}

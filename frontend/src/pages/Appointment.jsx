@@ -1,60 +1,80 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Calendar from "../components/appointment/Calendar";
 import PersonSelector from "../components/appointment/PersonSelector";
 import ProgressBar from "../components/appointment/ProgressBar";
-import Header from "../components/public/Header";
+import Header from "../components/basic/Header";
 import Time from "../components/appointment/Time";
 import NextButton from "../components/NextButton";
-import Recheck from "../components/appointment/recheck";
+// import Recheck from "../components/appointment/Recheck";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { AppDataContext } from "../Context.jsx";
+import "../styles/pages/Appointment.css"
 
 const Appointment = () => {
-  const [resultDate, setResultDate] = useState("");
-  const [selectedPerson, setSelectedPerson] = useState(0); // 선택된 인원 수
-  const [selectedTime, setSelectedTime] = useState(null); // 선택된 시간
+  const nav = useNavigate();
+  const { appData, setAppData } = useContext(AppDataContext);
+  const [selectedDate, setSelectedDate] = useState(""); 
+  const [selectedPerson, setSelectedPerson] = useState(1);
+  const [selectedTime, setSelectedTime] = useState('10:00');
   const [showAppointmentDetails, setShowAppointmentDetails] = useState(true);
 
-  // 버튼 활성화 조건
-  const isDisabled = !resultDate || selectedPerson === 0 || !selectedTime;
+  const [searchParams] = useSearchParams();
+  const popupName = searchParams.get("popupName");
+  const popupId = searchParams.get("popupId");
+  const popupEndDate = searchParams.get("endDate");
+  const popupStartDate = searchParams.get("startDate");
+  const popupOperationTime = searchParams.get("popupTime");
+  const popupMaximumPeople = searchParams.get("peopleCount");
+  // const [userId, setUserId] = useState(1); //샘플 userId
+  const [userId, setUserId] = useState(appData.userId); // appData에서 사용자 ID 가져오기
 
-  const handleNextButtonClick = () => {
-    // Next 버튼 클릭 시 컴포넌트를 숨김
-    console.log("Next 버튼 클릭");
+  // console.log(popupOperationTime);
 
-    setShowAppointmentDetails(false);
-    console.log(showAppointmentDetails);
-    console.log(resultDate);
-    console.log(selectedPerson);
-    console.log(selectedTime);
-  };
+  
+  
+  
+  useEffect(() => {
+    console.log("⭐Context 데이터⭐", appData);
+  }, [appData]); 
+ 
+
   return (
-    <div>
+    <div style={{ width: "100%", margin: "0 auto" }}>
       <Header title="방문 예약" />
       <ProgressBar showAppointmentDetails={showAppointmentDetails} />
-      {showAppointmentDetails ? (
-        <>
-          <Calendar resultDate={resultDate} setResultDate={setResultDate} />
+      <div className="appointment-container">
+      <div className="appointment-section appointment-left-section">
+        <div></div>
+          <Calendar setResultDate={setSelectedDate} popupStartDay={popupStartDate} popupEndDay={popupEndDate} />
+        </div>
+        <div className="appointment-section appointment-right-section">
+         
+          <div className="desktop-appoint-name" style={{color:"white", marginBottom:"18px", fontSize:"22px", fontWeight:"bold", lineHeight:"30px"}}>{popupName}</div>
+          <h2 className="appoint-title">
+          인원
+          </h2>
           <PersonSelector
             selectedPerson={selectedPerson}
             setSelectedPerson={setSelectedPerson}
+            maxPeople={popupMaximumPeople}
           />
+          <h2 className="appoint-title">
+          시간
+          </h2>
+          
           <Time selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
-        </>
-      ) : (
-        <>
-          <h3>
-            예약 정보를 다시 한 번<br />
-            확인해주세요.
-          </h3>
-          <Recheck
-            date={resultDate}
-            people={selectedPerson}
-            title={selectedTime}
-          />
-        </>
-      )}
-      <NextButton isDisabled={isDisabled} onClick={handleNextButtonClick}>
-        다음
-      </NextButton>
+         
+          
+          <div className="desktop-appoint-but" onClick={()=>nav("/recheck")}>
+            다음
+          </div>
+          <div className="mobile-appoint-but">
+            <NextButton onClick={()=>nav("/recheck")}>다음</NextButton>
+          </div>
+          
+        </div>
+        
+      </div>
     </div>
   );
 };

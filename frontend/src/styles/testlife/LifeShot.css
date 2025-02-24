@@ -1,0 +1,137 @@
+
+.insert-life-bg {
+    position: absolute; /* ✅ 애니메이션이 적용될 요소가 화면 기준으로 움직일 수 있도록 설정 */
+    width: 100%;
+    height: 100vh;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+/* ✅ 왼쪽으로 사라지는 애니메이션 */
+.insert-life-bg.exit {
+    transform: translateX(-100%);
+    opacity: 0; /* 서서히 사라지는 효과 추가 */
+}
+
+.life-back-btn{
+  margin: 15px;
+  width: 30px;
+  height: 30px;
+}
+
+  .insert-life-bg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000000;
+    overflow: hidden;
+  }
+  .white-box {
+    height: 15%;
+    width: calc(15vh * 4 / 3);
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-top: 0px;
+    
+    /* ✅ 초기 상태: 오른쪽에서 점점 나타남 */
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(0);
+    transition: clip-path 0.5s ease-out, transform 0.5s ease-out 0.5s;
+  }
+  
+  /* ✅ 위쪽 박스 애니메이션 */
+  .white-box.show {
+    clip-path: inset(0 0 0 0);
+    transform: translateY(-10px);
+  }
+  
+  /* ✅ 아래쪽 박스 */
+  .white-box-second {
+    height: 15%;
+    width: calc(15vh * 4 / 3);
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  
+    /* ✅ 초기 상태: 왼쪽에서 점점 나타남 */
+    clip-path: inset(0 0 0 100%);
+    transform: translateY(0);
+    transition: clip-path 0.5s ease-out 1s, transform 0.5s ease-out 1s;
+  }
+  
+  /* ✅ 아래쪽 박스 애니메이션 */
+  .white-box-second.show {
+    clip-path: inset(0 0 0 0);
+  }
+  
+  /* ✅ 새로운 박스 (위쪽, 아래쪽) */
+  .new-box {
+    height: 15%;
+    width: calc(15vh * 4 / 3);
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    
+    /* ✅ 초기 상태: 오른쪽에서 점점 나타남 */
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+    transition: clip-path 0.4s ease-out 2s, opacity 0.4s ease-out 2s;
+  }
+
+  .life-btn {
+    width: calc(15vh * 4 / 3);
+    height: 40px;
+    margin-top: 50px;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: rgb(90, 94, 93);
+    border: 1px solid rgb(189, 196, 196);
+  
+    /* ✅ 초기 상태: 투명 + 아래에서 위로 이동 */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out 3s, transform 0.5s ease-out 3s;
+}
+
+/* ✅ 버튼 등장 애니메이션 */
+.life-btn.show {
+    opacity: 1;
+    transform: translateY(0);
+
+    /* ✅ 등장 후 무한 반복 애니메이션 실행 */
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* ✅ 버튼 유도 애니메이션 (살짝 커졌다가 돌아오는 효과) */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+    }
+}
+
+  
+  /* ✅ 새로운 박스 애니메이션 */
+  .new-box.show {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  
+  .new-box-top {
+    margin-bottom: 20px; /* ✅ 기존 white-box 위에 위치 */
+  }
+  
+  .new-box-bottom {
+    margin-top: 10px; /* ✅ 기존 white-box-second 아래에 위치 */
+  }
+  

@@ -1,9 +1,0 @@
-fastapi
-uvicorn
-pillow
-rembg
-boto3
-python-multipart
-python-dotenv
-requests
-onnxruntime

@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/popup-category")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class PopupCategoryController {
     private final PopupCategoryService popupCategoryService;
 

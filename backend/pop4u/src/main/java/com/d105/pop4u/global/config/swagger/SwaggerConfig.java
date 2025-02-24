@@ -26,9 +26,9 @@ public class SwaggerConfig {
                 .addList("bearerAuth");
 
         return new OpenAPI()
-                .addServersItem(new Server().url("https://i12d105.p.ssafy.io") // 배포한 서버
+                .addServersItem(new Server().url("https://j12d105.p.ssafy.io") // 배포한 서버
                         .description("Default Server URL"))
-                .addServersItem(new Server().url("http://localhost:8081")
+                .addServersItem(new Server().url("http://localhost:8080")
                         .description("Local Development Server"))
                 .components(new Components().addSecuritySchemes("bearerAuth", securityScheme))
                 .addSecurityItem(securityRequirement)

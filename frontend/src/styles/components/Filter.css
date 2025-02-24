@@ -1,13 +1,126 @@
-.filter-container {
+.filter-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px; /* 요소 간 간격 */
-  font-family: sans-serif;
-  margin-left: 3.5vw;
-  margin-top: 3vw;
-  margin-right: 3.5vw;
-  margin-bottom: 5vw;
+  padding: 10px 16px;
+}
+
+.reservation-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.filter-checkbox{
+  -webkit-appearance:checkbox
+}
+
+.button-group {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-button {
+  width: auto;
+  padding: 6px 16px;
+  border-radius: 10px;
+  border: 1px solid #E0E0E0;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.arrow-down {
+  font-size: 10px;
+  color: #666;
+}
+
+.filter-container {
+  position: relative;
+}
+
+.custom-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+  touch-action: pan-y; /* 수직 드래그 허용 */
+  cursor: grab; /* 드래그 가능함을 보여주는 커서 */
+  user-select: none; /* 텍스트 선택 방지 */
+}
+
+.custom-dropdown1 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 80px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+  touch-action: pan-y; /* 수직 드래그 허용 */
+  cursor: grab; /* 드래그 가능함을 보여주는 커서 */
+  user-select: none; /* 텍스트 선택 방지 */
+}
+
+
+.custom-dropdown:active {
+  cursor: grabbing; /* 드래그 중일 때 커서 변경 */
+}
+
+/* 스크롤바 숨기기 */
+.custom-dropdown::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-dropdown {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 드롭다운 옵션의 높이 고정 */
+.dropdown-option {
+  padding: 8px 12px;
+  height: 40px; /* 각 옵션의 높이를 고정 */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-option.selected {
+ font-size: 15px;
+}
+
+.check-mark {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.filter-oval-button {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid #E0E0E0;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 /* 체크박스 부분 */
@@ -28,21 +141,6 @@
 }
 
 /* 타원 버튼 스타일 */
-.filter-oval-button {
-  margin-left: 1vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ccc;
-  border-radius: 8px; /* 완전한 타원형 모양 */
-  background-color: #fff;
-  padding: 0.5vw 1.5vw; /* 버튼 내부 패딩 */
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-  transition: background-color 0.3s ease; /* hover 효과를 위한 부드러운 전환 */
-}
-
 .filter-oval-button:hover {
   background-color: #f5f5f5; /* 호버 시 약간 어두운 배경 */
 }

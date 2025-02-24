@@ -1,7 +1,6 @@
 .list-popup-card {
   display: flex;
-  align-items: center;
-  padding: 4vw;
+  padding: 20px;
   border-bottom: 1px solid #eaeaea;
 }
 
@@ -10,19 +9,21 @@
 }
 
 .list-popup-image {
-  width: 26vw;
-  height: 26vw;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
-  margin-right: 5vw;
+  margin-right: 20px;
+  flex-shrink: 0;
 }
 
 .list-popup-content {
   flex-grow: 1;
+  position: relative;
 }
 
 .list-popup-title {
-  font-size: 3.5vw;
+  font-size: 18px;
   font-weight: bold;
   margin: 0;
   padding: 0;
@@ -36,6 +37,10 @@
 
 .list-popup-icon {
   margin-right: 5px;
+  vertical-align: middle;
+  width: 12px;
+  height: 12px;
+  fill: #ff9589;
 }
 
 .list-popup-rating {
@@ -46,11 +51,24 @@
 .list-popup-star {
   color: #ffc107;
   font-size: 18px;
-  margin-left: 5vw;
+  margin-left: 20px;
   margin-right: 5px;
 }
 
 .popup-score {
   font-size: 16px;
   font-weight: bold;
+}
+
+.time-text span {
+  display: block; /* 각 span을 블록 레벨로 만들어 줄바꿈 */
+  line-height: 1.5; /* 줄 간격 조정 */
+}
+
+.popup-date {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: #666;
 }

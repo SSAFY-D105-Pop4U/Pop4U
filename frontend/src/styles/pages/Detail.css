@@ -1,45 +1,61 @@
 .container1 {
-    width: 100%;
-    max-width: 960px; /* 기본적으로 최대 너비 설정 */
-    height: 100%;
-    background: white;
-    overflow: hidden;
-    margin: 0 auto; /* 가운데 정렬 */
-    /* border-radius: 40px; */
-}
-/* 📌 화면이 일정 크기 이상(1024px)일 때, 양쪽 배경을 흰색으로 만들기 */
-@media (min-width: 960px) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 화면 높이만큼 유지 */
+    padding-bottom: 70px; /* 버튼이 가리는 부분을 방지 */
+  }
+/* 📌 화면이 일정 크기 이상(960px)일 때, 양쪽 배경을 흰색으로 만들기 */
+@media (min-width: 530px) {
     body {
         background-color: white; /* 양쪽 배경을 흰색으로 설정 */
     }
 
     .container1 {
-        max-width: 960px; /* 본문 최대 너비 설정 */
+        max-width: 530px; /* 본문 최대 너비 설정 */
         background: white;
     }
 }
 
-
-/* 이미지 영역 */
-.image-wrapper {
+/* ✅ 이미지 컨테이너 설정 */
+.image-container {
     position: relative;
-    width: 100%;
-    height: 414px; /* 기본 높이 */
-    overflow: hidden;
     display: flex;
-    justify-content: center; /* 가운데 정렬 */
-}
-
-.image {
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    max-width: 460px; /* 460px 이상 커지지 않도록 제한 */
-    height: 100%;
+    aspect-ratio: 1/1;
+    /* padding-bottom: 50px; ✅ 이미지 아래 공간 확보 (그라데이션이 내려갈 공간) */
+  }
+  
+  /* ✅ 이미지 스타일 */
+  .image-container img {
+    
+    height: auto;
+    display: block;
     object-fit: cover;
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+  }
+  
+  /* ✅ 그라데이션 효과 - 아래쪽으로 내리기 */
+  .image-container::after {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* ✅ 기존 bottom: 0 → -40px (아래로 이동) */
+    left: 0;
+    width: 100%;
+    height: 20%; /* ✅ 그라데이션 영역 확대 */
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,   /* 시작: 완전 투명 */
+      rgba(255, 255, 255, 0.2) 30%, /* 30% 지점에서 약간의 흰색 */
+      rgba(255, 255, 255, 0.6) 70%, /* 70% 지점에서 흰색이 더 뚜렷 */
+      white 100%                     /* 끝: 완전 흰색 */
+    );
+    pointer-events: none; /* 클릭 방해 방지 */
+  }
+  
+.detail-header{
+    display: none;
 }
-
-
 
 /* 정보 영역 스타일 */
 .info {
@@ -47,11 +63,20 @@
  
 }
 
-.title {
-    font-size: 20px;
-    font-weight: 700;
+.detial-title1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: black;
-    /* font-weight: bold; */
+    font-weight: bold;
+    
+    margin-bottom: 5px;
+}
+
+.detial-title {
+    color: black;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .date, .location, .operating-hours {
@@ -66,7 +91,6 @@
     display: flex;
     position: relative;
     justify-content: center;
-    margin-top: 20px;
     width: 100%;
     border-bottom: 2px solid #EFEFF0;
     position: relative;
@@ -84,7 +108,7 @@
 }
 
 .tab.active {
-    color: #6631E5;
+    color: #000000;
     font-weight: 600;
 }
 
@@ -95,7 +119,7 @@
     left: 0;
     width: 50%;
     height: 2px;
-    background-color: #6631E5;
+    background-color: #002C5F;
     transition: left 0.3s ease-in-out; 
 }
 
@@ -113,39 +137,67 @@
     /* padding: 10px; */
     /* background: #F1F6F7; */
     /* border-radius: 10px; */
-    margin: 10px 0;
+    margin: 10px 20px;
+
 }
 
-/* 버튼 영역 */
+
+/* 버튼이 항상 하단에 위치하도록 고정 */
 .button-wrapper {
-    position: fixed; /* ✅ 항상 고정 */
-    bottom: 0; 
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
+    background-color: white; /* 배경색 추가 (글씨가 겹치는 문제 방지) */
+    padding: 10px 0;
     display: flex;
-    gap: 20px;
-    justify-content: center;
-    padding: 10px 20px;
-    z-index: 1000; /* 다른 요소보다 위에 배치 */
-}
+    justify-content: space-around; /* 버튼들을 가운데 정렬 */
+    
+  }
 
-
-.button {
+.chat-button {
     width: 45%;
     height: 40px;
-    background: white;
+    background: #986CFF;
     border-radius: 10px;
     border: 1px solid #986CFF;
     font-size: 14px;
     font-weight: 500;
-    color: black;
+    color: white;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease; /* ✅ 부드러운 전환 효과 */
 }
 
-.button:hover {
+.apointment-button {
+    width: 45%;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #002C5F;
+    font-size: 14px;
+    font-weight: 500;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.2s ease; /* ✅ 부드러운 전환 효과 */
+}
+/* ✅ 마우스를 올렸을 때 */
+.chat-button:hover {
     background: #986CFF;
     color: white;
+    transform: scale(1.05); /* 살짝 확대 효과 */
 }
+.apointment-button:hover {
+    transform: scale(1.05); /* 살짝 확대 효과 */
+}
+
+/* ✅ 클릭했을 때 */
+.chat-button:active {
+    transform: scale(0.99); /* 클릭 시 살짝 작아지는 효과 */
+}
+.apointment-button:active {
+    transform: scale(0.99); /* 클릭 시 살짝 작아지는 효과 */
+}
+
 
 .eye{
     width: 20px;
@@ -156,17 +208,130 @@
     display: flex;
     justify-content: flex-end;
     margin-right: 10px;
-    margin-top: 5px;
+    margin-bottom: 10px;
     gap: 5px;
   }
 
 .back {
     position: absolute; /* 절대 위치 설정 */
-    top: 10px; /* 이미지 상단에서 10px 위치 */
     left: 10px; /* 이미지 왼쪽에서 10px 위치 */
     width: 30px; /* 버튼 크기 */
     height: 30px;
     cursor: pointer;
     z-index: 10; /* 이미지보다 위에 배치 */
   }
+  
+  .desktop-detail-button{
+    display: none;
+  }
+
+  .mobile-detail-button{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 3px;
+    background-color: white;
+  }
+@media screen and (min-width: 768px) {
+  .container1 {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  .detail-header{
+    display: flex;
+}
+
+  .desktop-detail-button{
+    display: flex;
+  }
+  .mobile-detail-button{
+    display: none;
+  }
+
+  .left-section {
+    position: fixed;
+    left: calc(50% - 10px);
+    top: 0; /* 상단으로 변경 */
+    transform: translateX(-100%); /* Y축 transform 제거 */
+    width: 50%;
+    /* max-width: 550px; */
+    padding-top: 20px; /* 상단 여백 추가 */
+    margin-top: 12vh;
+  }
+
+  .detail-right-section {
+    position: absolute;
+    overflow-y: auto; /* ✅ 세로 스크롤 허용 */
+  max-height: 90vh; /* ✅ 너무 길어지지 않도록 제한 */
+    position: fixed;
+    left: calc(50% + 10px);
+    top: 0;
+    height: 100vh;
+    width: calc(50% - 40px);
+    margin: 0 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10vh;
+  }
+
+  .image-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    aspect-ratio: 1/1;
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .view {
+    align-self: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .tab-container {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .tab-content {
+    width: 100%;
+  }
+
+  .button-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: white;
+    z-index: 1000;
+  }
+}
+
+.detail-chat-button {
+    width: 45%;
+    height: 40px;
+    color: #fefefe;
+    background: #002C5F;
+    border-radius: 10px;
+
+}
 

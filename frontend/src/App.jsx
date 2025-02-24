@@ -1,10 +1,13 @@
 import AppRouter from "./routes/AppRoutes";
 import "./App.css";
+import { AppDataProvider } from "./Context.jsx";
 
 function App() {
   return (
-    <div>
-      <AppRouter />
+    <div className="app">
+      <AppDataProvider>
+        <AppRouter />
+      </AppDataProvider>
     </div>
   );
 }
