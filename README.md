@@ -25,7 +25,7 @@
 ### 💻 Frontend
 
 | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">김동욱</div> | <div align="center" style="display: flex; align-items: center; justify-content: center; height: 100px;">이상혁</div> |
-|:---------:|:---------:|:---------:|
+|:---------:|:---------:|
 | [<img src="https://avatars.githubusercontent.com/okukay" height=200 width=200> <br/> @okukay](https://github.com/okukay) | [<img src="https://avatars.githubusercontent.com/hyuksanglee" height=200 width=200> <br/> @hyuksanglee](https://github.com/hyuksanglee) |
 
 ### 🗃️ Backend
