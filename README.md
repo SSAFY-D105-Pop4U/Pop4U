@@ -107,7 +107,7 @@
 ### 동시성 게임화면
 |모바일|데스크탑|
 |:---:|:---:|
-| <img src="/readme_file/gif_file/게임화면_모바일.gif" width=200 height=400/> | <img src="/readme_file/gif_file/게임화면면_데스크탑.gif" width=800 height=400/>
+| <img src="/readme_file/gif_file/게임화면_모바일.gif" width=200 height=400/> | <img src="/readme_file/gif_file/게임화면_데스크탑.gif" width=800 height=400/>
 
 ### 인생네컷화면
 |모바일|데스크탑|
