@@ -14,14 +14,12 @@ pipeline {
             }
         }
 
-<<<<<<< HEAD
         stage('credentials download') {
             when {
                 expression { env.GIT_BRANCH == 'origin/back_develop' }
             }
-=======
+
         stage('application.yml download') {
->>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
             steps {
                 withCredentials([file(credentialsId: 'application-yml', variable: 'dbConfigFile')]) {
                     script {
@@ -56,7 +54,6 @@ pipeline {
                     echo "Current branch: ${env.GIT_BRANCH}"
                     echo "Deploy branch: ${deployBranch}"
                     echo "Current workspace: ${WORKSPACE}"
-<<<<<<< HEAD
 
                     if (deployBranch == 'frontend') {
                         sshagent(['ec2-ssh-key']) {
@@ -76,10 +73,8 @@ pipeline {
                             """
                         }
                     } else if (deployBranch == 'backend') {
-=======
                     
                     if (deployBranch) {
->>>>>>> 269263a7f563adde489e2ae40d5121b389b81805
                         sshagent(['ec2-ssh-key']) {
                             sh """
                                 ssh -o StrictHostKeyChecking=no ubuntu@\${EC2_HOST} '
