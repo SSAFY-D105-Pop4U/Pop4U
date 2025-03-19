@@ -120,17 +120,3 @@
 ![alt text](/readme_file/기능명세서_2.png)
 
 상세 내역 : https://florentine-orchestra-549.notion.site/1734e33243408152bc02ef1a8bafbeed?pvs=4
-
-
-    
-## 업무 분담표
-##### 1주차
-![alt text](/readme_file/업무분담표_1주차.png)
-
-##### 2주차
-![alt text](/readme_file/업무분담표_2주차.png)
-
-## 📑 산출물
-|API명세서|디자인|요구사항정의서|ERD|시퀀스다이어그램|
-|:---:|:---:|:---:|:---:|:---:|
-|[📒API명세서](https://www.notion.so/API-1734e33243408101a864d05f1b5b561c?pvs=4)|[🎨디자인](https://www.figma.com/design/7HCVQXL1kvtf20FxEJ3bKu/pop4U-%ED%94%BC%EA%B7%B8%EB%A7%88?node-id=0-1&p=f&t=nOpZQAzrINfi5gXk-0)|[🧾요구사항정의서](https://www.notion.so/1734e33243408152bc02ef1a8bafbeed?pvs=4)|[⚙ERD](https://www.erdcloud.com/d/AN2oyCaGr9Lx8zf4C)|[🕐흐름도](https://www.figma.com/board/1sexUS41EobeTiVfMIHbOK/pop4U-%ED%9D%90%EB%A6%84%EB%8F%84?t=nOpZQAzrINfi5gXk-0)|
